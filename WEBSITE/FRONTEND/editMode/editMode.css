@@ -1,0 +1,83 @@
+body {
+    font-family: 'Manrope', sans-serif;
+}
+
+.navbar{
+    background: #FFE600;
+    font-family: "Lucida Console", monospace;   
+}
+.nav-item{
+    padding: 1% 7%;
+    margin: auto;
+}
+​
+.button-src{
+    background-color: #810dfd;
+    color: #FFFFFF;
+}
+
+nav {
+    font-family: 'Manrope', sans-serif;
+}
+
+#overview {
+    border: 1px solid grey;
+    border-radius: 2px;
+    width: 100%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+#agenda {
+    margin-top: 3vh;
+    text-align: center;
+    font-size: 5vh;
+    font-family: monospace;
+}
+
+p {
+    font-size: small;
+    font-family: 'Manrope', sans-serif;
+}
+
+#toolbar {
+    width: 100%;
+    text-align: center;
+}
+
+#basic-addon1 {
+    height: 100%;
+    background-color: white;
+}
+
+#searchbox {
+    margin-top: 1vh;
+    width: 100%;
+    text-align: center;
+    font-family: 'Manrope', sans-serif;
+}
+
+.extra {
+    background-color: white;
+    margin: auto;
+    height: 100%;
+
+}
+#add {
+    background-color: white;
+    padding: 1% 1% 1% 4%;
+}
+
+#trash {
+    background-color: white;
+    
+    padding: 1% 4% 1% 4%;
+    text-align: center;
+    border-style: none solid none none;
+    border-color: grey;
+}
+
+#details {
+    margin: auto;
+    padding: 1% 0%;
+}
