@@ -23,17 +23,17 @@ body {
 }
 
 .questions {
-    padding-top: 1%;
-    border: solid 2px black;
-
+    padding: 1% 0% 3% 1%;
 }
 
 .question-header {
     background-color: #FFE600;
+    padding: 1% 1% 1% 0;
 }
 
 #questions-container {
     border: solid 2px black;
+    padding: 1%;
     margin: 2vh;
 }
 
