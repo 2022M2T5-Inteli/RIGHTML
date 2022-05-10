@@ -22,6 +22,21 @@ body {
     color: #FFFFFF;
 }
 
+.questions {
+    padding-top: 1%;
+    border: solid 2px black;
+
+}
+
+.question-header {
+    background-color: #FFE600;
+}
+
+#questions-container {
+    border: solid 2px black;
+    margin: 2vh;
+}
+
 nav {
     font-family: 'Manrope', sans-serif;
 }
