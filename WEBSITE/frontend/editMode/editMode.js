@@ -1,11 +1,21 @@
 const questionsContainer = document.getElementById("questions-container");
 
+const questionsArray = []
+
+function Question(question = "Este é o enunciado", axis = "Este é o eixo", alternatives = ["A", "B", "C", "D"]) {
+    this.question = question;
+    this.axis = axis;
+    this.alternatives = alternatives
+}
+
 function addQuestion() {
+    let question = new Question();
+    questionsArray.push(question);
     questionsContainer.innerHTML += `
     <div class="container questions">
           <div class="row question-header">
             <div class="col-sm-11">
-              <h5>Questão x | Eixo blablabla </h5>
+              <h5>Questão ${questionsArray.indexOf(question, 0) + 1} | Eixo ${question}} </h5>
             </div>
             <div class="col-sm-1">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3"
@@ -54,3 +64,5 @@ function addQuestion() {
           </div>
       </div>`
 }
+
+function display 
