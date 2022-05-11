@@ -28,11 +28,17 @@ body {
 
 .question-header {
     background-color: #FFE600;
-    padding: 1% 1% 1% 0;
+    padding: 1% 1% 0% 0;
+}
+
+.question-wording {
+    padding: 0;
+    margin: 0;
 }
 
 #questions-container {
-    border: solid 2px black;
+    border: 1px solid grey;
+    border-radius: 2px;
     padding: 1%;
     margin: 2vh;
 }
