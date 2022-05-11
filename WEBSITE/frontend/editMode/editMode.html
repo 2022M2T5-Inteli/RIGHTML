@@ -82,7 +82,7 @@
             </svg></button>
         </span>
         <span class="extra" id="add">
-          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"><svg
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal"><svg
               xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg"
               viewBox="0 0 16 16">
               <path fill-rule="evenodd"
@@ -93,8 +93,8 @@
       </div>
     </div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- Add Modal -->
+    <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-scrollable">
         <div class="modal-content">
           <div class="modal-header">
@@ -143,6 +143,55 @@
       </div>
     </div>
 
+    <!-- Edit Modal -->
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="editModalLabel">Editar pergunta</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form id="editForm">
+              <div class="form-group">
+                <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Eixo</label>
+                <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" name="axis">
+                  <option value="" selected>Escolher...</option>
+                  <option value="Ensino">Ensino</option>
+                  <option value="Pessoas">Pessoas</option>
+                  <option value="Fluxo">Fluxo</option>
+                  <option value="Incentivos">Ensino</option>
+                  <option value="Infraestrutura e TI">Infraestrutura e TI</option>
+                  <option value="Gestão para Resultados">Gestão para Resultados</option>
+                  <option value="Equidade">Equidade</option>
+                </select>
+                <br>
+                <label for="question">Enunciado</label>
+                <div class="md-form">
+                  <textarea name="question" id="form7" class="md-textarea form-control" rows="3"></textarea>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="alternatives">Alternativas:</label>
+                <div class="form-group" id="editableAlternatives">
+                  <input type="text" name="alternative1" class="form-control editableAlternatives" placeholder="Resposta...">
+                  <input type="text" name="alternative2" class="form-control editableAlternatives" placeholder="Resposta...">
+                  <input type="text" name="alternative3" class="form-control editableAlternatives" placeholder="Resposta...">
+                  <input type="text" name="alternative4" class="form-control editableAlternatives" placeholder="Resposta...">
+                  <input type="text" name="alternative5" class="form-control editableAlternatives" placeholder="Resposta...">
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+            <button type="button" class="btn btn-primary" onclick="applyQuestionChanges()"
+              data-bs-dismiss="modal">Salvar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div id="questions-container" class="container">
       <div id="questions-placeholder">Ainda não há questões neste questionário. Clique no + para adicionar uma.</div>
     </div>
@@ -178,9 +227,9 @@
         </div>
       </div>
   </footer>
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-    crossorigin="anonymous"></script>
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
   <script src="editMode.js"></script>
 </body>
 
