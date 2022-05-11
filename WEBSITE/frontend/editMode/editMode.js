@@ -2,7 +2,7 @@ const questionsContainer = document.getElementById("questions-container");
 
 const questionsArray = []
 
-function Question(question = "Este é o enunciado", axis = "Este é o eixo", alternatives = ["A", "B", "C", "D"]) {
+function Question(question = "Este é o enunciado", axis = "Este é o eixo", alternatives = ["A", "B", "C", "D", "E"]) {
     this.question = question;
     this.axis = axis;
     this.alternatives = alternatives
@@ -11,11 +11,17 @@ function Question(question = "Este é o enunciado", axis = "Este é o eixo", alt
 function addQuestion() {
     let question = new Question();
     questionsArray.push(question);
+    displayQuestion(question);
+}
+
+function displayQuestion(question) {
+    let index = questionsArray.indexOf(question, 0);
+    let numberOfAlternatives = question.alternatives.length;
     questionsContainer.innerHTML += `
     <div class="container questions">
           <div class="row question-header">
             <div class="col-sm-11">
-              <h5>Questão ${questionsArray.indexOf(question, 0) + 1} | Eixo ${question.axis}} </h5>
+              <h5>Questão ${index + 1} | Eixo ${question.axis} </h5>
             </div>
             <div class="col-sm-1">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3"
@@ -30,39 +36,17 @@ function addQuestion() {
             </div>
           </div>
           <div>
-            ENUNCIADO: Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nihil, et, adipisci facilis quis architecto debitis nostrum cupiditate commodi magni recusandae amet qui aut repellat reprehenderit non deleniti? Minus, rerum distinctio!
-          </div>
-          <div class="form-check">
+            ${question.question}
+          </div>`
+
+    for (let i = 0; i < numberOfAlternatives; i++) {
+        questionsContainer.innerHTML +=
+          `<div class="form-check">
             <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
             <label class="form-check-label" for="flexRadioDefault1">
-              Default radio
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-            <label class="form-check-label" for="flexRadioDefault2">
-              Default checked radio
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-            <label class="form-check-label" for="flexRadioDefault1">
-              Default radio
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-            <label class="form-check-label" for="flexRadioDefault2">
-              Default checked radio
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-            <label class="form-check-label" for="flexRadioDefault1">
-              Default radio
+              ${question.alternatives[i]}
             </label>
           </div>
       </div>`
-}
 
-function display 
+}}
