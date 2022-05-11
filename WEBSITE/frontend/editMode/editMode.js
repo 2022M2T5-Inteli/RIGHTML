@@ -1,7 +1,7 @@
-const questions = document.getElementById("questions-container");
+const questionsContainer = document.getElementById("questions-container");
 
 function addQuestion() {
-    questions.innerHTML += `
+    questionsContainer.innerHTML += `
     <div class="container questions">
           <div class="row question-header">
             <div class="col-sm-11">
