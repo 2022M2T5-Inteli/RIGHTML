@@ -1,0 +1,89 @@
+
+/* barra de pesquisa*/
+body {
+    padding: 0;
+    margin: 0;
+    background: #ffffff;
+}
+
+.search-box {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: yellow;
+    height: 60px;
+    border-radius: 40px;
+    padding: 10px;
+}
+
+.search-btn {
+    color: #343a40;
+    float: rigth;
+    width: 40px;
+    border-radius: 50%;
+    background: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-txt {
+    border: none;
+    background: none;
+    outline: left;
+    float: left;
+    padding: 0;
+    color: black;
+    font-size: 16px;
+    transition: 0.4s;
+    line-height: 40px;
+    width: 300px;
+    outline-style: none;
+    box-shadow: none;
+    border-color: transparent;
+}
+
+/*grafico*/
+#bars{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 400px;
+    width: 800px;
+}
+
+/*roda pé*/
+#footer-logo {
+    width: 6%;
+    height: 6%;
+    padding-right: 1%;
+
+}
+
+.centered {
+    display: flex;
+    align-items: center;
+}
+
+#footer-bottom {
+    background-color: #747678;
+}
+
+.footer-content {
+    padding: 1vh 0;
+}
+
+body {
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+footer {
+    background-color: #343a40;
+    color: white;
+    margin-top: auto;
+}
