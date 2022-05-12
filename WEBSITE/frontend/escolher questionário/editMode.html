@@ -55,21 +55,26 @@
     <h2 id="page-title">Escolha seu questionário</h2>
     <div class="row">
       <div class="col order-first">
-        <div class="education">
+        <div class="btn" data-bs-toggle="collapse">
+        
 
-
-          <div style="text-align:center;" class="education-figure"><img id="education-image" src="imagens/agenda_educacional.png"></div>
-
-        </div>
+          <button style="text-align:center;" type="button" data-bs-toggle="collapse"
+          data-bs-target="#collapseExample" aria-expanded="false"
+           aria-controls="collapseExample"  class="education-figure"><img id="education-image" src="imagens/agenda_educacional.png"></button>
+          
+          </div>
 
       </div>
 
       <div class="col order-last">
         <div class="management">
+          <div class="btn" data-bs-toggle="collapse">
 
 
-          <div style="text-align:center;" class="education-figure"><img id="education-image" src="imagens/agenda_gestao.png"></div>
-
+            <button style="text-align:center;" type="button" data-bs-toggle="collapse"
+            data-bs-target="#testeTarget" aria-expanded="false"
+             aria-controls="testeTarget"  class="education-figure"><img id="managment-image" src="imagens/agenda_gestao.png"></button>
+          </div>
         </div>
 
       </div>
@@ -79,18 +84,39 @@
       <div class="container questions">
           <div class="row question-header">
             <div class="col-sm-11">
+
               <h5>Agenda educacional</h5>
             </div>
           </div>
         </div>
-          <div>
+        <div class="collapse" id="collapseExample">
+          <div class="card card-body">
           Neste questionário você ira responder diversas questões a respeito da situação de ensino da sua escola.
 
           XX Questões
           XX Minutos
 
+          </div>
+          <div class="button-finish" >
+            <button type="button" class="btn btn-warning btn-rounded" onclick="location.href = 'https://www.inteli.edu.br/';">Iniciar teste</button>
+            <!--na função onclick se colocar window.location.href abre uma nova guia-->
+            
+            
+        </div>
+        </div>
+        <div class="collapse" id="testeTarget">
+          <div class="card card-body">
+          Cotton eye joe 
 
           </div>
+          <div class="button-finish" >
+            <button type="button" class="btn btn-warning btn-rounded" onclick="location.href = 'https://www.inteli.edu.br/';">Iniciar teste</button>
+            <!--na função onclick se colocar window.location.href abre uma nova guia-->
+            
+            
+        </div>
+      </div>
+
           
       </div>
     </div>
@@ -105,12 +131,7 @@
     crossorigin="anonymous"></script>
 
 
-    <div class="button-finish" >
-      <button type="button" class="btn btn-warning btn-rounded" onclick="location.href = 'https://www.inteli.edu.br/';">Iniciar teste</button>
-      <!--na função onclick se colocar window.location.href abre uma nova guia-->
-      
-      
-  </div>
+
 
   <footer>
     <div class="container-fluid">
