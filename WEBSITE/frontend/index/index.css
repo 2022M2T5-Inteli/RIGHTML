@@ -1,0 +1,192 @@
+.title {
+    font-size: 200%;
+    font-weight: bold;
+    font-family: "Manrope", sans-serif;
+    text-align: center;
+}
+
+.content {
+    font-size: 100%;
+    font-family: "Manrope", sans-serif;
+    /* font-family: "Roboto", sans-serif; */
+}
+
+.button {
+    border-radius: 5px;
+    font: "Inter";
+    background-color: #810dfd;
+    color: white;
+    border-color: #810dfd;
+}
+
+body {
+    margin: 5rem;
+}
+
+/* .margin {} */
+
+.link {
+    font-size: 75%;
+    font-family: "Inter", sans-serif;
+    size: 70%;
+}
+
+/* #part1 { */
+/* display: flex; */
+/*assumiria o tamanho da imagem*/
+
+
+/* background-image: url("https://blog.zelt.com.br/wp-content/uploads/2019/01/2560x1440-gray-solid-color-background.jpg"); */
+/* padding-top: 80%;
+    padding-bottom: 80%;
+    margin-bottom: 3%;
+    margin-top: 8%; */
+/* } */
+
+/*trabalhar com largura definida para part1, usando media query no css;
+definir uma altura para o part1, deixando largura responder ao container(imagem tem que se adaptar a essa altura);*/
+
+
+#imageImpactPhrase {
+    margin: 0;
+    width: 100vw;
+}
+
+#impactPhrase {
+    position: relative;
+    top: 50%;
+    left: 50%;
+}
+
+#part3 {
+    margin-top: 30%;
+    text-align: center;
+}
+
+#explanation {
+    text-align: center;
+}
+
+/* #centralizedButton {
+    position: relative;
+    top: 50%;
+    left: 33%;
+} */
+
+
+.logo {
+    width: 50px;
+    height: 50px;
+}
+
+#final {
+    background-color: #747678;
+}
+
+/* navbar */
+.navbar {
+    background: #FFE600;
+    font-family: "Lucida Console", monospace;
+}
+
+.nav-item {
+    padding: 1% 7%;
+    margin: auto;
+}
+
+​ .button-src {
+    background-color: #810dfd;
+    color: #FFFFFF;
+}
+
+#loginAlign {
+    /* margin-top: 10%; */
+    /* filter: drop-shadow(0px 2px 2px  rgba(0, 0, 0, .5)); */
+    /*sombra para a div*/
+    /* text-align: center; */
+    /*aliinha em relação a uma caixa com largura definida*/
+    /* display: flex; */
+    /*habilita propriedades listadas abaixo*/
+    /* justify-content: center; */
+    /*centralização horizontal*/
+    /* align-items: center; */
+    background-color: white;
+    /* flex-direction: column;
+    padding: 10%; */
+    display: flex;
+    /* align-items: center;
+    justify-content: center; */
+    margin: 20%;
+    padding: 15%
+}
+
+
+#paiLogin {
+    /* display: flex; */
+    /* align-items: center;
+    justify-content: center;
+    max-height: 65vh; */
+    /* height: 00vh; */
+    /*viewportheight*/
+    background-color: #343a40;
+    display: flex;
+
+}
+
+
+
+/* #inputTextLogin {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+} */
+
+
+.social-media-icons {
+    color: white;
+    padding: 2%;
+}
+
+#footer-logo {
+    width: 6%;
+    height: 6%;
+    padding-right: 1%;
+
+}
+
+#footer-bottom {
+    background-color: #747678;
+}
+
+.footer-content {
+    padding: 1vh 0;
+}
+
+footer {
+    background-color: #343a40;
+    color: white;
+    margin-top: auto;
+}
+
+body {
+    font-family: 'Manrope', sans-serif;
+}
+
+.centered {
+    display: flex;
+    align-items: center;
+}
+
+
+
+p {
+    font-size: small;
+    font-family: 'Manrope', sans-serif;
+}
+
+body {
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}

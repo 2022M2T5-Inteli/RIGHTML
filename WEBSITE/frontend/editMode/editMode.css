@@ -2,6 +2,8 @@ body {
     font-family: 'Manrope', sans-serif;
 }
 
+/* Navbar styling */
+
 .navbar {
     background: #FFE600;
     font-family: "Lucida Console", monospace;
@@ -12,15 +14,94 @@ body {
     margin: auto;
 }
 
+nav {
+    font-family: 'Manrope', sans-serif;
+}
+
+/* Footer styling */
+
 .social-media-icons {
     color: white;
     padding: 2%;
 }
 
-​ .button-src {
-    background-color: #810dfd;
-    color: #FFFFFF;
+#footer-logo {
+    width: 6%;
+    height: 6%;
+    padding-right: 1%;
+
 }
+
+#footer-bottom {
+    background-color: #747678;
+}
+
+.footer-content {
+    padding: 1vh 0;
+}
+
+footer {
+    background-color: #343a40;
+    color: white;
+    margin-top: auto;
+}
+
+/* Top of the page styling */
+
+#overview {
+    border: 1px solid grey;
+    border-radius: 2px;
+    width: 100%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+#add {
+    background-color: white;
+    padding: 1% 1% 1% 4%;
+}
+
+#trash {
+    background-color: white;
+    padding: 1% 4% 1% 4%;
+    text-align: center;
+    border-style: none solid none none;
+    border-color: grey;
+}
+
+#page-title {
+    margin-top: 3vh;
+    text-align: center;
+    font-size: 5vh;
+    font-family: monospace;
+}
+
+#toolbar {
+    width: 100%;
+    text-align: center;
+}
+
+#basic-addon1 {
+    height: 100%;
+    background-color: white;
+}
+
+#searchbox {
+    margin-top: 1vh;
+    width: 100%;
+    text-align: center;
+    font-family: 'Manrope', sans-serif;
+}
+
+.main-title {
+    padding: 0;
+    margin: 0;
+    font-size: medium;
+}
+
+
+
+/* Questions styling */
 
 .questions {
     padding: 1% 0% 3% 1%;
@@ -43,92 +124,21 @@ body {
     margin: 2vh;
 }
 
-nav {
-    font-family: 'Manrope', sans-serif;
+.alternatives {
+    margin-bottom: 2vh;
 }
 
-#overview {
-    border: 1px solid grey;
-    border-radius: 2px;
-    width: 100%;
-    margin-top: 2%;
-    margin-bottom: 2%;
-}
-
-
-#footer-logo {
-    width: 6%;
-    height: 6%;
-    padding-right: 1%;
-
-}
 
 .centered {
     display: flex;
     align-items: center;
 }
 
-#footer-bottom {
-    background-color: #747678;
-}
 
-.footer-content {
-    padding: 1vh 0;
-}
-
-#page-title {
-    margin-top: 3vh;
-    text-align: center;
-    font-size: 5vh;
-    font-family: monospace;
-}
 
 p {
     font-size: small;
     font-family: 'Manrope', sans-serif;
-}
-
-#toolbar {
-    width: 100%;
-    text-align: center;
-}
-
-#basic-addon1 {
-    height: 100%;
-    background-color: white;
-}
-
-#searchbox {
-    margin-top: 1vh;
-    width: 100%;
-    text-align: center;
-    font-family: 'Manrope', sans-serif;
-}
-
-.extra {
-    background-color: white;
-    margin: auto;
-    height: 100%;
-
-}
-
-#add {
-    background-color: white;
-    padding: 1% 1% 1% 4%;
-}
-
-#trash {
-    background-color: white;
-
-    padding: 1% 4% 1% 4%;
-    text-align: center;
-    border-style: none solid none none;
-    border-color: grey;
-}
-
-#details {
-    margin: auto;
-    padding: 1% 0%;
 }
 
 body {
@@ -136,20 +146,4 @@ body {
     margin: 0;
     display: flex;
     flex-direction: column;
-}
-
-footer {
-    background-color: #343a40;
-    color: white;
-    margin-top: auto;
-}
-
-.main-title {
-    padding: 0;
-    margin: 0;
-    font-size: medium;
-}
-
-.alternatives {
-    margin-bottom: 2vh;
 }
