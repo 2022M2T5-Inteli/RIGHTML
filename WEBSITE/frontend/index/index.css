@@ -48,8 +48,8 @@ definir uma altura para o part1, deixando largura responder ao container(imagem 
 
 
 #imageImpactPhrase {
-    height: auto;
-    width: auto;
+    margin: 0;
+    width: 100vw;
 }
 
 #impactPhrase {
@@ -73,13 +73,6 @@ definir uma altura para o part1, deixando largura responder ao container(imagem 
     left: 33%;
 } */
 
-#rodape {
-    background-color: #343a40;
-}
-
-footer {
-    color: white;
-}
 
 .logo {
     width: 50px;
@@ -147,3 +140,53 @@ footer {
     align-items: center;
     justify-content: center;
 } */
+
+
+.social-media-icons {
+    color: white;
+    padding: 2%;
+}
+
+#footer-logo {
+    width: 6%;
+    height: 6%;
+    padding-right: 1%;
+
+}
+
+#footer-bottom {
+    background-color: #747678;
+}
+
+.footer-content {
+    padding: 1vh 0;
+}
+
+footer {
+    background-color: #343a40;
+    color: white;
+    margin-top: auto;
+}
+
+body {
+    font-family: 'Manrope', sans-serif;
+}
+
+.centered {
+    display: flex;
+    align-items: center;
+}
+
+
+
+p {
+    font-size: small;
+    font-family: 'Manrope', sans-serif;
+}
+
+body {
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
