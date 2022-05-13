@@ -10,6 +10,10 @@
 
 }
 
+.main-title{
+    font-family: "Lucida Console", monospace;  
+}
+
 #footer-bottom {
     background-color: #747678;
 }
