@@ -27,24 +27,6 @@ body {
     padding: 1% 0% 3% 1%;
 }
 
-.axis-title {
-    font-family: monospace;
-    font-size: 4vh;
-    width: fit-content;
-    padding-bottom: 0;
-    margin-bottom: 0;
-    margin-top: 1px;
-    padding-left: 1%;
-}
-
-.axis-title-inner-styling {
-    border-top: solid 3px #FFE600;
-    border-bottom: solid 4px yellow;
-    margin-top: 1px;
-    background-color: #FFE600;
-}
-
-
 #Agenda-educacional{
     padding: 2%;
 }
@@ -105,7 +87,6 @@ nav {
     text-align: center;
     font-size: 5vh;
     font-family: monospace;
-    margin-bottom: 2vh;
 }
 
 p {
@@ -178,34 +159,4 @@ footer {
     padding: 0;
     margin: 0;
     font-size: medium;
-}
-
-.questions {
-    padding: 1% 0% 3% 1%;
-}
-
-.question-header {
-    background-color: #FFE600;
-    padding: 1% 1% 0% 0;
-}
-
-.question-wording {
-    padding: 0;
-    margin: 0;
-}
-
-#questions-container {
-    border: 1px solid grey;
-    border-radius: 2px;
-    padding: 1%;
-    margin: 2vh;
-}
-
-.alternatives {
-    margin-bottom: 2vh;
-}
-
-.form-check-label {
-    font-family: "Manrope", sans-serif;
-    font-size: small;
 }

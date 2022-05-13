@@ -1,6 +1,6 @@
 const questionsContainer = document.getElementById("questions-container");
 
-const questionsArray = [];
+const questionsArray = []
 
 let currentEditModeQuestionIndex = null;
 
