@@ -1,3 +1,18 @@
+/*cabeçalho*/
+.navbar{
+    background: #FFE600;
+    font-family: "Lucida Console", monospace;   
+}
+.nav-item{
+    padding: 1% 7%;
+    margin: auto;
+}
+.button-src{
+    background-color: #810dfd;
+    color: #FFFFFF;
+}
+
+
 /*Quem somos*/
 #qs1{
     margin-top: 5%;
@@ -10,6 +25,7 @@
 
 #qs2{
     margin-top: 20px;
+    font-family: manrope;
 }
 
 #botao1{
@@ -47,6 +63,10 @@
 
 .footer-content {
     padding: 1vh 0;
+}
+
+.main-title{
+    font-family: "Lucida Console", monospace;  
 }
 
 body {

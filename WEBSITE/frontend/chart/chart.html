@@ -5,9 +5,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quem somos</title>
-    <link rel="stylesheet" href="quemSomos.css">
+    <title>Chart</title>
+    <link rel="stylesheet" href="chart.css">
     <!--Integrações-->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script defe src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
@@ -18,7 +19,7 @@
 
 <!--header-->
 
-  <header>
+<header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
           <a class="navbar-brand" href="#">
@@ -48,35 +49,75 @@
       </nav>
 </header>
 
-<!--Who-->
 
-<div class="container">
-  <div id="qs1" class="row">
-    <div class="col">
-    <p> Quem somos? </p>
+<!--Search Box-->
+<div class="search-box">
+  <input class="search-txt" type="text" name="" placeholder="Escola, cidade ou estado">
+  <a class="search-btn" href="#"></a><i class="fas fa-search"></i>
+</div>
+
+
+<!--Chart-->
+<div id="bars">
+    <div class="chartBox">
+      <canvas id="myChart"></canvas>
     </div>
-  </div>
+  
+  
+      <script>
+      const ctx = document.getElementById('myChart').getContext('2d');
+      const myChart = new Chart(ctx, {
+          type: 'bar',
+          data: {
+              labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+              datasets: [{
+                  label: '# of Votes',
+                  data: [12, 19, 3, 5, 2, 3],
+                  backgroundColor: [
+                      'rgba(255, 99, 132, 0.2)',
+                      'rgba(54, 162, 235, 0.2)',
+                      'rgba(255, 206, 86, 0.2)',
+                      'rgba(75, 192, 192, 0.2)',
+                      'rgba(153, 102, 255, 0.2)',
+                      'rgba(255, 159, 64, 0.2)'
+                  ],
+                  borderColor: [
+                      'rgba(255, 99, 132, 1)',
+                      'rgba(54, 162, 235, 1)',
+                      'rgba(255, 206, 86, 1)',
+                      'rgba(75, 192, 192, 1)',
+                      'rgba(153, 102, 255, 1)',
+                      'rgba(255, 159, 64, 1)'
+                  ],
+                  borderWidth: 1
+              }]
+          },
+          options: {
+              scales: {
+                  y: {
+                      beginAtZero: true
+                  }
+              }
+          }
+      });
+  
+      const config = {
+        type: 'bar',
+        data: data,
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        },
+      };
+  
+    </script>
 </div>
 
-<div class="container">
-    <div id="qs2" class="row">
-      <div class="col-12 text-center"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim recusandae perspiciatis beatae dignissimos,
-      optio consectetur hic magnam quis, harum iste ut voluptatem corporis repudiandae totam, aliquam est quo molestiae. </div>
-        <p></p>
-      <div class="col-12 text-center"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim recusandae perspiciatis beatae dignissimos,
-        optio consectetur hic magnam quis, harum iste ut voluptatem corporis repudiandae totam, aliquam est quo molestiae. </div>
-        <p></p>
-      <div class="col-12 text-center"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim recusandae perspiciatis beatae dignissimos,
-        optio consectetur hic magnam quis, harum iste ut voluptatem corporis repudiandae totam, aliquam est quo molestiae. </div>
-    </div>
-</div>
-
-<div id="botao1">
-  <button id="botao" type="button" class="btn btn-secondary btn-lg btn-block">Fale conosco!!</button>
-</div>
 
 <!--Footer-->
-
     <footer>
         <div class="container-fluid">
           <div class="row footer-content">
@@ -107,7 +148,6 @@
           </div>
     </footer>
 </body>
-
 <!-- JavaScript Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
 integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
