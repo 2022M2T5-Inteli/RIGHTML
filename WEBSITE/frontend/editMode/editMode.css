@@ -1,79 +1,15 @@
-body {
-    font-family: 'Manrope', sans-serif;
-}
-
-/* Navbar styling */
-
-.navbar {
-    background: #FFE600;
-    font-family: "Lucida Console", monospace;
-}
-
-.nav-item {
-    padding: 1% 7%;
-    margin: auto;
-}
-
-nav {
-    font-family: 'Manrope', sans-serif;
-}
-
-/* Footer styling */
-
-.social-media-icons {
-    color: white;
-    padding: 2%;
-}
-
-#footer-logo {
-    width: 6%;
-    height: 6%;
-    padding-right: 1%;
-
-}
-
-#footer-bottom {
-    background-color: #747678;
-}
-
-.footer-content {
-    padding: 1vh 0;
-}
-
-footer {
-    background-color: #343a40;
-    color: white;
-    margin-top: auto;
-}
-
 /* Top of the page styling */
 
-#overview {
+#overview-div {
     border: 1px solid grey;
     border-radius: 2px;
     width: 100%;
-    margin-top: 2%;
-    margin-bottom: 2%;
+    margin: 2% 0;
 }
 
-#add {
-    background-color: white;
-    padding: 1% 1% 1% 4%;
-}
-
-#trash {
-    background-color: white;
-    padding: 1% 4% 1% 4%;
-    text-align: center;
-    border-style: none solid none none;
-    border-color: grey;
-}
-
-#page-title {
-    margin-top: 3vh;
-    text-align: center;
-    font-size: 5vh;
-    font-family: monospace;
+#overview-data {
+    margin: auto;
+    padding: 1vh 0;
 }
 
 #toolbar {
@@ -93,57 +29,14 @@ footer {
     font-family: 'Manrope', sans-serif;
 }
 
-.main-title {
-    padding: 0;
-    margin: 0;
-    font-size: medium;
+#add-toolbar-button {
+    background-color: white;
+    padding: 1% 1% 1% 4%;
 }
 
-
-
-/* Questions styling */
-
-.questions {
-    padding: 1% 0% 3% 1%;
-}
-
-.question-header {
-    background-color: #FFE600;
-    padding: 1% 1% 0% 0;
-}
-
-.question-wording {
-    padding: 0;
-    margin: 0;
-}
-
-#questions-container {
-    border: 1px solid grey;
-    border-radius: 2px;
-    padding: 1%;
-    margin: 2vh;
-}
-
-.alternatives {
-    margin-bottom: 2vh;
-}
-
-
-.centered {
-    display: flex;
-    align-items: center;
-}
-
-
-
-p {
-    font-size: small;
-    font-family: 'Manrope', sans-serif;
-}
-
-body {
-    height: 100vh;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
+#trash-toolbar-button {
+    background-color: white;
+    padding: 1% 4% 1% 4%;
+    text-align: center;
+    border-style: none solid none none;
 }
