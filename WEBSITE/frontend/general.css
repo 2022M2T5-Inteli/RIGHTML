@@ -1,0 +1,131 @@
+/* Generic styling */
+
+body {
+    font-family: 'Manrope', sans-serif;
+}
+
+main {
+    margin: 0 2vw;
+}
+
+.centered {
+    display: flex;
+    align-items: center;
+}
+
+p {
+    font-size: small;
+    font-family: 'Manrope', sans-serif;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #FFE600;
+    text-decoration: none;
+}
+
+.btn-primary {
+    background: #810DFD;
+    border-color: #810DFD;
+}
+
+.btn-secondary {
+    background: #FFE600;
+    border-color: #FFE600;
+    color: #343a40;
+}
+
+.btn-primary:hover {
+    background-color: #5a06b4;
+    background-color: #5a06b4;
+}
+
+.btn-primary:visited,
+.btn-primary:active,
+.btn-primary:focus {
+    background: #810DFD;
+    border-color: none;
+    outline-color: transparent;
+}
+
+/* Navbar styling */
+
+.navbar {
+    font-family: "Space Mono", monospace;
+    color: white;
+}
+
+/* Footer styling */
+
+footer {
+    background-color: #343a40;
+    color: white;
+    margin-top: auto;
+    font-family: 'Space Mono', monospace;
+}
+
+.social-media-icons {
+    color: white;
+    padding: 2%;
+}
+
+#footer-logo {
+    width: 6%;
+    height: 6%;
+    padding-right: 1%;
+}
+
+.footer-content {
+    padding: 1vh 0;
+}
+
+.main-title {
+    padding: 0;
+    margin: 0;
+    font-size: medium;
+}
+
+/* Top of the page styling */
+
+#page-title {
+    margin-top: 3vh;
+    text-align: center;
+    font-size: 5vh;
+    font-family: "Space Mono", monospace;
+}
+
+/* Questions styling */
+
+.questions {
+    padding: 1% 0% 3% 1%;
+}
+
+.question-header {
+    background-color: #FFE600;
+    padding: 1% 1% 0% 0;
+}
+
+.question-wording {
+    padding: 0;
+    margin: 0;
+}
+
+#questions-container {
+    border: 1px solid grey;
+    border-radius: 2px;
+    padding: 1%;
+    margin: 2vh;
+}
+
+.alternatives {
+    margin-bottom: 2vh;
+}
+
+.form-check-label {
+    font-family: "Manrope", sans-serif;
+    font-size: small;
+}
