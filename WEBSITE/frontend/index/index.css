@@ -48,8 +48,8 @@ definir uma altura para o part1, deixando largura responder ao container(imagem 
 
 
 #imageImpactPhrase {
-    margin: 0;
-    width: 100vw;
+    height: auto;
+    width: auto;
 }
 
 #impactPhrase {
@@ -67,12 +67,14 @@ definir uma altura para o part1, deixando largura responder ao container(imagem 
     text-align: center;
 }
 
-/* #centralizedButton {
-    position: relative;
-    top: 50%;
-    left: 33%;
-} */
 
+#rodape {
+    background-color: #343a40;
+}
+
+footer {
+    color: white;
+}
 
 .logo {
     width: 50px;
@@ -99,94 +101,13 @@ definir uma altura para o part1, deixando largura responder ao container(imagem 
     color: #FFFFFF;
 }
 
-#loginAlign {
-    /* margin-top: 10%; */
-    /* filter: drop-shadow(0px 2px 2px  rgba(0, 0, 0, .5)); */
-    /*sombra para a div*/
-    /* text-align: center; */
-    /*aliinha em relação a uma caixa com largura definida*/
-    /* display: flex; */
-    /*habilita propriedades listadas abaixo*/
-    /* justify-content: center; */
-    /*centralização horizontal*/
-    /* align-items: center; */
-    background-color: white;
-    /* flex-direction: column;
-    padding: 10%; */
-    display: flex;
-    /* align-items: center;
-    justify-content: center; */
-    margin: 20%;
-    padding: 15%
-}
+.gradient-custom {
+    /* fallback for old browsers */
+    background: #6a11cb;
 
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
 
-#paiLogin {
-    /* display: flex; */
-    /* align-items: center;
-    justify-content: center;
-    max-height: 65vh; */
-    /* height: 00vh; */
-    /*viewportheight*/
-    background-color: #343a40;
-    display: flex;
-
-}
-
-
-
-/* #inputTextLogin {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-} */
-
-
-.social-media-icons {
-    color: white;
-    padding: 2%;
-}
-
-#footer-logo {
-    width: 6%;
-    height: 6%;
-    padding-right: 1%;
-
-}
-
-#footer-bottom {
-    background-color: #747678;
-}
-
-.footer-content {
-    padding: 1vh 0;
-}
-
-footer {
-    background-color: #343a40;
-    color: white;
-    margin-top: auto;
-}
-
-body {
-    font-family: 'Manrope', sans-serif;
-}
-
-.centered {
-    display: flex;
-    align-items: center;
-}
-
-
-
-p {
-    font-size: small;
-    font-family: 'Manrope', sans-serif;
-}
-
-body {
-    height: 100vh;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1))
 }
