@@ -31,22 +31,7 @@ body {
     padding: 1% 1% 1% 0;
 }
 
-#choose-agenda {
-    border: solid 2px black;
-    padding: 1%;
-    margin: 2vh;
-   
-}
-.education{
-    
-    padding: 2%;
-    margin: 1%;
-}
-.management{
-    
-    padding: 2%;
-    margin: 1%;
-}
+
 
 .button-finish{
     display: flex;
@@ -135,14 +120,22 @@ p {
     padding: 1% 4% 1% 4%;
     text-align: center;
     border-style: none solid none none;
-    border-color: grey;
+    border-color: rgb(151, 27, 27);
 }
 
 #details {
     margin: auto;
     padding: 1% 0%;
 }
-
+#img_right {
+    max-width: 50%;
+    height: 50%;
+    
+}
+#img_left {
+    max-width: 50%;
+    height: 50%;
+}
 body {
     height: 100vh;
     margin: 0;
