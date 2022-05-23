@@ -12,12 +12,14 @@
     padding: 1vh 0;
 }
 
+/* Toolbar */
+
 #toolbar {
     width: 100%;
     text-align: center;
 }
 
-#basic-addon1 {
+#basic-addon1 { /* Search icon on the left */
     height: 100%;
     background-color: white;
 }
