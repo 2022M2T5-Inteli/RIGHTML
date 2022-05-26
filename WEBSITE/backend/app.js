@@ -16,7 +16,7 @@ app.use(express.json());
 
 /* Definição dos endpoints */
 
-
+// NETWORK
 app.get('/networks', (req, res) => {
 	res.statusCode = 200;
 	res.setHeader('Access-Control-Allow-Origin', '*');
@@ -78,7 +78,7 @@ app.post('/networkdelete', urlencodedParser, (req, res) => {
 });
 
 
-/* network manager */
+// NETWORK MANAGER
 app.get('/networkmanagers', (req, res) => {
 	res.statusCode = 200;
 	res.setHeader('Access-Control-Allow-Origin', '*'); // Isso é importante para evitar o erro de CORS
@@ -93,54 +93,23 @@ app.get('/networkmanagers', (req, res) => {
 	});
 	db.close(); // Fecha o banco
 });
-    // Insere um registro (é o C do CRUD - Create)
+    
 app.post('/networkmanagerinsert', urlencodedParser, (req, res) => {
 	res.statusCode = 200;
-	res.setHeader('Access-Control-Allow-Origin', '*'); // Isso é importante para evitar o erro de CORS
+	res.setHeader('Access-Control-Allow-Origin', '*'); 
 
 	sql = "INSERT INTO network_manager (cpf, email, name) VALUES ('" + req.body.cpf + "', '" + req.body.email + "', '" + req.body.name + "')";
-	var db = new sqlite3.Database(DBPATH); // Abre o banco
+	var db = new sqlite3.Database(DBPATH); 
 	db.run(sql, [],  err => {
 		if (err) {
 		    throw err;
 		}
 	});
-	db.close(); // Fecha o banco
+	db.close(); 
 	res.end();
 });
 
-/* school */
-app.get('/networkmanagers', (req, res) => {
-	res.statusCode = 200;
-	res.setHeader('Access-Control-Allow-Origin', '*'); // Isso é importante para evitar o erro de CORS
-
-	var db = new sqlite3.Database(DBPATH); // Abre o banco
-  var sql = 'SELECT * FROM network_manager ORDER BY cpf COLLATE NOCASE';
-	db.all(sql, [],  (err, rows ) => {
-		if (err) {
-		    throw err;
-		}
-		res.json(rows);
-	});
-	db.close(); // Fecha o banco
-});
-    // Insere um registro (é o C do CRUD - Create)
-app.post('/networkmanagerinsert', urlencodedParser, (req, res) => {
-	res.statusCode = 200;
-	res.setHeader('Access-Control-Allow-Origin', '*'); // Isso é importante para evitar o erro de CORS
-
-	sql = "INSERT INTO network_manager (cpf, email, name) VALUES ('" + req.body.cpf + "', '" + req.body.email + "', '" + req.body.name + "')";
-	var db = new sqlite3.Database(DBPATH); // Abre o banco
-	db.run(sql, [],  err => {
-		if (err) {
-		    throw err;
-		}
-	});
-	db.close(); // Fecha o banco
-	res.end();
-});
-
-/* diagnosis */
+/* DIAGNOSIS */
 app.get('/diagnosis', (req, res) => {
 	res.statusCode = 200;
 	res.setHeader('Access-Control-Allow-Origin', '*'); // Isso é importante para evitar o erro de CORS
@@ -317,19 +286,51 @@ app.get('/schools', (req, res) => {
 	db.close(); // Fecha o banco
 });
 
-// Insere um registro (é o C do CRUD - Create)
+
 app.post('/schoolinsert', urlencodedParser, (req, res) => {
 	res.statusCode = 200;
 	res.setHeader('Access-Control-Allow-Origin', '*'); // Isso é importante para evitar o erro de CORS
 
 	sql = "INSERT INTO school (name, cnpj, number_of_students, number_of_employees, type_of_institution, school_census_id, network_id) VALUES ('" + req.body.name + "', '" + req.body.cnpj + "', '" + req.body.number_of_students + "', '" + req.body.number_of_employees +"', '" + req.body.type_of_institution +"', '" + req.body.school_census_id +"','" + req.body.network_id +"')";
-	var db = new sqlite3.Database(DBPATH); // Abre o banco
+	var db = new sqlite3.Database(DBPATH); 
 	db.run(sql, [],  err => {
 		if (err) {
 		    throw err;
 		}
 	});
+	db.close();
+	res.end();
+});
+
+/* employee */
+app.get('/employees', (req, res) => {
+	res.statusCode = 200;
+	res.setHeader('Access-Control-Allow-Origin', '*'); // Isso é importante para evitar o erro de CORS
+
+	var db = new sqlite3.Database(DBPATH); // Abre o banco
+  var sql = 'SELECT * FROM employee ORDER BY name COLLATE NOCASE';
+	db.all(sql, [],  (err, rows ) => {
+		if (err) {
+		    throw err;
+		}
+		res.json(rows);
+	});
 	db.close(); // Fecha o banco
+});
+
+
+app.post('/employeeinsert', urlencodedParser, (req, res) => {
+	res.statusCode = 200;
+	res.setHeader('Access-Control-Allow-Origin', '*'); // Isso é importante para evitar o erro de CORS
+
+	sql = "INSERT INTO employee (email, cpf, name, type) VALUES ('" + req.body.email + "', '" + req.body.cpf + "', '" + req.body.type + "', '" + req.body.number_of_employees +"', '" + req.body.type_of_institution +"', '" + req.body.school_census_id +"','" + req.body.network_id +"')";
+	var db = new sqlite3.Database(DBPATH); 
+	db.run(sql, [],  err => {
+		if (err) {
+		    throw err;
+		}
+	});
+	db.close();
 	res.end();
 });
 
