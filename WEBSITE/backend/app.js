@@ -291,13 +291,8 @@ app.post('/schoolinsert', urlencodedParser, (req, res) => {
 	res.statusCode = 200;
 	res.setHeader('Access-Control-Allow-Origin', '*'); // Isso é importante para evitar o erro de CORS
 
-<<<<<<< HEAD
 	sql = "INSERT INTO school (name, cnpj, number_of_students, number_of_employees, type_of_institution, school_census_id, network_id) VALUES ('" + req.body.name + "', '" + req.body.cnpj + "', '" + req.body.number_of_students + "', '" + req.body.number_of_employees +"', '" + req.body.type_of_institution +"', '" + req.body.school_census_id +"','" + req.body.network_id +"')";
 	var db = new sqlite3.Database(DBPATH); 
-=======
-	sql = "INSERT INTO school (name, cnpj,number_of_students,number_of_employees,type_of_institution, school_census_id) VALUES ('" + req.body.name + "', '" + req.body.cnpj + "', '" + req.body.number_of_students + "', '" + req.body.number_of_employees +"', '" + req.body.type_of_institution +"', '" + req.body.school_number_of_students +"', '" + req.body.school_number_of_students +"')";
-	var db = new sqlite3.Database(DBPATH); // Abre o banco
->>>>>>> parent of a8c96b1 (school insert working)
 	db.run(sql, [],  err => {
 		if (err) {
 		    throw err;
