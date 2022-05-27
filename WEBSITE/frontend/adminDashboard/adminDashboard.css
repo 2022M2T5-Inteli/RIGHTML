@@ -41,3 +41,10 @@
     text-align: center;
     border-style: none solid none none;
 }
+
+/* Buttons of admin panel */
+#edit-question {
+    margin: 5%;
+    bottom: 20%;
+}
+
