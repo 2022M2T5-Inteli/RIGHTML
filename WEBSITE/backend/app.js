@@ -333,7 +333,22 @@ app.post('/employeeinsert', urlencodedParser, (req, res) => {
 	db.close();
 	res.end();
 });
+ 
+// Exclui um registro (é o D do CRUD - Delete)
+app.post('/questiondelete', urlencodedParser, (req, res) => {
+    res.statusCode = 200;
+    res.setHeader('Access-Control-Allow-Origin', '*'); // Isso é importante para evitar o erro de CORS
 
+    sql = "DELETE FROM question WHERE id  = " + req.body.id;
+    var db = new sqlite3.Database(DBPATH); // Abre o banco
+    db.run(sql, [],  err => {
+        if (err) {
+            throw err;
+        }
+        res.end();
+    });
+    db.close(); // Fecha o banco
+});
 
 
 /* Inicia o servidor */
