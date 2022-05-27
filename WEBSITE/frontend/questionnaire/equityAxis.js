@@ -10,8 +10,7 @@ const questionsArray = [
         new Question("Disciplinas diversificadas aprovam ?", "Ensino", ["Não há diretriz padrão definida na rede" , " Há padrão de avaliações aplicadas na rede" ]),
         new Question("A secretária tem atendido às carências específicas da rede ?", "Pessoas", ["As carências específicas da rede não são atendidas" , "As carências específicas da rede são atendidas parcialmente" ,"As carências específicas da rede são totalmente atendidas" ] ),
         new Question("Como é o processo de acompanhamento da Secretaria no Censo Escolar ? ", "Fluxo", [" Não há processo de acompanhamento da Secretaria no Censo Escolar padronizado" , "Há processo de acompanhamento da Secretaria no Censo Escolar padronizado, mas não é efetivo", "Há processo de acompanhamento da Secretaria no Censo Escolar padronizado e efetivo" ]  ),
-        new Question("O processo de enturmação considera a metragem das salas de aulas", "Infraestrutura e TI", ["Não é considerado a metragem das salas de aula no processo de enturmação", "O processo de enturmação  considera parcialmente a metragem das salas de aula", "O processo de enturmação considera totalmente a metragem das salas de aulas" ]),
-        new Question(" Há suporte financeiro a alunos vulneráveis?", "Equidade", ["Não há suporte financeiro" , "Há suporte financeiro para alunos vulneráveis"])];
+        new Question("O processo de enturmação considera a metragem das salas de aulas", "Infraestrutura e TI", ["Não é considerado a metragem das salas de aula no processo de enturmação", "O processo de enturmação  considera parcialmente a metragem das salas de aula", "O processo de enturmação considera totalmente a metragem das salas de aulas" ]),];
 
 function loadQuestions() {
     const questionsContainer = document.getElementById("questions-container")

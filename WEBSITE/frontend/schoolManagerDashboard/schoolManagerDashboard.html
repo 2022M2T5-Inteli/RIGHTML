@@ -60,10 +60,10 @@
 
     <div>
       <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-        Dados do sistema
+        Dados da instituição
       </a>
       <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2">
-        Alterar informações dos usuários
+        Atualizar informações 
       </button>
     </div>
 <!-- Box de informações sobre o sistema -->
@@ -71,76 +71,69 @@
       <div class="list-group list-group-numbered">
         <li class="list-group-item d-flex justify-content-between align-items-start">
           <div class="ms-2 me-auto">
-            <div class="fw-bold">Número usuários</div>
+            <div class="fw-bold">Número de estudantes</div>
             nº xxxxx 
           </div>
           <span class="badge bg-primary rounded-pill">xxxxx</span>
         </li>
         <li class="list-group-item d-flex justify-content-between align-items-start">
           <div class="ms-2 me-auto">
-            <div class="fw-bold">Número escolas cadastradas</div>
+            <div class="fw-bold">Número de funcionários</div>
             nº xxxxx
           </div>
           <span class="badge bg-primary rounded-pill">xxxxx</span>
         </li>
         <li class="list-group-item d-flex justify-content-between align-items-start">
           <div class="ms-2 me-auto">
-            <div class="fw-bold">Questionários respondidos</div>
-            nº xxxx
+            <div class="fw-bold">Tipo de instituição</div>
+            xxxxxxxxxx
           </div>
-          <span class="badge bg-primary rounded-pill">xxxxx</span>
         </li>  
         <li class="list-group-item d-flex justify-content-between align-items-start">
           <div class="ms-2 me-auto">
-            <div class="fw-bold">Usuários ativos</div>
+            <div class="fw-bold">CNPJ</div>
             nº xxxx
           </div>
-          <span class="badge bg-primary rounded-pill">xxxxx</span>
         </li>  
+        <li class="list-group-item d-flex justify-content-between align-items-start">
+          <div class="ms-2 me-auto">
+            <div class="fw-bold">Número cadastrado no INEP </div>
+            nº xxxxxxxxxx
+          </div>
+        </li>
 
       </div>
     </div>
     
     <!-- Box para alterar dados dos usuarios  -->
     <div class="collapse" id="collapseExample2">
+      <label for="basic-url" class="form-label">Informações</label>
       <div class="input-group mb-3">
-        <input type="text" class="form-control" placeholder="Nome usuário" aria-label="Username" aria-describedby="basic-addon1">
-      </div>
-      
-      <div class="input-group mb-3">
-        <input type="text" class="form-control" placeholder="email usuário" aria-label="Recipient's username" aria-describedby="basic-addon2">
-        <span class="input-group-text" id="basic-addon2">@email.com</span>
-      </div>
-      
-      <label for="basic-url" class="form-label">Contato</label>
-      <div class="input-group mb-3">
-        <span class="input-group-text" id="basic-addon3">Telefone</span>
+        <span class="input-group-text" id="basic-addon3">nº alunos</span>
         <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
       </div>
       
       <div class="input-group mb-3">
-        <span class="input-group-text">Nome</span>
+        <span class="input-group-text">nº funcionários</span>
         <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
       </div>
 
       <div class="input-group mb-3">
-        <span class="input-group-text">Cargo</span>
+        <span class="input-group-text">Taxa de aprovação</span>
         <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
       </div>
       
-      <div class="input-group">
-        <span class="input-group-text">Informações adicionais</span>
-        <textarea class="form-control" aria-label="With textarea"></textarea>
-      </div>
-
 
       <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2">
        Salvar
       </button>
     </div>
 
-
-
+    <!-- Este botão ira levar para a tela de editar e adicionar questões -->
+    <div class='container' style="text-align:center;" id="edit_question" >
+      <button type="button" class="btn btn-primary" onclick="location.href = 'https://www.inteli.edu.br/';">Escolher questionário</button>
+      <!--na função onclick se colocar window.location.href abre uma nova guia-->
+    </div>
 
 
 
