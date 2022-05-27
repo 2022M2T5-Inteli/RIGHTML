@@ -17,6 +17,34 @@ body {
     padding: 2%;
 }
 
+
+footer {
+    background-color: #343a40;
+    color: white;
+    margin-top: auto;
+    font-family: 'Space Mono', monospace;
+}
+
+.social-media-icons {
+    color: white;
+    padding: 2%;
+}
+
+#footer-logo {
+    width: 6%;
+    height: 6%;
+    padding-right: 1%;
+}
+
+.footer-content {
+    padding: 1vh 0;
+}
+
+.main-title {
+    padding: 0;
+    margin: 0;
+    font-size: medium;
+}
 ​ .button-src {
     background-color: #810dfd;
     color: #FFFFFF;
@@ -31,22 +59,7 @@ body {
     padding: 1% 1% 1% 0;
 }
 
-#choose-agenda {
-    border: solid 2px black;
-    padding: 1%;
-    margin: 2vh;
-   
-}
-.education{
-    
-    padding: 2%;
-    margin: 1%;
-}
-.management{
-    
-    padding: 2%;
-    margin: 1%;
-}
+
 
 .button-finish{
     display: flex;
@@ -92,7 +105,7 @@ nav {
     margin-top: 3vh;
     text-align: center;
     font-size: 5vh;
-    font-family: monospace;
+    font-family: 'Manrope';
 }
 
 p {
@@ -135,14 +148,22 @@ p {
     padding: 1% 4% 1% 4%;
     text-align: center;
     border-style: none solid none none;
-    border-color: grey;
+    border-color: rgb(151, 27, 27);
 }
 
 #details {
     margin: auto;
     padding: 1% 0%;
 }
-
+#img_right {
+    max-width: 75%;
+    height: 75%;
+    
+}
+#img_left {
+    max-width: 75%;
+    height: 75%;
+}
 body {
     height: 100vh;
     margin: 0;
