@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope&display=swap');
+.body {
+    font-family: 'Manrope', sans-serif;
+}
+@import url('https://fonts.googleapis.com/css2?family=Manrope&display=swap');
+.body {
+    font-family: 'Manrope', sans-serif;
+}
+
+
+#form.row{
+    width: 50%;
+    justify-content: center;
+    display: flex;
+}
+
+select{
+    background-color: blueviolet;
+    color: white;
+    border-radius: 7px;
+}
+
+select option {
+    background-color: #C4C4C4 ;
+}
+
+.button {
+    border-radius: 5px;
+    background-color: #810dfd;
+    color: rgb(255, 255, 255);
+    border-color: #810dfd;
+}
+
+.social-media-icons {
+    color: white;
+    padding: 2%;
+}
+
+#footer-logo {
+    width: 6%;
+    height: 6%;
+    padding-right: 1%;
+
+}
+
+.main-title{
+    font-family: monospace;  
+}
+
+#footer-bottom {
+    background-color: #747678;
+}
+
+.footer-content {
+    padding: 1vh 0;
+}
+
+footer {
+    background-color: #343a40;
+    color: white;
+    margin-top: auto;
+}
+
+body {
+    font-family: 'Manrope', sans-serif;
+}
+
+.centered {
+    display: flex;
+    align-items: center;
+}
+
+
+
+p {
+    font-size: small;
+    font-family: 'Manrope', sans-serif;
+}
+
+body {
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.t1 {
+    font-size: 1.5em;
+    font-family: monospace
+}
+
+
+
+
+
