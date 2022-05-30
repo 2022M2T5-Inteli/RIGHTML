@@ -443,12 +443,11 @@ app.post('/employeeinsert', urlencodedParser, (req, res) => {
 });
 
 
-/*não tem id- PK ficou como name */
 app.post('/employeedelete', urlencodedParser, (req, res) => {
 	res.statusCode = 200;
 	res.setHeader('Access-Control-Allow-Origin', '*'); // Isso é importante para evitar o erro de CORS
 
-	sql = "DELETE FROM employee WHERE name = " + req.body.name;
+	sql = "DELETE FROM employee WHERE email = " + req.body.email;
 	var db = new sqlite3.Database(DBPATH); // Abre o banco
 	db.run(sql, [],  err => {
 		if (err) {
