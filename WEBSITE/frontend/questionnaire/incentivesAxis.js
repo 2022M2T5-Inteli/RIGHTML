@@ -7,11 +7,11 @@ function Question(question = "Este é o enunciado", axis = "incentivos",
 }
 
 const questionsArray = [
-    new Question("Os professores possuem programas de incentivo financeiro para alcance de resultados?"),
-    new Question("Os professores possuem programas de incentivo não financeiro para alcance de resultados?"),
-    new Question("Os demais servidores possuem programas de incentivo financeiro para alcance de resultados?"),
-    new Question("Os alunos da rede possuem algum tipo de programa de incentivo para alcance de resultados?"),
-    new Question("As escolas da rede possuem algum tipo de programa de incentivo para alcance de resultados?")];
+    new Question("Disciplinas diversificadas aprovam ?", "Ensino", ["Não há diretriz padrão definida na rede" , " Há padrão de avaliações aplicadas na rede" ]),
+    new Question("A secretária tem atendido às carências específicas da rede ?", "Pessoas", ["As carências específicas da rede não são atendidas" , "As carências específicas da rede são atendidas parcialmente" ,"As carências específicas da rede são totalmente atendidas" ] ),
+    new Question("Como é o processo de acompanhamento da Secretaria no Censo Escolar ? ", "Fluxo", [" Não há processo de acompanhamento da Secretaria no Censo Escolar padronizado" , "Há processo de acompanhamento da Secretaria no Censo Escolar padronizado, mas não é efetivo", "Há processo de acompanhamento da Secretaria no Censo Escolar padronizado e efetivo" ]  ),
+    new Question("O processo de enturmação considera a metragem das salas de aulas", "Infraestrutura e TI", ["Não é considerado a metragem das salas de aula no processo de enturmação", "O processo de enturmação  considera parcialmente a metragem das salas de aula", "O processo de enturmação considera totalmente a metragem das salas de aulas" ]),
+    ];
 
 function loadQuestions() {
     console.log("here")

@@ -22,7 +22,7 @@
   <link href="../general.css" rel="stylesheet">
   <link href="adminDashboard.css" rel="stylesheet">
 
-  <title>Dashboard admin</title>
+  <title>Adicionar escola</title>
 </head>
 
 <body>
@@ -54,101 +54,42 @@
   </header>
 
   <!-- Conteúdo da página em si -->
-  <main class="container">
-    <h2 id="page-title">Dashboard administrador</h2>
-    <!-- Box de informações gerais sobre o sistema e funcionalidades -->
-
-    <div>
-      <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-        Dados do sistema
-      </a>
-      <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2">
-        Alterar informações dos usuários
-      </button>
-    </div>
-<!-- Box de informações sobre o sistema -->
-    <div class="collapse" id="collapseExample">
-      <div class="list-group list-group-numbered">
-        <li class="list-group-item d-flex justify-content-between align-items-start">
-          <div class="ms-2 me-auto">
-            <div class="fw-bold">Número usuários</div>
-            nº xxxxx 
+  <main class="container m-3 p-3">
+    <form>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="inputEmail4">Nome da escola</label>
+            <input type="text" class="form-control" id="inputEmail4">
           </div>
-          <span class="badge bg-primary rounded-pill">xxxxx</span>
-        </li>
-        <li class="list-group-item d-flex justify-content-between align-items-start">
-          <div class="ms-2 me-auto">
-            <div class="fw-bold">Número escolas cadastradas</div>
-            nº xxxxx
+          <div class="form-group col-md-6">
+            <label for="inputPassword4">CNPJ</label>
+            <input type="text" class="form-control" id="inputPassword4">
           </div>
-          <span class="badge bg-primary rounded-pill">xxxxx</span>
-        </li>
-        <li class="list-group-item d-flex justify-content-between align-items-start">
-          <div class="ms-2 me-auto">
-            <div class="fw-bold">Questionários respondidos</div>
-            nº xxxx
+        </div>
+        <div class="te-group">
+          <label for="inputAddress">Endereço</label>
+          <input type="address" class="form-control" id="inputAddress">
+        </div>
+        <div class="form-group">
+          <label for="inputAddress2">Número de alunos</label>
+          <input type="number" class="form-control" id="inputAddress2">
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="inputCity">Número de funcionários</label>
+            <input type="number" class="form-control" id="inputCity">
           </div>
-          <span class="badge bg-primary rounded-pill">xxxxx</span>
-        </li>  
-        <li class="list-group-item d-flex justify-content-between align-items-start">
-          <div class="ms-2 me-auto">
-            <div class="fw-bold">Usuários ativos</div>
-            nº xxxx
+          <div class="form-group col-md-4">
+            <label for="inputState">Rede:</label>
+            <input type="number" class="form-control" id="inputState">
           </div>
-          <span class="badge bg-primary rounded-pill">xxxxx</span>
-        </li>  
-
-      </div>
-    </div>
-    
-    <!-- Box para alterar dados dos usuarios  -->
-    <div class="collapse" id="collapseExample2">
-      <div class="input-group mb-3">
-        <input type="text" class="form-control" placeholder="Nome usuário" aria-label="Username" aria-describedby="basic-addon1">
-      </div>
-      
-      <div class="input-group mb-3">
-        <input type="text" class="form-control" placeholder="email usuário" aria-label="Recipient's username" aria-describedby="basic-addon2">
-        <span class="input-group-text" id="basic-addon2">@email.com</span>
-      </div>
-      
-      <label for="basic-url" class="form-label">Contato</label>
-      <div class="input-group mb-3">
-        <span class="input-group-text" id="basic-addon3">Telefone</span>
-        <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
-      </div>
-      
-      <div class="input-group mb-3">
-        <span class="input-group-text">Nome</span>
-        <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
-      </div>
-
-      <div class="input-group mb-3">
-        <span class="input-group-text">Cargo</span>
-        <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
-      </div>
-      
-      <div class="input-group">
-        <span class="input-group-text">Informações adicionais</span>
-        <textarea class="form-control" aria-label="With textarea"></textarea>
-      </div>
-
-
-      <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2">
-       Salvar
-      </button>
-    </div>
-
-
-
-
-
-    <!-- Este botão ira levar para a tela de editar e adicionar questões -->
-    <div class='container' style="text-align:center;" id="edit_question" >
-      <button type="button" class="btn btn-primary" onclick="location.href = 'https://www.inteli.edu.br/';">Editar questões</button>
-      <!--na função onclick se colocar window.location.href abre uma nova guia-->
-    </div>
-
+          <div class="form-group col-md-2">
+            <label for="inputZip">School census ID</label>
+            <input type="number" class="form-control" id="inputZip">
+          </div>
+        </div>
+        <a href="../schoolManagerDashboard/schoolManagerDashboard.html"><input type="button" value="Cadastrar" class="btn btn-primary m-3"></a>
+      </form>
 
   </main>
 

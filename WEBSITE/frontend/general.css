@@ -39,8 +39,8 @@ a:active {
 }
 
 .btn-primary:hover {
-    background-color: #5a06b4;
-    background-color: #5a06b4;
+    background-color: #810DFD;
+    background-color: #810DFD;
 }
 
 .btn-primary:visited,
@@ -71,10 +71,10 @@ a:active {
 /* Footer styling */
 
 footer {
-    background-color: #212529;
+    background-color: #232228;
     color: white;
-    margin-top: auto;
     font-family: 'Space Mono', monospace;
+    
 }
 
 .social-media-icons {
@@ -96,4 +96,16 @@ footer {
     padding: 0;
     margin: 0;
     font-size: medium;
+}
+
+.yellow{
+	background-color: #f8c000;
+}
+
+.purple{
+    background-color: #810DFD;
+}
+
+.black{
+    background-color: #232228;
 }
