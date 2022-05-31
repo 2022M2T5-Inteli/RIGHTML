@@ -1,11 +1,13 @@
-const express = require('express'); 
-const app = express();
+// CÓDIGO DO SERVIDOR
 
+// importa bibliotecas necessárias
+const express = require('express'); 
+const sqlite3 = require('sqlite3').verbose();
+
+// cria servidor no endereço local e determina que a pasta frontend deve ser usada como source
+const app = express();
 const hostname = '127.0.0.1';
 const port = 3001;
-const sqlite3 = require('sqlite3').verbose();
-const DBPATH = 'db.db';
-
 const bodyParser = require('body-parser');
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
 
@@ -13,16 +15,19 @@ app.use(express.static("../frontend/"));
 
 app.use(express.json());
 
+// caminho do banco de dados
+const DBPATH = 'db.db'
 
-/* Definição dos endpoints */
 
-// NETWORK
+/* DEFINIÇÃO DOS ENDPOINTS */
+
+// NETWORK - ler
 app.get('/networks', (req, res) => {
 	res.statusCode = 200;
 	res.setHeader('Access-Control-Allow-Origin', '*');
 
 	var db = new sqlite3.Database(DBPATH); 
-  var sql = 'SELECT * FROM network ORDER BY id COLLATE NOCASE';
+  var sql = 'SELECT * FROM network ORDER BY name COLLATE NOCASE'; // ordena por name
 	db.all(sql, [],  (err, rows ) => {
 		if (err) {
 		    throw err;
@@ -32,59 +37,63 @@ app.get('/networks', (req, res) => {
 	db.close(); 
 });
 
+// NETWORK - inserir/criar
 app.post('/networkinsert', urlencodedParser, (req, res) => {
 	res.statusCode = 200;
-	res.setHeader('Access-Control-Allow-Origin', '*'); // Isso é importante para evitar o erro de CORS
-
+	res.setHeader('Access-Control-Allow-Origin', '*');
+	// insere valores de nome e tipo segundo a request enviada pelo cliente
 	sql = "INSERT INTO network (name, type) VALUES ('" + req.body.name + "', '" + req.body.type + "')";
-	var db = new sqlite3.Database(DBPATH); // Abre o banco
+	var db = new sqlite3.Database(DBPATH);
 	db.run(sql, [],  err => {
 		if (err) {
 		    throw err;
 		}
 	});
-	db.close(); // Fecha o banco
+	db.close();
 	res.end();
 });
 
-app.post('/networkupdate', urlencodedParser, (req, res) => {
-	res.statusCode = 200;
-	res.setHeader('Access-Control-Allow-Origin', '*'); // Isso é importante para evitar o erro de CORS
-
-	sql = "UPDATE network SET name = '" + req.body.name + "', type = '" + req.body.type + "' WHERE id = " + req.body.id;
-	var db = new sqlite3.Database(DBPATH); // Abre o banco
-	db.run(sql, [],  err => {
-		if (err) {
-		    throw err;
-		}
-		res.end();
-	});
-	db.close(); // Fecha o banco
-});
-
+// NETWORK - deletar
 app.post('/networkdelete', urlencodedParser, (req, res) => {
 	res.statusCode = 200;
-	res.setHeader('Access-Control-Allow-Origin', '*'); // Isso é importante para evitar o erro de CORS
-
+	res.setHeader('Access-Control-Allow-Origin', '*');
+	// deleta segundo o id
 	sql = "DELETE FROM network WHERE id = " + req.body.id;
-	var db = new sqlite3.Database(DBPATH); // Abre o banco
+	var db = new sqlite3.Database(DBPATH);
 	db.run(sql, [],  err => {
 		if (err) {
 		    throw err;
 		}
 		res.end();
 	});
-	db.close(); // Fecha o banco
+	db.close(); 
+});
+
+// NETWORK - update
+app.post('/networkupdate', urlencodedParser, (req, res) => {
+	res.statusCode = 200;
+	res.setHeader('Access-Control-Allow-Origin', '*');
+	// permite alterar o nome e o tipo dado certo id (chave primária)
+	sql = "UPDATE network SET name = '" + req.body.name + "', type = '" + req.body.type + "' WHERE id = " + req.body.id;
+	var db = new sqlite3.Database(DBPATH);
+	db.run(sql, [],  err => {
+		if (err) {
+		    throw err;
+		}
+		res.end();
+	});
+	db.close();
 });
 
 
 // NETWORK MANAGER
+// NETWORK MANAGER - ler
 app.get('/networkmanagers', (req, res) => {
 	res.statusCode = 200;
 	res.setHeader('Access-Control-Allow-Origin', '*'); // Isso é importante para evitar o erro de CORS
 
 	var db = new sqlite3.Database(DBPATH); // Abre o banco
-  var sql = 'SELECT * FROM network_manager ORDER BY cpf COLLATE NOCASE';
+  var sql = 'SELECT * FROM network_manager ORDER BY name COLLATE NOCASE';
 	db.all(sql, [],  (err, rows ) => {
 		if (err) {
 		    throw err;
@@ -93,7 +102,8 @@ app.get('/networkmanagers', (req, res) => {
 	});
 	db.close(); // Fecha o banco
 });
-    
+   
+// NETWORK MANAGER - inserir/criar
 app.post('/networkmanagerinsert', urlencodedParser, (req, res) => {
 	res.statusCode = 200;
 	res.setHeader('Access-Control-Allow-Origin', '*'); 
@@ -109,11 +119,89 @@ app.post('/networkmanagerinsert', urlencodedParser, (req, res) => {
 	res.end();
 });
 
+// NETWORK MANAGER - deletar
 app.post('/networkmanagerdelete', urlencodedParser, (req, res) => {
 	res.statusCode = 200;
 	res.setHeader('Access-Control-Allow-Origin', '*'); // Isso é importante para evitar o erro de CORS
 
 	sql = "DELETE FROM network_manager WHERE network_id = " + req.body.network_id;
+	var db = new sqlite3.Database(DBPATH); // Abre o banco
+	db.run(sql, [],  err => {
+		if (err) {
+		    throw err;
+		}
+		res.end();
+	});
+	db.close(); // Fecha o banco
+});
+
+app.post('/networkmanagerupdate', urlencodedParser, (req, res) => {
+	res.statusCode = 200;
+	res.setHeader('Access-Control-Allow-Origin', '*'); 
+
+	sql = "UPDATE network_manager SET cpf = '" + req.body.cpf + "', email = '" + req.body.email + "', name = '" + req.body.name + "' WHERE network_id = '" + req.body.network_id + "'";
+	var db = new sqlite3.Database(DBPATH); 
+	db.run(sql, [],  err => {
+		if (err) {
+		    throw err;
+		}
+	});
+	db.close(); 
+	res.end();
+});
+
+/* school */
+app.get('/schools', (req, res) => {
+	res.statusCode = 200;
+	res.setHeader('Access-Control-Allow-Origin', '*'); // Isso é importante para evitar o erro de CORS
+
+	var db = new sqlite3.Database(DBPATH); // Abre o banco
+  var sql = 'SELECT * FROM school ORDER BY name COLLATE NOCASE';
+	db.all(sql, [],  (err, rows ) => {
+		if (err) {
+		    throw err;
+		}
+		res.json(rows);
+	});
+	db.close(); // Fecha o banco
+});
+
+
+app.post('/schoolinsert', urlencodedParser, (req, res) => {
+	res.statusCode = 200;
+	res.setHeader('Access-Control-Allow-Origin', '*'); // Isso é importante para evitar o erro de CORS
+
+	sql = "INSERT INTO school (name, cnpj, number_of_students, number_of_employees, type_of_institution, school_census_id, network_id) VALUES ('" + req.body.name + "', '" + req.body.cnpj + "', '" + req.body.number_of_students + "', '" + req.body.number_of_employees +"', '" + req.body.type_of_institution +"', '" + req.body.school_census_id +"','" + req.body.network_id +"')";
+	var db = new sqlite3.Database(DBPATH); 
+	db.run(sql, [],  err => {
+		if (err) {
+		    throw err;
+		}
+	});
+	db.close();
+	res.end();
+});
+
+app.post('/schooldelete', urlencodedParser, (req, res) => {
+	res.statusCode = 200;
+	res.setHeader('Access-Control-Allow-Origin', '*'); // Isso é importante para evitar o erro de CORS
+
+	sql = "DELETE FROM school WHERE cnpj = " + req.body.cnpj;
+	var db = new sqlite3.Database(DBPATH); // Abre o banco
+	db.run(sql, [],  err => {
+		if (err) {
+		    throw err;
+		}
+		res.end();
+	});
+	db.close(); // Fecha o banco
+});
+
+app.post('/schoolupdate', urlencodedParser, (req, res) => {
+	res.statusCode = 200;
+	res.setHeader('Access-Control-Allow-Origin', '*'); // Isso é importante para evitar o erro de CORS
+
+	sql = "UPDATE school SET WHERE cnpj = " + req.body.cnpj;
 	var db = new sqlite3.Database(DBPATH); // Abre o banco
 	db.run(sql, [],  err => {
 		if (err) {
@@ -363,52 +451,6 @@ app.post('/answerdelete', urlencodedParser, (req, res) => {
 	db.close(); // Fecha o banco
 });
 
-/* school */
-app.get('/schools', (req, res) => {
-	res.statusCode = 200;
-	res.setHeader('Access-Control-Allow-Origin', '*'); // Isso é importante para evitar o erro de CORS
-
-	var db = new sqlite3.Database(DBPATH); // Abre o banco
-  var sql = 'SELECT * FROM school ORDER BY id COLLATE NOCASE';
-	db.all(sql, [],  (err, rows ) => {
-		if (err) {
-		    throw err;
-		}
-		res.json(rows);
-	});
-	db.close(); // Fecha o banco
-});
-
-
-app.post('/schoolinsert', urlencodedParser, (req, res) => {
-	res.statusCode = 200;
-	res.setHeader('Access-Control-Allow-Origin', '*'); // Isso é importante para evitar o erro de CORS
-
-	sql = "INSERT INTO school (name, cnpj, number_of_students, number_of_employees, type_of_institution, school_census_id, network_id) VALUES ('" + req.body.name + "', '" + req.body.cnpj + "', '" + req.body.number_of_students + "', '" + req.body.number_of_employees +"', '" + req.body.type_of_institution +"', '" + req.body.school_census_id +"','" + req.body.network_id +"')";
-	var db = new sqlite3.Database(DBPATH); 
-	db.run(sql, [],  err => {
-		if (err) {
-		    throw err;
-		}
-	});
-	db.close();
-	res.end();
-});
-
-app.post('/schooldelete', urlencodedParser, (req, res) => {
-	res.statusCode = 200;
-	res.setHeader('Access-Control-Allow-Origin', '*'); // Isso é importante para evitar o erro de CORS
-
-	sql = "DELETE FROM school WHERE network_id = " + req.body.network_id;
-	var db = new sqlite3.Database(DBPATH); // Abre o banco
-	db.run(sql, [],  err => {
-		if (err) {
-		    throw err;
-		}
-		res.end();
-	});
-	db.close(); // Fecha o banco
-});
 
 /* employee */
 app.get('/employees', (req, res) => {
