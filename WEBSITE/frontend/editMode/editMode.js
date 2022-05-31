@@ -24,7 +24,7 @@ function displayQuestion(question) {
     let numberOfAlternatives = question.alternatives.length;
     questionsContainer.innerHTML += `
     <div id="question${index + 1}">
-        <div class="row question-header">
+        <div class="row question-header yellow">
             <div class="col-sm-10">
                 <h5>Questão ${index + 1} | Eixo ${question.axis} </h5>
             </div>

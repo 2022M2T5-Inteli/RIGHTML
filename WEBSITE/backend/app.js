@@ -711,17 +711,19 @@ app.post('/answerdelete', urlencodedParser, (req, res) => {
 
 app.post('/answerupdate', urlencodedParser, (req, res) => {
 	res.statusCode = 200;
-	res.setHeader('Access-Control-Allow-Origin', '*'); // Isso é importante para evitar o erro de CORS
-
-	sql = "UPDATE answer SETWHERE id = " + req.body.id;
-	var db = new sqlite3.Database(DBPATH); // Abre o banco
+	res.setHeader('Access-Control-Allow-Origin', '*'); 
+	sql = "UPDATE answer SET extra_info = '" + req.body.extra_info + "', option_id = '" + req.body.option_id + 
+	"', question_id = '" + req.body.question_id + "', axis_subdivision_id =" + req.body.axis_subdivision_id + 
+	"', axis_id = '" + req.body.axis_id + "', diagnosis_id = '" + req.body.diagnosis_id + "', school_cnpj = '" + 
+	req.body.school_cnpj + "' network_id = '" + req.body.network_id + "' WHERE id = '" + req.body.id + "'";
+	var db = new sqlite3.Database(DBPATH); 
 	db.run(sql, [],  err => {
 		if (err) {
 		    throw err;
 		}
 		res.end();
 	});
-	db.close(); // Fecha o banco
+	db.close(); 
 });
 
 /* employee */
@@ -740,7 +742,6 @@ app.get('/employees', (req, res) => {
 	db.close(); // Fecha o banco
 });
 
-
 app.post('/employeeinsert', urlencodedParser, (req, res) => {
 	res.statusCode = 200;
 	res.setHeader('Access-Control-Allow-Origin', '*'); // Isso é importante para evitar o erro de CORS
@@ -752,15 +753,25 @@ app.post('/employeeinsert', urlencodedParser, (req, res) => {
 		    throw err;
 		}
 	});
+
+	if (req.body.cnpj_school != null) {
+		sql = "INSERT INTO employee_school (cnpj_school, email_employee) VALUES ('" + 
+		req.body.cnpj_school + "', '" + req.body.email + "')";	
+		db.run(sql, [],  err => {
+			if (err) {
+				throw err;
+			}
+		});
+	}
+
 	db.close();
+
 	res.end();
 });
-
 
 app.post('/employeedelete', urlencodedParser, (req, res) => {
 	res.statusCode = 200;
 	res.setHeader('Access-Control-Allow-Origin', '*'); // Isso é importante para evitar o erro de CORS
-
 	sql = "DELETE FROM employee WHERE email = " + req.body.email;
 	var db = new sqlite3.Database(DBPATH); // Abre o banco
 	db.run(sql, [],  err => {
@@ -772,6 +783,67 @@ app.post('/employeedelete', urlencodedParser, (req, res) => {
 	db.close(); // Fecha o banco
 });
 
+app.post('/employeeupdate', urlencodedParser, (req, res) => {
+	res.statusCode = 200;
+	res.setHeader('Access-Control-Allow-Origin', '*'); 
+	sql = "UPDATE employee SET name = '" + req.body.name + "', type = '" + req.body.type + 
+	"', cpf = '" + req.body.cpf + "' WHERE email = '" + req.body.email + "'";
+	var db = new sqlite3.Database(DBPATH); 
+	db.run(sql, [],  err => {
+		if (err) {
+		    throw err;
+		}
+		res.end();
+	});
+	db.close(); 
+});
+
+/* employee-school */
+app.get('/employeeschool', (req, res) => {
+	res.statusCode = 200;
+	res.setHeader('Access-Control-Allow-Origin', '*'); // Isso é importante para evitar o erro de CORS
+
+	var db = new sqlite3.Database(DBPATH); // Abre o banco
+  var sql = 'SELECT * FROM employee_school ORDER BY email_employee COLLATE NOCASE';
+	db.all(sql, [],  (err, rows ) => {
+		if (err) {
+		    throw err;
+		}
+		res.json(rows);
+	});
+	db.close(); // Fecha o banco
+});
+
+app.post('/employeeschoolinsert', urlencodedParser, (req, res) => {
+	res.statusCode = 200;
+	res.setHeader('Access-Control-Allow-Origin', '*'); // Isso é importante para evitar o erro de CORS
+
+	sql = "INSERT INTO employee_school (cnpj_school, email_employee) VALUES ('" + req.body.cnpj_school + "', '" + req.body.email_employee + "')";
+	var db = new sqlite3.Database(DBPATH); 
+	db.run(sql, [],  err => {
+		if (err) {
+		    throw err;
+		}
+	});
+	db.close();
+	res.end();
+});
+
+app.post('/employeeschooledelete', urlencodedParser, (req, res) => {
+	res.statusCode = 200;
+	res.setHeader('Access-Control-Allow-Origin', '*'); // Isso é importante para evitar o erro de CORS
+
+	sql = "DELETE FROM employee_school WHERE email_employee = '" + 
+	req.body.email_employee + "' AND cnpj_school = '" + req.body.cnpj_school + "'";
+	var db = new sqlite3.Database(DBPATH); // Abre o banco
+	db.run(sql, [],  err => {
+		if (err) {
+		    throw err;
+		}
+		res.end();
+	});
+	db.close(); // Fecha o banco
+});
 
 /* Inicia o servidor */
 app.listen(port, hostname, () => {
