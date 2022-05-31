@@ -1,26 +1,9 @@
-/*header*/
-#page-title {
-    margin-top: 3vh;
-    text-align: center;
-    font-size: 5vh;
-    font-family: "Space Mono", monospace;
-}
 
-
-.navbar {
-    font-family: "Space Mono", monospace;
-    color: white;
-}
-
-
-/*Who*/
+/*quem somos*/
 #qs1{
     margin-top: 5%;
     text-align: center;
-    background-color: yellow;
     height: 50px;
-    border: solid 0.5px black;
-    border-radius: 2px;
 }
 
 #qs2{
@@ -36,68 +19,19 @@
 
 #botao{
     text-align: center;
-    background-color: purple;
+    background-color: #810DFD;
     height: 40px;
     width: 240px;
     border: solid 2px black;
-    border-radius: 60px;
+    border-radius: 5px;
     padding: 0px;
     margin-top: 20px;
     font-size: 20px;
     font-family: monospace;
+    border-color: #808080;
 }
 
-
-/*footer*/
-.social-media-icons {
-    color: white;
-    padding: 2%;
+#imagem{
+    padding-left: 200px;
 }
 
-#footer-logo {
-    width: 6%;
-    height: 6%;
-    padding-right: 1%;
-
-}
-
-.main-title{
-    font-family: "Lucida Console", monospace;  
-}
-
-#footer-bottom {
-    background-color: #747678;
-}
-
-.footer-content {
-    padding: 1vh 0;
-}
-
-footer {
-    background-color: #343a40;
-    color: white;
-    margin-top: auto;
-}
-
-body {
-    font-family: 'Manrope', sans-serif;
-}
-
-.centered {
-    display: flex;
-    align-items: center;
-}
-
-
-
-p {
-    font-size: small;
-    font-family: 'Manrope', sans-serif;
-}
-
-body {
-    height: 100vh;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-}

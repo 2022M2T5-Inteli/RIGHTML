@@ -1,20 +1,3 @@
-/*header*/
-.navbar {
-    font-family: "Space Mono", monospace;
-    color: white;
-}
-
-#page-title {
-    margin-top: 3vh;
-    text-align: center;
-    font-size: 5vh;
-    font-family: "Space Mono", monospace;
-}
-
-
-
-
-
 
 /*page*/
 .title {
@@ -27,9 +10,9 @@
 .button {
     border-radius: 5px;
     font: "Inter";
-    background-color: #810dfd;
+    background-color: #810DFD;
     color: white;
-    border-color: #810dfd;
+    border-color: #808080;
     font-family: monospace;
 }
 
@@ -51,33 +34,3 @@
 
 
 
-
-
-/*footer*/
-footer {
-    background-color: #343a40;
-    color: white;
-    margin-top: auto;
-    font-family: 'Space Mono', monospace;
-}
-
-.social-media-icons {
-    color: white;
-    padding: 2%;
-}
-
-#footer-logo {
-    width: 6%;
-    height: 6%;
-    padding-right: 1%;
-}
-
-.footer-content {
-    padding: 1vh 0;
-}
-
-.main-title {
-    padding: 0;
-    margin: 0;
-    font-size: medium;
-}
