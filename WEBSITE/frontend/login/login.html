@@ -12,24 +12,23 @@
 </head>
 
 <body>
-
     <div class="container">
         <h1 class="title">
             Entrar
         </h1>
+        <!-- div que envolve a parte dos inputs -->
         <div class="inputGroup">
             <label class="label">Endereço de Email </label>
             <input type="email" class="textInput" id="emailInput" />
+            <label class="label">Senha </label>
+            <input type="password" class="textInput" id="passwordInput" />
         </div>
-        <!-- <div class=" checkboxes">
-            <p class="content"><input type="radio" value="teste" name="opcao"> Sou gestor de escola</p><br>
-            <p class="content"><input type="radio" value="teste" name="opcao"> Sou gestor de rede</p><br>
-            <p class="content"><input type="radio" value="teste" name="opcao"> Sou consultor Falconi</p>
-        </div> -->
+        <!-- div que envolve o botão entrar-->
         <div>
-            <input type="button" value="Entrar" class="buttonEntrar"  onclick="location.href = '../schoolManagerDashboard/schoolManagerDashboard.html';">
+            <input type="button" value="Entrar" class="buttonEntrar"
+                onclick="location.href = '../schoolManagerDashboard/schoolManagerDashboard.html';">
         </div>
-
+        <!-- div que envolve a parte do "ainda não tem conta?" e o botão criar conta -->
         <div>
             <a href="../signUp/cadastro2.html">
                 <p class="content" style="text-align: center;"> Ainda não tem conta? </p>
