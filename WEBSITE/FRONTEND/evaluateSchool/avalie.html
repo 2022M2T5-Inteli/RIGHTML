@@ -23,31 +23,37 @@
 
   <body>
     <header>
-      <!-- Navegação segundo classes do Bootstrap-->
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-          <!-- Ícone e título -->
-          <a href="#" class="navbar-brand">
-            <img src="images/logo.png" height="70" alt="SchoolAhead">SchoolAhead
+          <a class="navbar-brand" href="#">
+            <img src="icone.png" width="50px">
+            SchoolAhead
           </a>
-          <!-- Botão de hambúrguer para telas menores -->
-          <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-          <!-- Links -->
-          <div class="collapse navbar-collapse" id="navbarCollapse">
-            <div class="navbar-nav">
-              <a href="..\index\index.html" class="nav-item p-4 nav-link active">Início</a>
-              <a href="..\chart\chart.html" class="nav-item p-4 nav-link">Índices educacionais</a>
-              <a href="../whoWeAre/whoWeAre.html" class="nav-item p-4 nav-link">Quem somos</a>
-            </div>
-            <div class="navbar-nav ms-auto">
-              <a href="../login/login.html" class="nav-item nav-link">Entrar</a>
-            </div>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Login</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Índices educacionais</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Quem somos?</a>
+              </li>
+            </ul>
           </div>
         </div>
       </nav>
     </header>
+
    <div class="t1" style="margin: 3rem; text-align:center;">
       <h1>Avalie a sua escola</h1>
    </div> 
