@@ -40,7 +40,8 @@ body {
     border-radius: 6px;
     padding: 5rem 5rem;
     width: 50rem;
-    height: 45rem
+    height: 50rem;
+
 }
 
 .inputGroup {
@@ -104,4 +105,13 @@ body {
 #networkType {
     margin: 1.5rem auto;
 
+}
+
+#signUpLabel {
+    font-size: 2rem;
+    font-weight: bold;
+    font-family: "Manrope", sans-serif;
+    text-align: center;
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;
 }

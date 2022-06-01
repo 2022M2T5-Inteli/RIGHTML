@@ -40,11 +40,13 @@ body {
     border-radius: 6px;
     padding: 5rem 5rem;
     width: 50rem;
-    height: 60rem
+    height: 50rem;
+    overflow-y: scroll;
+
 }
 
 .inputGroup {
-    margin-bottom: 0.5rem;
+    margin-bottom: 1.2rem;
     border-color: rgb(180, 180, 180)
 }
 
@@ -99,4 +101,13 @@ body {
     color: white;
     width: 50rem;
     padding: 2rem;
+}
+
+#signUpLabel {
+    font-size: 2rem;
+    font-weight: bold;
+    font-family: "Manrope", sans-serif;
+    text-align: center;
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;
 }
