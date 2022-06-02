@@ -10,11 +10,9 @@
 </head>
 
 <body>
-    <section>
+    <main>
+        <!-- div que envolve os inputs, as checkboxes e o botão criar conta -->
         <div class="container">
-            <!-- <h1 class="title">
-                Cadastro
-            </h1> -->
             <div class="inputName">
                 <label class="label">Nome </label>
                 <input type="email" class="textInput" />
@@ -31,20 +29,20 @@
                 <label class=" label">Senha</label>
                 <input type="password" class="textInput" />
             </div>
-            <div class="checkboxes">
-                <p class="content"><input type="radio" value="teste" name="opcao"> Sou gestor de escola</p><br>
-                <p class="content"><input type="radio" value="teste" name="opcao"> Sou gestor de rede</p><br>
-                <p class="content"><input type="radio" value="teste" name="opcao"> Sou consultor Falconi</p>
+            <div class="radios">
+                <p class="content"><input type="radio" value="schoolManager" name="option"> Sou gestor de escola</p><br>
+                <p class="content"><input type="radio" value="networkManager" name="option"> Sou gestor de rede</p><br>
             </div>
             <div>
-                <input type="button" value="Criar conta" class="buttonCriarConta">
+                <input type="button" value="Continuar" class="buttonContinuar" onclick="next()">
             </div>
         </div>
 
+        <!-- div que envolve os textos de cadastro -->
         <div class="signUpText">
             <h1 class="title" id="signUpTitle">
-                The best offer<br>
-                your business
+                Cadastre-se<br>
+
             </h1>
 
             <p class="content" id="signUpContent">
@@ -54,7 +52,8 @@
                 ab ipsum nisi dolorem modi. Quos?
             </p>
         </div>
-    </section>
+    </main>
+    <script src="signUp.js"></script>
 </body>
 
 </html>

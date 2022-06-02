@@ -27,12 +27,13 @@
 
 <body>
   <header>
+
     <!-- Navegação segundo classes do Bootstrap-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
       <div class="container-fluid">
         <!-- Ícone e título -->
         <a href="#" class="navbar-brand">
-          <img src="images/logo.png" height="70" alt="SchoolAhead">SchoolAhead
+          <img src="../logo.png" height="70" alt="SchoolAhead">SchoolAhead
         </a>
         <!-- Botão de hambúrguer para telas menores -->
         <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
@@ -41,9 +42,8 @@
         <!-- Links -->
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <div class="navbar-nav">
-            <a href="#" class="nav-item p-4 nav-link active">Início</a>
-            <a href="#" class="nav-item p-4 nav-link">Índices educacionais</a>
-            <a href="#" class="nav-item p-4 nav-link">Quem somos</a>
+            <a href="../index/index.html" class="nav-item p-4 nav-link active">Início</a>
+            <a href="../whoWeAre/whoWeAre.html" class="nav-item p-4 nav-link">Quem somos</a>
           </div>
           <div class="navbar-nav ms-auto">
             <a href="../login/login.html" class="nav-item nav-link">Entrar</a>
@@ -54,18 +54,28 @@
   </header>
 
   <!-- Conteúdo da página em si -->
+
   <main class="container">
+
+  <div class="container row">  
     <h2 id="page-title">Dashboard gestor da escola</h2>
     <!-- Box de informações gerais sobre o sistema e funcionalidades -->
+    
+      <div class="col-md-4 offset-md-4">
+        <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+          Dados da instituição
+        </a>
+        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2">
+          Atualizar informações 
+        </button>
+      </div>
+    
 
-    <div>
-      <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-        Dados da instituição
-      </a>
-      <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2">
-        Atualizar informações 
-      </button>
-    </div>
+      <div id="imagem"class="col-first">
+        <img src="images/logo.png" height="400">
+      </div>
+  </div>
+    
 <!-- Box de informações sobre o sistema -->
     <div class="collapse" id="collapseExample">
       <div class="list-group list-group-numbered">

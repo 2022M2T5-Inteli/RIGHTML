@@ -2,109 +2,119 @@
 <html lang="pt-br">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página inicial</title>
-    <link rel="stylesheet" href="/css/index.css">
-    <!-- CSS only -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="icon" href="images\logo.png">
-    <link rel="stylesheet" href="home.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!--aba de pesquisa-->
+  <title>Página inicial</title>
+  <link rel="icon" href="logo.png">
+
+  <!-- integracoes -->
+  <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="../general.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <link rel="icon" href="logo.png">
+
 </head>
 
 <body>
 
-<!--header-->
-
-<header>
-        <!-- Navegação segundo classes do Bootstrap-->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-          <div class="container-fluid">
-            <!-- Ícone e título -->
-            <a href="#" class="navbar-brand">
-              <img src="images/logo.png" height="70" alt="SchoolAhead">SchoolAhead
-            </a>
-            <!-- Botão de hambúrguer para telas menores -->
-            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <!-- Links -->
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-              <div class="navbar-nav">
-                <a href="#" class="nav-item p-4 nav-link active">Início</a>
-                <a href="#" class="nav-item p-4 nav-link">Índices educacionais</a>
-                <a href="#" class="nav-item p-4 nav-link">Quem somos</a>
-              </div>
-              <div class="navbar-nav ms-auto">
-                <a href="#" class="nav-item nav-link">Entrar</a>
-              </div>
-            </div>
+  <!--header-->
+  <header>
+    <!-- Navegação segundo classes do Bootstrap-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+      <div class="container-fluid">
+        <!-- Ícone e título -->
+        <a href="#" class="navbar-brand">
+          <img src="logo.png" height="70" alt="SchoolAhead">SchoolAhead
+        </a>
+        <!-- Botão de hambúrguer para telas menores -->
+        <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <!-- Links -->
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <div class="navbar-nav">
+            <a href="../index/index.html" class="nav-item p-4 nav-link active">Início</a>
+            <a href="../whoWeAre/whoWeAre.html" class="nav-item p-4 nav-link">Quem somos</a>
           </div>
-        </nav>
-</header>
-
-<!--page-->
-
-<!--image-->
-<section id="p1">
-  <div id="part1" class="col-12">
-    <img src="https://blog.zelt.com.br/wp-content/uploads/2019/01/2560x1440-gray-solid-color-background.jpg" id="imageImpactPhrase">
-  </div>
-
-<!--hit phrase-->
-  <p class="title" id="impactPhrase"> Frase Impacto </p>
-
-<!--Button and link-->
-  <div id="part2" class="col-12 text-center">
-    <button type="button" class="btn btn-warning btn-rounded" href="../frontend/login/login.html">Avalie sua escola</button>
-    <a onclick="../frontend/underdeveloped/chart/chart.html" href="../frontend/underdeveloped/chart/chart.html" class="link"> Consulte dados de outras escolas</a>
-  </div>
-
-
-
-<!--who it works text-->
-  <div id="part3">
-      <div class="container col-12 text-center">
-        <p class="title"> Como funciona?</p>
+          <div class="navbar-nav ms-auto">
+            <a href="../login/login.html" class="nav-item nav-link">Entrar</a>
+          </div>
+        </div>
       </div>
-    <div id="eixos" class="container">
-        <p class="content" id="explanation"> Most fonts have a particular weight which corresponds to one of
-        the
-        numbers in
-        Common weight name mapping. However some fonts, called variable fonts, can support a range of
-        weights with a more or less fine granularity, and this can give the designer a much closer
-        degree of
-        control over the chosen weight. </p>
-      <div id="axes" class="content text-center" class="col-12 ">
-                        <p> eixo 1</p>
-                        <p> eixo 2</p>
-                        <p> eixo 2</p>
-                        <p> eixo 2</p>
-                        <p> eixo 2</p>
-                        <p> eixo 2</p>
-                        <p> eixo 2</p>
-                        <p> eixo 2</p>
-                        
-      </div>
+    </nav>
+  </header>
+
+  <!--page-->
+
+  <!--image-->
+  <div class="col-12 d-flex" style="height:80vh; position:relative; overflow-y: hidden; width: 100%; max-width: 100vw;">
+    <img src="https://blog.zelt.com.br/wp-content/uploads/2019/01/2560x1440-gray-solid-color-background.jpg"
+      id="homepageImage" style="position: absolute; object-fit: cover; max-width: 100%;">
+    <div style=" position: absolute; bottom: 100px; left: 50%; text-align: center; transform: translate(-50%, 50%); -ms-transform: translate(-50%, 50%);">
+      <h1 class="title" id="impactPhrase" style="margin-bottom: 50px;"> Frase Impacto </h1>
+      <input type="button" class="button" onclick="location.href = '../login/login.html';"
+        value="Avalie sua escola"><br>
+      <a href="../underdeveloped/chart/chart.html" class="link"> Consulte dados de outras escolas</a>
     </div>
   </div>
 
+  <main>
+    <!--chamar general style css-->
+    <!--hit phrase-->
+    <p class="title" id="impactPhrase"> Frase Impacto </p>
 
-<!--feedback and button-->
-  <div id="part4" class="text-center">
-    <p class="title"> Depoimento </p>
-    <input type="button" href="../frontend/login/login.html" class="button" value="Avalie sua escola">
-  
-  </div>
-</section>
+    <!--Button and link-->
+    <div id="part2" class="col-12 text-center">
+      <input type="button" class="button" onclick="location.href = '../login/login.html';"
+        value="Avalie sua escola"><br>
+      <a href="../underdeveloped/chart/chart.html" class="link"> Consulte dados de outras escolas</a>
+    </div>
+
+    <br><br><br>
+
+    <!--who it works text-->
+    <div id="part3">
+      <div class="container col-12 text-center">
+        <p class="title"> Como funciona?</p>
+      </div>
+      <div id="eixos" class="container">
+        <p class="content" id="explanation"> Most fonts have a particular weight which corresponds to one of
+          the
+          numbers in
+          Common weight name mapping. However some fonts, called variable fonts, can support a range of
+          weights with a more or less fine granularity, and this can give the designer a much closer
+          degree of
+          control over the chosen weight. </p>
+        <div id="axes" class="content text-center" class="col-12 ">
+          <p> eixo 1</p>
+          <p> eixo 2</p>
+          <p> eixo 2</p>
+          <p> eixo 2</p>
+          <p> eixo 2</p>
+          <p> eixo 2</p>
+          <p> eixo 2</p>
+          <p> eixo 2</p>
+          <br><br><br><br>
+        </div>
+      </div>
+    </div>
 
 
+    <!--feedback and button-->
+    <div id="part4" class="text-center">
+      <p class="title"> Depoimento </p>
+      <input type="button" onclick="location.href = '../login/login.html';" class="button" value="Avalie sua escola">
 
-<!--footer-->
+    </div>
+    </section>
+  </main>
 
-<footer class="container-fluid">
+  <!-- Rodapé -->
+  <footer class="container-fluid">
     <div class="row footer-content">
       <div class="col-sm-6">
         <h3 class="main-title">SchoolAhead</h3>
@@ -136,7 +146,6 @@
         <a href="https://landing.falconi.com/" target="_blank">Fale conosco</a>
       </div>
   </footer>
-  
 
 </body>
 
