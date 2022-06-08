@@ -455,7 +455,7 @@ app.post('/diagnosisupdate', urlencodedParser, (req, res) => {
 	db.close(); // Fecha o banco
 });
 
-app.get('/axis', (req, res) => {
+app.get('/axes', (req, res) => {
 	res.statusCode = 200;
 	res.setHeader('Access-Control-Allow-Origin', '*'); // Isso é importante para evitar o erro de CORS
 
