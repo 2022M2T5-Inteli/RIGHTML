@@ -15,6 +15,7 @@ $(document).ready(function() {
                     cnpj: $('#CNPJ_key').val(),
                     number_of_employees: $('#update_employees_number').val(),
                     number_of_students: $('#update_students_number').val(),
+                    name: $('#name_update').val(),
 
                 },
             })
