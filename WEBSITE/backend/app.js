@@ -131,7 +131,7 @@ app.post('/networkmanagerdelete', urlencodedParser, (req, res) => {
 		}
 		res.end();
 	});
-	db.close(); // Fecha o banco
+	db.close(); // Fecha o bancos
 });
 
 app.post('/networkmanagerupdate', urlencodedParser, (req, res) => {

@@ -42,7 +42,7 @@
         <!-- Links -->
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <div class="navbar-nav">
-            <a href="../index/index.html" class="nav-item p-4 nav-link active">Início</a>
+            <a href="../index.html" class="nav-item p-4 nav-link active">Início</a>
             <a href="../whoWeAre/whoWeAre.html" class="nav-item p-4 nav-link">Quem somos</a>
           </div>
           <div class="navbar-nav ms-auto">
@@ -120,21 +120,26 @@
       <label for="basic-url" class="form-label">Informações</label>
       <div class="input-group mb-3">
         <span class="input-group-text" id="basic-addon3">nº alunos</span>
-        <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+        <input type="text" class="form-control" id="update_students_number" aria-describedby="basic-addon3">
       </div>
-      
+      <!--Box de teste apenas para testar função de atualizar dados em uma planilha-->
+      <div class="input-group mb-3">
+        <span class="input-group-text">key primaria para saber onde sera o update</span>
+        <input type="text" class="form-control" id="CNPJ_key" aria-label="Amount (to the nearest dollar)">
+      </div>
+
       <div class="input-group mb-3">
         <span class="input-group-text">nº funcionários</span>
-        <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+        <input type="text" class="form-control" id="update_employees_number" aria-label="Amount (to the nearest dollar)">
       </div>
 
       <div class="input-group mb-3">
-        <span class="input-group-text">Taxa de aprovação</span>
+        <span class="input-group-text">Taxa de aprovação (NÃO HÁ DADOS NO BANCO)</span>
         <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
       </div>
       
 
-      <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2">
+      <button class="btn btn-primary"  type="button" data-bs-toggle="collapse" id="update_data" data-bs-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2">
        Salvar
       </button>
     </div>
@@ -189,7 +194,9 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
     crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="editMode.js"></script>
+  <script src="schoolManagerDashboard.js"></script>
 
 </body>
 
