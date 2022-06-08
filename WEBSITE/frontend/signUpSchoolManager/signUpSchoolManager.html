@@ -15,31 +15,36 @@
         <div class="container">
             <div class="inputGroup">
                 <label class="label">CPF </label>
-                <input type="text" class="textInput" />
+                <input type="text" class="textInput" id="CPF" />
             </div>
             <div class="inputGroup">
                 <label class="label">CNPJ da Escola </label>
-                <input type="text" class="textInput" />
+                <input type="text" class="textInput" id="CNPJ" />
             </div>
             <div class="inputGroup">
                 <label class="label">Nome da Escola </label>
-                <input type="text" class="textInput" />
+                <input type="text" class="textInput" id="school_name" />
             </div>
             <div class="inputGroup">
                 <label class=" label">Número de Alunos</label>
-                <input type="text" class="textInput" />
+                <input type="text" class="textInput" id="student_ number" />
             </div>
             <div class="inputGroup">
                 <label class=" label">Número de Funcionários</label>
-                <input type="text" class="textInput" />
+                <input type="text" class="textInput" id="employee_number" />
             </div>
             <div class="inputGroup">
                 <label class=" label">Id do Senso Escolar</label>
                 <input type="text" class="textInput" />
             </div>
             <div class="inputGroup">
-                <label class=" label">Id da Rede</label>
-                <input type="text" class="textInput" />
+                <label class=" label">email</label>
+                <input type="text" class="textInput" id="email" />
+            </div>
+            <!-- Adicionar um dropdown que permite escolher entre escola pública ou privada e jogar essa info direto pro backend sem o input escrito do úsuario -->
+            <div class="inputGroup">
+                <label class=" label">Escola pública ou privada</label>
+                <input type="text" class="textInput" id="type" />
             </div>
             <div>
                 <div>
@@ -63,6 +68,7 @@
             </p>
         </div>
     </main>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="signUpSchoolManager.js"></script>
 </body>
 
