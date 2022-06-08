@@ -22,7 +22,7 @@ $(document).ready(function () {
         console.log("LISTA: "+ cpfs)
         console.log("CPF1:" + $('#cpf').val())
         console.log("CPF2:" + cpfs.includes(parseInt(document.getElementById("cpf").value)))
-        if (!cpfs.includes(parseInt($('#cpf').val()))) {
+        //if (!cpfs.includes(parseInt($('#cpf').val()))) {
 
             $.ajax({
                 url: url,
@@ -35,9 +35,9 @@ $(document).ready(function () {
                 },
             });
 
-        } else {
-            alert("CPF já cadastrado");
-        }
+       // } else {
+        //    alert("CPF já cadastrado");
+        //}
 
     });
 });

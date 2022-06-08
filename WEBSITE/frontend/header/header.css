@@ -1,0 +1,12 @@
+
+.navbar {
+    font-family: "Space Mono", monospace;
+    color: white;
+}
+
+#page-title {
+    margin-top: 3vh;
+    text-align: center;
+    font-size: 5vh;
+    font-family: "Space Mono", monospace;
+}
