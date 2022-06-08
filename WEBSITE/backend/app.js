@@ -271,13 +271,13 @@ app.get('/schoolmanagers', (req, res) => {
 
 //INSERT com verificação da chave primária (só inserir se não existir a chave ainda)
 app.post('/schoolmanagerinsert', urlencodedParser, (req, res) => {
-	
+
 	res.setHeader('Access-Control-Allow-Origin', '*'); // Isso é importante para evitar o erro de CORS
 	var db = new sqlite3.Database(DBPATH);
 	sql = "SELECT cpf FROM school_manager WHERE cpf = '" + req.body.cpf + "'";
 	db.all(sql, [], (err, rows) => {
-		if(rows.length == 0){
-			res.statusCode = 200;
+		if (rows.length == 0) {
+			// res.sendStatus(200).send();
 			console.log("nao existe o cpf");
 			console.log(req.body.name + "cnpj:" + req.body.school_cnpj);
 			sql = "INSERT INTO school_manager (name, cpf, email, school_cnpj) VALUES ('" + req.body.name + "', " + req.body.cpf +
@@ -285,13 +285,13 @@ app.post('/schoolmanagerinsert', urlencodedParser, (req, res) => {
 			db.run(sql, [], err => {
 				if (err) {
 					//throw err;
-					console.log(err)
+					console.log(err);
 				}
 			});
 		}
-		//else{
-		//	res.json(false);
-		//}
+		else {
+			res.sendStatus(200).send("CPF já registrado");
+		}
 	});
 	db.close();
 	res.end();
