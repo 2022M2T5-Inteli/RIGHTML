@@ -131,18 +131,25 @@ function getAlternatives(question_id) {
 
 function readQuestionsFromDatabase() {
     $.ajax({
+        //url do endpoint
         url: "http://127.0.0.1:3001/questions",
+        //tipo da requisição
         type: 'GET',
+        //se obtiver sucesso, executar a arrow function abaixo
         success: data => {
+            //se não tiver questão no banco de dados, retorna um div do html com esse texto
             if (data.length == 0) {
                 return questionsContainer.innerHTML = "Ainda não há questões neste questionário. Clique no + para adicionar uma.";
             }
+            //se tiver questão, limpa o questionsContainer
             else {
                 questionsContainer.innerHTML = "";
-
-                data.forEach(element => {
-                    console.log("FUNCTION: " + getAxisFromId(element['axis_id']))
+                //forEach faz loop que vai passar por cada elemento dentro do data
+                //cada vez que passa ele vai guardar o registro atual na variável elemento
+                data.forEach(element => { 
+                    //insere todo o html que precisa para cada pergunta
                     questionsContainer.innerHTML += `
+                <!-- o cifrao chama a posição de um elemento na array data->
         <div id="question${element['position']}">
             <div class="row question-header">
                 <div class="col-sm-10">
@@ -165,9 +172,9 @@ function readQuestionsFromDatabase() {
                 </div>
             </div>
             <div class="question-wording">
+                <!-- aiaiaiai -->
                 <p>${element['text']}</p>
             </div>`
-                    console.log(getAlternatives(element));
                 });
             }
         }
