@@ -54,6 +54,23 @@ function updateModalSubdivisions() {
 
 }
 
+function lastQuestionPosition() {
+    let highestPosition = 0;
+    $.ajax({
+        url: "http://127.0.0.1:3001/questions",
+        type: 'GET',
+        async: false,
+        success: data => {
+            data.forEach(element => {
+                if (parseInt(element['position']) > highestPosition) {
+                    highestPosition = parseInt(element['position']);
+                }
+            });
+        }
+    });
+    return lastQuestionPosition;
+}
+
 function saveQuestion() {
     $.ajax({
         url: "http://127.0.0.1:3001/questioninsert",
@@ -62,12 +79,40 @@ function saveQuestion() {
         data: {
             weight: $("#weight").val(),
             text: $("#question").val(),
-            position: 10,
+            position: lastQuestionPosition + 1,
             axis_subdivision_id: 1,
-            axis_id: 
+            axis_id: getAxisIdFromName($('#axis-dropdown').val())
         }
     });
+    let highestId = 0;
+    $.ajax({
+        url: "http://127.0.0.1:3001/questions",
+        type: 'GET',
+        async: false,
+        sucess: data => {
+            data.forEach(element => {
+                if(element['id'] > highestId) {
+                    highestId = element['id'];
+                }
+            })
+        }
+    });
+    saveAlternatives(highestId);
+}
 
+function saveAlternatives() {
+    $.ajax({
+        url: "http://127.0.0.1:3001/optioninsert",
+        type: 'POST',
+        async: false,
+        data: {
+            weight: $("#weight").val(),
+            text: $("#question").val(),
+            position: lastQuestionPosition + 1,
+            axis_subdivision_id: 1,
+            axis_id: getAxisIdFromName($('#axis-dropdown').val())
+        }
+    });
 }
 
 function getAxes() {
@@ -88,6 +133,8 @@ function getAxes() {
 }
 
 function getAxisIdFromName(name) {
+    console.log(name)
+    let id = null;
     $.ajax({
         url: "http://127.0.0.1:3001/axes",
         type: 'GET',
@@ -95,11 +142,13 @@ function getAxisIdFromName(name) {
         success: data => {
             data.forEach(element => {
                 if (element['name'] === name) {
-                    
-                }
+                    id = element['id']; 
+                } 
             });
         }
     });
+    console.log(id)
+    return id;
 }
 
 function getAxisSubdivisions() {

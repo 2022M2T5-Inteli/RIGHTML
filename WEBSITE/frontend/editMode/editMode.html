@@ -22,8 +22,6 @@
   <link href="../questions-styling.css" rel="stylesheet">
   <link href="editMode.css" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  <link rel="stylesheet" href="dist/jquery.gridstrap.min.css"> 
-  <script src="dist/jquery.gridstrap.min.js"></script>
   <title>Editar questionário</title>
 </head>
 
@@ -150,7 +148,7 @@
                 <br>
                 <label for="question">Enunciado</label>
                 <div class="md-form">
-                  <textarea name="question" id="form7" class="md-textarea form-control" rows="3"></textarea>
+                  <textarea name="question" id="question" class="md-textarea form-control" rows="3"></textarea>
                 </div>
                 <label for="weight">Peso:</label>
                   <input name="weight" id="weight"></input>
@@ -169,7 +167,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-light" data-bs-dismiss="modal">Fechar</button>
-            <button type="button" class="btn btn-primary" onclick="addQuestion()"
+            <button type="button" class="btn btn-primary" onclick="saveQuestion()"
               data-bs-dismiss="modal">Salvar</button>
           </div>
         </div>
