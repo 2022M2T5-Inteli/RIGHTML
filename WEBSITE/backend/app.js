@@ -21,7 +21,7 @@ const DBPATH = 'db.db'
 
 /* DEFINIÇÃO DOS ENDPOINTS */
 
-// NETWORK - ler
+// NETWORKS - checar registros cadastros na tabela NETWORK
 app.get('/networks', (req, res) => {
 	res.statusCode = 200;
 	res.setHeader('Access-Control-Allow-Origin', '*');
@@ -37,7 +37,7 @@ app.get('/networks', (req, res) => {
 	db.close(); 
 });
 
-// NETWORK - inserir/criar
+// NETWORKINSERT - inserir novos registros na tabela NETWORK
 app.post('/networkinsert', urlencodedParser, (req, res) => {
 	res.statusCode = 200;
 	res.setHeader('Access-Control-Allow-Origin', '*');
@@ -53,7 +53,7 @@ app.post('/networkinsert', urlencodedParser, (req, res) => {
 	res.end();
 });
 
-// NETWORK - deletar
+// NETWORKDELETE - deletar registros cadastrados na tabela NETWORK
 app.post('/networkdelete', urlencodedParser, (req, res) => {
 	res.statusCode = 200;
 	res.setHeader('Access-Control-Allow-Origin', '*');
@@ -69,7 +69,7 @@ app.post('/networkdelete', urlencodedParser, (req, res) => {
 	db.close(); 
 });
 
-// NETWORK - update
+// NETWORKUPDATE - atualizar registros cadastrados na tabela NETWORK 
 app.post('/networkupdate', urlencodedParser, (req, res) => {
 	res.statusCode = 200;
 	res.setHeader('Access-Control-Allow-Origin', '*');
@@ -87,7 +87,7 @@ app.post('/networkupdate', urlencodedParser, (req, res) => {
 
 
 // NETWORK MANAGER
-// NETWORK MANAGER - ler
+// NETWORKMANAGERS - checar registros cadastrados na tabela NETWORK MANAGER
 app.get('/networkmanagers', (req, res) => {
 	res.statusCode = 200;
 	res.setHeader('Access-Control-Allow-Origin', '*'); // Isso é importante para evitar o erro de CORS
@@ -103,7 +103,7 @@ app.get('/networkmanagers', (req, res) => {
 	db.close(); // Fecha o banco
 });
    
-// NETWORK MANAGER - inserir/criar
+// NETWORKMANAGERINSERT - inserir novos registros na tabela NETWORKMANAGER
 app.post('/networkmanagerinsert', urlencodedParser, (req, res) => {
 	res.statusCode = 200;
 	res.setHeader('Access-Control-Allow-Origin', '*'); 
@@ -119,7 +119,7 @@ app.post('/networkmanagerinsert', urlencodedParser, (req, res) => {
 	res.end();
 });
 
-// NETWORK MANAGER - deletar
+// NETWORKMANAGERDELETE  - deletar registros cadastrados na tabela NETWORKMANAGER
 app.post('/networkmanagerdelete', urlencodedParser, (req, res) => {
 	res.statusCode = 200;
 	res.setHeader('Access-Control-Allow-Origin', '*'); // Isso é importante para evitar o erro de CORS
@@ -134,7 +134,7 @@ app.post('/networkmanagerdelete', urlencodedParser, (req, res) => {
 	});
 	db.close(); // Fecha o banco
 });
-
+//NETWORKMANAGERUPDATE - atualizar registros cadastrados na tabela NETWORKMANAGERUPDATE
 app.post('/networkmanagerupdate', urlencodedParser, (req, res) => {
 	res.statusCode = 200;
 	res.setHeader('Access-Control-Allow-Origin', '*'); 
@@ -151,7 +151,8 @@ app.post('/networkmanagerupdate', urlencodedParser, (req, res) => {
 	res.end();
 });
 
-/* school */
+// SCHOOL
+//SCHOOLS - checar registros cadastrados na tabela SCHOOL
 app.get('/schools', (req, res) => {
 	res.statusCode = 200;
 	res.setHeader('Access-Control-Allow-Origin', '*'); // Isso é importante para evitar o erro de CORS
@@ -167,7 +168,7 @@ app.get('/schools', (req, res) => {
 	db.close(); // Fecha o banco
 });
 
-
+//SCHOOLINSERT - inserir novos registros na tabela SCHOOL
 app.post('/schoolinsert', urlencodedParser, (req, res) => {
 	res.statusCode = 200;
 	res.setHeader('Access-Control-Allow-Origin', '*'); // Isso é importante para evitar o erro de CORS
@@ -184,7 +185,7 @@ app.post('/schoolinsert', urlencodedParser, (req, res) => {
 	db.close();
 	res.end();
 });
-
+//SCHOOLDELETE - deletar registros cadastrados na tabela SCHOOL
 app.post('/schooldelete', urlencodedParser, (req, res) => {
 	res.statusCode = 200;
 	res.setHeader('Access-Control-Allow-Origin', '*'); // Isso é importante para evitar o erro de CORS
@@ -199,7 +200,7 @@ app.post('/schooldelete', urlencodedParser, (req, res) => {
 	});
 	db.close();
 });
-
+//SCHOOLUPDATE - atualizar registros cadastrados na tabela SCHOOL
 app.post('/schoolupdate', urlencodedParser, (req, res) => {
 	res.statusCode = 200;
 	res.setHeader('Access-Control-Allow-Origin', '*'); 
@@ -219,7 +220,7 @@ app.post('/schoolupdate', urlencodedParser, (req, res) => {
 });
 
 // SCHOOL MANAGER
-// ler
+// SCHOOLMANAGERS - checar registros cadastrados na tabela SCHOOLMANAGER
 app.get('/schoolmanagers', (req, res) => {
 	res.statusCode = 200;
 	res.setHeader('Access-Control-Allow-Origin', '*'); // Isso é importante para evitar o erro de CORS
@@ -235,7 +236,7 @@ app.get('/schoolmanagers', (req, res) => {
 	db.close(); // Fecha o banco
 });
 
-
+//SCHOOLMANAGERINSERT - inserir novos registros na tabela SCHOOLMANAGER
 app.post('/schoolmanagerinsert', urlencodedParser, (req, res) => {
 	res.statusCode = 200;
 	res.setHeader('Access-Control-Allow-Origin', '*'); // Isso é importante para evitar o erro de CORS
@@ -251,7 +252,7 @@ app.post('/schoolmanagerinsert', urlencodedParser, (req, res) => {
 	db.close();
 	res.end();
 });
-
+//SCHOOLMANAGERDELETE - deletar registros cadastrados na tabela SCHOOLMANAGER
 app.post('/schoolmanagerdelete', urlencodedParser, (req, res) => {
 	res.statusCode = 200;
 	res.setHeader('Access-Control-Allow-Origin', '*'); // Isso é importante para evitar o erro de CORS
@@ -266,7 +267,7 @@ app.post('/schoolmanagerdelete', urlencodedParser, (req, res) => {
 	});
 	db.close();
 });
-
+//SCHOOLMANAGERUPDATE - atualizar registros cadastrados na tabela SCHOOLMANAGER
 app.post('/schoolmanagerupdate', urlencodedParser, (req, res) => {
 	res.statusCode = 200;
 	res.setHeader('Access-Control-Allow-Origin', '*'); 
@@ -282,8 +283,8 @@ app.post('/schoolmanagerupdate', urlencodedParser, (req, res) => {
 	});
 	db.close();
 });
-
-
+//ADDRESS
+//ADDRESSES - checar registros cadastrados na tabela ADDRESS
 app.get('/addresses', (req, res) => {
 	res.statusCode = 200;
 	res.setHeader('Access-Control-Allow-Origin', '*');
@@ -298,7 +299,7 @@ app.get('/addresses', (req, res) => {
 	});
 	db.close();
 });
-
+//ADDRESSINSERT - inserir novos registros na tabela ADDRESS
  app.post('/addressinsert', urlencodedParser, (req, res) => {
 	res.statusCode = 200;
 	res.setHeader('Access-Control-Allow-Origin', '*');
@@ -316,7 +317,7 @@ app.get('/addresses', (req, res) => {
 	db.close(); 
 	res.end();
 });
-
+//ADDRESSDELETE - deletar registros cadastrados na tabela ADDRESS
 app.post('/addressdelete', urlencodedParser, (req, res) => {
 	res.statusCode = 200;
 	res.setHeader('Access-Control-Allow-Origin', '*'); // Isso é importante para evitar o erro de CORS
@@ -331,7 +332,7 @@ app.post('/addressdelete', urlencodedParser, (req, res) => {
 	});
 	db.close(); // Fecha o banco
 });
-
+//ADDRESSUPTADE - atualizar registros cadastrados na tabela ADDRESS 
 app.post('/addressupdate', urlencodedParser, (req, res) => {
 	res.statusCode = 200;
 	res.setHeader('Access-Control-Allow-Origin', '*'); // Isso é importante para evitar o erro de CORS
@@ -349,7 +350,8 @@ app.post('/addressupdate', urlencodedParser, (req, res) => {
 	db.close(); // Fecha o banco
 });
 
-/* DIAGNOSIS */
+//DIAGNOSIS 
+//
 app.get('/diagnoses', (req, res) => {
 	res.statusCode = 200;
 	res.setHeader('Access-Control-Allow-Origin', '*');
