@@ -1,12 +1,13 @@
 
 let idOptions = [];
+let questionsName = [];
 function readQuestionsFromDatabase() {
     $.ajax({
         url: "http://127.0.0.1:3001/questions",
         type: 'GET',
         success: data => {
                 data.forEach(element => {
-                    console.log("FUNCTION: " + (element['text']))
+                    questionsName.push(element)
                     questionsContainer.innerHTML += `
                     <div id="question${element['position']}">
                         <div class="row question-header">
@@ -18,19 +19,18 @@ function readQuestionsFromDatabase() {
                             <p>${element['text']}</p>
                         </div>`;
                         let alternatives = getAlternatives(element['id']);
-                        console.log("Meu enunciado é: " + element['text'] + "e minhas opções são: " + alternatives)
                         alternatives.forEach(alternative => {
                             questionsContainer.innerHTML +=
                     `<div class="form-check">
-                    <input class="form-check-input" type="radio" name="question${element['position']}" id="${alternative['id']}">
+                    <input class="form-check-input" type="radio" name="question${element['position']}" id="${alternative['id']}" value="${alternative['id']}" >
                     <label class="form-check-label" for="">${alternative['text']}</label>
                     </div>`
                   
                         
                         })
-              
+                        
                 });
-        
+        console.log(questionsName)
             
         }
 
@@ -62,7 +62,7 @@ $(document).ready(function() {
     $("#update_data").click(function () {
         let url = "http://127.0.0.1:3001/answerinsert";
         
-        console.log("works")
+        
         
         {  
             $.ajax({
@@ -78,4 +78,38 @@ $(document).ready(function() {
         }});
     });
 
- 
+ function saveAnswers(OPTION_ID,QUESTION_ID){
+    let url = "http://127.0.0.1:3001/answerinsert";
+
+    {
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data :{
+                option_id: OPTION_ID,
+                question_id : QUESTION_ID,
+
+            }
+            
+        })
+    }
+
+ }
+
+ function testePraDescobrir(){
+    /* id="${alternative['id']}"
+    let alternatives = getAlternatives(element['id']); */
+    var valoresSelecionados = [];
+    questionsName.forEach(question=>{
+        console.log(question)
+       var selected = $(`input[name="question${question.position}"]:checked`).val();
+        question.selectedvalue = selected
+        valoresSelecionados.push(question)
+        saveAnswers(selected,question.id)
+
+    })
+    console.log(valoresSelecionados)
+   
+    /* var dale =$('input[id="alternatives['id']:checked').val(); */
+    
+     }

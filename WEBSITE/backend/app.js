@@ -678,14 +678,71 @@ app.get('/answers', (req, res) => {
 	db.close(); // Fecha o banco
 });
 
+
+
+
+
+
+
+
+                  
+                  
+function getAlternatives(question_id) {
+    alternatives = [];
+    $.ajax({
+        url: "http://127.0.0.1:3001/options",
+        type: 'GET',
+        async: false,
+        success: data => { 
+            data.forEach(element => {
+                if (parseInt(question_id) === parseInt(element['question_id'])) {
+                    alternatives.push(element['text']);
+                }
+            })
+        }
+
+    })
+    return alternatives;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 app.post('/answerinsert', urlencodedParser, (req, res) => {
 	res.statusCode = 200;
 	res.setHeader('Access-Control-Allow-Origin', '*'); // Isso é importante para evitar o erro de CORS
 
-	sql = `INSERT INTO answer (extra_info, option_id, question_id, axis_subdivision_id, axis_id, diagnosis_id, school_cnpj,
-		school_number_of_students, network_id) VALUES ('"` + req.body.extra_info + "', '" + req.body.option_id + "', '" + req.body.question_id + "', '" + 
-		"', '" + req.body.axis_subdivision_id + "', '" + req.body.axis_id + "', '" + req.body.diagnosis_id +
-		req.body.school_cnpj +"', '" + "0" + "', '" + req.body.network_id + "')";
+	sql = `INSERT INTO answer (extra_info, option_id, question_id, axis_subdivision_id, axis_id, diagnosis_id,
+		school_number_of_students, network_id) VALUES ('"` + req.body.extra_info + "', '" + req.body.option_id + "', '" + req.body.question_id + "', '" + req.body.axis_subdivision_id + "', '" + req.body.axis_id + "', '" + req.body.diagnosis_id +
+		"', '" + "0" + "', '" + req.body.network_id + "')";
 	var db = new sqlite3.Database(DBPATH); // Abre o banco
 	db.run(sql, [],  err => {
 		if (err) {
