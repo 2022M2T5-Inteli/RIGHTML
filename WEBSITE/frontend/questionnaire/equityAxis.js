@@ -1,4 +1,5 @@
 
+let idOptions = [];
 function readQuestionsFromDatabase() {
     $.ajax({
         url: "http://127.0.0.1:3001/questions",
@@ -21,8 +22,8 @@ function readQuestionsFromDatabase() {
                         alternatives.forEach(alternative => {
                             questionsContainer.innerHTML +=
                     `<div class="form-check">
-                    <input class="form-check-input" type="radio" name="question${element['position']}" id="flexRadioDefault1">
-                    <label class="form-check-label" for="flexRadioDefault1">${alternative}</label>
+                    <input class="form-check-input" type="radio" name="question${element['position']}" id="${alternative['id']}">
+                    <label class="form-check-label" for="">${alternative['text']}</label>
                     </div>`
                   
                         
@@ -47,7 +48,7 @@ function getAlternatives(question_id) {
         success: data => { 
             data.forEach(element => {
                 if (parseInt(question_id) === parseInt(element['question_id'])) {
-                    alternatives.push(element['text']);
+                    alternatives.push(element);  //com essa função estou puxando todos os dados da array 
                 }
             })
         }
@@ -77,19 +78,4 @@ $(document).ready(function() {
         }});
     });
 
-    function saveAnswers(question_id) {
-        alternatives = [];
-        $.ajax({
-            url: "http://127.0.0.1:3001/answerinsert",
-            type: 'POST',
-            success: data => { 
-                data.forEach(element => {
-                    if (parseInt(question_id) === parseInt(element['question_id'])) {
-                        alternatives.push(element['text']);
-                    }
-                })
-            }
-    
-        })
-        return alternatives;
-    }
+ 
