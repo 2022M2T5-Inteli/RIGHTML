@@ -103,7 +103,6 @@ function getAxisFromId(id) {
             data.forEach(element => {
                 if (parseInt(element['id']) === parseInt(id)) {
                     name = element['name'];
-                    console.log("dentro do if: ")
                 }
             });
         }
@@ -114,17 +113,18 @@ function getAxisFromId(id) {
 function getAlternatives(question_id) {
     let alternatives = [];
     $.ajax({
-        url: "http://127.0.0.1:3001/alternatives",
+        url: "http://127.0.0.1:3001/options",
         type: 'GET',
         success: data => {
             data.forEach(element => {
+                console.log(element);
                 if (question_id === element['id']) {
                     alternatives.push(element['text']);
                 }
-            });
-            console.log(getAlternatives(elements));
-        }
-    });
+            })
+            }
+
+})
 }
 
 
@@ -146,10 +146,10 @@ function readQuestionsFromDatabase() {
                 questionsContainer.innerHTML = "";
                 //forEach faz loop que vai passar por cada elemento dentro do data
                 //cada vez que passa ele vai guardar o registro atual na variável elemento
-                data.forEach(element => { 
+                data.forEach(element => {
                     //insere todo o html que precisa para cada pergunta
                     questionsContainer.innerHTML += `
-                <!-- o cifrao chama a posição de um elemento na array data->
+                
         <div id="question${element['position']}">
             <div class="row question-header">
                 <div class="col-sm-10">
@@ -172,9 +172,9 @@ function readQuestionsFromDatabase() {
                 </div>
             </div>
             <div class="question-wording">
-                <!-- aiaiaiai -->
                 <p>${element['text']}</p>
-            </div>`
+            </div>`;
+                    getAlternatives();
                 });
             }
         }
@@ -182,7 +182,7 @@ function readQuestionsFromDatabase() {
     });
 }
 
-function updateQuestions() {
+/* function updateQuestions() {
     if (questionsArray.length === 0) {
         return questionsContainer.innerHTML = "Ainda não há questões neste questionário. Clique no + para adicionar uma.";
     }
@@ -247,4 +247,4 @@ function updateEditModal(questionIndex) {
     for (let i = 0; i < alternativeElements.length; i++) {
         document.querySelectorAll(".editableAlternatives")[i].value = originalQuestion.alternatives[i];
     }
-}
+} */

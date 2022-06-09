@@ -16,4 +16,24 @@ $(document).ready(function () {
 
     });
 });
-    
+
+function readQuestionsFromDatabase() {
+    $.ajax({
+        url: "http://127.0.0.1:3001/network_manager",
+        type: 'POST',
+        success: data => {
+            if (data.length == 0) {
+                return questionsContainer.innerHTML = "Ainda não há questões neste questionário. Clique no + para adicionar uma.";
+            }
+            else {
+                questionsContainer.innerHTML = "";
+                data.forEach(element => { 
+                    questionsContainer.innerHTML += `
+  
+                });
+            }
+        }
+
+    });
+}
+

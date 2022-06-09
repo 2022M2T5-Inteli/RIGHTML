@@ -22,11 +22,12 @@
   <link href="../general.css" rel="stylesheet">
   <link href="../questions-styling.css" rel="stylesheet">
   <link href="editMode.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
   <title>Editar questionário</title>
 </head>
 
-<body onload="updateQuestions()" style="min-height:100vh"
+<body onload="readQuestionsFromDatabase()" style="min-height:100vh"
 >
   <header>
     <!-- Navegação segundo classes do Bootstrap-->
