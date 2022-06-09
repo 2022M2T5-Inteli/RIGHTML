@@ -110,6 +110,25 @@ function getAxisFromId(id) {
     });
     return name;
 }
+
+function getAlternatives(question_id) {
+    let alternatives = [];
+    $.ajax({
+        url: "http://127.0.0.1:3001/alternatives",
+        type: 'GET',
+        success: data => {
+            data.forEach(element => {
+                if (question_id === element['id']) {
+                    alternatives.push(element['text']);
+                }
+            });
+            console.log(getAlternatives(elements));
+        }
+    });
+}
+
+
+
 function readQuestionsFromDatabase() {
     $.ajax({
         url: "http://127.0.0.1:3001/questions",
@@ -148,7 +167,7 @@ function readQuestionsFromDatabase() {
             <div class="question-wording">
                 <p>${element['text']}</p>
             </div>`
-                    console.log(element);
+                    console.log(getAlternatives(element));
                 });
             }
         }
