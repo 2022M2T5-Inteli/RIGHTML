@@ -17,23 +17,23 @@ $(document).ready(function () {
     });
 });
 
-function readQuestionsFromDatabase() {
-    $.ajax({
-        url: "http://127.0.0.1:3001/network_manager",
-        type: 'POST',
-        success: data => {
-            if (data.length == 0) {
-                return questionsContainer.innerHTML = "Ainda não há questões neste questionário. Clique no + para adicionar uma.";
-            }
-            else {
-                questionsContainer.innerHTML = "";
-                data.forEach(element => { 
-                    questionsContainer.innerHTML += `
-  
-                });
-            }
-        }
-
-    });
+function inputNetworkManagersData() {
+    $(document).ready(function() {
+        $("#buttonCreateAccount").click(function () {
+            let url = "http://127.0.0.1:3001/networkmanagerinsert";
+            console.log("works")
+            {
+                $.ajax({ //basicamente tem a mesma função do postman
+                    url: url,
+                    type: 'POST',
+                    data: {
+                        cpf: $('#CNPJ_key').val(),
+                        email: $('#update_employees_number').val(),
+                        name: $('#update_students_number').val(),
+                        network_id: $('#update_students_number').val(),
+                    },
+                })
+            }});
+        });
 }
 

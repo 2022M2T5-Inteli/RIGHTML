@@ -110,21 +110,24 @@ function getAxisFromId(id) {
     return name;
 }
 
+let alternatives = [];
+
 function getAlternatives(question_id) {
-    let alternatives = [];
+    alternatives = [];
     $.ajax({
         url: "http://127.0.0.1:3001/options",
         type: 'GET',
-        success: data => {
+        async: false,
+        success: data => { 
             data.forEach(element => {
-                console.log(element);
-                if (question_id === element['id']) {
+                if (parseInt(question_id) === parseInt(element['question_id'])) {
                     alternatives.push(element['text']);
                 }
             })
-            }
+        }
 
-})
+    })
+    return alternatives;
 }
 
 
@@ -174,7 +177,15 @@ function readQuestionsFromDatabase() {
             <div class="question-wording">
                 <p>${element['text']}</p>
             </div>`;
-                    getAlternatives();
+                    let alternatives = getAlternatives(element['id']);
+                    console.log("Meu enunciado é: " + element['text'] + "e minhas opções são: " + alternatives)
+                    alternatives.forEach(alternative => {
+                        questionsContainer.innerHTML +=
+                `<div class="form-check">
+                <input class="form-check-input" type="radio" name="question${element['position']}" id="flexRadioDefault1">
+                <label class="form-check-label" for="flexRadioDefault1">${alternative}</label>
+                </div>`
+                    })
                 });
             }
         }
