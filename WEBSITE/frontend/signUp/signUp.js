@@ -1,3 +1,5 @@
+
+
 function next() {
     let options = document.querySelector('input[name="option"]:checked').value
     if (options == "schoolManager") {
@@ -11,12 +13,45 @@ function next() {
     }
 }
 
+let cpfs = [];
+
 $(document).ready(function () {
-    $("#button").click(function () {
+    $("#continue").click(function () {
         let url = "http://127.0.0.1:3001/schoolmanagerinsert";
-        let xhttp = new XMLHttpRequest();
-            xhttp.open("POST", url, false);
-            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            xhttp.send("name" + $('#name').val() + "&email=" + $('#email').val() + "&cpf" + $('#cpf').val());//A execução do script pára aqui até a requisição retornar do servidor
+        get_cpfs()
+        console.log("LISTA: "+ cpfs)
+        console.log("CPF1:" + $('#cpf').val())
+        console.log("CPF2:" + cpfs.includes(parseInt(document.getElementById("cpf").value)))
+        //if (!cpfs.includes(parseInt($('#cpf').val()))) {
+
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: {
+                    email: "sjkhkjlsdn",
+                    name: $('#first-name').val(),
+                    school_cnpj: "212321",//$('#school_cnpj').val(),
+                    cpf: $('#cpf').val(),
+                },
+            });
+
+       // } else {
+        //    alert("CPF já cadastrado");
+        //}
+
     });
 });
+
+function get_cpfs() {
+    $.ajax({
+        url: "http://127.0.0.1:3001/schoolmanagers",
+        type: 'GET',
+        success: data => {
+            data.forEach(element => {
+
+                cpfs.push(element['cpf'])
+            });
+        }
+
+    });
+}
