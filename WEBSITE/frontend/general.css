@@ -142,7 +142,14 @@ footer {
 
 .link{
     font-family: manrope;
-    color: #1F033D;
+    color: #1F033D;   
+}
 
-    
+.title2home {
+    font-size: 45px;
+    font-weight: bold;
+    font-family: monospace;
+    text-align: center;
+    color: #232228;      
+    margin: 130px;;       
 }
