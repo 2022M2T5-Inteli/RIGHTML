@@ -68,6 +68,12 @@ a:active {
     font-family: "Space Mono", monospace;
 }
 
+
+#homepageImage {
+    width: 100%;
+    height: 100%;
+}
+
 /* Footer styling */
 
 footer {
@@ -114,4 +120,36 @@ footer {
     
     background-color:  #fff
     ;
+}
+
+.titlehome {
+    font-size: 56px;
+    font-weight: bold;
+    font-family: 'Manrope', sans-serif;
+    text-align: center;
+    color: #232228;             
+}
+
+.button {
+    border-radius: 15px;
+    font: "Inter";
+    background-color: #810DFD;
+    color: white;
+    border-color: #810DFD;
+    font-family: manrope;
+    font-size: 23px;
+}
+
+.link{
+    font-family: manrope;
+    color: #1F033D;   
+}
+
+.title2home {
+    font-size: 45px;
+    font-weight: bold;
+    font-family: monospace;
+    text-align: center;
+    color: #232228;      
+    margin: 130px;;       
 }
