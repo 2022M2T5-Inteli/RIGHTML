@@ -431,7 +431,7 @@ app.post('/axisinsert', urlencodedParser, (req, res) => {
 	res.statusCode = 200;
 	res.setHeader('Access-Control-Allow-Origin', '*'); // Isso é importante para evitar o erro de CORS
 
-	sql = "INSERT INTO axis (name, subdivision_name, position, diagnosis_id) VALUES ('" + req.body.name + "', '" + req.body.subdivision_name + "', '" + req.body.position +"' , '" + req.body.diagnosis_id + "' )" ;
+	sql = "INSERT INTO axis (name, position, diagnosis_id) VALUES ('" + req.body.name + "', '" + req.body.position +"' , '" + req.body.diagnosis_id + "' )" ;
 	var db = new sqlite3.Database(DBPATH); // Abre o banco
 	db.run(sql, [],  err => {
 		if (err) {
