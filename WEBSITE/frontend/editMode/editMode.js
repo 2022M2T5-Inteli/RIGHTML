@@ -249,6 +249,33 @@ $('#save-axis').on('click', function (event) {
             position: 10,
         }
     });
+    $('#add-axis-input').val("");
+    $('#add-axis-span').hide();
+    modal();
+});
+
+$('#add-subaxis').on('click', function (event) {
+    if ($('#add-subaxis-span').is(":visible")) {
+        $('#add-subaxis-span').hide();
+    } else {
+        $('#add-subaxis-span').show();
+    }
+});
+
+$('#save-subaxis').on('click', function (event) {
+    let axis_name = $('#add-subaxis-input').val();
+    $.ajax({
+        url: "http://127.0.0.1:3001/axisinsert",
+        type: 'POST',
+        async: false,
+        data: {
+            name: axis_name,
+            diagnosis_id: 1,
+            position: 10,
+        }
+    });
+    $('#add-subaxis-input').val("");
+    $('#add-subaxis-span').hide();
     modal();
 });
 
