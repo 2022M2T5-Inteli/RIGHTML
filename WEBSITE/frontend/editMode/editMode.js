@@ -48,10 +48,12 @@ function modal() {
     axes.forEach(axis => {
         document.getElementById('axis-dropdown').innerHTML += `<option value="${axis['name']}">${axis['name']}</option>`
     })
-}
-
-function updateModalSubdivisions() {
-
+    let subdivisions = getModalSubdivisions();
+    console.log(subdivisions)
+    document.getElementById('critical-factors').innerHTML = "<option value='' disabled selected>Escolher...</option>";
+    axes.forEach(axis => {
+        document.getElementById('critical-factors').innerHTML += `<option value="${axis['name']}">${axis['name']}</option>`
+    })
 }
 
 function lastQuestionPosition() {
@@ -91,7 +93,7 @@ function saveQuestion() {
         async: false,
         sucess: data => {
             data.forEach(element => {
-                if(element['id'] > highestId) {
+                if (element['id'] > highestId) {
                     highestId = element['id'];
                 }
             })
@@ -99,6 +101,47 @@ function saveQuestion() {
     });
     saveAlternatives(highestId);
 }
+
+function getAxisIdFromName(name) {
+    console.log(name)
+    let id = null;
+    $.ajax({
+        url: "http://127.0.0.1:3001/axes",
+        type: 'GET',
+        async: false,
+        success: data => {
+            data.forEach(element => {
+                if (element['name'] === name) {
+                    id = element['id'];
+                }
+            });
+        }
+    });
+    return id;
+}
+let critical_factors = [];
+function getModalSubdivisions() {
+    let axis = $("#dropdown").val()
+    let id = getAxisIdFromName(axis);
+    $.ajax({
+        url: "http://127.0.0.1:3001/axissubdivisions",
+        type: 'GET',
+        async: false,
+        success: data => {
+            data.forEach(element => {
+                if (parseInt(id) === (element['id'])) {
+                    critical_factors.push(element['name'])
+                }
+            });
+        }
+    });
+    return critical_factors;
+}
+
+$("#drop").change(function () {
+    var end = this.value;
+    var firstDropVal = $('#pick').val();
+});
 
 function saveAlternatives() {
     $.ajax({
@@ -142,30 +185,13 @@ function getAxisIdFromName(name) {
         success: data => {
             data.forEach(element => {
                 if (element['name'] === name) {
-                    id = element['id']; 
-                } 
+                    id = element['id'];
+                }
             });
         }
     });
     console.log(id)
     return id;
-}
-
-function getAxisSubdivisions() {
-    var subdivisions = [];
-    $.ajax({
-        url: "http://127.0.0.1:3001/axis_subdivisions",
-        type: 'GET',
-        async: false,
-        success: data => {
-            data.forEach(element => {
-                if (parseInt(element['axis']) === 1) {
-                    axes.push(element['name']);
-                }
-            });
-        }
-    });
-    return axes;
 }
 
 $('#add-axis').on('click', function (event) {
