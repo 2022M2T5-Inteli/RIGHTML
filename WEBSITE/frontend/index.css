@@ -5,25 +5,7 @@
     text-align: center;
 }
 
-.button {
-    border-radius: 5px;
-    font: "Inter";
-    background-color: #810DFD;
-    color: white;
-    border-color: #808080;
-    font-family: monospace;
-}
-
-.link{
-    font-family: manrope;
-}
-
 #eixos{
     font-family: manrope;
     text-align: center;
 }
-
-
-
-
-
