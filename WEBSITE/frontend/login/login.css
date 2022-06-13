@@ -24,7 +24,7 @@ html {
 }
 
 body {
-    background-color: black;
+
     min-height: 100vh;
     position: relative;
     font-family: "Manrope", sans-serif;
@@ -93,4 +93,13 @@ body {
 
 .buttonEntrar:hover {
     transform: scale(1.05)
+}
+
+.background-image {
+
+   background-image: url("./img/imgbkglog.png");
+   background-size: cover; 
+   height: 100vh;
+   background-repeat: no-repeat;
+
 }
