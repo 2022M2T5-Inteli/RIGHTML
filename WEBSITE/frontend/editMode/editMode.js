@@ -429,7 +429,6 @@ function readQuestionsFromDatabase() {
 }
 
 function updateEditModal(question_id) {
-
     $('#edit-add-axis-span').hide();
     $('#edit-add-subaxis-span').hide();
     var question = null;
@@ -446,17 +445,32 @@ function updateEditModal(question_id) {
         }
 
     })
-    console.log(question)
     let axes = getAxes();
-    document.getElementById('axis-dropdown-update').innerHTML = "<option value='' disabled selected>Escolher...</option>";
+    document.getElementById('edit-axis-dropdown').innerHTML = `<option value="${getAxisFromId(question['axis_id'])}" selected>${getAxisFromId(question['axis_id'])}</option>`;
     axes.forEach(axis => {
-        document.getElementById('axis-dropdown-update').innerHTML += `<option value="${axis['name']}">${axis['name']}</option>`
+        document.getElementById('edit-axis-dropdown').innerHTML += `<option value="${axis['name']}">${axis['name']}</option>`
     })
-    $("#axis-dropdown-update").val(getAxisFromId(question['axis_id']));
-    let subdivisions = get(getAxisFromId(question['axis_id']));
-    document.getElementById('subaxis-dropdown-update').innerHTML = "<option value='' disabled selected>Escolher...</option>";
+    let subdivision = getSubaxisFromId(question['axis_subdivision_id'])
+    document.getElementById('edit-critical-factors').innerHTML = `<option value="${subdivision}" selected>${subdivision}</option>`;
     axes.forEach(axis => {
-        document.getElementById('subaxis-dropdown-update').innerHTML += `<option value="${subdivisions['name']}">${subdivisions['name']}</option>`
+        document.getElementById('edit-critical-factors').innerHTML += `<option value="${axis['name']}">${axis['name']}</option>`
     })
+}
 
+function getSubaxisFromId(id) {
+    let subaxisName = '';
+    $.ajax({
+        url: "http://127.0.0.1:3001/axissubdivisions",
+        type: 'GET',
+        async: false,
+        success: data => {
+            data.forEach(element => {
+                if (parseInt(id) === parseInt(element['id'])) {
+                    subaxisName = element;
+                }
+            })
+        }
+
+    })
+    return subaxisName;
 }
