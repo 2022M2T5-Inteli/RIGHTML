@@ -7,41 +7,11 @@ function onload() {
 const questionsContainer = document.getElementById("questions-container");
 let currentEditModeQuestionIndex = null;
 
-function getQuestionData() {
-    let form = document.getElementById("form");
-    let questionWording = form["question"].value;
-    form["question"].value = "";
-    let axis = form['axis'].value;
-    form['axis'].value = "";
-    let alternativeElements = document.querySelectorAll(".alternatives");
-    let alternativeValues = [];
-    for (let i = 0; i < alternativeElements.length; i++) {
-        alternativeValues.push(alternativeElements[i].value);
-        document.querySelectorAll(".alternatives")[i].value = "";
-    }
-    let question = new Question(questionWording, axis, alternativeValues);
-    questionsArray.push(question);
-    updateQuestions();
-}
-
-function applyQuestionChanges() {
-    let form = document.getElementById("editForm");
-    let questionWording = form["question"].value;
-    let axis = form['axis'].value;
-    let alternativeElements = document.querySelectorAll(".editableAlternatives");
-    let alternativeValues = [];
-    for (let i = 0; i < alternativeElements.length; i++) {
-        alternativeValues.push(alternativeElements[i].value);
-    }
-    let question = new Question(questionWording, axis, alternativeValues);
-    questionsArray[currentEditModeQuestionIndex] = question;
-    updateQuestions();
-}
-
 function modal() {
     $('#question').val("");
     $('#weight').val("");
     let axes = getAxes();
+    console.log(axes)
     document.getElementById('axis-dropdown').innerHTML = "<option value='' disabled selected>Escolher...</option>";
     axes.forEach(axis => {
         document.getElementById('axis-dropdown').innerHTML += `<option value="${axis['name']}">${axis['name']}</option>`
