@@ -1,5 +1,6 @@
 function onload() {
     $("#add-axis-span").hide();
+    $("#add-subaxis-span").hide();
     readQuestionsFromDatabase();
 }
 
@@ -7,42 +8,9 @@ const questionsContainer = document.getElementById("questions-container");
 let currentEditModeQuestionIndex = null;
 
 
-function addQuestion() {
-    getQuestionData();
-}
-
-function getQuestionData() {
-    let form = document.getElementById("form");
-    let questionWording = form["question"].value;
-    form["question"].value = "";
-    let axis = form['axis'].value;
-    form['axis'].value = "";
-    let alternativeElements = document.querySelectorAll(".alternatives");
-    let alternativeValues = [];
-    for (let i = 0; i < alternativeElements.length; i++) {
-        alternativeValues.push(alternativeElements[i].value);
-        document.querySelectorAll(".alternatives")[i].value = "";
-    }
-    let question = new Question(questionWording, axis, alternativeValues);
-    questionsArray.push(question);
-    updateQuestions();
-}
-
-function applyQuestionChanges() {
-    let form = document.getElementById("editForm");
-    let questionWording = form["question"].value;
-    let axis = form['axis'].value;
-    let alternativeElements = document.querySelectorAll(".editableAlternatives");
-    let alternativeValues = [];
-    for (let i = 0; i < alternativeElements.length; i++) {
-        alternativeValues.push(alternativeElements[i].value);
-    }
-    let question = new Question(questionWording, axis, alternativeValues);
-    questionsArray[currentEditModeQuestionIndex] = question;
-    updateQuestions();
-}
-
 function modal() {
+    $('#question').val("");
+    $('#weight').val("");
     let axes = getAxes();
     document.getElementById('axis-dropdown').innerHTML = "<option value='' disabled selected>Escolher...</option>";
     axes.forEach(axis => {
@@ -50,10 +18,12 @@ function modal() {
     })
 }
 
+
+
 function updateModalSubdivisions() {
 
 }
-
+var highestPosition = 0; 
 function lastQuestionPosition() {
     let highestPosition = 0;
     $.ajax({
@@ -68,20 +38,23 @@ function lastQuestionPosition() {
             });
         }
     });
-    return lastQuestionPosition;
+    highestPosition += 1;
+    console.log("highest position: " + highestPosition)
 }
 
 function saveQuestion() {
+    lastQuestionPosition();
     $.ajax({
         url: "http://127.0.0.1:3001/questioninsert",
         type: 'POST',
         async: false,
         data: {
-            weight: $("#weight").val(),
+            weight: parseInt ($("#weight").val()),
             text: $("#question").val(),
-            position: lastQuestionPosition + 1,
-            axis_subdivision_id: 1,
-            axis_id: getAxisIdFromName($('#axis-dropdown').val())
+            position: highestPosition,
+            axis_subdivision_id: findIDByName ($('#critical-factors').vall()),
+            axis_id: getAxisIdFromName($('#axis-dropdown').val()),
+            diagnosis_id: 2
         }
     });
     let highestId = 0;
