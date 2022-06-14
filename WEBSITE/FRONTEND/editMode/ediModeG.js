@@ -185,7 +185,8 @@ function getAxisIdFromName(name) {
 }
 
 
-$('#add-axis').on('click', function (event) {
+$('#add-axis').click(function () {
+    
     if ($('#add-axis-span').is(":visible")) {
         $('#add-axis-span').hide();
     } else {
@@ -210,13 +211,7 @@ $('#save-axis').on('click', function (event) {
     modal();
 });
 
-$('#add-subaxis').on('click', function (event) {
-    if ($('#add-subaxis-span').is(":visible")) {
-        $('#add-subaxis-span').hide();
-    } else {
-        $('#add-subaxis-span').show();
-    }
-});
+
 $('#save-subaxis').on('click', function (event) {
     let subaxis_name = $('#add-subaxis-input').val();
     $.ajax({
@@ -228,6 +223,7 @@ $('#save-subaxis').on('click', function (event) {
             axis_id: getAxisIdFromName($("#axis-dropdown").val()),
             diagnosis_id: 2,
             position: 10,
+        
         }
     });
     $('#add-subaxis-input').val("");
