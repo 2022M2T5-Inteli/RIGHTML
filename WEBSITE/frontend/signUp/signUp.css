@@ -3,12 +3,22 @@
     font-weight: bold;
     font-family: "Manrope", sans-serif;
     text-align: center;
+    margin-bottom: 1rem;
+    margin-top: -1rem;
+    color: #232228;
+}
+
+.content-text {
+    font-size: 1.5rem;
+    font-family: "Manrope", sans-serif;
+    text-align: center  ;
     margin-bottom: 2rem;
 }
 
 .content {
     font-size: 1.5rem;
     font-family: "Manrope", sans-serif;
+    text-align: center  ;
 }
 
 * {
@@ -24,7 +34,7 @@ html {
 }
 
 body {
-    background-color: black;
+    
     min-height: 100vh;
     position: relative;
     font-family: "Manrope", sans-serif;
@@ -34,13 +44,13 @@ body {
 .container {
     position: absolute;
     top: 50%;
-    left: 70%;
+    left: 50%;
     transform: translate(-50%, -50%);
     background-color: white;
     border-radius: 6px;
     padding: 5rem 5rem;
     width: 50rem;
-    height: 50rem
+    height: 68rem;
 }
 
 .inputGroup {
@@ -65,8 +75,8 @@ body {
     outline: none;
     background: none;
     border: 1px solid #333;
-    border-radius: 3px;
-    width: 100%;
+    border-radius: 6px;
+    width: 400px;
 }
 
 .buttonContinuar {
@@ -76,7 +86,7 @@ body {
     background-color: #810dfd;
     color: white;
     border-color: #810dfd;
-    margin: 1.5rem auto;
+    margin: auto;
     padding: 1rem;
     display: block;
     cursor: pointer;
@@ -96,7 +106,7 @@ body {
 }
 
 #signUpTitle {
-    color: rgb(124, 124, 124);
+    color: #f8c000;;
     padding: 2rem;
 }
 
@@ -105,3 +115,19 @@ body {
     width: 50rem;
     padding: 2rem;
 }
+
+.background-image {
+
+    background-image: url("./img/imgbkglog.png");
+    background-size: cover; 
+    height: 100vh;
+    background-repeat: no-repeat;
+ }
+
+.logo {
+    width: 200px;
+    margin-top: -2rem;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}   
