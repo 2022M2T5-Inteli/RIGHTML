@@ -24,12 +24,13 @@ function get_cnpjs() {
 
 function get_network_id() {
     $.ajax({
-        url: "http://127.0.0.1:3001/networkmanagers",
+        url: "http://127.0.0.1:3001/networks",
         type: 'GET',
         async: false,
         success: data => {
             data.forEach(element => {
-                school_id.push(element['network_id'])
+
+                school_id.push(element['id'])
             });
         }
 
@@ -43,49 +44,75 @@ $(document).ready(function () {
         let url = "http://127.0.0.1:3001/schoolinsert";
         get_network_id();
         get_cnpjs();
-        console.log("CNPJ: " + CNPJS);
-        console.log(school_id);
-        if ( (!CNPJS.includes(parseInt($('#CNPJ').val()))) ) {
+        console.log(typeof parseInt($('#network_id').val()))
+        console.log(typeof school_id[0]);
+        console.log(school_id.includes(parseInt($('#network_id').val())))
 
-            $.ajax({
-                url: url,
-                type: 'POST',
-                data: {
-                    type_of_institution:$('#type').val(),
-                    number_of_employees:$('#employee_number').val(),
-                    cnpj: $('#CNPJ').val(),
-                    number_of_students:$('#student_number').val(),
-                    name: $('#school_name').val(),
-                    school_census_id: $('#school_id').val()
-                },
-            });
-
-        } else {
-            console.log("blabla")
-            alert("cnpj já cadastrado !");
+        if ($('#type').val() === "" ||
+            $('#employee_number').val() === "" ||
+            $('#CNPJ').val() === "" ||
+            $('#student_number').val() === "" ||
+            $('#school_name').val() === "" ||
+            $('#school_id').val() === "" ||
+            $('#network_id').val() === "") {
+            alert("preencha todos os dados")
         }
 
-        if ( (!school_id.includes(parseInt($('#network_id').val()))) ) {
 
-            $.ajax({
-                url: url,
-                type: 'POST',
-                data: {
-                    type_of_institution:$('#type').val(),
-                    number_of_employees:$('#employee_number').val(),
-                    cnpj: $('#CNPJ').val(),
-                    number_of_students:$('#student_number').val(),
-                    name: $('#school_name').val(),
-                    school_census_id: $('#school_id').val(),
-                    network_id:$('#network_id').val()
-                },
-            });
-
-        } else {
-            console.log("blabla")
-            alert("ID da rede já cadastrado !");
+        else if ((!school_id.includes(parseInt($('#network_id').val()))) || (CNPJS.includes(parseInt($('#CNPJ').val())))) {
+            alert("Preencha os dados corretamente")
         }
-    
-    
+
+        else {
+            
+            {
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    data: {
+                        type_of_institution: $('#type').val(),
+                        number_of_employees: $('#employee_number').val(),
+                        cnpj: $('#CNPJ').val(),
+                        number_of_students: $('#student_number').val(),
+                        name: $('#school_name').val(),
+                        school_census_id: $('#school_id').val(),
+                        network_id: $('#network_id').val()
+                    }, 
+                })
+            };
+            window.location = '../schoolManagerDashboard/schoolManagerDashboard.html';
+        }
+
+
+        /* if ( (!school_id.includes(parseInt($('#network_id').val()))) ) {
+ 
+             $.ajax({
+                 url: url,
+                 type: 'POST',
+                 data: {
+                     type_of_institution:$('#type').val(),
+                     number_of_employees:$('#employee_number').val(),
+                     cnpj: $('#CNPJ').val(),
+                     number_of_students:$('#student_number').val(),
+                     name: $('#school_name').val(),
+                     school_census_id: $('#school_id').val(),
+                     network_id:$('#network_id').val()
+                 },
+             });
+ 
+         } else {
+             alert("ID da rede já cadastrado !");
+             
+         }
+     
+     */
+
+
+
+
     });
 });
+
+
+localStorage.getItem
+localStorage.getItem
