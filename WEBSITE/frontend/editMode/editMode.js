@@ -1,6 +1,4 @@
 function onload() {
-    $("#add-axis-span").hide();
-    $("#add-subaxis-span").hide();
     readQuestionsFromDatabase();
 }
 
@@ -8,6 +6,8 @@ const questionsContainer = document.getElementById("questions-container");
 let currentEditModeQuestionIndex = null;
 
 function modal() {
+    $("#add-axis-span").hide();
+    $("#add-subaxis-span").hide();
     $('#question').val("");
     $('#weight').val("");
     let axes = getAxes();
@@ -122,6 +122,15 @@ $("#axis-dropdown").change(function () {
     })
 });
 
+$("#edit-axis-dropdown").change(function () {
+    console.log(getModalSubdivisions("Ensino"))
+    let subdivisions = getModalSubdivisions();
+    document.getElementById('critical-factors').innerHTML = "<option value='' disabled selected>Escolher...</option>";
+    subdivisions.forEach(subdivision => {
+        document.getElementById('critical-factors').innerHTML += `<option value="${subdivision}">${subdivision}</option>`
+    })
+});
+
 
 function findIDByName(name) {
     let id = ''
@@ -204,6 +213,14 @@ $('#add-axis').on('click', function (event) {
     }
 });
 
+$('#edit-add-axis').on('click', function (event) {
+    if ($('#edit-add-axis-span').is(":visible")) {
+        $('#edit-add-axis-span').hide();
+    } else {
+        $('#edit-add-axis-span').show();
+    }
+});
+
 $('#save-axis').on('click', function (event) {
     let axis_name = $('#add-axis-input').val();
     $.ajax({
@@ -221,11 +238,36 @@ $('#save-axis').on('click', function (event) {
     modal();
 });
 
+$('#edit-save-axis').on('click', function (event) {
+    let axis_name = $('#edit-add-axis-input').val();
+    $.ajax({
+        url: "http://127.0.0.1:3001/axisinsert",
+        type: 'POST',
+        async: false,
+        data: {
+            name: axis_name,
+            diagnosis_id: 2,
+            position: 10,
+        }
+    });
+    $('#edit-add-axis-input').val("");
+    $('#edit-add-axis-span').hide();
+    modal();
+});
+
 $('#add-subaxis').on('click', function (event) {
     if ($('#add-subaxis-span').is(":visible")) {
         $('#add-subaxis-span').hide();
     } else {
         $('#add-subaxis-span').show();
+    }
+});
+
+$('#edit-add-subaxis').on('click', function (event) {
+    if ($('#edit-add-subaxis-span').is(":visible")) {
+        $('#edit-add-subaxis-span').hide();
+    } else {
+        $('#edit-add-subaxis-span').show();
     }
 });
 
@@ -245,6 +287,24 @@ $('#save-subaxis').on('click', function (event) {
     $('#add-subaxis-input').val("");
     $('#add-subaxis-span').hide();
     modal();
+});
+
+$('#edit-save-subaxis').on('click', function (event) {
+    let subaxis_name = $('#edit-add-subaxis-input').val();
+    $.ajax({
+        url: "http://127.0.0.1:3001/axissubdivisioninsert",
+        type: 'POST',
+        async: false,
+        data: {
+            name: subaxis_name,
+            axis_id: getAxisIdFromName($("#edit-axis-dropdown").val()),
+            diagnosis_id: 2,
+            position: 10,
+        }
+    });
+    $('#edit-add-subaxis-input').val("");
+    $('#edit-add-subaxis-span').hide();
+    updateEditModal();
 });
 
 function getAxisFromId(id) {
@@ -370,7 +430,8 @@ function readQuestionsFromDatabase() {
 
 function updateEditModal(question_id) {
 
-
+    $('#edit-add-axis-span').hide();
+    $('#edit-add-subaxis-span').hide();
     var question = null;
     $.ajax({
         url: "http://127.0.0.1:3001/questions",
@@ -385,6 +446,7 @@ function updateEditModal(question_id) {
         }
 
     })
+    console.log(question)
     let axes = getAxes();
     document.getElementById('axis-dropdown-update').innerHTML = "<option value='' disabled selected>Escolher...</option>";
     axes.forEach(axis => {
