@@ -52,6 +52,29 @@ function saveQuestion() {
             axis_subdivision_id: findIDByName($('#critical-factors').val()),
             axis_id: getAxisIdFromName($('#axis-dropdown').val()),
             diagnosis_id: 1 
+<<<<<<< Updated upstream
+=======
+        }
+    });
+    let lastId = getLastQuestionId()
+    saveAlternatives(lastId);
+    readQuestionsFromDatabase();
+}
+
+function saveQuestionChanges() {
+    lastQuestionPosition();
+    $.ajax({
+        url: "http://127.0.0.1:3001/questionupdate",
+        type: 'POST',
+        async: false,
+        data: {
+            weight: parseInt($("#weight").val()),
+            text: $("#question").val(),
+            position: highestPosition,
+            axis_subdivision_id: findIDByName($('#critical-factors').val()),
+            axis_id: getAxisIdFromName($('#axis-dropdown').val()),
+            diagnosis_id: 1 
+>>>>>>> Stashed changes
         }
     });
     let lastId = getLastQuestionId()
@@ -94,28 +117,28 @@ function getAxisIdFromName(name) {
     return id;
 }
 let critical_factors = [];
-function getModalSubdivisions() {
+function getModalSubdivisions(axis_id) {
+    console.log("Axis id: " + axis_id)
     critical_factors = [];
-    let axis = $("#axis-dropdown").val();
-    let id = getAxisIdFromName(axis);
     $.ajax({
         url: "http://127.0.0.1:3001/axissubdivisions",
         type: 'GET',
         async: false,
         success: data => {
             data.forEach(element => {
-                if (parseInt(id) === (element['axis_id'])) {
+                if (parseInt(axis_id) === (element['axis_id'])) {
                     critical_factors.push(element['name'])
                 }
             });
         }
     });
+    console.log(critical_factors)
     return critical_factors;
 }
 
 $("#axis-dropdown").change(function () {
-    console.log(getModalSubdivisions("Ensino"))
-    let subdivisions = getModalSubdivisions();
+    let subdivisions = getModalSubdivisions(getAxisIdFromName($("#axis-dropdown").val()));
+    console.log("SUBDIVISIONS: " + subdivisions)
     document.getElementById('critical-factors').innerHTML = "<option value='' disabled selected>Escolher...</option>";
     subdivisions.forEach(subdivision => {
         document.getElementById('critical-factors').innerHTML += `<option value="${subdivision}">${subdivision}</option>`
@@ -123,11 +146,10 @@ $("#axis-dropdown").change(function () {
 });
 
 $("#edit-axis-dropdown").change(function () {
-    console.log(getModalSubdivisions("Ensino"))
-    let subdivisions = getModalSubdivisions();
-    document.getElementById('critical-factors').innerHTML = "<option value='' disabled selected>Escolher...</option>";
+    let subdivisions = getModalSubdivisions(getAxisIdFromName($("#edit-axis-dropdown").val()));
+    document.getElementById('edit-critical-factors').innerHTML = "<option value='' disabled selected>Escolher...</option>";
     subdivisions.forEach(subdivision => {
-        document.getElementById('critical-factors').innerHTML += `<option value="${subdivision}">${subdivision}</option>`
+        document.getElementById('edit-critical-factors').innerHTML += `<option value="${subdivision}">${subdivision}</option>`
     })
 });
 
@@ -430,7 +452,6 @@ function readQuestionsFromDatabase() {
 }
 
 function updateEditModal(question_id) {
-
     $('#edit-add-axis-span').hide();
     $('#edit-add-subaxis-span').hide();
     var question = null;
@@ -447,17 +468,44 @@ function updateEditModal(question_id) {
         }
 
     })
-    console.log(question)
     let axes = getAxes();
-    document.getElementById('axis-dropdown-update').innerHTML = "<option value='' disabled selected>Escolher...</option>";
     axes.forEach(axis => {
-        document.getElementById('axis-dropdown-update').innerHTML += `<option value="${axis['name']}">${axis['name']}</option>`
+        document.getElementById('edit-axis-dropdown').innerHTML += `<option value="${axis['name']}">${axis['name']}</option>`
     })
-    $("#axis-dropdown-update").val(getAxisFromId(question['axis_id']));
-    let subdivisions = get(getAxisFromId(question['axis_id']));
-    document.getElementById('subaxis-dropdown-update').innerHTML = "<option value='' disabled selected>Escolher...</option>";
-    axes.forEach(axis => {
-        document.getElementById('subaxis-dropdown-update').innerHTML += `<option value="${subdivisions['name']}">${subdivisions['name']}</option>`
+    $('#edit-axis-dropdown').val(getAxisFromId(question['axis_id']));
+    let subdivisions = getModalSubdivisions((question['axis_id']));
+    subdivisions.forEach(subdivision => {
+        document.getElementById('edit-critical-factors').innerHTML += `<option value="${subdivision}">${subdivision}</option>`
+    })
+    $("#edit-question").val(question['text']);
+    $("#edit-weight").val(question['weight']);
+    alternatives = getAlternatives(question['id']);
+    console.log(alternatives)
+    let current_count = 1
+    alternatives.forEach(alternative => {
+        $('#edit-alternative' + current_count).val(alternative['text']);
+        $('#edit-alternativeweight' + current_count).val(alternative['weight']);
+        current_count++;
     })
 
+}
+
+
+
+function getSubaxisFromId(id) {
+    let subaxisName = '';
+    $.ajax({
+        url: "http://127.0.0.1:3001/axissubdivisions",
+        type: 'GET',
+        async: false,
+        success: data => {
+            data.forEach(element => {
+                if (parseInt(id) === parseInt(element['id'])) {
+                    subaxisName = element;
+                }
+            })
+        }
+
+    })
+    return subaxisName;
 }
