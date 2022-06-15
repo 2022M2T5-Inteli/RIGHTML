@@ -82,37 +82,6 @@ $(document).ready(function () {
             };
             window.location = '../schoolManagerDashboard/schoolManagerDashboard.html';
         }
-
-
-        /* if ( (!school_id.includes(parseInt($('#network_id').val()))) ) {
- 
-             $.ajax({
-                 url: url,
-                 type: 'POST',
-                 data: {
-                     type_of_institution:$('#type').val(),
-                     number_of_employees:$('#employee_number').val(),
-                     cnpj: $('#CNPJ').val(),
-                     number_of_students:$('#student_number').val(),
-                     name: $('#school_name').val(),
-                     school_census_id: $('#school_id').val(),
-                     network_id:$('#network_id').val()
-                 },
-             });
- 
-         } else {
-             alert("ID da rede já cadastrado !");
-             
-         }
-     
-     */
-
-
-
-
     });
 });
 
-
-localStorage.getItem
-localStorage.getItem

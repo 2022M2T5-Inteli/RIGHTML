@@ -51,7 +51,7 @@ function saveQuestion() {
             position: highestPosition,
             axis_subdivision_id: findIDByName($('#critical-factors').val()),
             axis_id: getAxisIdFromName($('#axis-dropdown').val()),
-            diagnosis_id: 1
+            diagnosis_id: 1 
         }
     });
     let lastId = getLastQuestionId()
@@ -280,7 +280,7 @@ $('#save-subaxis').on('click', function (event) {
         data: {
             name: subaxis_name,
             axis_id: getAxisIdFromName($("#axis-dropdown").val()),
-            diagnosis_id: 2,
+            diagnosis_id: 1,
             position: 10,
         }
     });

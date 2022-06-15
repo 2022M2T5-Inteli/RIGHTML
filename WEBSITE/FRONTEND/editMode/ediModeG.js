@@ -54,55 +54,30 @@ function saveQuestion() {
             position: highestPosition,
             axis_subdivision_id: findIDByName ($('#critical-factors').vall()),
             axis_id: getAxisIdFromName($('#axis-dropdown').val()),
-            diagnosis_id: 2
+            diagnosis_id: 2 
         }
-    });
-    let highestId = 0;
-    $.ajax({
-        url: "http://127.0.0.1:3001/questions",
-        type: 'GET',
-        async: false,
-        sucess: data => {
-            data.forEach(element => {
-                if (element['id'] > highestId) {
-                    highestId = element['id'];
-                }
-            })
-        }
-    });
-    saveAlternatives(highestId);
-}
+    }); 
 
-function saveAlternatives() {
-    $.ajax({
-        url: "http://127.0.0.1:3001/optioninsert",
-        type: 'POST',
-        async: false,
-        data: {
-            weight: $("#weight").val(),
-            text: $("#question").val(),
-            position: lastQuestionPosition + 1,
-            axis_subdivision_id: 1,
-            axis_id: getAxisIdFromName($('#axis-dropdown').val())
-        }
-    });
-}
+         let latsId = getLastQuestionId()
+         saveAlternatives(latsId)
+          readQuestionsFromDatabase()
 
-function getAxes() {
-    var axes = [];
-    $.ajax({
-        url: "http://127.0.0.1:3001/axes",
-        type: 'GET',
-        async: false,
-        success: data => {
-            data.forEach(element => {
-                if (parseInt(element['diagnosis_id']) === 1) {
-                    axes.push(element);
-                }
-            });
-        }
-    });
-    return axes;
+    function getLastQuestionId(){ 
+        var highestId = 0;
+        $.ajax({
+            url: "http://127.0.0.1:3001/questions",
+            type: 'GET',
+            async: false,
+            success: data => {
+                data.forEach(question => {
+                    if (question['id'] > highestId) {
+                        highestId = question['id'];
+                    }
+                })
+            }
+        });
+        return highestId;
+    }
 }
 
 function getAxisIdFromName(name) {
@@ -120,28 +95,98 @@ function getAxisIdFromName(name) {
             });
         }
     });
-    console.log(id)
     return id;
 }
 
-function getAxisSubdivisions() {
-    var subdivisions = [];
+let critical_factors = [];
+function getModalSubdivisions() {
+    critical_factors = [];
+    let axis = $("#axis-dropdown").val();
+    let id = getAxisIdFromName(axis);
     $.ajax({
-        url: "http://127.0.0.1:3001/axis_subdivisions",
+        url: "http://127.0.0.1:3001/axissubdivisions",
         type: 'GET',
         async: false,
         success: data => {
             data.forEach(element => {
-                if (parseInt(element['axis']) === 1) {
-                    axes.push(element['name']);
+                if (parseInt(id) === (element['axis_id'])) {
+                    critical_factors.push(element['name'])
                 }
             });
         }
     });
-    return axes;
+    return critical_factors;
 }
 
-$('#add-axis').on('click', function (event) {
+$("#axis-dropdown").change(function () {
+    console.log(getModalSubdivisions("Ensino"))
+    let subdivisions = getModalSubdivisions();
+    document.getElementById('critical-factors').innerHTML = "<option value='' disabled selected>Escolher...</option>";
+    subdivisions.forEach(subdivision => {
+        document.getElementById('critical-factors').innerHTML += `<option value="${subdivision}">${subdivision}</option>`
+    })
+});
+
+function findIDByName(name) {
+    let id = ''
+    $.ajax({
+        url: "http://127.0.0.1:3001/axissubdivisions",
+        type: 'GET',
+        async: false,
+        success: data => {
+            data.forEach(element => {
+                if (name === element['name']) {
+                    id = element['id'];
+                }
+            })
+        }
+    })
+    return id;
+
+}
+
+
+function saveAlternatives(question_id) {
+    for (let i = 1; i <= 5; i++) {
+        if ($("#alternative" + i).val() != "") {
+            $.ajax({
+                url: "http://127.0.0.1:3001/optioninsert",
+                type: 'POST',
+                async: false,
+                data: {
+                    weight: $("#alternativeweight" + i).val(),
+                    text: $("#alternative" + i).val(),
+                    question_id: question_id,
+                    position: i,
+                    axis_subdivision_id: findIDByName($('#critical-factors').val()),
+                    axis_id: getAxisIdFromName($('#axis-dropdown').val()),
+                    diagnosis_id: 1
+                }
+            });
+        }
+    }
+}
+
+function getAxisIdFromName(name) {
+    let id = null;
+    $.ajax({
+        url: "http://127.0.0.1:3001/axes",
+        type: 'GET',
+        async: false,
+        success: data => {
+            data.forEach(element => {
+                if (element['name'] === name) {
+                    id = element['id'];
+                }
+            });
+        }
+    });
+    return id;
+}
+
+
+$('#add-axis').click(function () {
+    
     if ($('#add-axis-span').is(":visible")) {
         $('#add-axis-span').hide();
     } else {
@@ -161,8 +206,31 @@ $('#save-axis').on('click', function (event) {
             position: 10,
         }
     });
+    $('#add-axis-input').val("");
+    $('#add-axis-span').hide();
     modal();
 });
+
+
+$('#save-subaxis').on('click', function (event) {
+    let subaxis_name = $('#add-subaxis-input').val();
+    $.ajax({
+        url: "http://127.0.0.1:3001/axissubdivisioninsert",
+        type: 'POST',
+        async: false,
+        data: {
+            name: subaxis_name,
+            axis_id: getAxisIdFromName($("#axis-dropdown").val()),
+            diagnosis_id: 2,
+            position: 10,
+        
+        }
+    });
+    $('#add-subaxis-input').val("");
+    $('#add-subaxis-span').hide();
+    modal();
+});
+
 
 function getAxisFromId(id) {
     var name = null;
