@@ -23,7 +23,6 @@ function modal() {
     $('#question').val("");
     $('#weight').val("");
     let axes = getAxes();
-    console.log(axes)
     document.getElementById('axis-dropdown').innerHTML = "<option value='' disabled selected>Escolher...</option>";
     axes.forEach(axis => {
         document.getElementById('axis-dropdown').innerHTML += `<option value="${axis['name']}">${axis['name']}</option>`
@@ -72,8 +71,7 @@ function saveQuestion() {
 }
 
 function saveQuestionChanges(question_id) {
-    console.log(lastQuestionPosition())
-    let position = lastQuestionPosition() + 10
+    let position = lastQuestionPosition()
     $.ajax({
         url: "http://127.0.0.1:3001/questionupdate",
         type: 'POST',
@@ -110,7 +108,6 @@ function getLastQuestionId() {
 }
 
 function getAxisIdFromName(name) {
-    console.log(name)
     let id = null;
     $.ajax({
         url: "http://127.0.0.1:3001/axes",
@@ -128,7 +125,6 @@ function getAxisIdFromName(name) {
 }
 let critical_factors = [];
 function getModalSubdivisions(axis_id) {
-    console.log("Axis id: " + axis_id)
     critical_factors = [];
     $.ajax({
         url: "http://127.0.0.1:3001/axissubdivisions",
@@ -142,13 +138,11 @@ function getModalSubdivisions(axis_id) {
             });
         }
     });
-    console.log(critical_factors)
     return critical_factors;
 }
 
 $("#axis-dropdown").change(function () {
     let subdivisions = getModalSubdivisions(getAxisIdFromName($("#axis-dropdown").val()));
-    console.log("SUBDIVISIONS: " + subdivisions)
     document.getElementById('critical-factors').innerHTML = "<option value='' disabled selected>Escolher...</option>";
     subdivisions.forEach(subdivision => {
         document.getElementById('critical-factors').innerHTML += `<option value="${subdivision}">${subdivision}</option>`
@@ -205,7 +199,6 @@ function saveAlternatives(question_id) {
 
 function saveAlternativeChanges(question_id) {
     original_alternatives = getAlternatives(question_id);
-    console.log(original_alternatives)
     for (let i = 1; i <= 5; i++) {
         if ($("#edit-alternative" + i).val() != "") {
             $.ajax({
@@ -514,7 +507,6 @@ function updateEditModal(question_id) {
     $("#edit-question").val(question['text']);
     $("#edit-weight").val(question['weight']);
     alternatives = getAlternatives(question['id']);
-    console.log(alternatives)
     let current_count = 1
     alternatives.forEach(alternative => {
         $('#edit-alternative' + current_count).val(alternative['text']);
