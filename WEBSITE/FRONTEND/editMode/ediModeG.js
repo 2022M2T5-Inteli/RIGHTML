@@ -231,7 +231,6 @@ $('#save-subaxis').on('click', function (event) {
     modal();
 });
 
-
 function getAxisFromId(id) {
     var name = null;
     $.ajax({
@@ -248,6 +247,7 @@ function getAxisFromId(id) {
     });
     return name;
 }
+
 
 let alternatives = [];
 
