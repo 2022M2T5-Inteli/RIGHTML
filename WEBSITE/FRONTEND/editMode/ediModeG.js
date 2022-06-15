@@ -200,10 +200,12 @@ $('#save-axis').on('click', function (event) {
         url: "http://127.0.0.1:3001/axisinsert",
         type: 'POST',
         async: false,
-        data: {
-            name: axis_name,
-            diagnosis_id: 1,
-            position: 10,
+        data:{ 
+        name: subaxis_name,
+        axis_id: getAxisIdFromName($("#axis-dropdown").val()),
+        diagnosis_id: 2,
+        position: 10,
+    
         }
     });
     $('#add-axis-input').val("");
@@ -211,23 +213,23 @@ $('#save-axis').on('click', function (event) {
     modal();
 });
 
-
-$('#save-subaxis').on('click', function (event) {
-    let subaxis_name = $('#add-subaxis-input').val();
+$('#add-domain-g').click(function() {
+    console.log("im saving")
+    let subaxis_name = $('#add-domain-input').val();
     $.ajax({
         url: "http://127.0.0.1:3001/axissubdivisioninsert",
         type: 'POST',
         async: false,
         data: {
             name: subaxis_name,
-            axis_id: getAxisIdFromName($("#axis-dropdown").val()),
+            axis_id: getAxisIdFromName($("#domain-dropdown").val()),
             diagnosis_id: 2,
             position: 10,
         
         }
     });
-    $('#add-subaxis-input').val("");
-    $('#add-subaxis-span').hide();
+    $('#add-domain-input').val("");
+    $('#add-domain-span').hide();
     modal();
 });
 

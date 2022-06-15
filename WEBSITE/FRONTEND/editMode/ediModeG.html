@@ -100,7 +100,7 @@
             <!-- Título do modal -->
             <h5 class="modal-title" id="exampleModalLabel">Adicionar pergunta</h5>
             <!-- Botão 'x' para fechar modal -->
-            <button type="button" class="btn-close" aria-label="Close"></button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
             <form id="form">
@@ -121,7 +121,7 @@
                 </button>
                 <span id="add-axis-span">
                   <input type="text" style="width:20%;" id="add-axis-input"></input>
-                  <button id="save-axis" type="button" class="add-axis-buttons" onclick="">
+                  <button id="save-axis" type="button" class="add-axis-buttons">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                       class="bi bi-check-square" viewBox="0 0 16 16">
                       <path
@@ -133,9 +133,30 @@
                 </span>
                 <br>
                 
-                <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Fator crítico</label>
-                <select class="custom-select my-1 mr-sm-2" id="critical-factors" name="critical-factors" >
+                <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Domínio</label>
+                <select class="custom-select my-1 mr-sm-2" id="dominio" name="dominio" >
                 </select>
+                <button id="add-domain-g" type="button" class="add-axis-buttons">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-plus-square" viewBox="0 0 16 16">
+                    <path
+                      d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
+                    <path
+                      d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                  </svg>
+                </button>
+                <span id="add-domain-span">
+                  <input type="text" style="width:20%;" id="add-domain-input"></input>
+                  <button id="save-domain" type="button" class="add-axis-buttons">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor">
+                      <path
+                        d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
+                      <path
+                        d="M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.235.235 0 0 1 .02-.022z" />
+                    </svg>
+                  </button>
+                </span>
+                <br>
                 <br>
                 <label for="question">Enunciado</label>
                 <div class="md-form">
@@ -180,7 +201,15 @@
               <div class="form-group">
                 <!-- Drop-down de eixo -->
                 <label class="my-1 mr-2" for="inlineFormCustomSelectPref"> Grande Eixo</label>
-                <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" name="axis">
+                <select class="custom-select my-1 mr-sm-2" id="axis-dropdown" name="axis">
+                  <option value="" selected>Escolher...</option>
+                  <option value="Ensino">Sistema de Gestão</option>
+                  <option value="Ensino">Gestão de Pessoas</option>
+                </select>
+               <!--Drop-down do domínio-->
+                <br>
+                <label class="my-1 mr-2" for="inlineFormCustomSelectPref"> Domínio</label>
+                <select class="custom-select my-1 mr-sm-2" id="domain-dropdown" name="domain">
                   <option value="" selected>Escolher...</option>
                   <option value="Ensino">Sistema de Gestão</option>
                   <option value="Ensino">Gestão de Pessoas</option>
@@ -267,7 +296,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
     crossorigin="anonymous"></script>
-  <script src="editMode.js"></script>
+  <script src="ediModeG.js"></script>
 
 </body>
 
