@@ -6,6 +6,18 @@ const questionsContainer = document.getElementById("questions-container");
 let currentEditModeQuestionIndex = null;
 
 function modal() {
+    $('#axis-dropdown').val('')
+    $('#critical-factors').val('')
+    $('#alternative1').val('')
+    $('#alternative2').val('')
+    $('#alternative3').val('')
+    $('#alternative4').val('')
+    $('#alternative5').val('')
+    $('#weight1').val('')
+    $('#weight2').val('')
+    $('#weight3').val('')
+    $('#weight4').val('')
+    $('#weight5').val('')
     $("#add-axis-span").hide();
     $("#add-subaxis-span").hide();
     $('#question').val("");
@@ -52,8 +64,6 @@ function saveQuestion() {
             axis_subdivision_id: findIDByName($('#critical-factors').val()),
             axis_id: getAxisIdFromName($('#axis-dropdown').val()),
             diagnosis_id: 1 
-<<<<<<< Updated upstream
-=======
         }
     });
     let lastId = getLastQuestionId()
@@ -62,23 +72,21 @@ function saveQuestion() {
 }
 
 function saveQuestionChanges() {
-    lastQuestionPosition();
+    position = lastQuestionPosition() + 1
     $.ajax({
         url: "http://127.0.0.1:3001/questionupdate",
         type: 'POST',
         async: false,
         data: {
-            weight: parseInt($("#weight").val()),
-            text: $("#question").val(),
-            position: highestPosition,
-            axis_subdivision_id: findIDByName($('#critical-factors').val()),
-            axis_id: getAxisIdFromName($('#axis-dropdown').val()),
+            id: question_id,
+            weight: parseInt($("#weight-edit").val()),
+            text: $("#question-edit").val(),
+            position: position,
+            axis_subdivision_id: findIDByName($('#critical-factors-edit').val()),
+            axis_id: getAxisIdFromName($('#axis-dropdow-edit').val()),
             diagnosis_id: 1 
->>>>>>> Stashed changes
         }
     });
-    let lastId = getLastQuestionId()
-    saveAlternatives(lastId);
     readQuestionsFromDatabase();
 }
 
