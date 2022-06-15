@@ -188,6 +188,7 @@ function getAxes() {
     return axes;
 }
 
+
 function getAxisIdFromName(name) {
     let id = null;
     $.ajax({
