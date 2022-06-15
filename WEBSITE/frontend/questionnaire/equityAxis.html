@@ -26,7 +26,7 @@
   <title>Agenda educacional</title>
 </head>
 
-<body onload="readQuestionsFromDatabase()" class="d-flex flex-column min-vh-100">
+<body onload="readQuestionsFromDatabase() " class="d-flex flex-column min-vh-100">
 
   <header>
     <!-- Navegação segundo classes do Bootstrap-->
@@ -62,9 +62,25 @@
       </div>
     </div>
 
+    <!--Essa div contem os todos os eixos das perguntas  --> 
+    <div id="testingAxis" class="dropdown" type="button">
+      <button class="btn btn-secondary dropdown-toggle"  type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+        Escolha seu eixo
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" id="testeDrop">
+
+      </ul>
+    </div>
+   
+
     <div id="questionsContainer" class="container-fluid">
       <div id="questionsPlaceholder"></div>
     </div>
+
+
+
+
+
 
     <div class='container' style="text-align:center;">
         <!--na função onclick se colocar window.location.href abre uma nova guia-->
