@@ -46,7 +46,7 @@ function lastQuestionPosition() {
         }
     });
     highestPosition += 1;
-    console.log("highest position: " + highestPosition)
+    return highestPosition;
 }
 
 
@@ -71,22 +71,24 @@ function saveQuestion() {
     readQuestionsFromDatabase();
 }
 
-function saveQuestionChanges() {
-    position = lastQuestionPosition() + 1
+function saveQuestionChanges(question_id) {
+    console.log(lastQuestionPosition())
+    let position = lastQuestionPosition() + 10
     $.ajax({
         url: "http://127.0.0.1:3001/questionupdate",
         type: 'POST',
         async: false,
         data: {
             id: question_id,
-            weight: parseInt($("#weight-edit").val()),
-            text: $("#question-edit").val(),
+            weight: parseInt($("#edit-weight").val()),
+            text: $("#edit-question").val(),
             position: position,
-            axis_subdivision_id: findIDByName($('#critical-factors-edit').val()),
-            axis_id: getAxisIdFromName($('#axis-dropdow-edit').val()),
+            axis_subdivision_id: findIDByName($('#edit-critical-factors').val()),
+            axis_id: getAxisIdFromName($('#edit-axis-dropdown').val()),
             diagnosis_id: 1 
         }
     });
+    saveAlternativeChanges(question_id);
     readQuestionsFromDatabase();
 }
 
@@ -194,6 +196,30 @@ function saveAlternatives(question_id) {
                     position: i,
                     axis_subdivision_id: findIDByName($('#critical-factors').val()),
                     axis_id: getAxisIdFromName($('#axis-dropdown').val()),
+                    diagnosis_id: 1
+                }
+            });
+        }
+    }
+}
+
+function saveAlternativeChanges(question_id) {
+    original_alternatives = getAlternatives(question_id);
+    console.log(original_alternatives)
+    for (let i = 1; i <= 5; i++) {
+        if ($("#edit-alternative" + i).val() != "") {
+            $.ajax({
+                url: "http://127.0.0.1:3001/optionupdate",
+                type: 'POST',
+                async: false,
+                data: {
+                    id: original_alternatives[i - 1]['id'],
+                    weight: $("#edit-alternativeweight" + i).val(),
+                    text: $("#edit-alternative" + i).val(),
+                    question_id: question_id,
+                    position: i,
+                    axis_subdivision_id: findIDByName($('#edit-critical-factors').val()),
+                    axis_id: getAxisIdFromName($('#edit-axis-dropdown').val()),
                     diagnosis_id: 1
                 }
             });
@@ -495,6 +521,8 @@ function updateEditModal(question_id) {
         $('#edit-alternativeweight' + current_count).val(alternative['weight']);
         current_count++;
     })
+    let buttonFunction = `saveQuestionChanges(${question_id})`;
+    $("#save-button").attr("onclick", buttonFunction);
 
 }
 
