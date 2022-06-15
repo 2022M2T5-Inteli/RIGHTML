@@ -23,7 +23,6 @@ function modal() {
     $('#question').val("");
     $('#weight').val("");
     let axes = getAxes();
-    console.log(axes)
     document.getElementById('axis-dropdown').innerHTML = "<option value='' disabled selected>Escolher...</option>";
     axes.forEach(axis => {
         document.getElementById('axis-dropdown').innerHTML += `<option value="${axis['name']}">${axis['name']}</option>`
@@ -46,7 +45,7 @@ function lastQuestionPosition() {
         }
     });
     highestPosition += 1;
-    console.log("highest position: " + highestPosition)
+    return highestPosition;
 }
 
 
@@ -71,22 +70,23 @@ function saveQuestion() {
     readQuestionsFromDatabase();
 }
 
-function saveQuestionChanges() {
-    position = lastQuestionPosition() + 1
+function saveQuestionChanges(question_id) {
+    let position = lastQuestionPosition()
     $.ajax({
         url: "http://127.0.0.1:3001/questionupdate",
         type: 'POST',
         async: false,
         data: {
             id: question_id,
-            weight: parseInt($("#weight-edit").val()),
-            text: $("#question-edit").val(),
+            weight: parseInt($("#edit-weight").val()),
+            text: $("#edit-question").val(),
             position: position,
-            axis_subdivision_id: findIDByName($('#critical-factors-edit').val()),
-            axis_id: getAxisIdFromName($('#axis-dropdow-edit').val()),
+            axis_subdivision_id: findIDByName($('#edit-critical-factors').val()),
+            axis_id: getAxisIdFromName($('#edit-axis-dropdown').val()),
             diagnosis_id: 1 
         }
     });
+    saveAlternativeChanges(question_id);
     readQuestionsFromDatabase();
 }
 
@@ -108,7 +108,6 @@ function getLastQuestionId() {
 }
 
 function getAxisIdFromName(name) {
-    console.log(name)
     let id = null;
     $.ajax({
         url: "http://127.0.0.1:3001/axes",
@@ -126,7 +125,6 @@ function getAxisIdFromName(name) {
 }
 let critical_factors = [];
 function getModalSubdivisions(axis_id) {
-    console.log("Axis id: " + axis_id)
     critical_factors = [];
     $.ajax({
         url: "http://127.0.0.1:3001/axissubdivisions",
@@ -140,13 +138,11 @@ function getModalSubdivisions(axis_id) {
             });
         }
     });
-    console.log(critical_factors)
     return critical_factors;
 }
 
 $("#axis-dropdown").change(function () {
     let subdivisions = getModalSubdivisions(getAxisIdFromName($("#axis-dropdown").val()));
-    console.log("SUBDIVISIONS: " + subdivisions)
     document.getElementById('critical-factors').innerHTML = "<option value='' disabled selected>Escolher...</option>";
     subdivisions.forEach(subdivision => {
         document.getElementById('critical-factors').innerHTML += `<option value="${subdivision}">${subdivision}</option>`
@@ -194,6 +190,29 @@ function saveAlternatives(question_id) {
                     position: i,
                     axis_subdivision_id: findIDByName($('#critical-factors').val()),
                     axis_id: getAxisIdFromName($('#axis-dropdown').val()),
+                    diagnosis_id: 1
+                }
+            });
+        }
+    }
+}
+
+function saveAlternativeChanges(question_id) {
+    original_alternatives = getAlternatives(question_id);
+    for (let i = 1; i <= 5; i++) {
+        if ($("#edit-alternative" + i).val() != "") {
+            $.ajax({
+                url: "http://127.0.0.1:3001/optionupdate",
+                type: 'POST',
+                async: false,
+                data: {
+                    id: original_alternatives[i - 1]['id'],
+                    weight: $("#edit-alternativeweight" + i).val(),
+                    text: $("#edit-alternative" + i).val(),
+                    question_id: question_id,
+                    position: i,
+                    axis_subdivision_id: findIDByName($('#edit-critical-factors').val()),
+                    axis_id: getAxisIdFromName($('#edit-axis-dropdown').val()),
                     diagnosis_id: 1
                 }
             });
@@ -488,13 +507,14 @@ function updateEditModal(question_id) {
     $("#edit-question").val(question['text']);
     $("#edit-weight").val(question['weight']);
     alternatives = getAlternatives(question['id']);
-    console.log(alternatives)
     let current_count = 1
     alternatives.forEach(alternative => {
         $('#edit-alternative' + current_count).val(alternative['text']);
         $('#edit-alternativeweight' + current_count).val(alternative['weight']);
         current_count++;
     })
+    let buttonFunction = `saveQuestionChanges(${question_id})`;
+    $("#save-button").attr("onclick", buttonFunction);
 
 }
 

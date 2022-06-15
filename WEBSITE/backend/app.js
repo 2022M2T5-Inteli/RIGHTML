@@ -649,7 +649,7 @@ app.post('/optionupdate', urlencodedParser, (req, res) => {
 	res.statusCode = 200;
 	res.setHeader('Access-Control-Allow-Origin', '*'); 
 	sql = "UPDATE option SET text = '" + req.body.text + "', weight = '" + req.body.weight + 
-	"', position = '" + req.body.position + "', question_id =" + req.body.question_id + 
+	"', position = '" + req.body.position + "', question_id = '" + req.body.question_id + 
 	"', axis_subdivision_id = '" + req.body.axis_subdivision_id + "', axis_id = '" + 
 	req.body.axis_id + "', diagnosis_id = '" + req.body.diagnosis_id + "' WHERE id = '" + 
 	req.body.id + "'";
