@@ -515,7 +515,7 @@ function updateEditModal(question_id) {
     })
     let buttonFunction = `saveQuestionChanges(${question_id})`;
     $("#save-button").attr("onclick", buttonFunction);
-
+   console.log("ok")
 }
 
 
