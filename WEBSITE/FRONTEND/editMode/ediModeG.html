@@ -172,13 +172,14 @@
                     <input id="alternative1" style='float:left;width:70%;' type="text" name="alternative1"
                       class="form-control alternatives" placeholder="Resposta...">
                     <input id="alternativeweight1" style='float:right;width:30%;' type="text"
-                      name="alternativeweight1" class="form-control alternatives" placeholder="Peso">
+                      name="alternativeweight1" class="form-control alternatives" placeholder="Peso1" 
+                      name="Peso1weight1" class="form-control weights" >
                   </span>
                   <span>
                     <input id="alternative2" style='float:left;width:70%;' type="text" name="alternative2"
                       class="form-control alternatives" placeholder="Resposta...">
                     <input id="alternativeweight2" style='float:right;width:30%;' type="text"
-                      name="alternativeweight1" class="form-control alternatives" placeholder="Peso">
+                      name="alternativeweight1" class="form-control alternatives" placeholder="Peso2">
                   </span>
                   <span>
                     <input id="alternative3" style='float:left;width:70%;' type="text" name="alternative3"
@@ -212,69 +213,126 @@
       </div>
     </div>
 
-    <!-- Modal para edição de perguntas já existentes -->
-    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-scrollable">
-        <div class="modal-content">
-          <div class="modal-header">
-            <!-- Título do modal -->
-            <h5 class="modal-title" id="editModalLabel">Editar pergunta</h5>
-            <!-- Botão 'x' para fechar o modal -->
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+<!-- Modal para edição de perguntas já existentes -->
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <!-- Título do modal -->
+        <h5 class="modal-title" id="editModalLabel">Editar pergunta</h5>
+        <!-- Botão 'x' para fechar o modal -->
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="editForm">
+          <div class="form-group">
+            <label class="my-1 mr-2" for="edit-axis-dropdown">Eixo</label>
+            <select class="custom-select my-1 mr-sm-2" id="edit-axis-dropdown" name="axis">
+            </select>
+
+            <button id="edit-add-axis" type="button" class="add-axis-buttons">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                class="bi bi-plus-square" viewBox="0 0 16 16">
+                <path
+                  d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
+                <path
+                  d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+              </svg>
+            </button>
+            <span id="edit-add-axis-span">
+              <input type="text" style="width:20%;" id="edit-add-axis-input"></input>
+              <button id="edit-save-axis" type="button" class="add-axis-buttons">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                  class="bi bi-check-square" viewBox="0 0 16 16">
+                  <path
+                    d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
+                  <path
+                    d="M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.235.235 0 0 1 .02-.022z" />
+                </svg>
+              </button>
+            </span>
+            <br>
+
+            <label class="my-1 mr-2" for="edit-critical-factors">Fator crítico</label>
+            <select class="custom-select my-1 mr-sm-2" id="edit-critical-factors" name="edit-critical-factors">
+            </select>
+            <button id="edit-add-subaxis" type="button" class="add-axis-buttons">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                class="bi bi-plus-square" viewBox="0 0 16 16">
+                <path
+                  d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
+                <path
+                  d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+              </svg>
+            </button>
+            <span id="edit-add-subaxis-span">
+              <input type="text" style="width:20%;" id="edit-add-subaxis-input"></input>
+              <button id="edit-save-subaxis" type="button" class="add-axis-buttons">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                  class="bi bi-check-square" viewBox="0 0 16 16">
+                  <path
+                    d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
+                  <path
+                    d="M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.235.235 0 0 1 .02-.022z" />
+                </svg>
+              </button>
+            </span>
+            <br>
+            <!-- Área para enunciado -->
+            <label for="question">Enunciado</label>
+            <div class="md-form">
+              <textarea name="question" id="edit-question" class="md-textarea form-control" rows="3"></textarea>
+            </div>
+            <label for="weight">Peso:</label>
+            <input name="weight" id="edit-weight"></input>
           </div>
-          <div class="modal-body">
-            <form id="editForm">
-              <div class="form-group">
-                <!-- Drop-down de eixo -->
-                <label class="my-1 mr-2" for="inlineFormCustomSelectPref"> Grande Eixo</label>
-                <select class="custom-select my-1 mr-sm-2" id="axis-dropdown" name="axis">
-                  <option value="" selected>Escolher...</option>
-                  <option value="Ensino">Sistema de Gestão</option>
-                  <option value="Ensino">Gestão de Pessoas</option>
-                </select>
-               <!--Drop-down do domínio-->
-                <br>
-                <label class="my-1 mr-2" for="inlineFormCustomSelectPref"> Domínio</label>
-                <select class="custom-select my-1 mr-sm-2" id="domain-dropdown" name="domain">
-                  <option value="" selected>Escolher...</option>
-                  <option value="Ensino">Sistema de Gestão</option>
-                  <option value="Ensino">Gestão de Pessoas</option>
-                </select>
-                <br>
-                <!-- Área para enunciado -->
-                <label for="question">Enunciado</label>
-                <div class="md-form">
-                  <textarea name="question" id="form7" class="md-textarea form-control" rows="3"></textarea>
-                </div>
-              </div>
-              <div class="form-group">
-                <!-- Áreas para as alternativas -->
-                <label for="alternatives">Alternativas:</label>
-                <div class="form-group" id="editableAlternatives">
-                  <input type="text" name="alternative1" class="form-control editableAlternatives"
-                    placeholder="Resposta...">
-                  <input type="text" name="alternative2" class="form-control editableAlternatives"
-                    placeholder="Resposta...">
-                  <input type="text" name="alternative3" class="form-control editableAlternatives"
-                    placeholder="Resposta...">
-                  <input type="text" name="alternative4" class="form-control editableAlternatives"
-                    placeholder="Resposta...">
-                  <input type="text" name="alternative5" class="form-control editableAlternatives"
-                    placeholder="Resposta...">
-                </div>
-              </div>
-            </form>
+          <div class="form-group">
+            <label for="alternatives">Alternativas:</label>
+            <div class="form-group" id="alternatives">
+              <span>
+                <input id="edit-alternative1" style='float:left;width:70%;' type="text" name="alternative1"
+                  class="form-control alternatives" placeholder="Resposta...">
+                <input id="edit-alternativeweight1" style='float:right;width:30%;' type="text"
+                  name="alternativeweight1" class="form-control alternatives" placeholder="Peso">
+              </span>
+              <span>
+                <input id="edit-alternative2" style='float:left;width:70%;' type="text" name="alternative1"
+                  class="form-control alternatives" placeholder="Resposta...">
+                <input id="edit-alternativeweight2" style='float:right;width:30%;' type="text"
+                  name="alternativeweight1" class="form-control alternatives" placeholder="Peso">
+              </span>
+              <span>
+                <input id="edit-alternative3" style='float:left;width:70%;' type="text" name="alternative1"
+                  class="form-control alternatives" placeholder="Resposta...">
+                <input id="edit-alternativeweight3" style='float:right;width:30%;' type="text"
+                  name="alternativeweight1" class="form-control alternatives" placeholder="Peso">
+              </span>
+              <span>
+                <input id="edit-alternative4" style='float:left;width:70%;' type="text" name="alternative1"
+                  class="form-control alternatives" placeholder="Resposta...">
+                <input id="edit-alternativeweight4" style='float:right;width:30%;' type="text"
+                  name="alternativeweight1" class="form-control alternatives" placeholder="Peso">
+              </span>
+              <span>
+                <input id="edit-alternative5" style='float:left;width:70%;' type="text" name="alternative1"
+                  class="form-control alternatives" placeholder="Resposta...">
+                <input id="edit-alternativeweight5" style='float:right;width:30%;' type="text"
+                  name="alternativeweight1" class="form-control alternatives" placeholder="Peso">
+              </span>
+            </div>
           </div>
-          <!-- Botões -->
-          <div class="modal-footer">
-            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Fechar</button>
-            <!-- Botão de salvar inicia função que aplica as mudanças -->
-            <button type="button" class="btn btn-primary" onclick="applyQuestionChanges()"
-              data-bs-dismiss="modal">Salvar</button>
-          </div>
-        </div>
+        </form>
+      </div>
+      <!-- Botões -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Fechar</button>
+        <!-- Botão de salvar inicia função que aplica as mudanças -->
+        <button type="button" class="btn btn-primary" onclick="saveQuestionChanges()" data-bs-dismiss="modal"
+          id="save-button">Salvar</button>
       </div>
     </div>
+  </div>
+</div>
 
     <!-- Contêiner para as perguntas, se existirem. Senão, o placeholder aparece. -->
     <div id="questions-container" class="container-fluid">
@@ -300,15 +358,13 @@
           </svg></a>
         <!-- Linkedin -->
         <a class="social-media-icons" href="https://www.linkedin.com/company/falconi-oficial/?originalSubdomain=br"
-          target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-            class="bi bi-linkedin" viewBox="0 0 16 16">
+          target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-linkedin" viewBox="0 0 16 16">
             <path
               d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z" />
           </svg></a>
         <!-- Facebook -->
         <a class="social-media-icons" href="https://www.facebook.com/FalconiOficial/" target="_blank"><svg
-            xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-facebook"
-            viewBox="0 0 16 16">
+            xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
             <path
               d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z" />
           </svg></a>
