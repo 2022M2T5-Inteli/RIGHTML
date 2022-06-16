@@ -38,6 +38,30 @@ function readQuestionsFromDatabase() {
 }
 
 let alternatives = [];
+let axisName = []
+//essa função coloca todos os eixos no dropdown
+function readQuestionsFromDatabase(name) {
+    $.ajax({
+        url: "http://127.0.0.1:3001/axes",
+        type: 'GET',
+        success: data => {
+                data.forEach(element => {
+                    axisName.push(element)
+                    testeDrop.innerHTML += `
+                    <div id="${element['name']}" >
+                            <div class="dropdown-item" aria-labelledby="dropdownMenuButton1">
+                                <a>${element['name']}</a>
+                            </div>`
+                        
+                        })
+                    }        
+                });
+        console.log(name)
+            
+        };
+
+
+
 
 function getAlternatives(question_id) {
     alternatives = [];

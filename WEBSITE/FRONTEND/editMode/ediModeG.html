@@ -106,7 +106,7 @@
             <form id="form">
               <div class="form-group">
 
-                <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Grande Eixo</label>
+                <label class="my-1 mr-2" for="axis">Grande Eixo</label>
                 <select class="custom-select my-1 mr-sm-2" id="axis-dropdown" name="axis" >
                 </select>
 
@@ -133,10 +133,10 @@
                 </span>
                 <br>
                 
-                <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Domínio</label>
-                <select class="custom-select my-1 mr-sm-2" id="dominio" name="dominio" >
+                <label class="my-1 mr-2" for="domain">Domínio</label>
+                <select class="custom-select my-1 mr-sm-2" id="domain" name="domain" >
                 </select>
-                <button id="add-domain-g" type="button" class="add-axis-buttons">
+                <button id="add-domain" type="button" class="add-axis-buttons">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                     class="bi bi-plus-square" viewBox="0 0 16 16">
                     <path
@@ -168,15 +168,41 @@
               <div class="form-group">
                 <label for="alternatives">Alternativas:</label>
                 <div class="form-group" id="alternatives">
-                  <input type="text" name="alternative1" class="form-control alternatives" placeholder="Resposta...">
-                  <input type="text" name="alternative2" class="form-control alternatives" placeholder="Resposta...">
-                  <input type="text" name="alternative3" class="form-control alternatives" placeholder="Resposta...">
-                  <input type="text" name="alternative4" class="form-control alternatives" placeholder="Resposta...">
-                  <input type="text" name="alternative5" class="form-control alternatives" placeholder="Resposta...">
+                  <span>
+                    <input id="alternative1" style='float:left;width:70%;' type="text" name="alternative1"
+                      class="form-control alternatives" placeholder="Resposta...">
+                    <input id="alternativeweight1" style='float:right;width:30%;' type="text"
+                      name="alternativeweight1" class="form-control alternatives" placeholder="Peso">
+                  </span>
+                  <span>
+                    <input id="alternative2" style='float:left;width:70%;' type="text" name="alternative2"
+                      class="form-control alternatives" placeholder="Resposta...">
+                    <input id="alternativeweight2" style='float:right;width:30%;' type="text"
+                      name="alternativeweight1" class="form-control alternatives" placeholder="Peso">
+                  </span>
+                  <span>
+                    <input id="alternative3" style='float:left;width:70%;' type="text" name="alternative3"
+                      class="form-control alternatives" placeholder="Resposta...">
+                    <input id="alternativeweight3" style='float:right;width:30%;' type="text"
+                      name="alternativeweight1" class="form-control alternatives" placeholder="Peso">
+                  </span>
+                  <span>
+                    <input id="alternative4" style='float:left;width:70%;' type="text" name="alternative4"
+                      class="form-control alternatives" placeholder="Resposta...">
+                    <input id="alternativeweight4" style='float:right;width:30%;' type="text"
+                      name="alternativeweight1" class="form-control alternatives" placeholder="Peso">
+                  </span>
+                  <span>
+                    <input id="alternative5" style='float:left;width:70%;' type="text" name="alternative5"
+                      class="form-control alternatives" placeholder="Resposta...">
+                    <input id="alternativeweight5" style='float:right;width:30%;' type="text"
+                      name="alternativeweight1" class="form-control alternatives" placeholder="Peso">
+                  </span>
                 </div>
               </div>
             </form>
           </div>
+
           <div class="modal-footer">
             <button type="button" class="btn btn-light" data-bs-dismiss="modal">Fechar</button>
             <button type="button" class="btn btn-primary" onclick="saveQuestion()"
