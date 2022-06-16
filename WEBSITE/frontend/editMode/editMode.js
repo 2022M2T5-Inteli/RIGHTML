@@ -48,8 +48,6 @@ function lastQuestionPosition() {
     return highestPosition;
 }
 
-
-
 function saveQuestion() {
     lastQuestionPosition();
     $.ajax({
@@ -62,7 +60,7 @@ function saveQuestion() {
             position: highestPosition,
             axis_subdivision_id: findIDByName($('#critical-factors').val()),
             axis_id: getAxisIdFromName($('#axis-dropdown').val()),
-            diagnosis_id: 1 
+            diagnosis_id: 1
         }
     });
     let lastId = getLastQuestionId()
@@ -83,7 +81,7 @@ function saveQuestionChanges(question_id) {
             position: position,
             axis_subdivision_id: findIDByName($('#edit-critical-factors').val()),
             axis_id: getAxisIdFromName($('#edit-axis-dropdown').val()),
-            diagnosis_id: 1 
+            diagnosis_id: 1
         }
     });
     saveAlternativeChanges(question_id);
@@ -418,7 +416,68 @@ function deleteQuestion(question_id) {
     readQuestionsFromDatabase();
 }
 
+function getQuestionsByAxis() {
+    let axes = getAxes();
+    const questions = {};
+    axes.forEach(axis => {
+        questions[axis['id']] = []
+    });
+
+    $.ajax({
+        //url do endpoint
+        url: "http://127.0.0.1:3001/questions",
+        //tipo da requisição
+        type: 'GET',
+        //se obtiver sucesso, executar a arrow function abaixo
+        success: data => {
+            //se não tiver questão no banco de dados, retorna um div do html com esse texto
+            if (data.length == 0) {
+            }
+            //se tiver questão, limpa o questionsContainer
+            else {
+                data.forEach(question => {
+                    if (question['axis_id'] in questions) {
+                        questions[question['axis_id']].push(question);
+                    }
+                })
+            }      //forEach faz loop que vai passar por cada elemento dentro do data
+        }
+    });
+    return questions;
+}
+
+function showQuestionsByAxis() {
+    let axesWithQuestions = getQuestionsByAxis();
+    console.log(axesWithQuestions)
+    console.log(axesWithQuestions['1'][0])
+    Object.entries(axesWithQuestions).forEach(axis => {
+        document.getElementById("questions-container-test").innerHTML += `<div class="accordion" id="${axis}Accordion">
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingOne">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#my${axis}" aria-expanded="true" aria-controls="my${axis}">
+                ${getAxisFromId(axis)}
+            </button>
+          </h2>
+          <div id="my${axis}" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+            <div class="accordion-body" id="${axis}-body">
+            </div>
+          </div>
+          </div>`
+        let questionArray = axis[1];
+        for (let i = 0; i < questionArray.length; i++) {
+            console.log("im insde")
+            console.log(questionArray[i])
+        }
+        questionArray.forEach(question => {
+            console.log(question['text'])
+            document.getElementById(`${axis}-body`).innerHTML += question;
+        })
+    })
+
+}
+
 function readQuestionsFromDatabase() {
+    showQuestionsByAxis();
     $.ajax({
         //url do endpoint
         url: "http://127.0.0.1:3001/questions",
