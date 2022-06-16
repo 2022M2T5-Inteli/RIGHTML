@@ -99,6 +99,7 @@ function saveQuestion() {
 
 function saveAlternatives(question_id) {
     for (let i = 1; i <= 5; i++) {
+        console.log($("#alternative" + i).val())
         if ($("#alternative" + i).val() != "") {
             $.ajax({
                 url: "http://127.0.0.1:3001/optioninsert",
@@ -158,6 +159,33 @@ function saveQuestionChanges(question_id) {
     readQuestionsFromDatabase();
 }
 
+function saveAlternativeChanges(question_id) {
+    let original_alternatives = getAlternatives(question_id);
+    console.log(original_alternatives)
+    for (let i = 1; i <= 5; i++) {
+        if ($("#edit-alternative" + i).val() != "") {
+            $.ajax({
+                url: "http://127.0.0.1:3001/optionupdate",
+                type: 'POST',
+                async: false,
+                data: {
+                    id: original_alternatives[i - 1]['id'],
+                    weight: $("#edit-alternativeweight" + i).val(),
+                    text: $("#edit-alternative" + i).val(),
+                    question_id: question_id,
+                    position: i,
+                    axis_subdivision_id: findIDByName($('#edit-domains').val()),
+                    axis_id: getAxisIdFromName($('#edit-axis-dropdown').val()),
+                    diagnosis_id: 1
+                }
+            });
+        }
+    }
+}
+
+    function saveNewAlternative(){
+        
+    }
 let critical_factors = [];
 function getModalSubdivisions() {
     critical_factors = [];
@@ -203,28 +231,6 @@ function findIDByName(name) {
     })
     return id;
 
-}
-
-
-function saveAlternatives(question_id) {
-    for (let i = 1; i <= 5; i++) {
-        if ($("#alternatives" + i).val() != "") {
-            $.ajax({
-                url: "http://127.0.0.1:3001/optioninsert",
-                type: 'POST',
-                async: false,
-                data: {
-                    weight: $("#alternativeweight" + i).val(),
-                    text: $("#alternative" + i).val(),
-                    question_id: question_id,
-                    position: i,
-                    axis_subdivision_id: findIDByName($('#critical-factors').val()),
-                    axis_id: getAxisIdFromName($('#axis-dropdown').val()),
-                    diagnosis_id: 1
-                }
-            });
-        }
-    }
 }
 
 function getAxisIdFromName(name) {
@@ -404,7 +410,7 @@ function readQuestionsFromDatabase() {
                         questionsContainer.innerHTML +=
                             `<div class="form-check">
                 <input class="form-check-input" type="radio" name="question${element['position']}" id="flexRadioDefault1">
-                <label class="form-check-label" for="flexRadioDefault1">${alternative}</label>
+                <label class="form-check-label" for="flexRadioDefault1">${alternative['text']}</label>
                 </div>`
                     })
                 });
