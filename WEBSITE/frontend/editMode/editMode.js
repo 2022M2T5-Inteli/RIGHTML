@@ -1,32 +1,52 @@
+// Carregar questões ao carregar a página
 function onload() {
     readQuestionsFromDatabase();
 }
 
-const questionsContainer = document.getElementById("questions-container");
-let currentEditModeQuestionIndex = null;
-
-function modal() {
+// Reinicia modal de adicionar questões
+function addModal() {
+    // Deixa dropdowns em branco
     $('#axis-dropdown').val('')
     $('#critical-factors').val('')
+
+    // Deixa alternativas em branco
     $('#alternative1').val('')
     $('#alternative2').val('')
     $('#alternative3').val('')
     $('#alternative4').val('')
     $('#alternative5').val('')
+
+    // Deixa pesos em branco
+    $('#weight').val('');
     $('#weight1').val('')
     $('#weight2').val('')
     $('#weight3').val('')
     $('#weight4').val('')
     $('#weight5').val('')
+
+    // Deixar campo de enunciado em branco
+    $("#question").val('');
+
+    // Esconde botão de deletar eixo subeixo e campos de adicionar eixo e subeixo
+    $("#delete-axis").hide();
+    $("#delete-subaxis").hide();
     $("#add-axis-span").hide();
     $("#add-subaxis-span").hide();
-    $('#question').val("");
-    $('#weight').val("");
+    updateAddModalDropdowns();
+
+}
+
+// Atualiza dropdowns do modal de adicionar questão
+function updateAddModalDropdowns() {
     let axes = getAxes();
     document.getElementById('axis-dropdown').innerHTML = "<option value='' disabled selected>Escolher...</option>";
     axes.forEach(axis => {
         document.getElementById('axis-dropdown').innerHTML += `<option value="${axis['name']}">${axis['name']}</option>`
     })
+    document.getElementById('critical-factors').innerHTML = "<option value='' disabled selected>Escolher...</option>";
+
+
+
 }
 
 var highestPosition = 0;
@@ -48,24 +68,32 @@ function lastQuestionPosition() {
     return highestPosition;
 }
 
+// Salva nova questão no modal de adicionar questões
 function saveQuestion() {
-    lastQuestionPosition();
-    $.ajax({
-        url: "http://127.0.0.1:3001/questioninsert",
-        type: 'POST',
-        async: false,
-        data: {
-            weight: parseInt($("#weight").val()),
-            text: $("#question").val(),
-            position: highestPosition,
-            axis_subdivision_id: findIDByName($('#critical-factors').val()),
-            axis_id: getAxisIdFromName($('#axis-dropdown').val()),
-            diagnosis_id: 1
-        }
-    });
-    let lastId = getLastQuestionId()
-    saveAlternatives(lastId);
-    readQuestionsFromDatabase();
+    console.log("axis dropdown = " + $('#axis-dropdown').val())
+    if ($('#axis-dropdown').val() === null || $('#critical-factors').val() === null) {
+        alert("Escolha um eixo e fator crítico para adicionar a questão.");
+    } else {
+        lastQuestionPosition();
+        $.ajax({
+            url: "http://127.0.0.1:3001/questioninsert",
+            type: 'POST',
+            async: false,
+            data: {
+                weight: parseInt($("#weight").val()),
+                text: $("#question").val(),
+                position: highestPosition,
+                axis_subdivision_id: findSubdivisionIDFromName($('#critical-factors').val()),
+                axis_id: getAxisIdFromName($('#axis-dropdown').val()),
+                diagnosis_id: 1
+            }
+        });
+        let lastId = getLastQuestionId()
+        saveAlternatives(lastId);
+        readQuestionsFromDatabase();
+        $('#addModal').modal('toggle');
+
+    }
 }
 
 function saveQuestionChanges(question_id) {
@@ -79,7 +107,7 @@ function saveQuestionChanges(question_id) {
             weight: parseInt($("#edit-weight").val()),
             text: $("#edit-question").val(),
             position: position,
-            axis_subdivision_id: findIDByName($('#edit-critical-factors').val()),
+            axis_subdivision_id: findSubdivisionIDFromName($('#edit-critical-factors').val()),
             axis_id: getAxisIdFromName($('#edit-axis-dropdown').val()),
             diagnosis_id: 1
         }
@@ -122,8 +150,9 @@ function getAxisIdFromName(name) {
     return id;
 }
 let critical_factors = [];
-function getModalSubdivisions(axis_id) {
-    critical_factors = [];
+
+function getSubdivisionsFromAxisId(axis_id) {
+    subdivisions = [];
     $.ajax({
         url: "http://127.0.0.1:3001/axissubdivisions",
         type: 'GET',
@@ -131,24 +160,38 @@ function getModalSubdivisions(axis_id) {
         success: data => {
             data.forEach(element => {
                 if (parseInt(axis_id) === (element['axis_id'])) {
-                    critical_factors.push(element['name'])
+                    subdivisions.push(element)
                 }
             });
         }
     });
-    return critical_factors;
+    return subdivisions;
 }
 
 $("#axis-dropdown").change(function () {
-    let subdivisions = getModalSubdivisions(getAxisIdFromName($("#axis-dropdown").val()));
-    document.getElementById('critical-factors').innerHTML = "<option value='' disabled selected>Escolher...</option>";
-    subdivisions.forEach(subdivision => {
-        document.getElementById('critical-factors').innerHTML += `<option value="${subdivision}">${subdivision}</option>`
-    })
+    if ($("#axis-dropdown").val() === "") {
+        $("#delete-axis").hide();
+    } else {
+        $("#delete-axis").show();
+        let subdivisions = getSubdivisionsFromAxisId(getAxisIdFromName($("#axis-dropdown").val()));
+        document.getElementById('critical-factors').innerHTML = "<option value='' disabled selected>Escolher...</option>";
+        subdivisions.forEach(subdivision => {
+            document.getElementById('critical-factors').innerHTML += `<option value="${subdivision['name']}">${subdivision['name']}</option>`
+        })
+    }
+});
+
+
+$("#critical-factors").change(function () {
+    if ($("#critical-factor").val() === "") {
+        $("#delete-subaxis").hide();
+    } else {
+        $("#delete-subaxis").show();
+    }
 });
 
 $("#edit-axis-dropdown").change(function () {
-    let subdivisions = getModalSubdivisions(getAxisIdFromName($("#edit-axis-dropdown").val()));
+    let subdivisions = getSubdivisionsFromAxisId(getAxisIdFromName($("#edit-axis-dropdown").val()));
     document.getElementById('edit-critical-factors').innerHTML = "<option value='' disabled selected>Escolher...</option>";
     subdivisions.forEach(subdivision => {
         document.getElementById('edit-critical-factors').innerHTML += `<option value="${subdivision}">${subdivision}</option>`
@@ -156,7 +199,7 @@ $("#edit-axis-dropdown").change(function () {
 });
 
 
-function findIDByName(name) {
+function findSubdivisionIDFromName(name) {
     let id = ''
     $.ajax({
         url: "http://127.0.0.1:3001/axissubdivisions",
@@ -186,7 +229,7 @@ function saveAlternatives(question_id) {
                     text: $("#alternative" + i).val(),
                     question_id: question_id,
                     position: i,
-                    axis_subdivision_id: findIDByName($('#critical-factors').val()),
+                    axis_subdivision_id: findSubdivisionIDFromName($('#critical-factors').val()),
                     axis_id: getAxisIdFromName($('#axis-dropdown').val()),
                     diagnosis_id: 1
                 }
@@ -209,7 +252,7 @@ function saveAlternativeChanges(question_id) {
                     text: $("#edit-alternative" + i).val(),
                     question_id: question_id,
                     position: i,
-                    axis_subdivision_id: findIDByName($('#edit-critical-factors').val()),
+                    axis_subdivision_id: findSubdivisionIDFromName($('#edit-critical-factors').val()),
                     axis_id: getAxisIdFromName($('#edit-axis-dropdown').val()),
                     diagnosis_id: 1
                 }
@@ -261,6 +304,81 @@ $('#add-axis').on('click', function (event) {
     }
 });
 
+function deleteAxis(axis_id) {
+    if (confirm("Tem certeza que deseja deletar este eixo? Todos os subeixos e questões associados também serão deletados.")) {
+        if ($('#axis-dropdown').val() != '') {
+            let questions = getAllQuestionsFromAxis(axis_id);
+            questions.forEach(question => {
+                deleteQuestion(question['id']);
+            });
+            let subaxes = getSubdivisionsFromAxisId(axis_id);
+            subaxes.forEach(subaxis => {
+                deleteSubaxis(subaxis['id'])
+            })
+            $.ajax({
+                url: "http://127.0.0.1:3001/axisdelete",
+                type: 'POST',
+                async: false,
+                data: {
+                    id: axis_id
+                }
+            });
+
+
+        }
+    }
+
+}
+
+
+
+$('#delete-axis').on('click', function (event) {
+    let axis_id = getAxisIdFromName($("#axis-dropdown").val());
+    deleteAxis(axis_id)
+    readQuestionsFromDatabase();
+    updateAddModalDropdowns();
+    $("#critical-factors").val("");
+    document.getElementById('critical-factors').innerHTML = "<option value='' disabled selected>Escolher...</option>";
+    $('#delete-axis').hide();
+});
+
+
+$('#delete-subaxis').on('click', function (event) {
+    if ($("#critical-factors").val() != '') {
+        let currentAxis = $("#axis-dropdown").val();
+        let subaxis_id = getSubaxisIdFromName($("#critical-factors").val());
+        let questions = getQuestionsFromSubaxis(subaxis_id);
+        questions.forEach(question => {
+            deleteQuestion(question['id']);
+        })
+        deleteSubaxis(subaxis_id)
+        readQuestionsFromDatabase();
+        updateAddModalDropdowns();
+        $("#axis-dropdown").val(currentAxis);
+        $("#critical-factors").val("");
+
+        document.getElementById('critical-factors').innerHTML = "<option value='' disabled selected>Escolher...</option>";
+    } else {
+        alert("Selecione um eixo no dropdown para deletá-lo.")
+    }
+});
+
+function deleteSubaxis(subaxis_id) {
+    $.ajax({
+        url: "http://127.0.0.1:3001/axissubdivisiondelete",
+        type: 'POST',
+        async: false,
+        data: {
+            id: subaxis_id
+        }
+    });
+}
+
+$('#delete-subaxis').on('click', function (event) {
+    let subaxis_id = getSubaxisIdFromName($("#critical-factors").val())
+    deleteSubaxis(subaxis_id)
+});
+
 $('#edit-add-axis').on('click', function (event) {
     if ($('#edit-add-axis-span').is(":visible")) {
         $('#edit-add-axis-span').hide();
@@ -283,7 +401,9 @@ $('#save-axis').on('click', function (event) {
     });
     $('#add-axis-input').val("");
     $('#add-axis-span').hide();
-    modal();
+    updateAddModalDropdowns();
+    $('#axis-dropdown').val(axis_name)
+    $('#delete-axis').show();
 });
 
 $('#edit-save-axis').on('click', function (event) {
@@ -300,7 +420,7 @@ $('#edit-save-axis').on('click', function (event) {
     });
     $('#edit-add-axis-input').val("");
     $('#edit-add-axis-span').hide();
-    modal();
+    addModal();
 });
 
 $('#add-subaxis').on('click', function (event) {
@@ -319,7 +439,31 @@ $('#edit-add-subaxis').on('click', function (event) {
     }
 });
 
+function getSubaxisIdFromName(name) {
+    console.log("subaxis name: " + name)
+    let id = -1;
+    $.ajax({
+        url: "http://127.0.0.1:3001/axissubdivisions",
+        type: 'GET',
+        async: false,
+        success: data => {
+            data.forEach(subaxis => {
+                console.log("this subaxis: " + subaxis)
+                if (name === subaxis['name']) {
+                    id = subaxis['id']
+                }
+            });
+        }
+    });
+    return id
+
+}
+
 $('#save-subaxis').on('click', function (event) {
+    let axis = $("#axis-dropdown").val();
+    if ($("#axis-dropdown").val() === '' || $("#axis-dropdown").val() === null) {
+        return alert("Selecione um eixo para adicionar um fator crítico");
+    }
     let subaxis_name = $('#add-subaxis-input').val();
     $.ajax({
         url: "http://127.0.0.1:3001/axissubdivisioninsert",
@@ -327,14 +471,21 @@ $('#save-subaxis').on('click', function (event) {
         async: false,
         data: {
             name: subaxis_name,
-            axis_id: getAxisIdFromName($("#axis-dropdown").val()),
+            axis_id: getAxisIdFromName(axis),
             diagnosis_id: 1,
             position: 10,
         }
     });
     $('#add-subaxis-input').val("");
     $('#add-subaxis-span').hide();
-    modal();
+    let subdivisions = getSubdivisionsFromAxisId(getAxisIdFromName(axis));
+    document.getElementById('critical-factors').innerHTML = "<option value='' disabled selected>Escolher...</option>";
+    subdivisions.forEach(subdivision => {
+        document.getElementById('critical-factors').innerHTML += `<option value="${subdivision['name']}">${subdivision['name']}</option>`
+    })
+    $('#critical-factors').val(subaxis_name)
+    $('#axis-dropdown').val(axis)
+    $('#delete-subaxis').show();
 });
 
 $('#edit-save-subaxis').on('click', function (event) {
@@ -416,6 +567,30 @@ function deleteQuestion(question_id) {
     readQuestionsFromDatabase();
 }
 
+function getQuestionsFromSubaxis(subaxis_id) {
+    let questions = [];
+    $.ajax({
+        //url do endpoint
+        url: "http://127.0.0.1:3001/questions",
+        //tipo da requisição
+        type: 'GET',
+        async: false,
+        //se obtiver sucesso, executar a arrow function abaixo
+        success: data => {
+            //se não tiver questão no banco de dados, retorna um div do html com esse texto
+            data.forEach(question => {
+                console.log(subaxis_id)
+                if (question['axis_subdivision_id'] === subaxis_id) {
+
+                    questions.push(question);
+                }
+            })
+        }      //forEach faz loop que vai passar por cada elemento dentro do data
+    });
+    console.log("ARRAY: " + questions)
+    return questions;
+}
+
 function getQuestionsByAxis() {
     let axes = getAxes();
     const questions = {};
@@ -446,95 +621,114 @@ function getQuestionsByAxis() {
     return questions;
 }
 
-function showQuestionsByAxis() {
-    let axesWithQuestions = getQuestionsByAxis();
-    console.log(axesWithQuestions)
-    console.log(axesWithQuestions['1'][0])
-    Object.entries(axesWithQuestions).forEach(axis => {
-        document.getElementById("questions-container-test").innerHTML += `<div class="accordion" id="${axis}Accordion">
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingOne">
-            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#my${axis}" aria-expanded="true" aria-controls="my${axis}">
-                ${getAxisFromId(axis)}
-            </button>
-          </h2>
-          <div id="my${axis}" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-            <div class="accordion-body" id="${axis}-body">
-            </div>
-          </div>
-          </div>`
-        let questionArray = axis[1];
-        for (let i = 0; i < questionArray.length; i++) {
-            console.log("im insde")
-            console.log(questionArray[i])
-        }
-        questionArray.forEach(question => {
-            console.log(question['text'])
-            document.getElementById(`${axis}-body`).innerHTML += question;
-        })
-    })
-
-}
-
-function readQuestionsFromDatabase() {
-    showQuestionsByAxis();
+function getAllQuestionsFromAxis(axis_id) {
+    questions = [];
     $.ajax({
         //url do endpoint
         url: "http://127.0.0.1:3001/questions",
         //tipo da requisição
         type: 'GET',
+        async: false,
         //se obtiver sucesso, executar a arrow function abaixo
         success: data => {
             //se não tiver questão no banco de dados, retorna um div do html com esse texto
-            if (data.length == 0) {
-                return questionsContainer.innerHTML = "Ainda não há questões neste questionário. Clique no + para adicionar uma.";
-            }
             //se tiver questão, limpa o questionsContainer
-            else {
-                questionsContainer.innerHTML = "";
-                //forEach faz loop que vai passar por cada elemento dentro do data
-                //cada vez que passa ele vai guardar o registro atual na variável elemento
-                data.forEach(element => {
-                    //insere todo o html que precisa para cada pergunta
-                    questionsContainer.innerHTML += `
-                
-        <div id="question${element['position']}">
+            data.forEach(question => {
+                if (question['axis_id'] === axis_id) {
+                    questions.push(question);
+                }
+            })    //forEach faz loop que vai passar por cada elemento dentro do data
+        }
+    });
+    return questions;
+}
+
+function createAxisAccordions(container) {
+    let axes = getAxes()
+    axes.forEach(axis => {
+        document.getElementById(`${container}`).innerHTML += `<div class="accordion" id="${axis['name']}Accordion">
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingOne">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target='#my${axis['name']}' aria-expanded="true" aria-controls="my${axis}">
+                ${axis['name']}
+            </button>
+          </h2>
+          <div id='my${axis['name']}' class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+            <div class="accordion-body" id="${axis['name']}-body">
+            </div>
+          </div>
+          </div>`
+    })
+}
+function showQuestionsByAxis() {
+    let axes = getAxes()
+    axes.forEach(axis => {
+        let questions = getAllQuestionsFromAxis(axis['id'])
+        questions.forEach(question => {
+            document.getElementById(`${axis['name']}-body`).innerHTML += `<div id="question${question['position']}">
             <div class="row question-header">
-                <div class="col-sm-10">
-                    <h5>Questão ${element['position']} | Eixo ${getAxisFromId(element['axis_id'])}</h5>
+                <div class="col-sm-9">
+                    <h5>Questão ${question['position']}</h5>
                 </div>
-                <div class="col-sm-1">
-                    <button type="button" id="trash${element['id']}" class="btn btn-primary trash" onclick="deleteQuestion(${element['id']})">
+                <div class="col-sm-3">
+                <span>
+                    <button type="button" id="trash${question['id']}" class="btn btn-light" onclick="deleteQuestion(${question['id']})">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
                             <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
                         </svg>
                     </button>
-                </div>
-                <div class="col-sm-1">
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal" onclick="updateEditModal(${element['id']})">
+                    <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#editModal" onclick="updateEditModal(${question['id']})">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                             <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
                             <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
                         </svg>
                     </button>
+                    </span>
                 </div>
+                
             </div>
             <div class="question-wording">
-                <p>${element['text']}</p>
-            </div>`;
-                    let alternatives = getAlternatives(element['id']);
-                    alternatives.forEach(alternative => {
-                        questionsContainer.innerHTML +=
-                            `<div class="form-check">
-                <input class="form-check-input" type="radio" name="question${element['position']}" id="flexRadioDefault1">
+                <p>${question['text']}</p>
+            </div>`
+            let alternatives = getAlternatives(question['id']);
+            alternatives.forEach(alternative => {
+                document.getElementById(`${axis['name']}-body`).innerHTML +=
+                    `<div class="form-check">
+                <input class="form-check-input" type="radio" name="question${question['position']}" id="flexRadioDefault1">
                 <label class="form-check-label" for="flexRadioDefault1">${alternative['text']}</label>
                 </div>`
-                    })
-                });
+            })
+            document.getElementById(`${axis['name']}-body`).innerHTML += "<hr>"
+        });
+    })
+};
+
+function questionsExist() {
+    $.ajax({
+        url: "http://127.0.0.1:3001/questions",
+        type: 'GET',
+        async: false,
+        success: data => {
+            if (data.length > 0) {
+                return true;
             }
+            return false;
         }
 
-    });
+    })
+}
+
+function readQuestionsFromDatabase() {
+    if (questionsExist) {
+        document.getElementById("questions-container").innerHTML = '';
+        createAxisAccordions("questions-container");
+        showQuestionsByAxis();
+    } else {
+        document.getElementById("questions-container").innerHTML = `
+        <div id="questions-placeholder">Ainda não há questões neste questionário. 
+        Clique no + para adicionar.`
+    }
+
 }
 
 function updateEditModal(question_id) {
@@ -559,9 +753,9 @@ function updateEditModal(question_id) {
         document.getElementById('edit-axis-dropdown').innerHTML += `<option value="${axis['name']}">${axis['name']}</option>`
     })
     $('#edit-axis-dropdown').val(getAxisFromId(question['axis_id']));
-    let subdivisions = getModalSubdivisions((question['axis_id']));
+    let subdivisions = getSubdivisionsFromAxisId((question['axis_id']));
     subdivisions.forEach(subdivision => {
-        document.getElementById('edit-critical-factors').innerHTML += `<option value="${subdivision}">${subdivision}</option>`
+        document.getElementById('edit-critical-factors').innerHTML += `<option value="${subdivision['name']}">${subdivision['name']}</option>`
     })
     $("#edit-question").val(question['text']);
     $("#edit-weight").val(question['weight']);
@@ -574,9 +768,7 @@ function updateEditModal(question_id) {
     })
     let buttonFunction = `saveQuestionChanges(${question_id})`;
     $("#save-button").attr("onclick", buttonFunction);
-   console.log("ok")
 }
-
 
 
 function getSubaxisFromId(id) {
