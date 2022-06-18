@@ -70,10 +70,20 @@ function lastQuestionPosition() {
 
 // Salva nova questão no modal de adicionar questões
 function saveQuestion() {
-    console.log("axis dropdown = " + $('#axis-dropdown').val())
     if ($('#axis-dropdown').val() === null || $('#critical-factors').val() === null) {
         alert("Escolha um eixo e fator crítico para adicionar a questão.");
-    } else {
+    } else if ($('#question').val() === '') {
+        alert("Preencha o enunciado da questão para continuar.");
+    } else if ($('#weight').val() === '') {
+        alert("Preencha o peso da questão para continuar.");
+    } else if (($('#alternative1').val() != '' && $('#alternativeweight1').val() === '') ||
+        ($('#alternative2').val() != '' && $('#alternativeweight2').val() === '') ||
+        ($('#alternative3').val() != '' && $('#alternativeweight3').val() === '') ||
+        ($('#alternative4').val() != '' && $('#alternativeweight4').val() === '') ||
+        ($('#alternative5').val() != '' && $('#alternativeweight5').val() === '')) {
+        alert("Preencha os pesos das alternativas para adicionar a questão.");
+    }
+    else {
         lastQuestionPosition();
         $.ajax({
             url: "http://127.0.0.1:3001/questioninsert",
@@ -97,23 +107,38 @@ function saveQuestion() {
 }
 
 function saveQuestionChanges(question_id) {
-    let position = lastQuestionPosition()
-    $.ajax({
-        url: "http://127.0.0.1:3001/questionupdate",
-        type: 'POST',
-        async: false,
-        data: {
-            id: question_id,
-            weight: parseInt($("#edit-weight").val()),
-            text: $("#edit-question").val(),
-            position: position,
-            axis_subdivision_id: findSubdivisionIDFromName($('#edit-critical-factors').val()),
-            axis_id: getAxisIdFromName($('#edit-axis-dropdown').val()),
-            diagnosis_id: 1
-        }
-    });
-    saveAlternativeChanges(question_id);
-    readQuestionsFromDatabase();
+    if ($('#edit-axis-dropdown').val() === null || $('#edit-critical-factors').val() === null) {
+        alert("Escolha um eixo e fator crítico para salvar a questão.");
+    } else if ($('#edit-question').val() === '') {
+        alert("Preencha o enunciado da questão para continuar.");
+    } else if ($('#edit-weight').val() === '') {
+        alert("Preencha o peso da questão para continuar.");
+    } else if (($('#edit-alternative1').val() != '' && $('#edit-alternativeweight1').val() === '') ||
+        ($('#edit-alternative2').val() != '' && $('#edit-alternativeweight2').val() === '') ||
+        ($('#edit-alternative3').val() != '' && $('#edit-alternativeweight3').val() === '') ||
+        ($('#edit-alternative4').val() != '' && $('#edit-alternativeweight4').val() === '') ||
+        ($('#edit-alternative5').val() != '' && $('#edit-alternativeweight5').val() === '')) {
+        alert("Preencha os pesos das alternativas para salvar a questão.");
+    }
+    else {
+        let position = lastQuestionPosition()
+        $.ajax({
+            url: "http://127.0.0.1:3001/questionupdate",
+            type: 'POST',
+            async: false,
+            data: {
+                id: question_id,
+                weight: parseInt($("#edit-weight").val()),
+                text: $("#edit-question").val(),
+                position: position,
+                axis_subdivision_id: findSubdivisionIDFromName($('#edit-critical-factors').val()),
+                axis_id: getAxisIdFromName($('#edit-axis-dropdown').val()),
+                diagnosis_id: 1
+            }
+        });
+        saveAlternativeChanges(question_id);
+        readQuestionsFromDatabase();
+    }
 }
 
 function getLastQuestionId() {
@@ -191,11 +216,15 @@ $("#critical-factors").change(function () {
 });
 
 $("#edit-axis-dropdown").change(function () {
-    let subdivisions = getSubdivisionsFromAxisId(getAxisIdFromName($("#edit-axis-dropdown").val()));
-    document.getElementById('edit-critical-factors').innerHTML = "<option value='' disabled selected>Escolher...</option>";
-    subdivisions.forEach(subdivision => {
-        document.getElementById('edit-critical-factors').innerHTML += `<option value="${subdivision}">${subdivision}</option>`
-    })
+    if ($("#edit-axis-dropdown").val() === "") {
+        $("#edit-delete-axis").hide();
+    } else {
+        let subdivisions = getSubdivisionsFromAxisId(getAxisIdFromName($("#edit-axis-dropdown").val()));
+        document.getElementById('edit-critical-factors').innerHTML = "<option value='' disabled selected>Escolher...</option>";
+        subdivisions.forEach(subdivision => {
+            document.getElementById('edit-critical-factors').innerHTML += `<option value="${subdivision}">${subdivision}</option>`
+        })
+    }
 });
 
 
@@ -240,7 +269,7 @@ function saveAlternatives(question_id) {
 
 function saveAlternativeChanges(question_id) {
     original_alternatives = getAlternatives(question_id);
-    for (let i = 1; i <= 5; i++) {
+    for (let i = 1; i <= original_alternatives.length; i++) {
         if ($("#edit-alternative" + i).val() != "") {
             $.ajax({
                 url: "http://127.0.0.1:3001/optionupdate",
@@ -248,6 +277,33 @@ function saveAlternativeChanges(question_id) {
                 async: false,
                 data: {
                     id: original_alternatives[i - 1]['id'],
+                    weight: $("#edit-alternativeweight" + i).val(),
+                    text: $("#edit-alternative" + i).val(),
+                    question_id: question_id,
+                    position: i,
+                    axis_subdivision_id: findSubdivisionIDFromName($('#edit-critical-factors').val()),
+                    axis_id: getAxisIdFromName($('#edit-axis-dropdown').val()),
+                    diagnosis_id: 1
+                }
+            });
+        } else if ($("#edit-alternative" + i).val() === "") {
+            $.ajax({
+                url: "http://127.0.0.1:3001/optiondelete",
+                type: 'POST',
+                async: false,
+                data: {
+                    id: original_alternatives[i - 1]['id'],
+                }
+            });
+        }
+    }
+    for (let i = original_alternatives.length + 1; i <= 5; i++) {
+        if ($("#edit-alternative" + i).val() != "") {
+            $.ajax({
+                url: "http://127.0.0.1:3001/optioninsert",
+                type: 'POST',
+                async: false,
+                data: {
                     weight: $("#edit-alternativeweight" + i).val(),
                     text: $("#edit-alternative" + i).val(),
                     question_id: question_id,
@@ -331,20 +387,25 @@ function deleteAxis(axis_id) {
 }
 
 
-
 $('#delete-axis').on('click', function (event) {
-    let axis_id = getAxisIdFromName($("#axis-dropdown").val());
-    deleteAxis(axis_id)
-    readQuestionsFromDatabase();
-    updateAddModalDropdowns();
-    $("#critical-factors").val("");
-    document.getElementById('critical-factors').innerHTML = "<option value='' disabled selected>Escolher...</option>";
-    $('#delete-axis').hide();
+    if ($("#axis-dropdown").val() != '' &&
+        confirm("Tem certeza de que deseja deletar este eixo? Todas as questões associadas a ele (inclusive esta) serão excluídas.")) {
+        let axis_id = getAxisIdFromName($("#axis-dropdown").val());
+        deleteAxis(axis_id)
+        readQuestionsFromDatabase();
+        updateAddModalDropdowns();
+        $("#critical-factors").val("");
+        document.getElementById('critical-factors').innerHTML = "<option value='' disabled selected>Escolher...</option>";
+        $('#delete-axis').hide();
+    } else if ($("#axis-dropdown").val() === '' || $("#axis-dropdown").val() === null) {
+        alert("Selecione um fator crítico no dropdown para deletá-lo.")
+    }
 });
 
 
 $('#delete-subaxis').on('click', function (event) {
-    if ($("#critical-factors").val() != '') {
+    if ($("#critical-factors").val() != '' &&
+        confirm("Tem certeza de que deseja deletar este fator crítico? Todas as questões associadas a ele (inclusive esta) serão excluídas.")) {
         let currentAxis = $("#axis-dropdown").val();
         let subaxis_id = getSubaxisIdFromName($("#critical-factors").val());
         let questions = getQuestionsFromSubaxis(subaxis_id);
@@ -358,8 +419,8 @@ $('#delete-subaxis').on('click', function (event) {
         $("#critical-factors").val("");
 
         document.getElementById('critical-factors').innerHTML = "<option value='' disabled selected>Escolher...</option>";
-    } else {
-        alert("Selecione um eixo no dropdown para deletá-lo.")
+    } else if ($("#critical-factors").val() === '' || $("#critical-factors").val() === null) {
+        alert("Selecione um fator crítico no dropdown para deletá-lo.")
     }
 });
 
@@ -374,10 +435,40 @@ function deleteSubaxis(subaxis_id) {
     });
 }
 
-$('#delete-subaxis').on('click', function (event) {
-    let subaxis_id = getSubaxisIdFromName($("#critical-factors").val())
-    deleteSubaxis(subaxis_id)
+
+$('#edit-delete-subaxis').on('click', function (event) {
+    if ($("#edit-critical-factors").val() != '' &&
+        confirm("Tem certeza de que deseja deletar este fator crítico? Todas as questões associadas a ele (inclusive esta) serão excluídas.")) {
+        console.log("insde")
+        let subaxis_id = getSubaxisIdFromName($("#edit-critical-factors").val());
+        let questions = getQuestionsFromSubaxis(subaxis_id);
+        questions.forEach(question => {
+            deleteQuestion(question['id']);
+        })
+        deleteSubaxis(subaxis_id)
+        readQuestionsFromDatabase();
+        $('#editModal').modal('toggle');
+
+    } else if ($("#edit-critical-factors").val() === '' || $("#edit-critical-factors").val() === null) {
+        alert("Selecione um eixo no dropdown para deletá-lo.")
+    }
 });
+
+$('#edit-delete-axis').on('click', function (event) {
+    if ($("#edit-axis-dropdown").val() != '' &&
+        confirm("Tem certeza de que deseja deletar este eixo? Todas as questões associadas a ele (inclusive esta) serão excluídas.")) {
+        let axis_id = getAxisIdFromName($("#edit-axis-dropdown").val());
+        deleteAxis(axis_id)
+        readQuestionsFromDatabase();
+        updateAddModalDropdowns();
+        $('#editModal').modal('toggle');
+    } else if ($("#edit-axis-dropdown").val() === '' || $("#edit-axis-dropdown").val() === null) {
+        alert("Selecione um eixo no dropdown para deletá-lo.")
+    }
+});
+
+
+
 
 $('#edit-add-axis').on('click', function (event) {
     if ($('#edit-add-axis-span').is(":visible")) {
@@ -734,6 +825,8 @@ function readQuestionsFromDatabase() {
 function updateEditModal(question_id) {
     $('#edit-add-axis-span').hide();
     $('#edit-add-subaxis-span').hide();
+    $("#delete-axis").show();
+    $("#delete-subaxis").show();
     var question = null;
     $.ajax({
         url: "http://127.0.0.1:3001/questions",
