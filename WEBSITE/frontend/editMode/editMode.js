@@ -46,10 +46,10 @@ function updateAddModalDropdowns() {
     document.getElementById('critical-factors').innerHTML = "<option value='' disabled selected>Escolher...</option>";
 
 
-
 }
 
 var highestPosition = 0;
+
 function lastQuestionPosition() {
     highestPosition = 0;
     $.ajax({
@@ -82,8 +82,7 @@ function saveQuestion() {
         ($('#alternative4').val() != '' && $('#alternativeweight4').val() === '') ||
         ($('#alternative5').val() != '' && $('#alternativeweight5').val() === '')) {
         alert("Preencha os pesos das alternativas para adicionar a questão.");
-    }
-    else {
+    } else {
         lastQuestionPosition();
         $.ajax({
             url: "http://127.0.0.1:3001/questioninsert",
@@ -95,7 +94,7 @@ function saveQuestion() {
                 position: highestPosition,
                 axis_subdivision_id: findSubdivisionIDFromName($('#critical-factors').val()),
                 axis_id: getAxisIdFromName($('#axis-dropdown').val()),
-                diagnosis_id: 1
+                diagnosis_id: 4
             }
         });
         let lastId = getLastQuestionId()
@@ -119,8 +118,7 @@ function saveQuestionChanges(question_id) {
         ($('#edit-alternative4').val() != '' && $('#edit-alternativeweight4').val() === '') ||
         ($('#edit-alternative5').val() != '' && $('#edit-alternativeweight5').val() === '')) {
         alert("Preencha os pesos das alternativas para salvar a questão.");
-    }
-    else {
+    } else {
         let position = lastQuestionPosition()
         $.ajax({
             url: "http://127.0.0.1:3001/questionupdate",
@@ -175,6 +173,7 @@ function getAxisIdFromName(name) {
     });
     return id;
 }
+
 let critical_factors = [];
 
 function getSubdivisionsFromAxisId(axis_id) {
@@ -450,8 +449,6 @@ $('#edit-delete-axis').on('click', function (event) {
 });
 
 
-
-
 $('#edit-add-axis').on('click', function (event) {
     if ($('#edit-add-axis-span').is(":visible")) {
         $('#edit-add-axis-span').hide();
@@ -652,7 +649,6 @@ function getQuestionsFromSubaxis(subaxis_id) {
         success: data => {
             //se não tiver questão no banco de dados, retorna um div do html com esse texto
             data.forEach(question => {
-                console.log(subaxis_id)
                 if (question['axis_subdivision_id'] === subaxis_id) {
 
                     questions.push(question);
@@ -660,7 +656,6 @@ function getQuestionsFromSubaxis(subaxis_id) {
             })
         }      //forEach faz loop que vai passar por cada elemento dentro do data
     });
-    console.log("ARRAY: " + questions)
     return questions;
 }
 
@@ -726,24 +721,26 @@ function createAxisAccordions(container) {
                 ${axis['name']}
             </button>
           </h2>
-          <div id='my${axis['name']}' class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+          <div id='my${axis['name']}' class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
             <div class="accordion-body" id="${axis['name']}-body">
             </div>
           </div>
           </div>`
     })
 }
+
 function showQuestionsByAxis() {
+    var questionNumber = 0;
     let axes = getAxes()
     axes.forEach(axis => {
         let subdivisions = getSubdivisionsFromAxisId(axis['id']);
         subdivisions.forEach(subdivision => {
             let questions = getQuestionsFromSubaxis(subdivision['id']);
-            if(questions.length > 0) {
-            document.getElementById(`${axis['name']}-body`).innerHTML += `<h4 class="yellow">${subdivision['name']}</h4>`;
-            questions.forEach(question => {
-                document.getElementById(`${axis['name']}-body`).innerHTML += `
-                <div id = "question${question['position']}" >
+            if (questions.length > 0) {
+                document.getElementById(`${axis['name']}-body`).innerHTML += `<h4 class="yellow">${subdivision['name']}</h4>`;
+                questions.forEach(question => {
+                    document.getElementById(`${axis['name']}-body`).innerHTML += `
+                <div id = "question${questionNumber}" >
                     <div class='row'>
                         <div class="col-sm-9">
                             <p style="font-size:16px;">${question['text']}</p>
@@ -765,18 +762,20 @@ function showQuestionsByAxis() {
                         </span>
                     </div>
             `
-                let alternatives = getAlternatives(question['id']);
-                alternatives.forEach(alternative => {
-                    document.getElementById(`${axis['name']}-body`).innerHTML +=
-                        `<div class="form-check">
+                    let alternatives = getAlternatives(question['id']);
+                    alternatives.forEach(alternative => {
+                        document.getElementById(`${axis['name']}-body`).innerHTML +=
+                            `<div class="form-check">
                 <input class="form-check-input" type="radio" name="question${question['position']}" id="flexRadioDefault1">
                     <label class="form-check-label" for="flexRadioDefault1">${alternative['text']}</label>
                 </div>`
-                })
-                document.getElementById(`${axis['name']}-body`).innerHTML += "</div><hr>";
-            });
-        };
-        document.getElementById(`${axis['name']}-body`).innerHTML += "<br>";
+                    })
+                    document.getElementById(`${axis['name']}-body`).innerHTML += "</div><hr>";
+                });
+                questionNumber++;
+            }
+            ;
+            document.getElementById(`${axis['name']}-body`).innerHTML += "<br>";
         });
     })
 };
@@ -809,7 +808,6 @@ function readQuestionsFromDatabase() {
     }
 
 }
-
 
 
 function updateEditModal(question_id) {
@@ -877,3 +875,4 @@ function getSubaxisFromId(id) {
     })
     return subaxisName;
 }
+

@@ -40,14 +40,12 @@ a:active {
 
 .btn-primary:hover {
     background-color: #810DFD;
-    background-color: #810DFD;
 }
 
 .btn-primary:visited,
 .btn-primary:active,
 .btn-primary:focus {
     background: #810DFD;
-    border-color: none;
     outline-color: transparent;
 }
 
@@ -135,7 +133,6 @@ footer {
 
 .button {
     border-radius: 15px;
-    font: "Inter";
     background-color: #810DFD;
     color: white;
     border-color: #810DFD;
@@ -156,4 +153,20 @@ footer {
     color: #232228;
     margin: 130px;
     ;
+}
+
+#page-container {
+    position: relative;
+    min-height: 100vh;
+}
+
+#content-wrap {
+    padding-bottom: 2.5rem;    /* Footer height */
+}
+
+#footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 2.5rem;            /* Footer height */
 }
