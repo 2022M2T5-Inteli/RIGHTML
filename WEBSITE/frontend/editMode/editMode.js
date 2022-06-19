@@ -297,6 +297,7 @@ function saveAlternativeChanges(question_id) {
                     diagnosis_id: 1
                 }
             });
+            currentPosition++;
         }
     }
 }
