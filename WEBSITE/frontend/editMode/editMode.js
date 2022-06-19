@@ -837,6 +837,12 @@ function updateEditModal(question_id) {
     })
     $("#edit-question").val(question['text']);
     $("#edit-weight").val(question['weight']);
+
+    for (let i = 1; i <= 5; i++) {
+        $('#edit-alternative' + i).val('');
+        $('#edit-alternativeweight' + i).val('');
+    }
+
     alternatives = getAlternatives(question['id']);
     let current_count = 1
     alternatives.forEach(alternative => {
