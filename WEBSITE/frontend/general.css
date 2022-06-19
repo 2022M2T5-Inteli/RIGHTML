@@ -80,7 +80,11 @@ footer {
     background-color: #232228;
     color: white;
     font-family: 'Space Mono', monospace;
-    
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Footer height */
+
 }
 
 .social-media-icons {
@@ -104,22 +108,21 @@ footer {
     font-size: medium;
 }
 
-.yellow{
-	background-color: #f8c000;
+.yellow {
+    background-color: #f8c000;
 }
 
-.purple{
+.purple {
     background-color: #810DFD;
 }
 
-.black{
+.black {
     background-color: #232228;
 }
 
-.white{
-    
-    background-color:  #fff
-    ;
+.white {
+
+    background-color: #fff;
 }
 
 .titlehome {
@@ -127,7 +130,7 @@ footer {
     font-weight: bold;
     font-family: 'Manrope', sans-serif;
     text-align: center;
-    color: #232228;             
+    color: #232228;
 }
 
 .button {
@@ -140,9 +143,9 @@ footer {
     font-size: 23px;
 }
 
-.link{
+.link {
     font-family: manrope;
-    color: #1F033D;   
+    color: #1F033D;
 }
 
 .title2home {
@@ -150,6 +153,7 @@ footer {
     font-weight: bold;
     font-family: monospace;
     text-align: center;
-    color: #232228;      
-    margin: 130px;;       
+    color: #232228;
+    margin: 130px;
+    ;
 }

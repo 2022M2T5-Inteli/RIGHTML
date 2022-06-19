@@ -138,6 +138,7 @@ function saveQuestionChanges(question_id) {
         });
         saveAlternativeChanges(question_id);
         readQuestionsFromDatabase();
+        $('#editModal').modal('toggle');
     }
 }
 
@@ -269,35 +270,18 @@ function saveAlternatives(question_id) {
 
 function saveAlternativeChanges(question_id) {
     original_alternatives = getAlternatives(question_id);
-    for (let i = 1; i <= original_alternatives.length; i++) {
-        if ($("#edit-alternative" + i).val() != "") {
-            $.ajax({
-                url: "http://127.0.0.1:3001/optionupdate",
-                type: 'POST',
-                async: false,
-                data: {
-                    id: original_alternatives[i - 1]['id'],
-                    weight: $("#edit-alternativeweight" + i).val(),
-                    text: $("#edit-alternative" + i).val(),
-                    question_id: question_id,
-                    position: i,
-                    axis_subdivision_id: findSubdivisionIDFromName($('#edit-critical-factors').val()),
-                    axis_id: getAxisIdFromName($('#edit-axis-dropdown').val()),
-                    diagnosis_id: 1
-                }
-            });
-        } else if ($("#edit-alternative" + i).val() === "") {
-            $.ajax({
-                url: "http://127.0.0.1:3001/optiondelete",
-                type: 'POST',
-                async: false,
-                data: {
-                    id: original_alternatives[i - 1]['id'],
-                }
-            });
-        }
+    for (let i = 0; i < original_alternatives.length; i++) {
+        $.ajax({
+            url: "http://127.0.0.1:3001/optiondelete",
+            type: 'POST',
+            async: false,
+            data: {
+                id: original_alternatives[i]['id'],
+            }
+        });
     }
-    for (let i = original_alternatives.length + 1; i <= 5; i++) {
+    let currentPosition = 1;
+    for (let i = 1; i <= 5; i++) {
         if ($("#edit-alternative" + i).val() != "") {
             $.ajax({
                 url: "http://127.0.0.1:3001/optioninsert",
@@ -307,7 +291,7 @@ function saveAlternativeChanges(question_id) {
                     weight: $("#edit-alternativeweight" + i).val(),
                     text: $("#edit-alternative" + i).val(),
                     question_id: question_id,
-                    position: i,
+                    position: currentPosition,
                     axis_subdivision_id: findSubdivisionIDFromName($('#edit-critical-factors').val()),
                     axis_id: getAxisIdFromName($('#edit-axis-dropdown').val()),
                     diagnosis_id: 1
