@@ -150,12 +150,51 @@ function getAlternatives(question_id) {
                 }
             })
         }
-
     })
     return alternatives;
 }
 
+let user = null;
+let school = null;
+
+function getSessionData() {
+    let primaryKey = localStorage.getItem("primaryKey");
+    let table = localStorage.getItem("table");
+    user = null;
+    school = null;
+    if (table === "school_manager") {
+        $.ajax({
+            url: "http://127.0.0.1:3001/schoolmanagers",
+            type: 'GET',
+            async: false,
+            success: data => {
+                data.forEach(school_manager => {
+                    if (parseInt(primaryKey) === parseInt(school_manager['cpf'])) {
+                        user = school_manager;
+                    }
+                })
+            }
+        })
+        $.ajax({
+            url: "http://127.0.0.1:3001/schools",
+            type: 'GET',
+            async: false,
+            success: data => {
+                data.forEach(currentSchool => {
+                    if (parseInt(user['school_cnpj']) === parseInt(currentSchool['cnpj'])) {
+                        school = currentSchool;
+                    }
+                })
+            }
+        })
+        console.log(school)
+    } else {
+        alert("Entre em uma conta de gestor escolar para continuar.")
+    }
+}
+
 function saveAnswers() {
+    getSessionData()
     loadedQuestions.forEach(answeredQuestion => {
         console.log(answeredQuestion)
         let chosen_alternative_id = document.querySelector(`input[name=question${answeredQuestion['id']}]:checked`).value
@@ -170,8 +209,8 @@ function saveAnswers() {
                 axis_subdivision_id: answeredQuestion['axis_subdivision_id'],
                 axis_id: answeredQuestion['axis_id'],
                 diagnosis_id: 4,
-                school_cnpj: 22,
-                network_id: 2
+                school_cnpj: school['cnpj'],
+                network_id: school['network_id']
             }
         });
     })

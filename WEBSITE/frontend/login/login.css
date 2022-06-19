@@ -12,6 +12,10 @@
     font-family: "Manrope", sans-serif;
 }
 
+.option {
+    font-size: 100px;
+}
+
 * {
     margin: 0;
     padding: 0;

@@ -18,11 +18,11 @@ function addModal() {
 
     // Deixa pesos em branco
     $('#weight').val('');
-    $('#weight1').val('')
-    $('#weight2').val('')
-    $('#weight3').val('')
-    $('#weight4').val('')
-    $('#weight5').val('')
+    $('#alternativeweight1').val('')
+    $('#alternativeweight2').val('')
+    $('#alternativeweight3').val('')
+    $('#alternativeweight4').val('')
+    $('#alternativeweight5').val('')
 
     // Deixar campo de enunciado em branco
     $("#question").val('');
@@ -48,25 +48,7 @@ function updateAddModalDropdowns() {
 
 }
 
-var highestPosition = 0;
 
-function lastQuestionPosition() {
-    highestPosition = 0;
-    $.ajax({
-        url: "http://127.0.0.1:3001/questions",
-        type: 'GET',
-        async: false,
-        success: data => {
-            data.forEach(element => {
-                if (parseInt(element['position']) > highestPosition) {
-                    highestPosition = parseInt(element['position']);
-                }
-            });
-        }
-    });
-    highestPosition += 1;
-    return highestPosition;
-}
 
 // Salva nova questão no modal de adicionar questões
 function saveQuestion() {
@@ -83,7 +65,6 @@ function saveQuestion() {
         ($('#alternative5').val() != '' && $('#alternativeweight5').val() === '')) {
         alert("Preencha os pesos das alternativas para adicionar a questão.");
     } else {
-        lastQuestionPosition();
         $.ajax({
             url: "http://127.0.0.1:3001/questioninsert",
             type: 'POST',
@@ -91,7 +72,6 @@ function saveQuestion() {
             data: {
                 weight: parseInt($("#weight").val()),
                 text: $("#question").val(),
-                position: highestPosition,
                 axis_subdivision_id: findSubdivisionIDFromName($('#critical-factors').val()),
                 axis_id: getAxisIdFromName($('#axis-dropdown').val()),
                 diagnosis_id: 4
@@ -119,7 +99,6 @@ function saveQuestionChanges(question_id) {
         ($('#edit-alternative5').val() != '' && $('#edit-alternativeweight5').val() === '')) {
         alert("Preencha os pesos das alternativas para salvar a questão.");
     } else {
-        let position = lastQuestionPosition()
         $.ajax({
             url: "http://127.0.0.1:3001/questionupdate",
             type: 'POST',
@@ -128,7 +107,6 @@ function saveQuestionChanges(question_id) {
                 id: question_id,
                 weight: parseInt($("#edit-weight").val()),
                 text: $("#edit-question").val(),
-                position: position,
                 axis_subdivision_id: findSubdivisionIDFromName($('#edit-critical-factors').val()),
                 axis_id: getAxisIdFromName($('#edit-axis-dropdown').val()),
                 diagnosis_id: 1
@@ -466,13 +444,12 @@ $('#save-axis').on('click', function (event) {
         data: {
             name: axis_name,
             diagnosis_id: 2,
-            position: 10,
         }
     });
     $('#add-axis-input').val("");
     $('#add-axis-span').hide();
     updateAddModalDropdowns();
-    $('#axis-dropdown').val(axis_name)
+    $('#axis-dropdown').val(axis_name);
     $('#delete-axis').show();
 });
 
@@ -485,7 +462,6 @@ $('#edit-save-axis').on('click', function (event) {
         data: {
             name: axis_name,
             diagnosis_id: 2,
-            position: 10,
         }
     });
     $('#edit-add-axis-input').val("");
@@ -543,7 +519,6 @@ $('#save-subaxis').on('click', function (event) {
             name: subaxis_name,
             axis_id: getAxisIdFromName(axis),
             diagnosis_id: 1,
-            position: 10,
         }
     });
     $('#add-subaxis-input').val("");
@@ -568,7 +543,6 @@ $('#edit-save-subaxis').on('click', function (event) {
             name: subaxis_name,
             axis_id: getAxisIdFromName($("#edit-axis-dropdown").val()),
             diagnosis_id: 2,
-            position: 10,
         }
     });
     $('#edit-add-subaxis-input').val("");
@@ -608,13 +582,41 @@ function getAlternatives(question_id) {
                 }
             })
         }
-
     })
     return alternatives;
 }
 
+function getAnswers(question_id) {
+    let answers = [];
+    $.ajax({
+        url: "http://127.0.0.1:3001/answerS",
+        type: 'GET',
+        async: false,
+        success: data => {
+            data.forEach(answer => {
+                if (parseInt(question_id) === parseInt(answer['question_id'])) {
+                    answers.push(answer);
+                }
+            })
+        }
+
+    })
+    return answers;
+}
 
 function deleteQuestion(question_id) {
+    let answers = getAnswers(question_id);
+    console.log(answers)
+    answers.forEach(answer => {
+        $.ajax({
+            url: "http://127.0.0.1:3001/answerdelete",
+            type: 'POST',
+            async: false,
+            data: {
+                id: answer['id']
+            }
+        });
+    })
     let alternatives = getAlternatives(question_id);
     alternatives.forEach(alternative => {
         $.ajax({
@@ -766,7 +768,7 @@ function showQuestionsByAxis() {
                     alternatives.forEach(alternative => {
                         document.getElementById(`${axis['name']}-body`).innerHTML +=
                             `<div class="form-check">
-                <input class="form-check-input" type="radio" name="question${question['position']}" id="flexRadioDefault1">
+                <input class="form-check-input" type="radio" name="question${question['id']}" id="flexRadioDefault1">
                     <label class="form-check-label" for="flexRadioDefault1">${alternative['text']}</label>
                 </div>`
                     })
