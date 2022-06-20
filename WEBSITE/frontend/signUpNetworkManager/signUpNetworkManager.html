@@ -8,12 +8,13 @@
     <title>Cadastro</title>
     <link rel="stylesheet" href="signUpNetworkManager.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
     <main>
         <!-- div que envolve os inputs, as checkboxes e o botão criar conta -->
-    
+
         <div class="container">
             <div class="inputGroup">
                 <label class="label">Nome</label>
@@ -25,21 +26,23 @@
             </div>
             <div class="inputGroup">
                 <label class="label">CPF </label>
-                <input type="text" class="textInput" id="networkManagerCPF" />
+                <input type="text" class="textInput" id="networkManagerCPF" minlength="11" maxlength="11" />
             </div>
             <div class="inputGroup">
                 <label class="label">Nome da Rede </label>
                 <input type="text" class="textInput" id="networkName" />
             </div>
-    
+
             <div class="inputGroup">
                 <label class=" label">Id da Rede</label>
                 <input type="text" class="textInput" id="networkId" />
             </div>
             <div class="radios">
                 <label class="label" id="networkType">Tipo de rede </label>
-                <p class="content"><input type="radio" value="private" name="opcao" class="inputRadio"> Particular</p><br>
-                <p class="content"><input type="radio" value="public" name="opcao" checked="checked" class="inputRadio"> Pública</p><br>
+                <p class="content"><input type="radio" value="private" name="opcao" class="inputRadio"> Particular</p>
+                <br>
+                <p class="content"><input type="radio" value="public" name="opcao" checked="checked" class="inputRadio">
+                    Pública</p><br>
             </div>
             <div>
                 <input type="button" value="Criar conta" class="buttonCreateAccount" id="buttonCreateAccount">
@@ -64,6 +67,7 @@
         </div>
     </main>
     <script src="signUpNetworkManager.js"></script>
+
 
 </body>
 

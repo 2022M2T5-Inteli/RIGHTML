@@ -3,11 +3,15 @@ function onload() {
     readQuestionsFromDatabase();
 }
 
+// Constante id do diagnosses
+ const diagnosisid = 5;
+
+
 // Reinicia modal de adicionar questões
 function addModal() {
     // Deixa dropdowns em branco
     $('#axis-dropdown').val('')
-    $('#critical-factors').val('')
+    $('#domain').val('')
 
     // Deixa alternativas em branco
     $('#alternative1').val('')
@@ -43,7 +47,7 @@ function updateAddModalDropdowns() {
     axes.forEach(axis => {
         document.getElementById('axis-dropdown').innerHTML += `<option value="${axis['name']}">${axis['name']}</option>`
     })
-    document.getElementById('critical-factors').innerHTML = "<option value='' disabled selected>Escolher...</option>";
+    document.getElementById('domain').innerHTML = "<option value='' disabled selected>Escolher...</option>";
 
 
 }
@@ -52,7 +56,7 @@ function updateAddModalDropdowns() {
 
 // Salva nova questão no modal de adicionar questões
 function saveQuestion() {
-    if ($('#axis-dropdown').val() === null || $('#critical-factors').val() === null) {
+    if ($('#domain').val() === null || $('domain').val() === null) {
         alert("Escolha um eixo e fator crítico para adicionar a questão.");
     } else if ($('#question').val() === '') {
         alert("Preencha o enunciado da questão para continuar.");
@@ -72,9 +76,9 @@ function saveQuestion() {
             data: {
                 weight: parseInt($("#weight").val()),
                 text: $("#question").val(),
-                axis_subdivision_id: findSubdivisionIDFromName($('#critical-factors').val()),
+                axis_subdivision_id: findSubdivisionIDFromName($('#domain').val()),
                 axis_id: getAxisIdFromName($('#axis-dropdown').val()),
-                diagnosis_id: 4
+                diagnosis_id: diagnosisid
             }
         });
         let lastId = getLastQuestionId()
@@ -86,8 +90,8 @@ function saveQuestion() {
 }
 
 function saveQuestionChanges(question_id) {
-    if ($('#edit-axis-dropdown').val() === null || $('#edit-critical-factors').val() === null) {
-        alert("Escolha um eixo e fator crítico para salvar a questão.");
+    if ($('#edit-domain').val() === null || $('#edit-domain').val() === null) {
+        alert("Escolha um grande eixo e domínio para salvar a questão.");
     } else if ($('#edit-question').val() === '') {
         alert("Preencha o enunciado da questão para continuar.");
     } else if ($('#edit-weight').val() === '') {
@@ -107,9 +111,9 @@ function saveQuestionChanges(question_id) {
                 id: question_id,
                 weight: parseInt($("#edit-weight").val()),
                 text: $("#edit-question").val(),
-                axis_subdivision_id: findSubdivisionIDFromName($('#edit-critical-factors').val()),
+                axis_subdivision_id: findSubdivisionIDFromName($('#edit-domain').val()),
                 axis_id: getAxisIdFromName($('#edit-axis-dropdown').val()),
-                diagnosis_id: 1
+                diagnosis_id: diagnosisid
             }
         });
         saveAlternativeChanges(question_id);
@@ -152,7 +156,7 @@ function getAxisIdFromName(name) {
     return id;
 }
 
-let critical_factors = [];
+let domain = [];
 
 function getSubdivisionsFromAxisId(axis_id) {
     subdivisions = [];
@@ -177,16 +181,16 @@ $("#axis-dropdown").change(function () {
     } else {
         $("#delete-axis").show();
         let subdivisions = getSubdivisionsFromAxisId(getAxisIdFromName($("#axis-dropdown").val()));
-        document.getElementById('critical-factors').innerHTML = "<option value='' disabled selected>Escolher...</option>";
+        document.getElementById('domain').innerHTML = "<option value='' disabled selected>Escolher...</option>";
         subdivisions.forEach(subdivision => {
-            document.getElementById('critical-factors').innerHTML += `<option value="${subdivision['name']}">${subdivision['name']}</option>`
+            document.getElementById('domain').innerHTML += `<option value="${subdivision['name']}">${subdivision['name']}</option>`
         })
     }
 });
 
 
-$("#critical-factors").change(function () {
-    if ($("#critical-factor").val() === "") {
+$("#domain").change(function () {
+    if ($("#domain").val() === "") {
         $("#delete-subaxis").hide();
     } else {
         $("#delete-subaxis").show();
@@ -198,9 +202,9 @@ $("#edit-axis-dropdown").change(function () {
         $("#edit-delete-axis").hide();
     } else {
         let subdivisions = getSubdivisionsFromAxisId(getAxisIdFromName($("#edit-axis-dropdown").val()));
-        document.getElementById('edit-critical-factors').innerHTML = "<option value='' disabled selected>Escolher...</option>";
+        document.getElementById('edit-domain').innerHTML = "<option value='' disabled selected>Escolher...</option>";
         subdivisions.forEach(subdivision => {
-            document.getElementById('edit-critical-factors').innerHTML += `<option value="${subdivision}">${subdivision}</option>`
+            document.getElementById('edit-domain').innerHTML += `<option value="${subdivision}">${subdivision}</option>`
         })
     }
 });
@@ -239,9 +243,9 @@ function saveAlternatives(question_id) {
                     text: $("#alternative" + i).val(),
                     question_id: question_id,
                     position: i,
-                    axis_subdivision_id: findSubdivisionIDFromName($('#critical-factors').val()),
+                    axis_subdivision_id: findSubdivisionIDFromName($('#domain').val()),
                     axis_id: getAxisIdFromName($('#axis-dropdown').val()),
-                    diagnosis_id: 1
+                    diagnosis_id: diagnosisid
                 }
             });
         }
@@ -272,9 +276,9 @@ function saveAlternativeChanges(question_id) {
                     text: $("#edit-alternative" + i).val(),
                     question_id: question_id,
                     position: currentPosition,
-                    axis_subdivision_id: findSubdivisionIDFromName($('#edit-critical-factors').val()),
+                    axis_subdivision_id: findSubdivisionIDFromName($('#edit-domain').val()),
                     axis_id: getAxisIdFromName($('#edit-axis-dropdown').val()),
-                    diagnosis_id: 1
+                    diagnosis_id: diagnosisid
                 }
             });
             currentPosition++;
@@ -356,8 +360,8 @@ $('#delete-axis').on('click', function (event) {
         deleteAxis(axis_id)
         readQuestionsFromDatabase();
         updateAddModalDropdowns();
-        $("#critical-factors").val("");
-        document.getElementById('critical-factors').innerHTML = "<option value='' disabled selected>Escolher...</option>";
+        $("#domain").val("");
+        document.getElementById('domain').innerHTML = "<option value='' disabled selected>Escolher...</option>";
         $('#delete-axis').hide();
     } else if ($("#axis-dropdown").val() === '' || $("#axis-dropdown").val() === null) {
         alert("Selecione um fator crítico no dropdown para deletá-lo.")
@@ -366,10 +370,10 @@ $('#delete-axis').on('click', function (event) {
 
 
 $('#delete-subaxis').on('click', function (event) {
-    if ($("#critical-factors").val() != '' &&
+    if ($("#domain").val() != '' &&
         confirm("Tem certeza de que deseja deletar este fator crítico? Todas as questões associadas a ele (inclusive esta) serão excluídas.")) {
         let currentAxis = $("#axis-dropdown").val();
-        let subaxis_id = getSubaxisIdFromName($("#critical-factors").val());
+        let subaxis_id = getSubaxisIdFromName($("#domain").val());
         let questions = getQuestionsFromSubaxis(subaxis_id);
         questions.forEach(question => {
             deleteQuestion(question['id']);
@@ -378,10 +382,10 @@ $('#delete-subaxis').on('click', function (event) {
         readQuestionsFromDatabase();
         updateAddModalDropdowns();
         $("#axis-dropdown").val(currentAxis);
-        $("#critical-factors").val("");
+        $("#domain").val("");
 
-        document.getElementById('critical-factors').innerHTML = "<option value='' disabled selected>Escolher...</option>";
-    } else if ($("#critical-factors").val() === '' || $("#critical-factors").val() === null) {
+        document.getElementById('domain').innerHTML = "<option value='' disabled selected>Escolher...</option>";
+    } else if ($("#domain").val() === '' || $("#domain").val() === null) {
         alert("Selecione um fator crítico no dropdown para deletá-lo.")
     }
 });
@@ -399,10 +403,10 @@ function deleteSubaxis(subaxis_id) {
 
 
 $('#edit-delete-subaxis').on('click', function (event) {
-    if ($("#edit-critical-factors").val() != '' &&
+    if ($("#edit-domain").val() != '' &&
         confirm("Tem certeza de que deseja deletar este fator crítico? Todas as questões associadas a ele (inclusive esta) serão excluídas.")) {
         console.log("insde")
-        let subaxis_id = getSubaxisIdFromName($("#edit-critical-factors").val());
+        let subaxis_id = getSubaxisIdFromName($("#edit-domain").val());
         let questions = getQuestionsFromSubaxis(subaxis_id);
         questions.forEach(question => {
             deleteQuestion(question['id']);
@@ -411,7 +415,7 @@ $('#edit-delete-subaxis').on('click', function (event) {
         readQuestionsFromDatabase();
         $('#editModal').modal('toggle');
 
-    } else if ($("#edit-critical-factors").val() === '' || $("#edit-critical-factors").val() === null) {
+    } else if ($("#edit-domain").val() === '' || $("#edit-domain").val() === null) {
         alert("Selecione um eixo no dropdown para deletá-lo.")
     }
 });
@@ -446,7 +450,7 @@ $('#save-axis').on('click', function (event) {
         async: false,
         data: {
             name: axis_name,
-            diagnosis_id: 2,
+            diagnosis_id: diagnosisid,
         }
     });
     $('#add-axis-input').val("");
@@ -464,7 +468,7 @@ $('#edit-save-axis').on('click', function (event) {
         async: false,
         data: {
             name: axis_name,
-            diagnosis_id: 2,
+            diagnosis_id: diagnosisid,
         }
     });
     $('#edit-add-axis-input').val("");
@@ -521,17 +525,17 @@ $('#save-subaxis').on('click', function (event) {
         data: {
             name: subaxis_name,
             axis_id: getAxisIdFromName(axis),
-            diagnosis_id: 1,
+            diagnosis_id: diagnosisid,
         }
     });
     $('#add-subaxis-input').val("");
     $('#add-subaxis-span').hide();
     let subdivisions = getSubdivisionsFromAxisId(getAxisIdFromName(axis));
-    document.getElementById('critical-factors').innerHTML = "<option value='' disabled selected>Escolher...</option>";
+    document.getElementById('domain').innerHTML = "<option value='' disabled selected>Escolher...</option>";
     subdivisions.forEach(subdivision => {
-        document.getElementById('critical-factors').innerHTML += `<option value="${subdivision['name']}">${subdivision['name']}</option>`
+        document.getElementById('domain').innerHTML += `<option value="${subdivision['name']}">${subdivision['name']}</option>`
     })
-    $('#critical-factors').val(subaxis_name)
+    $('#domain').val(subaxis_name)
     $('#axis-dropdown').val(axis)
     $('#delete-subaxis').show();
 });
@@ -545,7 +549,7 @@ $('#edit-save-subaxis').on('click', function (event) {
         data: {
             name: subaxis_name,
             axis_id: getAxisIdFromName($("#edit-axis-dropdown").val()),
-            diagnosis_id: 2,
+            diagnosis_id: diagnosisid,
         }
     });
     $('#edit-add-subaxis-input').val("");
@@ -841,7 +845,7 @@ function updateEditModal(question_id) {
     $('#edit-axis-dropdown').val(getAxisFromId(question['axis_id']));
     let subdivisions = getSubdivisionsFromAxisId((question['axis_id']));
     subdivisions.forEach(subdivision => {
-        document.getElementById('edit-critical-factors').innerHTML += `<option value = "${subdivision['name']}" > ${subdivision['name']}</option> `
+        document.getElementById('edit-domain').innerHTML += `<option value = "${subdivision['name']}" > ${subdivision['name']}</option> `
     })
     $("#edit-question").val(question['text']);
     $("#edit-weight").val(question['weight']);
