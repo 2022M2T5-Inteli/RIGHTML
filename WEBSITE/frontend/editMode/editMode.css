@@ -18,8 +18,7 @@
     text-align: center;
 }
 
-#basic-addon1 {
-    /* Search icon on the left */
+#basic-addon1 { /* Search icon on the left */
     height: 100%;
     background-color: white;
 }
@@ -48,12 +47,3 @@
     background: none;
     border: none;
 }
-
-#page-container {
-    position: relative;
-    min-height: 100vh;
-  }
-  
-  #content-wrap {
-    padding-bottom: 2.5rem;    /* Footer height */
-  }
