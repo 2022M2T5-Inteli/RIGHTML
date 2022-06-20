@@ -431,7 +431,7 @@ app.post('/axisinsert', urlencodedParser, (req, res) => {
 	res.statusCode = 200;
 	res.setHeader('Access-Control-Allow-Origin', '*'); // Isso é importante para evitar o erro de CORS
 
-	sql = "INSERT INTO axis (name, position, diagnosis_id) VALUES ('" + req.body.name + "', '" + req.body.position +"' , '" + req.body.diagnosis_id + "' )" ;
+	sql = "INSERT INTO axis (name, diagnosis_id) VALUES ('" + req.body.name + "' , '" + req.body.diagnosis_id + "' )" ;
 	var db = new sqlite3.Database(DBPATH); // Abre o banco
 	db.run(sql, [],  err => {
 		if (err) {
@@ -460,8 +460,8 @@ app.post('/axisdelete', urlencodedParser, (req, res) => {
 app.post('/axisupdate', urlencodedParser, (req, res) => {
 	res.statusCode = 200;
 	res.setHeader('Access-Control-Allow-Origin', '*'); 
-	sql = "UPDATE axis SET name = '" + req.body.name + "', subdivision_name = '" + req.body.subdivision_name + 
-	"', position = '" + req.body.position + "', diagnosis_id = '" + req.body.diagnosis_id + "' WHERE id = '" + req.body.id + "'";
+	sql = "UPDATE axis SET name = '" + req.body.name + "', subdivision_name = '" + req.body.subdivision_name
+		+ "', diagnosis_id = '" + req.body.diagnosis_id + "' WHERE id = '" + req.body.id + "'";
 	var db = new sqlite3.Database(DBPATH); 
 	db.run(sql, [],  err => {
 		if (err) {
@@ -539,7 +539,7 @@ app.get('/questions', (req, res) => {
 	res.setHeader('Access-Control-Allow-Origin', '*'); // Isso é importante para evitar o erro de CORS
 
 	var db = new sqlite3.Database(DBPATH); // Abre o banco
-  var sql = 'SELECT * FROM question ORDER BY position COLLATE NOCASE';
+  var sql = 'SELECT * FROM question ORDER BY id COLLATE NOCASE';
 	db.all(sql, [],  (err, rows ) => {
 		if (err) {
 		    throw err;
@@ -553,8 +553,8 @@ app.get('/questions', (req, res) => {
 	res.statusCode = 200;
 	res.setHeader('Access-Control-Allow-Origin', '*'); // Isso é importante para evitar o erro de CORS
 
-	sql = "INSERT INTO question (text, weight, position, axis_subdivision_id, axis_id, diagnosis_id) VALUES ( '" 
-	+ req.body.text + "', '" + req.body.weight + "' , '" + req.body.position + "' , '" + req.body.axis_subdivision_id +
+	sql = "INSERT INTO question (text, weight, axis_subdivision_id, axis_id, diagnosis_id) VALUES ( '"
+	+ req.body.text + "', '" + req.body.weight + "' , '" + req.body.axis_subdivision_id +
 	"' , '" + req.body.axis_id + "' , '" + req.body.diagnosis_id + "')";
 	var db = new sqlite3.Database(DBPATH); // Abre o banco
 	db.run(sql, [],  err => {
@@ -584,8 +584,7 @@ app.post('/questiondelete', urlencodedParser, (req, res) => {
 app.post('/questionupdate', urlencodedParser, (req, res) => {
 	res.statusCode = 200;
 	res.setHeader('Access-Control-Allow-Origin', '*'); 
-	sql = "UPDATE question SET text = '" + req.body.text + "', weight = '" + req.body.weight + 
-	"', position = '" + req.body.position + "', axis_subdivision_id = '" + req.body.axis_subdivision_id + 
+	sql = "UPDATE question SET text = '" + req.body.text + "', weight = '" + req.body.weight + "', axis_subdivision_id = '" + req.body.axis_subdivision_id +
 	"', axis_id = '" + req.body.axis_id + "', diagnosis_id = '" + req.body.diagnosis_id +
 	"' WHERE id = '" + req.body.id + "'";
 	var db = new sqlite3.Database(DBPATH); 
@@ -681,10 +680,6 @@ app.get('/answers', (req, res) => {
 
 
 
-
-
-
-
                   
                   
 function getAlternatives(question_id) {
@@ -705,44 +700,11 @@ function getAlternatives(question_id) {
     return alternatives;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 app.post('/answerinsert', urlencodedParser, (req, res) => {
 	res.statusCode = 200;
 	res.setHeader('Access-Control-Allow-Origin', '*'); // Isso é importante para evitar o erro de CORS
 
-	sql = `INSERT INTO answer (extra_info, option_id, question_id, axis_subdivision_id, axis_id, diagnosis_id,
-		school_number_of_students, network_id) VALUES ('"` + req.body.extra_info + "', '" + req.body.option_id + "', '" + req.body.question_id + "', '" + req.body.axis_subdivision_id + "', '" + req.body.axis_id + "', '" + req.body.diagnosis_id +
-		"', '" + "0" + "', '" + req.body.network_id + "')";
+	sql = `INSERT INTO answer (extra_info, option_id, question_id, axis_subdivision_id, axis_id, diagnosis_id, school_cnpj, network_id) VALUES ('${req.body.extra_info}', ${req.body.option_id}, ${req.body.question_id}, ${req.body.axis_subdivision_id}, ${req.body.axis_id}, ${req.body.diagnosis_id}, ${req.body.school_cnpj}, ${req.body.network_id})`;
 	var db = new sqlite3.Database(DBPATH); // Abre o banco
 	db.run(sql, [],  err => {
 		if (err) {

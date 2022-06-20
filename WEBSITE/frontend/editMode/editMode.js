@@ -18,11 +18,11 @@ function addModal() {
 
     // Deixa pesos em branco
     $('#weight').val('');
-    $('#weight1').val('')
-    $('#weight2').val('')
-    $('#weight3').val('')
-    $('#weight4').val('')
-    $('#weight5').val('')
+    $('#alternativeweight1').val('')
+    $('#alternativeweight2').val('')
+    $('#alternativeweight3').val('')
+    $('#alternativeweight4').val('')
+    $('#alternativeweight5').val('')
 
     // Deixar campo de enunciado em branco
     $("#question").val('');
@@ -46,27 +46,9 @@ function updateAddModalDropdowns() {
     document.getElementById('critical-factors').innerHTML = "<option value='' disabled selected>Escolher...</option>";
 
 
-
 }
 
-var highestPosition = 0;
-function lastQuestionPosition() {
-    highestPosition = 0;
-    $.ajax({
-        url: "http://127.0.0.1:3001/questions",
-        type: 'GET',
-        async: false,
-        success: data => {
-            data.forEach(element => {
-                if (parseInt(element['position']) > highestPosition) {
-                    highestPosition = parseInt(element['position']);
-                }
-            });
-        }
-    });
-    highestPosition += 1;
-    return highestPosition;
-}
+
 
 // Salva nova questão no modal de adicionar questões
 function saveQuestion() {
@@ -82,9 +64,7 @@ function saveQuestion() {
         ($('#alternative4').val() != '' && $('#alternativeweight4').val() === '') ||
         ($('#alternative5').val() != '' && $('#alternativeweight5').val() === '')) {
         alert("Preencha os pesos das alternativas para adicionar a questão.");
-    }
-    else {
-        lastQuestionPosition();
+    } else {
         $.ajax({
             url: "http://127.0.0.1:3001/questioninsert",
             type: 'POST',
@@ -92,10 +72,9 @@ function saveQuestion() {
             data: {
                 weight: parseInt($("#weight").val()),
                 text: $("#question").val(),
-                position: highestPosition,
                 axis_subdivision_id: findSubdivisionIDFromName($('#critical-factors').val()),
                 axis_id: getAxisIdFromName($('#axis-dropdown').val()),
-                diagnosis_id: 1
+                diagnosis_id: 4
             }
         });
         let lastId = getLastQuestionId()
@@ -119,9 +98,7 @@ function saveQuestionChanges(question_id) {
         ($('#edit-alternative4').val() != '' && $('#edit-alternativeweight4').val() === '') ||
         ($('#edit-alternative5').val() != '' && $('#edit-alternativeweight5').val() === '')) {
         alert("Preencha os pesos das alternativas para salvar a questão.");
-    }
-    else {
-        let position = lastQuestionPosition()
+    } else {
         $.ajax({
             url: "http://127.0.0.1:3001/questionupdate",
             type: 'POST',
@@ -130,7 +107,6 @@ function saveQuestionChanges(question_id) {
                 id: question_id,
                 weight: parseInt($("#edit-weight").val()),
                 text: $("#edit-question").val(),
-                position: position,
                 axis_subdivision_id: findSubdivisionIDFromName($('#edit-critical-factors').val()),
                 axis_id: getAxisIdFromName($('#edit-axis-dropdown').val()),
                 diagnosis_id: 1
@@ -175,6 +151,7 @@ function getAxisIdFromName(name) {
     });
     return id;
 }
+
 let critical_factors = [];
 
 function getSubdivisionsFromAxisId(axis_id) {
@@ -242,6 +219,9 @@ function findSubdivisionIDFromName(name) {
                 }
             })
         }
+
+
+        
     })
     return id;
 
@@ -450,8 +430,6 @@ $('#edit-delete-axis').on('click', function (event) {
 });
 
 
-
-
 $('#edit-add-axis').on('click', function (event) {
     if ($('#edit-add-axis-span').is(":visible")) {
         $('#edit-add-axis-span').hide();
@@ -469,13 +447,12 @@ $('#save-axis').on('click', function (event) {
         data: {
             name: axis_name,
             diagnosis_id: 2,
-            position: 10,
         }
     });
     $('#add-axis-input').val("");
     $('#add-axis-span').hide();
     updateAddModalDropdowns();
-    $('#axis-dropdown').val(axis_name)
+    $('#axis-dropdown').val(axis_name);
     $('#delete-axis').show();
 });
 
@@ -488,7 +465,6 @@ $('#edit-save-axis').on('click', function (event) {
         data: {
             name: axis_name,
             diagnosis_id: 2,
-            position: 10,
         }
     });
     $('#edit-add-axis-input').val("");
@@ -546,7 +522,6 @@ $('#save-subaxis').on('click', function (event) {
             name: subaxis_name,
             axis_id: getAxisIdFromName(axis),
             diagnosis_id: 1,
-            position: 10,
         }
     });
     $('#add-subaxis-input').val("");
@@ -571,7 +546,6 @@ $('#edit-save-subaxis').on('click', function (event) {
             name: subaxis_name,
             axis_id: getAxisIdFromName($("#edit-axis-dropdown").val()),
             diagnosis_id: 2,
-            position: 10,
         }
     });
     $('#edit-add-subaxis-input').val("");
@@ -611,13 +585,41 @@ function getAlternatives(question_id) {
                 }
             })
         }
-
     })
     return alternatives;
 }
 
+function getAnswers(question_id) {
+    let answers = [];
+    $.ajax({
+        url: "http://127.0.0.1:3001/answerS",
+        type: 'GET',
+        async: false,
+        success: data => {
+            data.forEach(answer => {
+                if (parseInt(question_id) === parseInt(answer['question_id'])) {
+                    answers.push(answer);
+                }
+            })
+        }
+
+    })
+    return answers;
+}
 
 function deleteQuestion(question_id) {
+    let answers = getAnswers(question_id);
+    console.log(answers)
+    answers.forEach(answer => {
+        $.ajax({
+            url: "http://127.0.0.1:3001/answerdelete",
+            type: 'POST',
+            async: false,
+            data: {
+                id: answer['id']
+            }
+        });
+    })
     let alternatives = getAlternatives(question_id);
     alternatives.forEach(alternative => {
         $.ajax({
@@ -652,7 +654,6 @@ function getQuestionsFromSubaxis(subaxis_id) {
         success: data => {
             //se não tiver questão no banco de dados, retorna um div do html com esse texto
             data.forEach(question => {
-                console.log(subaxis_id)
                 if (question['axis_subdivision_id'] === subaxis_id) {
 
                     questions.push(question);
@@ -660,7 +661,6 @@ function getQuestionsFromSubaxis(subaxis_id) {
             })
         }      //forEach faz loop que vai passar por cada elemento dentro do data
     });
-    console.log("ARRAY: " + questions)
     return questions;
 }
 
@@ -726,49 +726,61 @@ function createAxisAccordions(container) {
                 ${axis['name']}
             </button>
           </h2>
-          <div id='my${axis['name']}' class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+          <div id='my${axis['name']}' class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
             <div class="accordion-body" id="${axis['name']}-body">
             </div>
           </div>
           </div>`
     })
 }
+
 function showQuestionsByAxis() {
+    var questionNumber = 0;
     let axes = getAxes()
     axes.forEach(axis => {
-        let questions = getAllQuestionsFromAxis(axis['id'])
-        questions.forEach(question => {
-            document.getElementById(`${axis['name']}-body`).innerHTML += `
-            <div id="question${question['position']}">
-                <div class="col-sm-9">
-                    <p>${question['text']}</p>
-                </div>
-                <div class="col-sm-3">
-                    <span>
-                        <button type="button" id="trash${question['id']}" class="btn btn-light" onclick="deleteQuestion(${question['id']})">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
-                                <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
-                            </svg>
-                        </button>
-                        <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#editModal" onclick="updateEditModal(${question['id']})">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-                                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-                                <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
-                            </svg>
-                        </button>
-                    </span>
-                </div>
-            
+        let subdivisions = getSubdivisionsFromAxisId(axis['id']);
+        subdivisions.forEach(subdivision => {
+            let questions = getQuestionsFromSubaxis(subdivision['id']);
+            if (questions.length > 0) {
+                document.getElementById(`${axis['name']}-body`).innerHTML += `<h4 class="yellow">${subdivision['name']}</h4>`;
+                questions.forEach(question => {
+                    document.getElementById(`${axis['name']}-body`).innerHTML += `
+                <div id = "question${questionNumber}" >
+                    <div class='row'>
+                        <div class="col-sm-9">
+                            <p style="font-size:16px;">${question['text']}</p>
+                        </div>
+                        <div class="col-sm-3">
+                        </row>
+                        <span>
+                            <button type="button" id="trash${question['id']}" class="btn btn-light" onclick="deleteQuestion(${question['id']})">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                                    <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
+                                </svg>
+                            </button>
+                            <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#editModal" onclick="updateEditModal(${question['id']})">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                    <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                    <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                                </svg>
+                            </button>
+                        </span>
+                    </div>
             `
-            let alternatives = getAlternatives(question['id']);
-            alternatives.forEach(alternative => {
-                document.getElementById(`${axis['name']}-body`).innerHTML +=
-                    `<div class="form-check">
-                <input class="form-check-input" type="radio" name="question${question['position']}" id="flexRadioDefault1">
-                <label class="form-check-label" for="flexRadioDefault1">${alternative['text']}</label>
+                    let alternatives = getAlternatives(question['id']);
+                    alternatives.forEach(alternative => {
+                        document.getElementById(`${axis['name']}-body`).innerHTML +=
+                            `<div class="form-check">
+                <input class="form-check-input" type="radio" name="question${question['id']}" id="flexRadioDefault1">
+                    <label class="form-check-label" for="flexRadioDefault1">${alternative['text']}</label>
                 </div>`
-            })
-            document.getElementById(`${axis['name']}-body`).innerHTML += "<hr>"
+                    })
+                    document.getElementById(`${axis['name']}-body`).innerHTML += "</div><hr>";
+                });
+                questionNumber++;
+            }
+            ;
+            document.getElementById(`${axis['name']}-body`).innerHTML += "<br>";
         });
     })
 };
@@ -786,7 +798,7 @@ function questionsExist() {
         }
 
     })
-    return questionsExist
+    return questionsExist;
 }
 
 function readQuestionsFromDatabase() {
@@ -796,11 +808,12 @@ function readQuestionsFromDatabase() {
         showQuestionsByAxis();
     } else {
         document.getElementById("questions-container").innerHTML = `
-        <div id="questions-placeholder">Ainda não há questões neste questionário. 
-        Clique no + para adicionar.`
+                <div id = "questions-placeholder"> Ainda não há questões neste questionário. 
+        Clique no + para adicionar.</div>`;
     }
 
 }
+
 
 function updateEditModal(question_id) {
     $('#edit-add-axis-span').hide();
@@ -823,12 +836,12 @@ function updateEditModal(question_id) {
     })
     let axes = getAxes();
     axes.forEach(axis => {
-        document.getElementById('edit-axis-dropdown').innerHTML += `<option value="${axis['name']}">${axis['name']}</option>`
+        document.getElementById('edit-axis-dropdown').innerHTML += `<option value = "${axis['name']}" > ${axis['name']}</option> `
     })
     $('#edit-axis-dropdown').val(getAxisFromId(question['axis_id']));
     let subdivisions = getSubdivisionsFromAxisId((question['axis_id']));
     subdivisions.forEach(subdivision => {
-        document.getElementById('edit-critical-factors').innerHTML += `<option value="${subdivision['name']}">${subdivision['name']}</option>`
+        document.getElementById('edit-critical-factors').innerHTML += `<option value = "${subdivision['name']}" > ${subdivision['name']}</option> `
     })
     $("#edit-question").val(question['text']);
     $("#edit-weight").val(question['weight']);
@@ -867,3 +880,4 @@ function getSubaxisFromId(id) {
     })
     return subaxisName;
 }
+

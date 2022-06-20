@@ -68,30 +68,10 @@
 
         <!-- Barra de pesquisa e ícones de adicionar e deletar perguntas-->
         <div class="container" id="toolbar">
-          <div class="input-group mb-3" id="searchbox">
-            <div class="input-group-prepend">
-              <!-- ícone de pesquisa (lupa) -->
-              <span class="input-group-text" id="basic-addon1">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search"
-                  viewBox="0 0 16 16">
-                  <path
-                    d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-                </svg>
-              </span>
-            </div>
-            <!-- Field de pesquisa -->
-            <input type="text" class="form-control" placeholder="Pesquisar" aria-label="Pesquisar"
-              aria-describedby="basic-addon1">
+         
             <!-- ícone de adicionar -->
-            <span id="add-toolbar-button">
-              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal"
-                onclick="addModal()"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                  class="bi bi-plus-lg" viewBox="0 0 16 16">
-                  <path fill-rule="evenodd"
-                    d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z" />
-                </svg></button>
-            </span>
-          </div>
+              <button type="button" class="btn btn-primary" style="width:100%;" data-bs-toggle="modal" data-bs-target="#addModal"
+                onclick="addModal()">Adicionar questão</button>
         </div>
 
         <!-- Modal para adicionar perguntas, ativado quando o botão de + na toolbar é acionado -->
@@ -141,7 +121,7 @@
                     </span>
                     <br>
 
-                    <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Fator crítico</label>
+                    <label class="my-1 mr-2" for="critical-factors">Fator crítico</label>
                     <select class="custom-select my-1 mr-sm-2" id="critical-factors" name="critical-factors">
                     </select>
                     <button id="add-subaxis" type="button" class="add-axis-buttons">
@@ -312,7 +292,7 @@
                   </div>
                   <div class="form-group">
                     <label for="alternatives">Alternativas:</label>
-                    <div class="form-group" id="alternatives">
+                    <div class="form-group" id="edit-alternatives">
                       <span>
                         <input id="edit-alternative1" style='float:left;width:70%;' type="text" name="alternative1"
                           class="form-control alternatives" placeholder="Resposta...">
@@ -397,6 +377,7 @@
           <!-- Fale conosco -->
           <a href="https://landing.falconi.com/" target="_blank">Fale conosco</a>
         </div>
+      </div>
     </footer>
 
 
