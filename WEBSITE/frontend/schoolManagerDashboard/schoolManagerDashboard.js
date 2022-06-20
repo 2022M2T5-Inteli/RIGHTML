@@ -64,7 +64,13 @@ var school = null;
    }
 
    function showUpdateBox() {
-       
+       updateNetworkDropdown();
+       $('#update_employees_number').val(school['number_of_employees']);
+       $('#update_students_number').val(school['number_of_students']);
+       $('#school-name-update').val(school['name']);
+       $("#school-census-update").val(school['school_census_id']);
+       $("#networkUpdate").val(school['network_id'])
+       $("#institutionTypeUpdate").val(school['type_of_institution'])
    }
    function getNetworkNameFromId(network_id) {
        let networkName = null;
