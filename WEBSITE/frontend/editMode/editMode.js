@@ -2,6 +2,8 @@
 function onload() {
     readQuestionsFromDatabase();
 }
+// Constante id do diagnosses
+ const diagnosisid = 4;
 
 // Reinicia modal de adicionar questões
 function addModal() {
@@ -48,8 +50,6 @@ function updateAddModalDropdowns() {
 
 }
 
-
-
 // Salva nova questão no modal de adicionar questões
 function saveQuestion() {
     if ($('#axis-dropdown').val() === null || $('#critical-factors').val() === null) {
@@ -74,7 +74,7 @@ function saveQuestion() {
                 text: $("#question").val(),
                 axis_subdivision_id: findSubdivisionIDFromName($('#critical-factors').val()),
                 axis_id: getAxisIdFromName($('#axis-dropdown').val()),
-                diagnosis_id: 4
+                diagnosis_id: diagnosisid
             }
         });
         let lastId = getLastQuestionId()
@@ -109,7 +109,7 @@ function saveQuestionChanges(question_id) {
                 text: $("#edit-question").val(),
                 axis_subdivision_id: findSubdivisionIDFromName($('#edit-critical-factors').val()),
                 axis_id: getAxisIdFromName($('#edit-axis-dropdown').val()),
-                diagnosis_id: 1
+                diagnosis_id: diagnosisid
             }
         });
         saveAlternativeChanges(question_id);
@@ -221,7 +221,7 @@ function findSubdivisionIDFromName(name) {
         }
 
 
-        
+
     })
     return id;
 
@@ -241,7 +241,7 @@ function saveAlternatives(question_id) {
                     position: i,
                     axis_subdivision_id: findSubdivisionIDFromName($('#critical-factors').val()),
                     axis_id: getAxisIdFromName($('#axis-dropdown').val()),
-                    diagnosis_id: 1
+                    diagnosis_id: diagnosisid
                 }
             });
         }
@@ -274,7 +274,7 @@ function saveAlternativeChanges(question_id) {
                     position: currentPosition,
                     axis_subdivision_id: findSubdivisionIDFromName($('#edit-critical-factors').val()),
                     axis_id: getAxisIdFromName($('#edit-axis-dropdown').val()),
-                    diagnosis_id: 1
+                    diagnosis_id: diagnosisid
                 }
             });
             currentPosition++;
@@ -290,7 +290,7 @@ function getAxes() {
         async: false,
         success: data => {
             data.forEach(element => {
-                if (parseInt(element['diagnosis_id']) === 2) {
+                if (parseInt(element['diagnosis_id']) === diagnosisid) {
                     axes.push(element);
                 }
             });
@@ -446,7 +446,7 @@ $('#save-axis').on('click', function (event) {
         async: false,
         data: {
             name: axis_name,
-            diagnosis_id: 2,
+            diagnosis_id: diagnosisid,
         }
     });
     $('#add-axis-input').val("");
@@ -464,7 +464,7 @@ $('#edit-save-axis').on('click', function (event) {
         async: false,
         data: {
             name: axis_name,
-            diagnosis_id: 2,
+            diagnosis_id: diagnosisid,
         }
     });
     $('#edit-add-axis-input').val("");
@@ -521,7 +521,7 @@ $('#save-subaxis').on('click', function (event) {
         data: {
             name: subaxis_name,
             axis_id: getAxisIdFromName(axis),
-            diagnosis_id: 1,
+            diagnosis_id: diagnosisid,
         }
     });
     $('#add-subaxis-input').val("");
@@ -545,7 +545,7 @@ $('#edit-save-subaxis').on('click', function (event) {
         data: {
             name: subaxis_name,
             axis_id: getAxisIdFromName($("#edit-axis-dropdown").val()),
-            diagnosis_id: 2,
+            diagnosis_id: diagnosisid,
         }
     });
     $('#edit-add-subaxis-input').val("");
