@@ -43,6 +43,7 @@ function addModal() {
 // Atualiza dropdowns do modal de adicionar questão
 function updateAddModalDropdowns() {
     let axes = getAxes();
+    console.log(axes)
     document.getElementById('axis-dropdown').innerHTML = "<option value='' disabled selected>Escolher...</option>";
     axes.forEach(axis => {
         document.getElementById('axis-dropdown').innerHTML += `<option value="${axis['name']}">${axis['name']}</option>`
@@ -294,7 +295,7 @@ function getAxes() {
         async: false,
         success: data => {
             data.forEach(element => {
-                if (parseInt(element['diagnosis_id']) === 2) {
+                if (parseInt(element['diagnosis_id']) === diagnosisid) {
                     axes.push(element);
                 }
             });
@@ -364,7 +365,7 @@ $('#delete-axis').on('click', function (event) {
         document.getElementById('domain').innerHTML = "<option value='' disabled selected>Escolher...</option>";
         $('#delete-axis').hide();
     } else if ($("#axis-dropdown").val() === '' || $("#axis-dropdown").val() === null) {
-        alert("Selecione um fator crítico no dropdown para deletá-lo.")
+        alert("Selecione um domínio no dropdown para deletá-lo.")
     }
 });
 
@@ -416,7 +417,7 @@ $('#edit-delete-subaxis').on('click', function (event) {
         $('#editModal').modal('toggle');
 
     } else if ($("#edit-domain").val() === '' || $("#edit-domain").val() === null) {
-        alert("Selecione um eixo no dropdown para deletá-lo.")
+        alert("Selecione um grande eixo no dropdown para deletá-lo.")
     }
 });
 
@@ -451,6 +452,7 @@ $('#save-axis').on('click', function (event) {
         data: {
             name: axis_name,
             diagnosis_id: diagnosisid,
+
         }
     });
     $('#add-axis-input').val("");
@@ -513,6 +515,7 @@ function getSubaxisIdFromName(name) {
 }
 
 $('#save-subaxis').on('click', function (event) {
+    console.log("im sinde")
     let axis = $("#axis-dropdown").val();
     if ($("#axis-dropdown").val() === '' || $("#axis-dropdown").val() === null) {
         return alert("Selecione um eixo para adicionar um fator crítico");
