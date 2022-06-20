@@ -219,6 +219,9 @@ function findSubdivisionIDFromName(name) {
                 }
             })
         }
+
+
+        
     })
     return id;
 
