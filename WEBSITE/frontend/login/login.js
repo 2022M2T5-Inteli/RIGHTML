@@ -50,7 +50,6 @@ function checkSchoolManager(loginInput) {
 
 function checkNetworkManager(loginInput) {
     let user = null;
-    console.log(loginInput)
     $.ajax({
         url: "http://127.0.0.1:3001/networkmanagers",
         type: 'GET',
