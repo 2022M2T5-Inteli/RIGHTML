@@ -292,7 +292,7 @@ function getAxes() {
         async: false,
         success: data => {
             data.forEach(element => {
-                if (parseInt(element['diagnosis_id']) === 2) {
+                if (parseInt(element['diagnosis_id']) === diagnosisid) {
                     axes.push(element);
                 }
             });
