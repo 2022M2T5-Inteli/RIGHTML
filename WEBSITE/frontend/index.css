@@ -92,3 +92,27 @@
     white-space: nowrap;
     -webkit-overflow-scrolling: touch;
   }
+
+  .contentIndex {
+    font-size: 25px;
+    margin-left: 150px;
+    margin-right: 150px;
+    margin-top: 0px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+
+    .imgComoFunciona {
+    display: flex;; 
+    height: 25  0px;
+  }
+
+ 
+
+  .textComoFunciona {
+    background-color: #f8c000;
+    height: min-content;
+    display: flex;
+
+  }
