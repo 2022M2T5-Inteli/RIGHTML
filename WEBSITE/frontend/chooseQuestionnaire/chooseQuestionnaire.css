@@ -1,104 +1,13 @@
-body {
-    font-family: 'Manrope', sans-serif;
-}
 
-.navbar {
-    background: #FFE600;
-    font-family: "Lucida Console", monospace;
-}
-
-.nav-item {
-    padding: 1% 7%;
-    margin: auto;
-}
-
-.social-media-icons {
-    color: white;
-    padding: 2%;
-}
-
-
-footer {
-    background-color: #343a40;
-    color: white;
-    margin-top: auto;
-    font-family: 'Space Mono', monospace;
-}
-
-.social-media-icons {
-    color: white;
-    padding: 2%;
-}
-
-#footer-logo {
-    width: 6%;
-    height: 6%;
-    padding-right: 1%;
-}
-
-.footer-content {
-    padding: 1vh 0;
-}
 
 .main-title {
     padding: 0;
     margin: 0;
     font-size: medium;
 }
-​ .button-src {
-    background-color: #810dfd;
-    color: #FFFFFF;
-}
-
-.questions {
-    padding: 1% 0% 3% 1%;
-}
-
-.question-header {
-    background-color: #FFE600;
-    padding: 1% 1% 1% 0;
-}
-
-
-
-.button-finish{
-    display: flex;
-    align-items: center;
-    justify-content: center
-    
-}
-
-nav {
-    font-family: 'Manrope', sans-serif;
-}
-
-#overview {
-    border: 1px solid grey;
-    border-radius: 2px;
-    width: 100%;
-    margin-top: 2%;
-    margin-bottom: 2%;
-}
-
-
-#footer-logo {
-    width: 6%;
-    height: 6%;
-    padding-right: 1%;
-
-}
-
 .centered {
     display: flex;
     align-items: center;
-}
-
-#footer-bottom {
-    background-color: #747678;
-}
-
-.footer-content {
-    padding: 1vh 0;
 }
 
 #page-title {
@@ -108,53 +17,6 @@ nav {
     font-family: 'Manrope';
 }
 
-p {
-    font-size: small;
-    font-family: 'Manrope', sans-serif;
-}
-
-#toolbar {
-    width: 100%;
-    text-align: center;
-}
-
-#basic-addon1 {
-    height: 100%;
-    background-color: white;
-}
-
-#searchbox {
-    margin-top: 1vh;
-    width: 100%;
-    text-align: center;
-    font-family: 'Manrope', sans-serif;
-}
-
-.extra {
-    background-color: white;
-    margin: auto;
-    height: 100%;
-
-}
-
-#add {
-    background-color: white;
-    padding: 1% 1% 1% 4%;
-}
-
-#trash {
-    background-color: white;
-
-    padding: 1% 4% 1% 4%;
-    text-align: center;
-    border-style: none solid none none;
-    border-color: rgb(151, 27, 27);
-}
-
-#details {
-    margin: auto;
-    padding: 1% 0%;
-}
 #img_right {
     max-width: 75%;
     height: 75%;
@@ -163,22 +25,4 @@ p {
 #img_left {
     max-width: 75%;
     height: 75%;
-}
-body {
-    height: 100vh;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-}
-
-footer {
-    background-color: #343a40;
-    color: white;
-    margin-top: auto;
-}
-
-.main-title {
-    padding: 0;
-    margin: 0;
-    font-size: medium;
 }
