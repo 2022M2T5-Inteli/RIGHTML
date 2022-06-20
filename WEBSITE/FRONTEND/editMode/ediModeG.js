@@ -91,7 +91,7 @@ function saveQuestion() {
 
 function saveQuestionChanges(question_id) {
     if ($('#edit-domain').val() === null || $('#edit-domain').val() === null) {
-        alert("Escolha um eixo e fator crítico para salvar a questão.");
+        alert("Escolha um grande eixo e domínio para salvar a questão.");
     } else if ($('#edit-question').val() === '') {
         alert("Preencha o enunciado da questão para continuar.");
     } else if ($('#edit-weight').val() === '') {
