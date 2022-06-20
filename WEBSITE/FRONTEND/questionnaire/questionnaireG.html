@@ -26,8 +26,9 @@
   <title>Agenda educacional</title>
 </head>
 
-<body onload="readQuestionsFromDatabase() " class="d-flex flex-column min-vh-100">
-
+<body onload="readQuestionsFromDatabase()">
+<div id="page-container">
+  <div id="content-wrap">
   <header>
     <!-- Navegação segundo classes do Bootstrap-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
@@ -55,38 +56,11 @@
   </header>
 
   <main class="d-flex flex-column min-vh-100">
-    <h2 id="page-title">Agenda educacional</h2>
-    <div class="axis-title-outer-styling">
-      <div class="axis-title-inner-styling">
-        <h3 class="axis-title">Responda às perguntas abaixo</h3>
-      </div>
+    <h2 id="page-title">Agenda de Gestão</h2>
+
+    <div id="questions-container" class="container-fluid">
     </div>
-
-    <!--Essa div contem os todos os eixos das perguntas  --> 
-    <div id="testingAxis" class="dropdown" type="button">
-      <button class="btn btn-secondary dropdown-toggle"  type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-        Escolha seu eixo
-      </button>
-      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" id="testeDrop">
-
-      </ul>
-    </div>
-   
-
-    <div id="questionsContainer" class="container-fluid">
-      <div id="questionsPlaceholder"></div>
-    </div>
-
-
-
-
-
-
-    <div class='container' style="text-align:center;">
-        <!--na função onclick se colocar window.location.href abre uma nova guia-->
-        <button type="button" class="btn btn-primary" onclick="testePraDescobrir(); location.href = '../results/10-05.html';">Finalizar</button>
-        <!--na função onclick se colocar window.location.href abre uma nova guia-->
-    </div>
+    <button class="btn btn-primary" onclick="saveAnswers()">Finalizar</button>
   </main>
 
   <!-- Rodapé -->
@@ -121,13 +95,16 @@
         <!-- Fale conosco -->
         <a href="https://landing.falconi.com/" target="_blank">Fale conosco</a>
       </div>
+    </div>
   </footer>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  <script src="equityAxis.js"></script>
+  <script src="questionnaireG.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
     crossorigin="anonymous"></script>
+
+  </div></div>
 </body>
 
 </html>
