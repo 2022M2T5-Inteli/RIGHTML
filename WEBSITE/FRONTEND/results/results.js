@@ -22,7 +22,7 @@ const myChart = new Chart(ctx, {
   data: {
     labels: getAxisLabels(),
     datasets: [{
-      label: 'Escola exemplo',
+      label: getSchoolName(),
       data: getAxesScores(),
       fill: true,
       backgroundColor: 'rgba(129, 13, 253, 0.2)',
@@ -110,7 +110,6 @@ function getAnswersByAxis(axis_id) {
   return answers;
 }
 
-
 function getAxes() {
   let axes = [];
   $.ajax({
@@ -128,18 +127,55 @@ function getAxes() {
   return axes;
 }
 
-  function getSessionData(){
+  function getUser() {
+    let cpf = localStorage.getItem("primaryKey");
+    let user = null;
+    $.ajax({
+      url: "http://127.0.0.1:3001/schoolmanagers",
+      type: 'GET',
+      async: false,
+      success: data => {
+        data.forEach(schoolManager => {
+          if (parseInt(schoolManager["cpf"]) === parseInt(cpf)) {
+              user = schoolManager
+          }
+        });
+      }
+    });
+    return user;
+  }
+  function getSessionData() {
     let loggedIn = localStorage.getItem("loggedIn")
     let userType = localStorage.getItem("table")
     let primaryKey = localStorage.getItem("primaryKey");
 
-    if(loggedIn === true && userType==="school_manager"){
-       console.log("logado")
+    if(loggedIn === 'true' && userType === "school_manager"){
+    }
+    else {
+        alert("Você precisa se logar para ter acesso aos resultados")
+        window.location.href = "../login/login.html"
     }
   }
 
-
+  function getSchoolName() {
+    let user = getUser()
+    let schoolName = null
+    $.ajax({
+      url: "http://127.0.0.1:3001/schools",
+      type: 'GET',
+      async: false,
+      success: data => {
+        data.forEach(school => {
+          if (user["school_cnpj"] === school["cnpj"]) {
+              schoolName = school["name"]
+          }
+        });
+      }
+    });
+    return schoolName;
+  }
   function onLoad(){
-    console.log(getSessionData())
+    getSessionData();
+
   }
 
