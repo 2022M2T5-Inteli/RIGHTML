@@ -29,14 +29,16 @@ Assim, buscamos oferecer uma forma rápida e simples para ques os diretores de e
 ## 🛠 Estrutura de pastas
 
 - Raiz<br>
-|<br>
-|-->Projeto 5
 
+|-->Projeto 5<br>
+
+<br>
 |--> DOCUMENTOS<br>
-  
+<br>
 |--> WEBSITE<br>
-
+<br>
 |--> imagens<br>
+<br>
 |--> src<br>
  
 | readme.md<br>
