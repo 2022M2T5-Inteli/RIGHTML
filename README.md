@@ -29,9 +29,6 @@ Assim, buscamos oferecer uma forma rápida e simples para ques os diretores de e
 ## 🛠 Estrutura de pastas
 
 **|-->** documentos<br>
-&emsp;**| -->** outros<br>
-&emsp;&emsp;| T4_G5_Web_application_document.docx<br>
-&emsp;&emsp;| T4_G5_Web_application_document.pdf<br>
 **|-->** imagens<br>
 **|-->** src<br>
 &emsp;**|-->** Backend<br>
@@ -50,6 +47,22 @@ Dentre os arquivos presentes na raiz do projeto, definem-se:
 **imagens**: imagens relacionadas ao projeto como um todo (por exemplo imagens do sistema, do grupo, logotipos e afins).
 
 **src**: nesta pasta encontra-se todo o código fonte do sistema (existem duas subpastas backend e frontend que contêm, respectivamente, o código do servidor e o código da página web).
+
+## 💻 Configuração para Desenvolvimento
+
+Aqui encontram-se todas as instruções necessárias para a instalação de todos os programas, bibliotecas e ferramentas imprescindíveis para a configuração do ambiente de desenvolvimento.<br>
+
+Baixar e instalar o **node.js**: https://nodejs.org/pt-br/ (versão 16.15.1 LTS)<br>
+Clone o repositório em questão.<br>
+No modo administrador, abra o "prompt de comando" ou o "terminal" e, após, abra a pasta "**src/backend**" no diretório raiz do repositório clonado e digite o segundo comando:<br>
+  
+```npm install```
+
+  <br>Isso instalará todas as dependências definidas no arquivo package.json que são necessárias para rodar o projeto. Agora o projeto já está pronto para ser modificado. Caso ainda deseje iniciar a aplicação, digite o comando abaixo no terminal:
+
+```npm start```
+
+Pronto. O servidor está online.
 
 ## 📋 Licença/License
 
