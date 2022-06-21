@@ -67,6 +67,11 @@ No modo administrador, abra o "prompt de comando" ou o "terminal" e, após, abra
 
 Pronto. O servidor está online.
 
+
+## 🗃 Histórico de lançamentos
+
+A cada atualização os detalhes devem ser lançados aqui.
+
 * 0.0.1 - 22/04/2022
     * Adição de Template;<br>
 * 0.0.2 - 03/05/2022
