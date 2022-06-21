@@ -50,8 +50,6 @@ function updateAddModalDropdowns() {
 
 }
 
-
-
 // Salva nova questão no modal de adicionar questões
 function saveQuestion() {
     if ($('#axis-dropdown').val() === null || $('#critical-factors').val() === null) {

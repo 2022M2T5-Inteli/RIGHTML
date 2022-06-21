@@ -25,6 +25,7 @@
     <title>Área do gestor</title>
 </head>
 
+<<<<<<< Updated upstream
 <body onload="getSessionData()">
 <div id="page-container">
     <div id="content-wrap">
@@ -197,7 +198,126 @@
 
 
         </main>
+=======
+<body>
+  <header>
 
+    <!-- Navegação segundo classes do Bootstrap-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+      <div class="container-fluid">
+        <!-- Ícone e título -->
+        <a href="#" class="navbar-brand">
+          <img src="../logo.png" height="70" alt="SchoolAhead">SchoolAhead
+        </a>
+        <!-- Botão de hambúrguer para telas menores -->
+        <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <!-- Links -->
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <div class="navbar-nav">
+            <a href="../index.html" class="nav-item p-4 nav-link active">Início</a>
+            <a href="../whoWeAre/whoWeAre.html" class="nav-item p-4 nav-link">Quem somos</a>
+          </div>
+          <div class="navbar-nav ms-auto">
+            <a href="../login/login.html" class="nav-item nav-link">Entrar</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Conteúdo da página em si -->
+
+  
+  <main class="container">
+
+  <div class="container row">  
+    <h2 id="page-title">Dashboard gestor da escola</h2>
+    <!-- Box de informações gerais sobre o sistema e funcionalidades -->
+    
+      <div class="col-md-4 offset-md-4">
+        <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+          Dados da instituição
+        </a>
+        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2">
+          Atualizar informações 
+        </button>
+      </div>
+    
+
+      <div id="imagem"class="col-first">
+        <img src="images/logo.png" height="400">
+      </div>
+  </div>
+    
+<!-- Box de informações sobre o sistema -->
+    <div class="collapse" id="collapseExample">
+      <div class="list-group list-group-numbered">
+        <li class="list-group-item d-flex justify-content-between align-items-start">
+          <div class="ms-2 me-auto">
+            <div class="fw-bold">Número de estudantes</div>
+            nº xxxxx 
+          </div>
+          <span class="badge bg-primary rounded-pill">xxxxx</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-start">
+          <div class="ms-2 me-auto">
+            <div class="fw-bold">Número de funcionários</div>
+            nº xxxxx
+          </div>
+          <span class="badge bg-primary rounded-pill">xxxxx</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-start">
+          <div class="ms-2 me-auto">
+            <div class="fw-bold">Tipo de instituição</div>
+            xxxxxxxxxx
+          </div>
+        </li>  
+        <li class="list-group-item d-flex justify-content-between align-items-start">
+          <div class="ms-2 me-auto">
+            <div class="fw-bold">CNPJ</div>
+            nº xxxx
+          </div>
+        </li>  
+        <li class="list-group-item d-flex justify-content-between align-items-start">
+          <div class="ms-2 me-auto">
+            <div class="fw-bold"> Número de cadastro INEP</div>
+            nº xxxxxxxxxx
+          </div>
+        </li>
+
+      </div>
+    </div>
+    
+    <!-- Box para alterar dados dos usuarios  -->
+    <div class="collapse" id="collapseExample2">
+      <label for="basic-url" class="form-label">Informações</label>
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon3">nº alunos</span>
+        <input type="text" class="form-control" id="update_students_number" aria-describedby="basic-addon3">
+      </div>
+      <!--Box de teste apenas para testar função de atualizar dados em uma planilha-->
+      <div class="input-group mb-3">
+        <span class="input-group-text">key primaria para saber onde sera o update</span>
+        <input type="text" class="form-control" id="CNPJ_key" aria-label="Amount (to the nearest dollar)">
+      </div>
+
+      <div class="input-group mb-3">
+        <span class="input-group-text">nº funcionários</span>
+        <input type="text" class="form-control" id="update_employees_number" aria-label="Amount (to the nearest dollar)">
+      </div>
+
+      <div class="input-group mb-3">
+        <span class="input-group-text">Taxa de aprovação (NÃO HÁ DADOS NO BANCO)</span>
+        <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+      </div>
+      
+
+      <button class="btn btn-primary"  type="button" data-bs-toggle="collapse" id="update_data" data-bs-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2">
+       Salvar
+      </button>
+>>>>>>> Stashed changes
     </div>
     <!-- Rodapé -->
     <footer class="container-fluid">
