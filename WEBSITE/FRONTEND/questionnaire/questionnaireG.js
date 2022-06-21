@@ -1,3 +1,4 @@
+//Ler as questões do banco de dados e criar o acordeon 
 function readQuestionsFromDatabase() {
     if (questionsExist()) {
         document.getElementById("questions-container").innerHTML = '';
@@ -10,6 +11,7 @@ function readQuestionsFromDatabase() {
 
 }
 
+//Checa se as questões existem no banco de dados 
 function questionsExist() {
     let questionsExist = false;
     $.ajax({
@@ -25,6 +27,7 @@ function questionsExist() {
     return questionsExist;
 }
 
+//Cria o acordeão de acordo com o eixo na página 
 function createAxisAccordions(container) {
     let axes = getAxes()
     axes.forEach(axis => {
@@ -45,6 +48,7 @@ function createAxisAccordions(container) {
 
 let loadedQuestions = [];
 
+//Mostra as questões por eixo na página e adiciona cada elemento num ID específico do HTML
 function showQuestionsByAxis() {
     loadedQuestions = [];
     let axes = getAxes()
@@ -58,6 +62,7 @@ function showQuestionsByAxis() {
         <h4>${subdivision['name']}</h4>
       </div>
     </div>`;
+    //Adiciona o texto das questões no HTML 
                 questions.forEach(question => {
                     document.getElementById(`${axis['name']}-body`).innerHTML += `
                             <div id = "question${question['id']}">
@@ -81,6 +86,7 @@ function showQuestionsByAxis() {
     })
 };
 
+//Compara se os eixos são de educação e guarda na array
 function getAxes() {
     var axes = [];
     $.ajax({
@@ -98,6 +104,7 @@ function getAxes() {
     return axes;
 }
 
+//Compara se as subdivisões dos eixos são do id específico do eixo
 function getSubdivisionsFromAxisId(axis_id) {
     subdivisions = [];
     $.ajax({
@@ -115,6 +122,7 @@ function getSubdivisionsFromAxisId(axis_id) {
     return subdivisions;
 }
 
+//Pega as questões do sub-eixo 
 function getQuestionsFromSubaxis(subaxis_id) {
     let questions = [];
     $.ajax({
@@ -137,6 +145,7 @@ function getQuestionsFromSubaxis(subaxis_id) {
     return questions;
 }
 
+//Pega as alternativas para cada questão de acordo com seu id 
 function getAlternatives(question_id) {
     alternatives = [];
     $.ajax({
@@ -157,6 +166,7 @@ function getAlternatives(question_id) {
 let user = null;
 let school = null;
 
+//Checa se o usúario está logado
 function getSessionData() {
     let primaryKey = localStorage.getItem("primaryKey");
     let table = localStorage.getItem("table");
@@ -193,6 +203,7 @@ function getSessionData() {
     }
 }
 
+//Salva as respostas para o usúario específico 
 function saveAnswers() {
     getSessionData()
     loadedQuestions.forEach(answeredQuestion => {

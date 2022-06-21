@@ -6,7 +6,7 @@ function criarConta() {
 let CNPJS = [];
 let school_id = [];
 
-// essa função checa se já existe um email cadastrado assim permitindo o cadastro ou indica o login  
+//Essa função coloca o CNPJ na lista
 function get_cnpjs() {
     $.ajax({
         url: "http://127.0.0.1:3001/schools",
@@ -22,6 +22,7 @@ function get_cnpjs() {
     });
 }
 
+//Essa função vê o ID da rede 
 function get_network_id() {
     $.ajax({
         url: "http://127.0.0.1:3001/networks",
@@ -37,8 +38,8 @@ function get_network_id() {
     });
 }
 
-// TESTANDO INTEGRAÇÃO COM BACKEND
-// nessa função adicionamos os dados das escolas no banco de dados 
+
+// Função que checa se todos os campos da escola estão preenchidos 
 $(document).ready(function () {
     $("#criarConta").click(function () {
         let url = "http://127.0.0.1:3001/schoolinsert";
@@ -66,6 +67,7 @@ $(document).ready(function () {
         else {
             
             {
+                //Insere os dados da escola no banco de dados
                 $.ajax({
                     url: url,
                     type: 'POST',

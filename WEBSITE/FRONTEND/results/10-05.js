@@ -1,9 +1,12 @@
+//Link para entrar em contato com a falconi 
 function contactUs() {
     window.location.href = "https://conteudo.falconi.com/formulario-home";
   }
 
+  //Onde o gráfico sera formado
   const ctx = document.getElementById('myChart');
 
+  //Função para formar o gráfico
   const myChart = new Chart(ctx, {
     type: 'radar',
     data: {

@@ -1,6 +1,9 @@
+
+//Compara se os dados do login estão no banco de dados e libera o acesso
 function login() {
     var loginInput = parseInt(document.getElementById('cpf').value);
     var userType = document.querySelector('input[type=radio][name=userType]:checked').value;
+    //Compara o input da tela de login caso escolha o botão gestor de escola
     if (userType === "schoolManager") {
         if (checkSchoolManager(loginInput)) {
             localStorage.setItem("loggedIn", "true");
@@ -15,6 +18,7 @@ function login() {
             })
 
         }
+        //Compara o input da tela de login caso escolha o botão gestor de rede 
     } else if (userType === "networkManager") {
         if (checkNetworkManager(loginInput)) {
             localStorage.setItem("loggedIn", "true");
@@ -28,6 +32,7 @@ function login() {
             })
 
         }
+        //Compara o input da tela de login caso escolha o botão funcionário Falconi
     } else if (userType === "falconi") {
         if (checkFalconiEmployee(loginInput)) {
             localStorage.setItem("loggedIn", "true");
@@ -46,6 +51,7 @@ function login() {
     console.log(loginInput + " " + userType)
 }
 
+//Checa no banco de dados se o cpf existe ou não
 function checkSchoolManager(loginInput) {
     let user = null;
     $.ajax({
@@ -63,6 +69,7 @@ function checkSchoolManager(loginInput) {
     return user;
 }
 
+//Checa no banco de dados se o cpf existe ou não
 function checkNetworkManager(loginInput) {
     let user = null;
     $.ajax({
@@ -80,6 +87,7 @@ function checkNetworkManager(loginInput) {
     return user;
 }
 
+//Checa no banco de dados se o cpf existe ou não
 function checkFalconiEmployee(loginInput) {
     let user = null;
     $.ajax({
