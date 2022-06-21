@@ -28,24 +28,28 @@ Assim, buscamos oferecer uma forma rápida e simples para ques os diretores de e
 
 ## 🛠 Estrutura de pastas
 
-- Raiz<br>
+**|-->** documentos<br>
+&emsp;**| -->** outros<br>
+&emsp;&emsp;| T4_G5_Web_application_document.docx<br>
+&emsp;&emsp;| T4_G5_Web_application_document.pdf<br>
+**|-->** imagens<br>
+**|-->** src<br>
+&emsp;**|-->** Backend<br>
+&emsp;**|-->** Frontend<br>
+&emsp;**|-->** .vscode<br>
+&emsp;**|-->** .idea<br>
+&emsp;|--> readme.md<br>
+&emsp;|---> license.txt<br>
 
-|-->Projeto 5<br>
+Dentre os arquivos presentes na raiz do projeto, definem-se:
 
-<br>|--> DOCUMENTOS<br>
+**readme.md**: arquivo que serve como guia e explicação geral sobre o projeto (o mesmo que você está lendo agora).
 
-<br>|--> WEBSITE<br>
+**documentos**: aqui estarão todos os documentos do projeto. Há também uma pasta denominada outros onde estão presentes aqueles documentos complementares ao web application document.
 
-<br>|--> imagens<br>
+**imagens**: imagens relacionadas ao projeto como um todo (por exemplo imagens do sistema, do grupo, logotipos e afins).
 
-<br>|--> src<br>
- 
-| readme.md<br>
-
-
-
-
-
+**src**: nesta pasta encontra-se todo o código fonte do sistema (existem duas subpastas backend e frontend que contêm, respectivamente, o código do servidor e o código da página web).
 
 ## 📋 Licença/License
 
