@@ -74,23 +74,23 @@ A cada atualização os detalhes devem ser lançados aqui.
 
 * 0.0.1 - 29/04/2022
     * Wireframe, matriz swot, matriz de risco, análise da indústia, descriçao do projeto no WAD e canvas concluidos;<br>
-* 0.0.2 - 09/05/2022
+* 0.2.0 - 09/05/2022
     * Criação e desenvolvimento do front-end;<br>
-* 0.2.1 - 13/05/2022
+* 0.3.0 - 13/05/2022
     * Revisão e atualização do front-end;<br>
-* 0.2.1 - 20/05/2022
+* 0.4.0 - 20/05/2022
     * Revisão do WAD, refatoração do código e atualização do front-end;<br>
-* 0.3.0 - 27/05/2022
+* 0.5.0 - 27/05/2022
     * Inicio da criação do banco de dados e introdução do CRUD no projeto;<br>
-* 0.4.0 - 03/06/2022
-    * PARAMOS AQUI;<br>
-* 0.5.0 - 01/06/2022
-    * Update WAD com Arquitetura da Solução;<br>
-* 0.6.0 - 15/06/2022
-    * Atualização da API do Postman;<br>
-* 0.7.0 - 15/06/2022
-    * Representação da arquitetura da solução concluída no WAD;<br>
- * **0.1.0 - 21/06/2022**
+* 0.6.0 - 03/06/2022
+    * Padronização de paginas, atualização do CSS, organização github e ajuste do banco de dados;<br>
+* 0.7.0 - 10/06/2022
+    * Atualização banco de dados, implementação ajax;<br>
+* 0.8.0 - 14/06/2022
+    * Refatoração dos códigos, atualização do banco de dados e WAD, correções na integração com ajax;<br>
+ * 0.8.1 - 17/06/2022
+    * Correçaõ de bugs da intregração do back-end com o front-end;<br>
+ * **1.0.0 - 21/06/2022**
     * **Update README.md completo e no modelo correto.**<br>   
 
 ## 📋 Licença/License
