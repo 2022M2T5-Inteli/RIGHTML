@@ -120,3 +120,33 @@
 #part4 {
   margin: 50px;
 }
+
+.container {
+  position: relative;
+  width: 1000px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.container .card {
+  position: relative;
+  max-width: 450px;
+  background: #f8c000;
+  display: flex;
+}
+
+.container .card .imgBx {
+  max-width: 150px;
+}
+
+.container .card .imgBx img {
+ 
+  height: auto;
+}
+
+#explicacao {
+  background-color: #f8c000;
+}
+
