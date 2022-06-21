@@ -2,6 +2,7 @@
 //     window.location = "../homePage/home.html"
 // }
 
+//Pega o CPF do gestor de rede 
 $(document).ready(function () {
     let CPFS = [];
     function get_cpf() {
@@ -19,6 +20,7 @@ $(document).ready(function () {
         });
     }
 
+    // Botão criar a conta 
     $("#buttonCreateAccount").click(function () {
         let urlNetworkManager = "http://127.0.0.1:3001/networkmanagerinsert"
         let urlNetwork = "http://127.0.0.1:3001/networkinsert"
@@ -39,9 +41,9 @@ $(document).ready(function () {
             })
         }
         else {
-            console.log("deu bom")
+            console.log("funcionou")
             get_cpf()
-
+            //Insere  os dados no banco de dados
             $.ajax({
                 url: urlNetworkManager,
                 type: 'POST',
@@ -51,7 +53,7 @@ $(document).ready(function () {
                     cpf: $('#networkManagerCPF').val(),
                 },
             })
-            $.ajax({ //basicamente tem a mesma função do postman
+            $.ajax({ 
                 url: urlNetwork,
                 type: 'POST',
                 data: {

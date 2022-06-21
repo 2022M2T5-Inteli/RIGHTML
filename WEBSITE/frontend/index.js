@@ -3,22 +3,24 @@ let headerLogged = document.getElementById("changeLink");
 let userType = localStorage.getItem("table");
 console.log(userType)
 
+
+//Verifica se o usuria já havia logado antes 
 function loggedChecked() {
     if (logged === "true") {
         console.log('logadoooo')
         // headerLogged.innerHTML = `<a href="./login/login.html" class="nav-item nav-link" id="changeLink">Logadao</a>`
         if (userType === "school_manager") {
-            console.log('gestor escola useeer')
+            console.log('gestor escola user')
             headerLogged.innerHTML = `<a href="./schoolManagerDashboard/schoolManagerDashboard" class="nav-item nav-link" id="changeLink">Área do Gestor de Escola</a>`
         }
 
         else if (userType === "network_manager") {
-            console.log('gestor rede useeer')
+            console.log('gestor rede user')
             headerLogged.innerHTML = `<a href="./login/login.html" class="nav-item nav-link" id="changeLink">Área do Gestor de Rede</a>`
         }
 
         else if (userType === "employee") {
-            console.log('funcionariou')
+            console.log('funcionario')
             headerLogged.innerHTML = `<a href="./login/login.html" class="nav-item nav-link" id="changeLink">Área do Funcionário </a>`
         }
     }

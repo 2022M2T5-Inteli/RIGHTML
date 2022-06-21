@@ -1,8 +1,12 @@
+
+//Container com todas questões 
 const questionsContainer = document.getElementById("questions-container");
 
+//Array que tem todas as questões
 const questionsArray = [];
 
 let currentEditModeQuestionIndex = null;
+
 
 function Question(question = "Este é o enunciado", axis = "Este é o eixo", alternatives = ["A", "B", "C", "D", "E"]) {
     this.question = question;
@@ -14,6 +18,7 @@ function addQuestion() {
     getQuestionData();
 }
 
+//Mostrar as questões na página
 function displayQuestion(question) {
     document.getElementById("questions-placeholder").hidden = true;
     let index = questionsArray.indexOf(question, 0);
@@ -58,6 +63,7 @@ function displayQuestion(question) {
     }
 }
 
+//Analisa todos os dados da questão
 function getQuestionData() {
     let form = document.getElementById("form");
     let questionWording = form["question"].value;
@@ -75,6 +81,7 @@ function getQuestionData() {
     updateQuestions();
 }
 
+//Compara os dados da questão e os atualiza
 function applyQuestionChanges() {
     let form = document.getElementById("editForm");
     let questionWording = form["question"].value;
