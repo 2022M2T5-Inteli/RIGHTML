@@ -28,22 +28,52 @@ Assim, buscamos oferecer uma forma rápida e simples para ques os diretores de e
 
 ## 🛠 Estrutura de pastas
 
-- Raiz<br>
-|<br>
-|--> DOCUMENTOS<br>
+**|-->** documentos<br>
+**|-->** imagens<br>
+**|-->** src<br>
+&emsp;**|-->** Backend<br>
+&emsp;**|-->** Frontend<br>
+&emsp;**|-->** .vscode<br>
+&emsp;**|-->** .idea<br>
+**|-->** readme.md<br>
+
+
+Dentre os arquivos presentes na raiz do projeto, definem-se:
+
+**readme.md**: arquivo que serve como guia e explicação geral sobre o projeto (o mesmo que você está lendo agora).
+
+**documentos**: aqui estarão todos os documentos do projeto. Há também uma pasta denominada outros onde estão presentes aqueles documentos complementares ao web application document.
+
+**imagens**: imagens relacionadas ao projeto como um todo (por exemplo imagens do sistema, do grupo, logotipos e afins).
+
+**src**: nesta pasta encontra-se todo o código fonte do sistema (existem quatro subpastas duas delas sendo backend e frontend que contêm, respectivamente, o código do servidor e o código da página web e as outras duas sendo de arquivos do para uso das ide´s).
+
+## 💻 Configuração para Desenvolvimento
+
+Aqui encontram-se todas as instruções necessárias para a instalação de todos os programas, bibliotecas e ferramentas imprescindíveis para a configuração do ambiente de desenvolvimento.<br>
+
+Baixar e instalar o **node.js**: https://nodejs.org/pt-br/ (versão 16.15.1 LTS)<br>
+Clone o repositório em questão.<br>
+No modo administrador, abra o "prompt de comando" ou o "terminal" e, após, abra a pasta "**src/backend**" no diretório raiz do repositório clonado e digite o segundo comando:<br>
   
-|--> WEBSITE<br>
+```npm install```
 
-|--> imagens<br>
-|--> src<br>
- 
-| readme.md<br>
+  <br>Isso instalará todas as dependências definidas no arquivo package.json que são necessárias para rodar o projeto. Agora o projeto já está pronto para ser modificado. Caso ainda deseje iniciar a aplicação, digite o comando abaixo no terminal:
 
+```npm start```
 
-
-
-
+Pronto. O servidor está online.
 
 ## 📋 Licença/License
 
 <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://github.com/Spidus/Teste_Final_1">MODELO GIT INTELI</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://www.yggbrasil.com.br/vr">INTELI, VICTOR BRUNO ALEXANDER ROSETTI DE QUIROZ</a> is licensed under <a href="http://creativecommons.org/licenses/by/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">Attribution 4.0 International<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"></a></p>
+
+## 🎓 Referências
+
+Aqui estão as referências usadas no projeto.
+
+1. <https://stackoverflow.com/>
+2. <https://www.w3schools.com/>
+3. <jquery-3.6.0.min.js>
+3. <https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js>
+4. <https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css>
