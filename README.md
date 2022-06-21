@@ -38,8 +38,8 @@ Assim, buscamos oferecer uma forma rápida e simples para ques os diretores de e
 &emsp;**|-->** Frontend<br>
 &emsp;**|-->** .vscode<br>
 &emsp;**|-->** .idea<br>
-&emsp;|--> readme.md<br>
-&emsp;|---> license.txt<br>
+**|-->** readme.md<br>
+
 
 Dentre os arquivos presentes na raiz do projeto, definem-se:
 
