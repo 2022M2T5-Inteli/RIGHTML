@@ -53,8 +53,6 @@ function updateAddModalDropdowns() {
 
 }
 
-
-
 // Salva nova questão no modal de adicionar questões
 function saveQuestion() {
     if ($('#domain').val() === null || $('domain').val() === null) {

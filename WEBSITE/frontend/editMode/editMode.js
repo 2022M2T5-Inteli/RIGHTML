@@ -84,6 +84,7 @@ function saveQuestion() {
 
     }
 }
+
 // Informa o último id automático da última questão
 function saveQuestionChanges(question_id) {
     if ($('#edit-axis-dropdown').val() === null || $('#edit-critical-factors').val() === null) {

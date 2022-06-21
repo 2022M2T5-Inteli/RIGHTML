@@ -1,13 +1,14 @@
 const educationalDiagnosisID = 4;
 const managementDiagnosisID = 5;
 
-
+// Carregar os diagnósticos ao carregar a página
 function onload() {
     checkSession();
     updateEducationalDiagnosisBox();
     updateManagementDiagnosisBox();
 }
 
+// Inicia a integração do banco de dados dos números das questões para aparecer no frontend
 function getNumberOfQuestions(diagnosis_id) {
     let number = 0;
     $.ajax({
@@ -24,6 +25,8 @@ function getNumberOfQuestions(diagnosis_id) {
     });
     return number;
 }
+
+// Inicia a integração do banco de dados com os id's de cada diagnósticok para aparecer no frontend
 function getDiagnosisData(diagnosis_id) {
     let desiredDiagnosis = null;
     $.ajax({
@@ -42,13 +45,15 @@ function getDiagnosisData(diagnosis_id) {
 
 }
 
-
+// Atualiza a descrição da agenda de acordo com os dos de cada escola 
 function updateEducationalDiagnosisBox() {
     let diagnosis = getDiagnosisData(educationalDiagnosisID)
     $("#educational-description").text(diagnosis['description']);
     $("#time-educational").text(diagnosis['answer_time'] + " minutos");
     $("#question-number-educational").text(getNumberOfQuestions(educationalDiagnosisID) + " questões");
 }
+
+// Atualiza a descrição da agenda de acordo com os dos de cada escola 
 function updateManagementDiagnosisBox() {
     let diagnosis = getDiagnosisData(managementDiagnosisID)
     $("#management-description").text(diagnosis['description']);
@@ -56,6 +61,7 @@ function updateManagementDiagnosisBox() {
     $("#question-number-management").text(getNumberOfQuestions(managementDiagnosisID) + " questões");
 }
 
+// Atualiza a descrição da agenda de acordo com os dos de cada escola 
 function checkSession(){
         if(localStorage.getItem("loggedIn") === "false" || localStorage.getItem("table") != "school_manager") {
             alert('Você não tem permissão para ver esta página. Entre como gestor escolar para proceder.');
