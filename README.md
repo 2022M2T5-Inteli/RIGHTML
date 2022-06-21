@@ -29,7 +29,7 @@ Assim, buscamos oferecer uma forma rápida e simples para ques os diretores de e
 ## 🛠 Estrutura de pastas
 
 - Raiz<br>
-|<br>
+- 
 |--> DOCUMENTOS<br>
   
 |--> WEBSITE<br>
