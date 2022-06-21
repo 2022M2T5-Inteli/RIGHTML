@@ -32,14 +32,13 @@ Assim, buscamos oferecer uma forma rápida e simples para ques os diretores de e
 
 |-->Projeto 5<br>
 
-<br>
-|--> DOCUMENTOS<br>
-<br>
-|--> WEBSITE<br>
-<br>
-|--> imagens<br>
-<br>
-|--> src<br>
+<br>|--> DOCUMENTOS<br>
+
+<br>|--> WEBSITE<br>
+
+<br>|--> imagens<br>
+
+<br>|--> src<br>
  
 | readme.md<br>
 
