@@ -36,11 +36,14 @@ Assim, buscamos oferecer uma forma rápida e simples para ques os diretores de e
 &emsp;**|-->** .vscode<br>
 &emsp;**|-->** .idea<br>
 **|-->** readme.md<br>
+**|-->** .gitignore<br>
 
 
 Dentre os arquivos presentes na raiz do projeto, definem-se:
 
 **readme.md**: arquivo que serve como guia e explicação geral sobre o projeto (o mesmo que você está lendo agora).
+
+**.gitignore**: arquivo que faz com que o github ignore o que não precisa.
 
 **documentos**: aqui estarão todos os documentos do projeto. Há também uma pasta denominada outros onde estão presentes aqueles documentos complementares ao web application document.
 
@@ -63,6 +66,38 @@ No modo administrador, abra o "prompt de comando" ou o "terminal" e, após, abra
 ```npm start```
 
 Pronto. O servidor está online.
+
+* 0.0.1 - 22/04/2022
+    * Adição de Template;<br>
+* 0.0.2 - 03/05/2022
+    * Criação e desenvolvimento do WAD;<br>
+* 0.2.1 - 05/01/2022
+    * Exclusão do modelo GDD e atualização do WAD;<br>
+* 0.2.1 - 05/01/2022
+    * Atualização do README.md;<br>
+* 0.3.0 - 15/05/2022
+    * Organização das pastas de Imagens e SRC;<br>
+    * Atualização da documentação;<br>
+* 0.4.0 - 29/05/2022
+    * Update README.md;<br>
+* 0.5.0 - 01/06/2022
+    * Update WAD com Arquitetura da Solução;<br>
+* 0.6.0 - 10/06/2022
+    * Update do README.md com correções ortográficas;<br>
+* 0.7.0 - 15/06/2022
+    * Atualização da API do Postman;<br>
+* 0.7.1 - 15/06/2022
+    * Representação da arquitetura da solução concluída no WAD;<br>
+ * 0.8.0 - 17/06/2022
+    * Add das legendas das imagens no WAD;<br>
+ * 0.8.1 - 17/06/2022
+    * Add da Arquitetura da Solução com Heroku na pasta documento;<br>
+ * 0.8.2 - 17/06/2022
+    * Add dos testes de Funcionalidade (preliminares);<br>
+ * 0.9.1 - 20/06/2022
+    * Organização das pastas documentos e update da estrutura de pastas do README.md<br>
+ * **0.1.0 - 21/06/2022**
+    * **Update README.md completo e no modelo correto.**<br>   
 
 ## 📋 Licença/License
 
