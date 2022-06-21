@@ -34,7 +34,6 @@ var school = null;
                     })
                 }
             })
-            console.log(school)
     }
 
     $("#update_data").click(function () {
