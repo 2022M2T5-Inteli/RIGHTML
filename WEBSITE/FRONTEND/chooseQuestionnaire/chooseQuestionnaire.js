@@ -3,6 +3,7 @@ const managementDiagnosisID = 5;
 
 
 function onload() {
+    checkSession();
     updateEducationalDiagnosisBox();
     updateManagementDiagnosisBox();
 }
@@ -53,4 +54,11 @@ function updateManagementDiagnosisBox() {
     $("#management-description").text(diagnosis['description']);
     $("#time-management").text(diagnosis['answer_time'] + " minutos");
     $("#question-number-management").text(getNumberOfQuestions(managementDiagnosisID) + " questões");
+}
+
+function checkSession(){
+        if(localStorage.getItem("loggedIn") === "false" || localStorage.getItem("table") != "school_manager") {
+            alert('Você não tem permissão para ver esta página. Entre como gestor escolar para proceder.');
+            window.location = "../index.html";
+        }
 }
