@@ -93,14 +93,6 @@ A cada atualização os detalhes devem ser lançados aqui.
     * Atualização da API do Postman;<br>
 * 0.7.1 - 15/06/2022
     * Representação da arquitetura da solução concluída no WAD;<br>
- * 0.8.0 - 17/06/2022
-    * Add das legendas das imagens no WAD;<br>
- * 0.8.1 - 17/06/2022
-    * Add da Arquitetura da Solução com Heroku na pasta documento;<br>
- * 0.8.2 - 17/06/2022
-    * Add dos testes de Funcionalidade (preliminares);<br>
- * 0.9.1 - 20/06/2022
-    * Organização das pastas documentos e update da estrutura de pastas do README.md<br>
  * **0.1.0 - 21/06/2022**
     * **Update README.md completo e no modelo correto.**<br>   
 

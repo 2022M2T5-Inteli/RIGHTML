@@ -762,7 +762,7 @@ function createAxisAccordions(container) {
     })
 }
 
-// Função 
+// Função que faz aparecer as questões cadastradas divididas por eixos e subeixos em cada questionário 
 function showQuestionsByAxis() {
     var questionNumber = 0;
     let axes = getAxes()
@@ -814,6 +814,7 @@ function showQuestionsByAxis() {
     })
 };
 
+// Função que verifica se existe eixo no banco de dados 
 function questionsExist() {
     let questionsExist = false;
     $.ajax({
@@ -829,7 +830,8 @@ function questionsExist() {
     })
     return questionsExist;
 }
-// 
+
+// Função que confere se há questões, não houvendo ela mostra o alrta para adicionar novas questões
 function readQuestionsFromDatabase() {
     if (questionsExist()) {
         document.getElementById("questions-container").innerHTML = '';
@@ -843,7 +845,7 @@ function readQuestionsFromDatabase() {
 
 }
 
-// Função que possibilida a edição do modal 
+// Inicia modal de edição de perguntas com dados atuais pré-inseridos
 function updateEditModal(question_id) {
     $('#edit-add-axis-span').hide();
     $('#edit-add-subaxis-span').hide();
@@ -891,7 +893,7 @@ function updateEditModal(question_id) {
     $("#save-button").attr("onclick", buttonFunction);
 }
 
-//
+// Função que retorna o nome do seu subeixos de acordo com o seu id  
 function getSubaxisFromId(id) {
     let subaxisName = '';
     $.ajax({
