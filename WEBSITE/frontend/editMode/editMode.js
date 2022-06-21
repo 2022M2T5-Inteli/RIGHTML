@@ -84,7 +84,7 @@ function saveQuestion() {
 
     }
 }
-
+// Informa o último id automático da última questão
 function saveQuestionChanges(question_id) {
     if ($('#edit-axis-dropdown').val() === null || $('#edit-critical-factors').val() === null) {
         alert("Escolha um eixo e fator crítico para salvar a questão.");
@@ -134,7 +134,7 @@ function getLastQuestionId() {
     });
     return highestId;
 }
-
+// Salva o id e o Nome de cada eixo 
 function getAxisIdFromName(name) {
     let id = null;
     $.ajax({
@@ -154,6 +154,7 @@ function getAxisIdFromName(name) {
 
 let critical_factors = [];
 
+// Salva a subdivisão de cada eixo 
 function getSubdivisionsFromAxisId(axis_id) {
     subdivisions = [];
     $.ajax({
@@ -171,6 +172,7 @@ function getSubdivisionsFromAxisId(axis_id) {
     return subdivisions;
 }
 
+// Realiza o dropdown para os eixos de cada agenda 
 $("#axis-dropdown").change(function () {
     if ($("#axis-dropdown").val() === "") {
         $("#delete-axis").hide();
@@ -184,7 +186,7 @@ $("#axis-dropdown").change(function () {
     }
 });
 
-
+// Subdivisão de eixos, ou seja, os fatores críticos 
 $("#critical-factors").change(function () {
     if ($("#critical-factor").val() === "") {
         $("#delete-subaxis").hide();
@@ -193,6 +195,7 @@ $("#critical-factors").change(function () {
     }
 });
 
+// Salva as edições do dropdown dos eixos 
 $("#edit-axis-dropdown").change(function () {
     if ($("#edit-axis-dropdown").val() === "") {
         $("#edit-delete-axis").hide();
@@ -205,7 +208,7 @@ $("#edit-axis-dropdown").change(function () {
     }
 });
 
-
+// Encontra o id do nome de cada subdivisão criada
 function findSubdivisionIDFromName(name) {
     let id = ''
     $.ajax({
@@ -227,6 +230,7 @@ function findSubdivisionIDFromName(name) {
 
 }
 
+// Salva as alternativas com o id de cada questão 
 function saveAlternatives(question_id) {
     for (let i = 1; i <= 5; i++) {
         if ($("#alternative" + i).val() != "") {
@@ -248,6 +252,7 @@ function saveAlternatives(question_id) {
     }
 }
 
+// Salve mudanças das alternativas que forem feitas 
 function saveAlternativeChanges(question_id) {
     original_alternatives = getAlternatives(question_id);
     for (let i = 0; i < original_alternatives.length; i++) {
@@ -260,6 +265,8 @@ function saveAlternativeChanges(question_id) {
             }
         });
     }
+
+// Função que insere até cinco alternativas se preenchidas 
     let currentPosition = 1;
     for (let i = 1; i <= 5; i++) {
         if ($("#edit-alternative" + i).val() != "") {
@@ -282,6 +289,7 @@ function saveAlternativeChanges(question_id) {
     }
 }
 
+// Função que salva os eixos
 function getAxes() {
     var axes = [];
     $.ajax({
@@ -299,7 +307,7 @@ function getAxes() {
     return axes;
 }
 
-
+// Salva o id e o Nome de cada eixo 
 function getAxisIdFromName(name) {
     let id = null;
     $.ajax({
@@ -317,6 +325,7 @@ function getAxisIdFromName(name) {
     return id;
 }
 
+// Botão que ao clicado esconde o segundo span 
 $('#add-axis').on('click', function (event) {
     if ($('#add-axis-span').is(":visible")) {
         $('#add-axis-span').hide();
@@ -325,6 +334,7 @@ $('#add-axis').on('click', function (event) {
     }
 });
 
+// Função que deleta o eixo selecionado 
 function deleteAxis(axis_id) {
     if ($('#axis-dropdown').val() != '') {
         let questions = getAllQuestionsFromAxis(axis_id);
@@ -348,7 +358,7 @@ function deleteAxis(axis_id) {
     }
 }
 
-
+// Confirmação de deletar o eixo 
 $('#delete-axis').on('click', function (event) {
     if ($("#axis-dropdown").val() != '' &&
         confirm("Tem certeza de que deseja deletar este eixo? Todas as questões associadas a ele (inclusive esta) serão excluídas.")) {
@@ -364,7 +374,7 @@ $('#delete-axis').on('click', function (event) {
     }
 });
 
-
+// Confirmação de deletar a subdivisão de cada eixo 
 $('#delete-subaxis').on('click', function (event) {
     if ($("#critical-factors").val() != '' &&
         confirm("Tem certeza de que deseja deletar este fator crítico? Todas as questões associadas a ele (inclusive esta) serão excluídas.")) {
@@ -386,6 +396,7 @@ $('#delete-subaxis').on('click', function (event) {
     }
 });
 
+// Deleta a subdivisão 
 function deleteSubaxis(subaxis_id) {
     $.ajax({
         url: "http://127.0.0.1:3001/axissubdivisiondelete",
@@ -397,7 +408,7 @@ function deleteSubaxis(subaxis_id) {
     });
 }
 
-
+// Confirmação para deletar o subeixo ( fatores críticos )
 $('#edit-delete-subaxis').on('click', function (event) {
     if ($("#edit-critical-factors").val() != '' &&
         confirm("Tem certeza de que deseja deletar este fator crítico? Todas as questões associadas a ele (inclusive esta) serão excluídas.")) {
@@ -438,6 +449,7 @@ $('#edit-add-axis').on('click', function (event) {
     }
 });
 
+// Botão que ao clicado salva o eixo 
 $('#save-axis').on('click', function (event) {
     let axis_name = $('#add-axis-input').val();
     $.ajax({
@@ -472,6 +484,7 @@ $('#edit-save-axis').on('click', function (event) {
     addModal();
 });
 
+// Esconde o span do subeixo 
 $('#add-subaxis').on('click', function (event) {
     if ($('#add-subaxis-span').is(":visible")) {
         $('#add-subaxis-span').hide();
@@ -480,6 +493,7 @@ $('#add-subaxis').on('click', function (event) {
     }
 });
 
+// Esconde o span do subeixo para a sua edição 
 $('#edit-add-subaxis').on('click', function (event) {
     if ($('#edit-add-subaxis-span').is(":visible")) {
         $('#edit-add-subaxis-span').hide();
@@ -488,6 +502,7 @@ $('#edit-add-subaxis').on('click', function (event) {
     }
 });
 
+// Função do subeixo de acordo com o nome e id 
 function getSubaxisIdFromName(name) {
     console.log("subaxis name: " + name)
     let id = -1;
@@ -508,6 +523,7 @@ function getSubaxisIdFromName(name) {
 
 }
 
+// Salva o subeixo e alarta para selecionar o eixo para só então adicionar um fator crítico 
 $('#save-subaxis').on('click', function (event) {
     let axis = $("#axis-dropdown").val();
     if ($("#axis-dropdown").val() === '' || $("#axis-dropdown").val() === null) {
@@ -524,6 +540,8 @@ $('#save-subaxis').on('click', function (event) {
             diagnosis_id: diagnosisid,
         }
     });
+
+// Dropdown dos subeixos depois que forem criados 
     $('#add-subaxis-input').val("");
     $('#add-subaxis-span').hide();
     let subdivisions = getSubdivisionsFromAxisId(getAxisIdFromName(axis));
@@ -536,6 +554,7 @@ $('#save-subaxis').on('click', function (event) {
     $('#delete-subaxis').show();
 });
 
+// Edição do subeixo quando clicado 
 $('#edit-save-subaxis').on('click', function (event) {
     let subaxis_name = $('#edit-add-subaxis-input').val();
     $.ajax({
@@ -553,6 +572,7 @@ $('#edit-save-subaxis').on('click', function (event) {
     updateEditModal();
 });
 
+// Traz as informações de nome e id do eixo do banco de dados para a tela  
 function getAxisFromId(id) {
     var name = null;
     $.ajax({
@@ -572,6 +592,7 @@ function getAxisFromId(id) {
 
 let alternatives = [];
 
+// Função que salva as alternativas criadas 
 function getAlternatives(question_id) {
     alternatives = [];
     $.ajax({
@@ -589,6 +610,7 @@ function getAlternatives(question_id) {
     return alternatives;
 }
 
+//Função que salva as respostas selecionadas 
 function getAnswers(question_id) {
     let answers = [];
     $.ajax({
@@ -607,6 +629,7 @@ function getAnswers(question_id) {
     return answers;
 }
 
+// Função que delata as questões, com os id's, enunciado, alternativas e respostas 
 function deleteQuestion(question_id) {
     let answers = getAnswers(question_id);
     console.log(answers)
@@ -642,24 +665,26 @@ function deleteQuestion(question_id) {
     readQuestionsFromDatabase();
 }
 
+//Função que slava as questões em cada subeixos
 function getQuestionsFromSubaxis(subaxis_id) {
     let questions = [];
     $.ajax({
-        //url do endpoint
+//Url do endpoint
         url: "http://127.0.0.1:3001/questions",
-        //tipo da requisição
+//Tipo da requisição
         type: 'GET',
         async: false,
-        //se obtiver sucesso, executar a arrow function abaixo
+//Se obtiver sucesso, executar a arrow function abaixo
         success: data => {
-            //se não tiver questão no banco de dados, retorna um div do html com esse texto
+//Se não tiver questão no banco de dados, retorna um div do html com esse texto
             data.forEach(question => {
                 if (question['axis_subdivision_id'] === subaxis_id) {
 
                     questions.push(question);
                 }
             })
-        }      //forEach faz loop que vai passar por cada elemento dentro do data
+        }     
+//ForEach faz loop que vai passar por cada elemento dentro do data
     });
     return questions;
 }
@@ -672,23 +697,24 @@ function getQuestionsByAxis() {
     });
 
     $.ajax({
-        //url do endpoint
+//url do endpoint
         url: "http://127.0.0.1:3001/questions",
-        //tipo da requisição
+//tipo da requisição
         type: 'GET',
-        //se obtiver sucesso, executar a arrow function abaixo
+//se obtiver sucesso, executar a arrow function abaixo
         success: data => {
-            //se não tiver questão no banco de dados, retorna um div do html com esse texto
+ //se não tiver questão no banco de dados, retorna um div do html com esse texto
             if (data.length == 0) {
             }
-            //se tiver questão, limpa o questionsContainer
+ //se tiver questão, limpa o questionsContainer
             else {
                 data.forEach(question => {
                     if (question['axis_id'] in questions) {
                         questions[question['axis_id']].push(question);
                     }
                 })
-            }      //forEach faz loop que vai passar por cada elemento dentro do data
+            }     
+//forEach faz loop que vai passar por cada elemento dentro do data
         }
     });
     return questions;
@@ -697,25 +723,27 @@ function getQuestionsByAxis() {
 function getAllQuestionsFromAxis(axis_id) {
     questions = [];
     $.ajax({
-        //url do endpoint
+//url do endpoint
         url: "http://127.0.0.1:3001/questions",
-        //tipo da requisição
+//tipo da requisição
         type: 'GET',
         async: false,
-        //se obtiver sucesso, executar a arrow function abaixo
+//se obtiver sucesso, executar a arrow function abaixo
         success: data => {
-            //se não tiver questão no banco de dados, retorna um div do html com esse texto
-            //se tiver questão, limpa o questionsContainer
+//se não tiver questão no banco de dados, retorna um div do html com esse texto
+//se tiver questão, limpa o questionsContainer
             data.forEach(question => {
                 if (question['axis_id'] === axis_id) {
                     questions.push(question);
                 }
-            })    //forEach faz loop que vai passar por cada elemento dentro do data
+            })    
+//forEach faz loop que vai passar por cada elemento dentro do data
         }
     });
     return questions;
 }
 
+// Função que cria o accordion dos eixos após criados 
 function createAxisAccordions(container) {
     let axes = getAxes()
     axes.forEach(axis => {
@@ -734,6 +762,7 @@ function createAxisAccordions(container) {
     })
 }
 
+// Função 
 function showQuestionsByAxis() {
     var questionNumber = 0;
     let axes = getAxes()
@@ -800,7 +829,7 @@ function questionsExist() {
     })
     return questionsExist;
 }
-
+// 
 function readQuestionsFromDatabase() {
     if (questionsExist()) {
         document.getElementById("questions-container").innerHTML = '';
@@ -814,7 +843,7 @@ function readQuestionsFromDatabase() {
 
 }
 
-
+// Função que possibilida a edição do modal 
 function updateEditModal(question_id) {
     $('#edit-add-axis-span').hide();
     $('#edit-add-subaxis-span').hide();
@@ -862,7 +891,7 @@ function updateEditModal(question_id) {
     $("#save-button").attr("onclick", buttonFunction);
 }
 
-
+//
 function getSubaxisFromId(id) {
     let subaxisName = '';
     $.ajax({
