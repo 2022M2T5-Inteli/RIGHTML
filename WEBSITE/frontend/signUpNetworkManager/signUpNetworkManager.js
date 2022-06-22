@@ -53,7 +53,7 @@ $(document).ready(function () {
                     cpf: $('#networkManagerCPF').val(),
                 },
             })
-            $.ajax({ 
+            $.ajax({
                 url: urlNetwork,
                 type: 'POST',
                 data: {
@@ -61,6 +61,12 @@ $(document).ready(function () {
                     network_id: $('#networkId').val(),
                     type: $('input[name=opcao]:checked').val(),
                 },
+            })
+            Swal.fire({
+                icon: 'success',
+                title: 'Conta criada com sucesso',
+                showConfirmButton: false,
+                timer: 3000
             })
             window.location.replace("../homePage/home.html")
         }
