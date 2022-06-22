@@ -207,8 +207,8 @@ function getSessionData() {
 function saveAnswers() {
     getSessionData()
     loadedQuestions.forEach(answeredQuestion => {
-        console.log(answeredQuestion)
-        let chosen_alternative_id = document.querySelector(`input[name=question${answeredQuestion['id']}]:checked`).value
+        let chosen_alternative_id = $(`input[name="question${answeredQuestion['id']}"]:checked`).val();
+        console.log(chosen_alternative_id)
         $.ajax({
             url: "http://127.0.0.1:3001/answerinsert",
             type: 'POST',
@@ -225,4 +225,6 @@ function saveAnswers() {
             }
         });
     })
+    console.log("estou aqui")
+    window.location.href = "../../results/resultsG.html";
 }

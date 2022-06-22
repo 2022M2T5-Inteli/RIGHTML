@@ -228,4 +228,5 @@ function saveAnswers() {
             }
         });
     })
+                window.location.href = "../results/results.html";
 }
