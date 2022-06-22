@@ -85,7 +85,7 @@ function getWeightQuestion(answer) {
     success: data => {
       data.forEach(question => {
         if (question["id"] === questionId) {
-          questionWeight =  question['weight']
+          questionWeight = question['weight']
         }
       });
     }
@@ -127,55 +127,88 @@ function getAxes() {
   return axes;
 }
 
-  function getUser() {
-    let cpf = localStorage.getItem("primaryKey");
-    let user = null;
-    $.ajax({
-      url: "http://127.0.0.1:3001/schoolmanagers",
-      type: 'GET',
-      async: false,
-      success: data => {
-        data.forEach(schoolManager => {
-          if (parseInt(schoolManager["cpf"]) === parseInt(cpf)) {
-              user = schoolManager
-          }
-        });
-      }
-    });
-    return user;
-  }
-  function getSessionData() {
-    let loggedIn = localStorage.getItem("loggedIn")
-    let userType = localStorage.getItem("table")
-    let primaryKey = localStorage.getItem("primaryKey");
-
-    if(loggedIn === 'true' && userType === "school_manager"){
+function getUser() {
+  let cpf = localStorage.getItem("primaryKey");
+  let user = null;
+  $.ajax({
+    url: "http://127.0.0.1:3001/schoolmanagers",
+    type: 'GET',
+    async: false,
+    success: data => {
+      data.forEach(schoolManager => {
+        if (parseInt(schoolManager["cpf"]) === parseInt(cpf)) {
+          user = schoolManager
+        }
+      });
     }
-    else {
-        alert("Você precisa se logar para ter acesso aos resultados")
-        window.location.href = "../login/login.html"
+  });
+  return user;
+}
+function getSessionData() {
+  let loggedIn = localStorage.getItem("loggedIn")
+  let userType = localStorage.getItem("table")
+  let primaryKey = localStorage.getItem("primaryKey");
+
+  if (loggedIn === 'true' && userType === "school_manager") {
+  }
+  else {
+    alert("Você precisa se logar para ter acesso aos resultados")
+    window.location.href = "../login/login.html"
+  }
+}
+
+function getSchoolName() {
+  let user = getUser()
+  let schoolName = null
+  $.ajax({
+    url: "http://127.0.0.1:3001/schools",
+    type: 'GET',
+    async: false,
+    success: data => {
+      data.forEach(school => {
+        if (user["school_cnpj"] === school["cnpj"]) {
+          schoolName = school["name"]
+        }
+      });
+    }
+  });
+  return schoolName;
+}
+function onLoad() {
+  getSessionData();
+  loggedChecked();
+
+}
+
+let logged = localStorage.getItem("loggedIn");
+let headerLogged = document.getElementById("changeLink");
+let userType = localStorage.getItem("table");
+// console.log(userType)
+
+
+//Verifica se o usuria já havia logado antes 
+function loggedChecked() {
+  if (logged === "true") {
+    // console.log('logadoooo')
+
+    if (userType === "school_manager") {
+      // console.log('gestor escola user')
+      headerLogged.innerHTML = `<a href="../schoolManagerDashboard/schoolManagerDashboard.html" class="nav-item nav-link" >Área do Gestor</a>`
+    }
+
+    else if (userType === "network_manager") {
+      // console.log('gestor rede user')
+      headerLogged.innerHTML = `<a href="../networkManagerDashboard/networkManagerDashboard.html" class="nav-item nav-link" >Área do Gestor</a>`
+    }
+
+    else if (userType === "employee") {
+      // console.log('funcionario')
+      headerLogged.innerHTML = `<a href="../adminDashboard.html" class="nav-item nav-link" >Área do Administrador </a>`
     }
   }
+  else {
 
-  function getSchoolName() {
-    let user = getUser()
-    let schoolName = null
-    $.ajax({
-      url: "http://127.0.0.1:3001/schools",
-      type: 'GET',
-      async: false,
-      success: data => {
-        data.forEach(school => {
-          if (user["school_cnpj"] === school["cnpj"]) {
-              schoolName = school["name"]
-          }
-        });
-      }
-    });
-    return schoolName;
+    headerLogged.innerHTML = `<a href="../login/login.html" class="nav-item nav-link" id="changeLink">Entrar</a>`
   }
-  function onLoad(){
-    getSessionData();
-
-  }
+}
 
