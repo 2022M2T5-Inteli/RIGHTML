@@ -1,4 +1,4 @@
-const diagnosisId = 4;
+const diagnosisId = 5;
 
 let axes = [];
 

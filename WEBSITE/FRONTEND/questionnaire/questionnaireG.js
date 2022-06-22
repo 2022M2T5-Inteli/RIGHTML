@@ -203,7 +203,16 @@ function getSessionData() {
     }
 }
 
-//Salva as respostas para o usúario específico 
+$('#finish').on('click', function (event) {
+    saveAnswers();
+    location.replace("../results/resultsG.html");
+
+});
+
+//Salva as respostas para o usúario específico
+
+
+
 function saveAnswers() {
     getSessionData()
     loadedQuestions.forEach(answeredQuestion => {
@@ -226,5 +235,4 @@ function saveAnswers() {
         });
     })
     console.log("estou aqui")
-    window.location.href = "../../results/resultsG.html";
 }
