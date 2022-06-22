@@ -24,6 +24,7 @@ function login() {
             localStorage.setItem("loggedIn", "true");
             localStorage.setItem("primaryKey", loginInput);
             localStorage.setItem("table", "network_manager");
+            window.location.href = "../networkManagerDashboard/networkManagerDashboard.html";
         } else {
             // alert("Este CPF não está cadastrado como gestor de rede.")
             Swal.fire({

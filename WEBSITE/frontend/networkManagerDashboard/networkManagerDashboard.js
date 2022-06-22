@@ -50,46 +50,47 @@ function getSessionData() {
             })
             updateNetworkInfo();
         }
-    });
 
-    function logout() {
-        localStorage.setItem("loggedIn", "false");
-        localStorage.setItem("primaryKey", null);
-        localStorage.setItem("table", null);
-        window.location.href = "../login/login.html";
-    }
+    })
+};
 
-    function showUpdateBox() {
-        $('#school-name-update').val(network['name']);
-        $("#networkUpdate").val(network['network_id'])
-        $("#institutionTypeUpdate").val(network['type_of_institution'])
-    }
+function logout() {
+    localStorage.setItem("loggedIn", "false");
+    localStorage.setItem("primaryKey", null);
+    localStorage.setItem("table", null);
+    window.location.href = "../login/login.html";
+}
 
-    function getNetworkNameFromId(network_id) {
-        let networkName = null;
-        $.ajax({
-            url: "http://127.0.0.1:3001/networks",
-            type: 'GET',
-            async: false,
-            success: data => {
-                data.forEach(network => {
-                    if (parseInt(network['id']) === parseInt(network_id)) {
-                        networkName = network['name'];
-                    }
-                })
-            }
-        })
-        return networkName;
-    }
+function showUpdateBox() {
+    $('#school-name-update').val(network['name']);
+    $("#networkUpdate").val(network['network_id'])
+    $("#institutionTypeUpdate").val(network['type_of_institution'])
+}
 
-    function updateNetworkInfo() {
-        getSessionData();
-        $("#institutionName").text(network['name'])
-        $("#network").text(getNetworkNameFromId(network['network_id']))
-        if (network['type_of_institution'] === "public") {
-            $("#institutionType").text("Pública")
-        } else if (network['type_of_institution'] === "private") {
-            $("#institutionType").text("Particular")
+function getNetworkNameFromId(network_id) {
+    let networkName = null;
+    $.ajax({
+        url: "http://127.0.0.1:3001/networks",
+        type: 'GET',
+        async: false,
+        success: data => {
+            data.forEach(network => {
+                if (parseInt(network['id']) === parseInt(network_id)) {
+                    networkName = network['name'];
+                }
+            })
         }
+    })
+    return networkName;
+}
+
+function updateNetworkInfo() {
+    getSessionData();
+    $("#institutionName").text(network['name'])
+    $("#network").text(getNetworkNameFromId(network['network_id']))
+    if (network['type_of_institution'] === "public") {
+        $("#institutionType").text("Pública")
+    } else if (network['type_of_institution'] === "private") {
+        $("#institutionType").text("Particular")
     }
 }
