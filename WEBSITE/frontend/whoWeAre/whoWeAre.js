@@ -11,12 +11,12 @@ function loggedChecked() {
         // headerLogged.innerHTML = `<a href="./login/login.html" class="nav-item nav-link" id="changeLink">Logadao</a>`
         if (userType === "school_manager") {
             console.log('gestor escola user')
-            headerLogged.innerHTML = `<a href="./schoolManagerDashboard/schoolManagerDashboard.html" class="nav-item nav-link">Área do Gestor</a>`
+            headerLogged.innerHTML = `<a href="../schoolManagerDashboard/schoolManagerDashboard.html" class="nav-item nav-link">Área do Gestor</a>`
         }
 
         else if (userType === "network_manager") {
             console.log('gestor rede user')
-            headerLogged.innerHTML = `<a href="/networkManagerDashboard/networkManagerDashboard.html" class="nav-item nav-link">Área do Gestor</a>`
+            headerLogged.innerHTML = `<a href="../networkManagerDashboard/networkManagerDashboard.html" class="nav-item nav-link">Área do Gestor</a>`
         }
 
         else if (userType === "employee") {
