@@ -73,7 +73,12 @@ $(document).ready(function () {
         }
 
         else {
-
+            Swal.fire({
+                icon: 'success',
+                title: 'Conta criada com sucesso',
+                showConfirmButton: false,
+                timer: 6000
+            })
             {
                 //Insere os dados da escola no banco de dados
                 $.ajax({
@@ -90,12 +95,6 @@ $(document).ready(function () {
                     },
                 })
             };
-            Swal.fire({
-                icon: 'success',
-                title: 'Conta criada com sucesso',
-                showConfirmButton: false,
-                timer: 3000
-            })
             window.location = '../schoolManagerDashboard/schoolManagerDashboard.html';
         }
     });
