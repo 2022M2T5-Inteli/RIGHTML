@@ -56,16 +56,24 @@ $(document).ready(function () {
             $('#school_name').val() === "" ||
             $('#school_id').val() === "" ||
             $('#network_id').val() === "") {
-            alert("preencha todos os dados")
+            // alert("preencha todos os dados")
+            Swal.fire({
+                icon: 'error',
+                title: 'Preencha todos os dados!',
+            })
         }
 
 
         else if ((!school_id.includes(parseInt($('#network_id').val()))) || (CNPJS.includes(parseInt($('#CNPJ').val())))) {
-            alert("Preencha os dados corretamente")
+            // alert("Preencha os dados corretamente")
+            Swal.fire({
+                icon: 'error',
+                title: 'Preencha os dados corretamente!',
+            })
         }
 
         else {
-            
+
             {
                 //Insere os dados da escola no banco de dados
                 $.ajax({
@@ -79,7 +87,7 @@ $(document).ready(function () {
                         name: $('#school_name').val(),
                         school_census_id: $('#school_id').val(),
                         network_id: $('#network_id').val()
-                    }, 
+                    },
                 })
             };
             window.location = '../schoolManagerDashboard/schoolManagerDashboard.html';

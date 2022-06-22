@@ -152,7 +152,11 @@ function getSessionData() {
   if (loggedIn === 'true' && userType === "school_manager") {
   }
   else {
-    alert("Você precisa se logar para ter acesso aos resultados")
+    // alert("Você precisa se logar para ter acesso aos resultados")
+    Swal.fire({
+      icon: 'error',
+      title: 'Você precisa se logar para ter acesso aos resultados',
+    })
     window.location.href = "../login/login.html"
   }
 }

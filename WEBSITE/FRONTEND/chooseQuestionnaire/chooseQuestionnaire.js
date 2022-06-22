@@ -61,7 +61,12 @@ function updateManagementDiagnosisBox() {
 // Atualiza a descrição da agenda de acordo com os dos de cada escola 
 function checkSession() {
     if (localStorage.getItem("loggedIn") === "false" || localStorage.getItem("table") != "school_manager") {
-        alert('Você não tem permissão para ver esta página. Entre como gestor escolar para proceder.');
+        // alert('Você não tem permissão para ver esta página. Entre como gestor escolar para proceder.');
+        Swal.fire({
+            icon: 'error',
+            title: 'Você não tem permissão para ver esta página',
+            text: 'Entre como gestor de rede para proceder',
+        })
         window.location = "../index.html";
     }
 }

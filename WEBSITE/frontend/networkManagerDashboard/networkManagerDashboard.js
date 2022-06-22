@@ -6,7 +6,12 @@ var network = null;
 
 function getSessionData() {
     if (localStorage.getItem("loggedIn") === "false" || localStorage.getItem("table") != "network_manager") {
-        alert('Você não tem permissão para ver esta página. Entre como gestor de rede para proceder.');
+        // alert('Você não tem permissão para ver esta página. Entre como gestor de rede para proceder.');
+        Swal.fire({
+            icon: 'error',
+            title: 'Você não tem permissão para ver esta página',
+            text: 'Entre como gestor de rede para proceder',
+        })
         window.location = "../index.html";
     }
     let primaryKey = localStorage.getItem("primaryKey");

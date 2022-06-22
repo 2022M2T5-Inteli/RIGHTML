@@ -4,7 +4,7 @@ function onload() {
 }
 
 // Constante id do diagnosses
- const diagnosisid = 5;
+const diagnosisid = 5;
 
 
 // Reinicia modal de adicionar questões
@@ -56,17 +56,29 @@ function updateAddModalDropdowns() {
 // Salva nova questão no modal de adicionar questões
 function saveQuestion() {
     if ($('#domain').val() === null || $('domain').val() === null) {
-        alert("Escolha um eixo e fator crítico para adicionar a questão.");
+        Swal.fire({
+            icon: 'error',
+            title: 'Escolha um eixo e fator crítico para adicionar a questão',
+        })
     } else if ($('#question').val() === '') {
-        alert("Preencha o enunciado da questão para continuar.");
+        Swal.fire({
+            icon: 'error',
+            title: 'Preencha o enunciado da questão para continuar',
+        })
     } else if ($('#weight').val() === '') {
-        alert("Preencha o peso da questão para continuar.");
+        Swal.fire({
+            icon: 'error',
+            title: 'Preencha o peso da questão para continuar',
+        })
     } else if (($('#alternative1').val() != '' && $('#alternativeweight1').val() === '') ||
         ($('#alternative2').val() != '' && $('#alternativeweight2').val() === '') ||
         ($('#alternative3').val() != '' && $('#alternativeweight3').val() === '') ||
         ($('#alternative4').val() != '' && $('#alternativeweight4').val() === '') ||
         ($('#alternative5').val() != '' && $('#alternativeweight5').val() === '')) {
-        alert("Preencha os pesos das alternativas para adicionar a questão.");
+        Swal.fire({
+            icon: 'error',
+            title: 'Preencha os pesos das alternativas para adicionar a questão',
+        })
     } else {
         $.ajax({
             url: "http://127.0.0.1:3001/questioninsert",
@@ -90,17 +102,30 @@ function saveQuestion() {
 
 function saveQuestionChanges(question_id) {
     if ($('#edit-domain').val() === null || $('#edit-domain').val() === null) {
-        alert("Escolha um grande eixo e domínio para salvar a questão.");
+        Swal.fire({
+            icon: 'error',
+            title: 'Escolha um grande eixo e domínio para salvar a questão',
+        })
+
     } else if ($('#edit-question').val() === '') {
-        alert("Preencha o enunciado da questão para continuar.");
+        Swal.fire({
+            icon: 'error',
+            title: 'Preencha o enunciado da questão para continuar',
+        })
     } else if ($('#edit-weight').val() === '') {
-        alert("Preencha o peso da questão para continuar.");
+        Swal.fire({
+            icon: 'error',
+            title: 'Preencha o peso da questão para continuar',
+        })
     } else if (($('#edit-alternative1').val() != '' && $('#edit-alternativeweight1').val() === '') ||
         ($('#edit-alternative2').val() != '' && $('#edit-alternativeweight2').val() === '') ||
         ($('#edit-alternative3').val() != '' && $('#edit-alternativeweight3').val() === '') ||
         ($('#edit-alternative4').val() != '' && $('#edit-alternativeweight4').val() === '') ||
         ($('#edit-alternative5').val() != '' && $('#edit-alternativeweight5').val() === '')) {
-        alert("Preencha os pesos das alternativas para salvar a questão.");
+        Swal.fire({
+            icon: 'error',
+            title: 'Preencha os pesos das alternativas para salvar a questão',
+        })
     } else {
         $.ajax({
             url: "http://127.0.0.1:3001/questionupdate",
@@ -224,7 +249,7 @@ function findSubdivisionIDFromName(name) {
         }
 
 
-        
+
     })
     return id;
 
@@ -363,7 +388,10 @@ $('#delete-axis').on('click', function (event) {
         document.getElementById('domain').innerHTML = "<option value='' disabled selected>Escolher...</option>";
         $('#delete-axis').hide();
     } else if ($("#axis-dropdown").val() === '' || $("#axis-dropdown").val() === null) {
-        alert("Selecione um domínio no dropdown para deletá-lo.")
+        Swal.fire({
+            icon: 'error',
+            title: 'Selecione um domínio no dropdown para deletá-lo',
+        })
     }
 });
 
@@ -385,7 +413,10 @@ $('#delete-subaxis').on('click', function (event) {
 
         document.getElementById('domain').innerHTML = "<option value='' disabled selected>Escolher...</option>";
     } else if ($("#domain").val() === '' || $("#domain").val() === null) {
-        alert("Selecione um fator crítico no dropdown para deletá-lo.")
+        Swal.fire({
+            icon: 'error',
+            title: 'Selecione um fator crítico no dropdown para deletá-lo',
+        })
     }
 });
 
@@ -415,7 +446,10 @@ $('#edit-delete-subaxis').on('click', function (event) {
         $('#editModal').modal('toggle');
 
     } else if ($("#edit-domain").val() === '' || $("#edit-domain").val() === null) {
-        alert("Selecione um grande eixo no dropdown para deletá-lo.")
+        Swal.fire({
+            icon: 'error',
+            title: 'Selecione um grande eixo no dropdown para deletá-lo.',
+        })
     }
 });
 
@@ -428,7 +462,10 @@ $('#edit-delete-axis').on('click', function (event) {
         updateAddModalDropdowns();
         $('#editModal').modal('toggle');
     } else if ($("#edit-axis-dropdown").val() === '' || $("#edit-axis-dropdown").val() === null) {
-        alert("Selecione um eixo no dropdown para deletá-lo.")
+        Swal.fire({
+            icon: 'error',
+            title: 'Selecione um eixo no dropdown para deletá-lo',
+        })
     }
 });
 
@@ -516,7 +553,12 @@ $('#save-subaxis').on('click', function (event) {
     console.log("im sinde")
     let axis = $("#axis-dropdown").val();
     if ($("#axis-dropdown").val() === '' || $("#axis-dropdown").val() === null) {
-        return alert("Selecione um eixo para adicionar um fator crítico");
+        return Swal.fire({
+            icon: 'error',
+            title: 'Selecione um eixo para adicionar um fator crítico',
+        })
+
+        // alert("Selecione um eixo para adicionar um fator crítico");
     }
     let subaxis_name = $('#add-subaxis-input').val();
     $.ajax({
