@@ -6,6 +6,7 @@ function onload() {
     checkSession();
     updateEducationalDiagnosisBox();
     updateManagementDiagnosisBox();
+    loggedChecked();
 }
 
 // Inicia a integração do banco de dados dos números das questões para aparecer no frontend
@@ -58,9 +59,39 @@ function updateManagementDiagnosisBox() {
 }
 
 // Atualiza a descrição da agenda de acordo com os dos de cada escola 
-function checkSession(){
-        if(localStorage.getItem("loggedIn") === "false" || localStorage.getItem("table") != "school_manager") {
-            alert('Você não tem permissão para ver esta página. Entre como gestor escolar para proceder.');
-            window.location = "../index.html";
+function checkSession() {
+    if (localStorage.getItem("loggedIn") === "false" || localStorage.getItem("table") != "school_manager") {
+        alert('Você não tem permissão para ver esta página. Entre como gestor escolar para proceder.');
+        window.location = "../index.html";
+    }
+}
+
+let logged = localStorage.getItem("loggedIn");
+let headerLogged = document.getElementById("changeLink");
+let userType = localStorage.getItem("table");
+console.log(userType)
+
+function loggedChecked() {
+    if (logged === "true") {
+        console.log('logadoooo')
+        // headerLogged.innerHTML = `<a href="./login/login.html" class="nav-item nav-link" id="changeLink">Logadao</a>`
+        if (userType === "school_manager") {
+            console.log('gestor escola user')
+            headerLogged.innerHTML = `<a href="../schoolManagerDashboard/schoolManagerDashboard.html" class="nav-item nav-link" >Área do Gestor</a>`
         }
+
+        else if (userType === "network_manager") {
+            console.log('gestor rede user')
+            headerLogged.innerHTML = `<a href="../networkManagerDashboard/networkManagerDashboard.html" class="nav-item nav-link" >Área do Gestor</a>`
+        }
+
+        else if (userType === "employee") {
+            console.log('funcionario')
+            headerLogged.innerHTML = `<a href="../adminDashboard.html" class="nav-item nav-link" >Área do Administrador </a>`
+        }
+    }
+    else {
+
+        headerLogged.innerHTML = `<a href="../login/login.html" class="nav-item nav-link" id="changeLink">Entrar</a>`
+    }
 }
