@@ -1,4 +1,4 @@
-const diagnosisId = 4;
+const diagnosis = 4
 
 function onload() {
     readQuestionsFromDatabase()
@@ -37,7 +37,6 @@ function questionsExist() {
 //Cria o acordeão de acordo com o eixo na página 
 function createAxisAccordions(container) {
     let axes = getAxes()
-    console.log(axes)
     axes.forEach(axis => {
         document.getElementById(`${container}`).innerHTML += `<div class="accordion" id="${axis['name']}Accordion">
         <div class="accordion-item">
@@ -103,7 +102,7 @@ function getAxes() {
         async: false,
         success: data => {
             data.forEach(element => {
-                if (parseInt(element['diagnosis_id']) === 4) {
+                if (parseInt(element['diagnosis_id']) === diagnosis) {
                     axes.push(element);
                 }
             });

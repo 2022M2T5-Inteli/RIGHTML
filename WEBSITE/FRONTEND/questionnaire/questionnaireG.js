@@ -1,3 +1,5 @@
+const diagnosis = 5
+
 function onload() {
     readQuestionsFromDatabase()
     loggedChecked();
@@ -100,7 +102,7 @@ function getAxes() {
         async: false,
         success: data => {
             data.forEach(element => {
-                if (parseInt(element['diagnosis_id']) === 5) {
+                if (parseInt(element['diagnosis_id']) === diagnosis) {
                     axes.push(element);
                 }
             });

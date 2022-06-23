@@ -810,7 +810,7 @@ function createAxisAccordions(container) {
         document.getElementById(`${container}`).innerHTML += `<div class="accordion" id="${axis['name']}Accordion">
         <div class="accordion-item">
           <h2 class="accordion-header" id="headingOne">
-            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target='#my${axis['name']}' aria-expanded="true" aria-controls="my${axis}">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target='#my${axis['name']}' aria-expanded="true" aria-controls="my${axis['name']}">
                 ${axis['name']}
             </button>
           </h2>
