@@ -34,14 +34,13 @@
                 <input type="text" class="textInput" id="school_id" />
             </div>
             <div class="inputGroup">
-                <label class=" label">Id da Rede Escolar</label>
-                <input type="text" class="textInput" id="network_id" />
-            </div>
-            <!-- Adicionar um dropdown que permite escolher entre escola pública ou privada e jogar essa info direto pro backend sem o input escrito do úsuario -->
-            <div class="inputGroup">
-                <label class=" label">Escola pública ou privada</label>
-                <input type="text" class="textInput" id="type" />
-            </div>
+                <div class="radios">
+                    <label class="label" id="networkType">Tipo de rede </label>
+                    <p class="content"><input type="radio" value="private" name="opcao" class="inputRadio"> Particular</p>
+                    <br>
+                    <p class="content"><input type="radio" value="public" name="opcao" checked="checked" class="inputRadio">
+                        Pública</p><br>
+                </div>
             <div>
                 <div>
                     <input type="button" value="Criar conta" class="buttonCriarConta" id="criarConta">
