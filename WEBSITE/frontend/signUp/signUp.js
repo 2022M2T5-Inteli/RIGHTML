@@ -4,14 +4,14 @@ function next() {
     let options = document.querySelector('input[name="option"]:checked').value;
     let cpf = parseInt($("#cpf").val());
     console.log("cpf " + cpf)
-    if(cpf === "" || $("#name").val() === "" || $("#email").val() === "") {
+    if (cpf === "" || $("#name").val() === "" || $("#email").val() === "") {
         Swal.fire({
             icon: 'error',
             title: 'Selecione uma das opções',
         })
     }
     else if (options == "schoolManager") {
-        if(SchoolManagerCPFIsUnique(cpf)) {
+        if (SchoolManagerCPFIsUnique(cpf)) {
             localStorage.setItem("cpf", cpf);
             localStorage.setItem("name", $("#name").val())
             localStorage.setItem("email", $("#email").val())
@@ -24,7 +24,7 @@ function next() {
         }
     }
     else if (options == "networkManager") {
-        if(NetworkManagerCPFIsUnique(cpf)) {
+        if (NetworkManagerCPFIsUnique(cpf)) {
             localStorage.setItem("cpf", cpf);
             localStorage.setItem("name", $("#name").val())
             localStorage.setItem("email", $("#email").val())

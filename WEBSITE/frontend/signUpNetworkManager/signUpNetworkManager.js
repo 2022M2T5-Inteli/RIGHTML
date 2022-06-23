@@ -20,8 +20,7 @@ function getLastNetworkId() {
 // Função que checa se todos os campos da escola estão preenchidos
 $(document).ready(function () {
     $("#create-account").click(function () {
-        if ($('#name').val() === "")
-        {
+        if ($('#name').val() === "") {
             Swal.fire({
                 icon: 'error',
                 title: 'Preencha todos os dados!',
@@ -50,8 +49,7 @@ $(document).ready(function () {
             Swal.fire({
                 icon: 'success',
                 title: 'Conta criada com sucesso',
-                showConfirmButton: false,
-                timer: 6000
+
             })
             window.location = '../networkManagerDashboard/networkManagerDashboard.html';
         }

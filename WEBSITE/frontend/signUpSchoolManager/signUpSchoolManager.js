@@ -37,7 +37,7 @@ function cnpjIsUnique() {
     let isUnique = true;
     let cnpjs = get_cnpjs()
     cnpjs.forEach(cnpj => {
-        if(cnpj === parseInt($("#CNPJ").val())) {
+        if (cnpj === parseInt($("#CNPJ").val())) {
             isUnique = false;
             return
         }
@@ -53,16 +53,15 @@ $(document).ready(function () {
             $('#CNPJ').val() === "" ||
             $('#student_number').val() === "" ||
             $('#school_name').val() === "" ||
-            $('#school_id').val() === "" )
-            {
+            $('#school_id').val() === "") {
             Swal.fire({
                 icon: 'error',
                 title: 'Preencha todos os dados!',
             })
         }
-        else if(cnpjIsUnique()) {
-                //Insere os dados da escola no banco de dados
-                $.ajax({
+        else if (cnpjIsUnique()) {
+            //Insere os dados da escola no banco de dados
+            $.ajax({
                 url: "http://127.0.0.1:3001/schoolinsert",
                 type: 'POST',
                 data: {
@@ -88,8 +87,7 @@ $(document).ready(function () {
             Swal.fire({
                 icon: 'success',
                 title: 'Conta criada com sucesso',
-                showConfirmButton: false,
-                timer: 6000
+
             })
             window.location = '../schoolManagerDashboard/schoolManagerDashboard.html';
         }
