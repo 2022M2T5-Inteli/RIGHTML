@@ -93,3 +93,26 @@ $(document).ready(function () {
     });
 });
 
+function updateNetworkDropdown() {
+    console.log("im here")
+    let networks = getNetworks();
+    networks.forEach(network => {
+        $("#networkDropdown").html(`<option value="${network['id']}">${network['name']}</option>`)
+    })
+}
+//esolhe qual a rede da escola
+function getNetworks() {
+    let networks = [];
+    $.ajax({
+        url: "http://127.0.0.1:3001/networks",
+        type: 'GET',
+        async: false,
+        success: data => {
+            data.forEach(network => {
+                networks.push(network);
+            })
+        }
+    })
+    return networks;
+}
+
