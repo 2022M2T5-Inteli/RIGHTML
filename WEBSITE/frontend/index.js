@@ -21,7 +21,7 @@ function loggedChecked() {
 
         else if (userType === "employee") {
             console.log('funcionario')
-            headerLogged.innerHTML = `<a href="./adminDashboard.html" class="nav-item nav-link" id="changeLink">Área do Administrador </a>`
+            headerLogged.innerHTML = `<a href="./adminDashboard/adminDashboard.html" class="nav-item nav-link" id="changeLink">Área do Administrador </a>`
         }
     }
     else {
