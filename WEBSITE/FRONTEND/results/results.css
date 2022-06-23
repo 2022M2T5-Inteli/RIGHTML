@@ -1,6 +1,6 @@
 .navbar{
     background: #FFE600;
-    font-family: "Lucida Console", monospace;   
+    font-family: 'Manrope', sans-serif;
 }
 .nav-item{
     padding: 1% 7%;
@@ -56,5 +56,4 @@ footer {
     background-color: #343a40;
     color: white;
     margin-top: auto;
-    font-family: "Lucida Console", monospace;   
-}
+    font-family: 'Manrope', sans-serif;
