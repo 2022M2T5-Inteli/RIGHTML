@@ -9,10 +9,14 @@
     <link rel="stylesheet" href="signUpSchoolManager.css">
 </head>
 
-<body>
+<body onload="updateNetworkDropdown()">
     <main>
         <!-- div que envolve os inputs, as checkboxes e o botão criar conta -->
         <div class="container">
+            <div class="inputGroup">
+                <label class="label">Rede </label>
+                <select id="networks"></select>
+            </div>
             <div class="inputGroup">
                 <label class="label">CNPJ da Escola </label>
                 <input type="text" class="textInput" id="CNPJ" />
@@ -30,7 +34,7 @@
                 <input type="text" class="textInput" id="employee_number" />
             </div>
             <div class="inputGroup">
-                <label class=" label">Id do Senso Escolar</label>
+                <label class=" label">ID no Censo Escolar</label>
                 <input type="text" class="textInput" id="school_id" />
             </div>
             <div class="inputGroup">
@@ -61,6 +65,7 @@
                 dolorum consequatur nulla, neque debitis eos reprehenderit quasi
                 ab ipsum nisi dolorem modi. Quos?
             </p>
+        </div>
         </div>
     </main>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
