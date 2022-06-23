@@ -5,40 +5,40 @@ var user = null;
 var school = null;
 
 function getSessionData() {
-    if (localStorage.getItem("loggedIn") === "false" || localStorage.getItem("table") != "school_manager") {
+    if (localStorage.getItem("loggedIn") === "false" || localStorage.getItem("table") != "employee") {
         // alert('Você não tem permissão para ver esta página. Entre como gestor escolar para proceder.');
         Swal.fire({
             icon: 'error',
             title: 'Você não tem permissão para ver esta página',
-            text: 'Entre como gestor de rede para proceder',
+            text: ' Entre como administrador para proceder'
         })
         window.location = "../index.html";
     }
     let primaryKey = localStorage.getItem("primaryKey");
-    $.ajax({
-        url: "http://127.0.0.1:3001/schoolmanagers",
-        type: 'GET',
-        async: false,
-        success: data => {
-            data.forEach(school_manager => {
-                if (parseInt(primaryKey) === parseInt(school_manager['cpf'])) {
-                    user = school_manager;
-                }
-            })
-        }
-    })
-    $.ajax({
-        url: "http://127.0.0.1:3001/schools",
-        type: 'GET',
-        async: false,
-        success: data => {
-            data.forEach(currentSchool => {
-                if (parseInt(user['school_cnpj']) === parseInt(currentSchool['cnpj'])) {
-                    school = currentSchool;
-                }
-            })
-        }
-    })
+    // $.ajax({
+    //     url: "http://127.0.0.1:3001/schoolmanagers",
+    //     type: 'GET',
+    //     async: false,
+    //     success: data => {
+    //         data.forEach(school_manager => {
+    //             if (parseInt(primaryKey) === parseInt(school_manager['cpf'])) {
+    //                 user = school_manager;
+    //             }
+    //         })
+    //     }
+    // })
+    // $.ajax({
+    //     url: "http://127.0.0.1:3001/schools",
+    //     type: 'GET',
+    //     async: false,
+    //     success: data => {
+    //         data.forEach(currentSchool => {
+    //             if (parseInt(user['school_cnpj']) === parseInt(currentSchool['cnpj'])) {
+    //                 school = currentSchool;
+    //             }
+    //         })
+    //     }
+    // })
 }
 
 function logout() {
@@ -47,4 +47,3 @@ function logout() {
     localStorage.setItem("table", null);
     window.location.href = "../login/login.html";
 }
-

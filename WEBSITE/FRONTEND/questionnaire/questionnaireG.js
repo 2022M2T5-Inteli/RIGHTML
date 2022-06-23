@@ -186,6 +186,7 @@ function getSessionData() {
                 data.forEach(school_manager => {
                     if (parseInt(primaryKey) === parseInt(school_manager['cpf'])) {
                         user = school_manager;
+
                     }
                 })
             }
@@ -196,13 +197,17 @@ function getSessionData() {
             async: false,
             success: data => {
                 data.forEach(currentSchool => {
+                    console.log(user['school_cnpj'])
+                    console.log(currentSchool['cnpj'])
                     if (parseInt(user['school_cnpj']) === parseInt(currentSchool['cnpj'])) {
+                        
+                        
                         school = currentSchool;
                     }
                 })
             }
         })
-        console.log(school)
+        
     } else {
         // alert("Entre em uma conta de gestor escolar para continuar")
         Swal.fire({
@@ -210,6 +215,8 @@ function getSessionData() {
             title: 'Entre em uma conta de gestor escolar para continuar',
         })
     }
+    console.log("user: " + user)
+    return [user, school]
 }
 
 $('#finish').on('click', function (event) {
@@ -223,10 +230,10 @@ $('#finish').on('click', function (event) {
 
 
 function saveAnswers() {
-    getSessionData()
+    let login = getSessionData()
+    console.log(login)
     loadedQuestions.forEach(answeredQuestion => {
         let chosen_alternative_id = $(`input[name="question${answeredQuestion['id']}"]:checked`).val();
-        console.log(chosen_alternative_id)
         $.ajax({
             url: "http://127.0.0.1:3001/answerinsert",
             type: 'POST',
@@ -238,37 +245,31 @@ function saveAnswers() {
                 axis_subdivision_id: answeredQuestion['axis_subdivision_id'],
                 axis_id: answeredQuestion['axis_id'],
                 diagnosis_id: 5,
-                school_cnpj: school['cnpj'],
-                network_id: school['network_id']
+                school_cnpj: login[1]['cnpj'],
+                network_id: data[1]['network_id']
             }
         });
     })
-    console.log("estou aqui")
+    window.location.href = "../results/results.html";
 }
 
 let logged = localStorage.getItem("loggedIn");
 let headerLogged = document.getElementById("changeLink");
 let userType = localStorage.getItem("table");
-console.log(userType)
-
 
 //Verifica se o usuria já havia logado antes 
 function loggedChecked() {
     if (logged === "true") {
-        console.log('logadoooo')
         // headerLogged.innerHTML = `<a href="./login/login.html" class="nav-item nav-link" id="changeLink">Logadao</a>`
         if (userType === "school_manager") {
-            console.log('gestor escola user')
             headerLogged.innerHTML = `<a href="../schoolManagerDashboard/schoolManagerDashboard.html" class="nav-item nav-link" >Área do Gestor</a>`
         }
 
         else if (userType === "network_manager") {
-            console.log('gestor rede user')
             headerLogged.innerHTML = `<a href="../networkManagerDashboard/networkManagerDashboard.html" class="nav-item nav-link" >Área do Gestor</a>`
         }
 
         else if (userType === "employee") {
-            console.log('funcionario')
             headerLogged.innerHTML = `<a href="../adminDashboard.html" class="nav-item nav-link" >Área do Administrador </a>`
         }
     }
