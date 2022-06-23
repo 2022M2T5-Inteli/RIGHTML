@@ -1,3 +1,4 @@
+/*header*/
 .navbar{
     background: #FFE600;
     font-family: 'Manrope', sans-serif;
@@ -7,6 +8,7 @@
     margin: auto;
 }
 
+/*body*/
 .button-src{
     background-color: #810dfd;
     color: #FFFFFF;
@@ -37,6 +39,7 @@ h1{
     align-items: center;
 }
 
+/*footer*/
 #footer-bottom {
     background-color: #747678;
 }

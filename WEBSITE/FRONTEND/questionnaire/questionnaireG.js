@@ -204,7 +204,11 @@ function getSessionData() {
         })
         console.log(school)
     } else {
-        alert("Entre em uma conta de gestor escolar para continuar.")
+        // alert("Entre em uma conta de gestor escolar para continuar")
+        Swal.fire({
+            icon: 'error',
+            title: 'Entre em uma conta de gestor escolar para continuar',
+        })
     }
 }
 

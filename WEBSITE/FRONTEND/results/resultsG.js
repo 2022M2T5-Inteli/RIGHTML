@@ -1,7 +1,7 @@
 const diagnosisId = 5;
 
 let axes = [];
-
+//pega os eixos existentes no banco de dados
 function getAxisLabels() {
   let axes = getAxes()
   let axesNames = [];
@@ -10,11 +10,11 @@ function getAxisLabels() {
   })
   return axesNames
 }
-
+//te envia para pagina da falconi
 function contactUs() {
   window.location.href = "https://conteudo.falconi.com/formulario-home";
 }
-
+//estilo do grafico
 const ctx = document.getElementById('myChart');
 
 const myChart = new Chart(ctx, {
@@ -41,7 +41,7 @@ const myChart = new Chart(ctx, {
     }
   },
 });
-
+//calcula sua nota na questao
 function getAxesScores() {
   let axesScores = [];
   let axes = getAxes()
@@ -56,7 +56,7 @@ function getAxesScores() {
   console.log(axesScores)
   return axesScores;
 }
-
+//pega o peso da opção marcada
 function getWeightAlternative(answer) {
   let chosenOption = null;
   let alternativeId = answer["option_id"]
@@ -74,7 +74,7 @@ function getWeightAlternative(answer) {
   });
   return chosenOption;
 }
-
+//pega o peso da questão
 function getWeightQuestion(answer) {
   let questionWeight = null;
   let questionId = answer["question_id"]
@@ -92,7 +92,7 @@ function getWeightQuestion(answer) {
   });
   return questionWeight;
 }
-
+//mostra a alternativa marcada
 function getAnswersByAxis(axis_id) {
   let answers = [];
   $.ajax({
@@ -109,7 +109,7 @@ function getAnswersByAxis(axis_id) {
   });
   return answers;
 }
-
+//pega o eixos do questionario escolhido
 function getAxes() {
   let axes = [];
   $.ajax({
@@ -126,7 +126,7 @@ function getAxes() {
   });
   return axes;
 }
-
+//pega o usuario que está sendop avaliado
 function getUser() {
   let cpf = localStorage.getItem("primaryKey");
   let user = null;
@@ -144,6 +144,8 @@ function getUser() {
   });
   return user;
 }
+
+//verifica se você tem permissão para estar na página
 function getSessionData() {
   let loggedIn = localStorage.getItem("loggedIn")
   let userType = localStorage.getItem("table")
@@ -152,11 +154,15 @@ function getSessionData() {
   if (loggedIn === 'true' && userType === "school_manager") {
   }
   else {
-    alert("Você precisa se logar para ter acesso aos resultados")
+    // alert("Você precisa se logar para ter acesso aos resultados")
+    Swal.fire({
+      icon: 'error',
+      title: 'Você precisa se logar para ter acesso aos resultados',
+    })
     window.location.href = "../login/login.html"
   }
 }
-
+//pega o nome da escola do usuario 
 function getSchoolName() {
   let user = getUser()
   let schoolName = null
@@ -179,7 +185,7 @@ function onLoad() {
   loggedChecked();
 
 }
-
+//olha quem está logado na pagina
 let logged = localStorage.getItem("loggedIn");
 let headerLogged = document.getElementById("changeLink");
 let userType = localStorage.getItem("table");

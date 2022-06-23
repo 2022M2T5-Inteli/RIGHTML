@@ -4,9 +4,15 @@
 var user = null;
 var network = null;
 
+
 function getSessionData() {
+    //verifica se voê tem permissão para estar na pagina
     if (localStorage.getItem("loggedIn") === "false" || localStorage.getItem("table") != "network_manager") {
-        alert('Você não tem permissão para ver esta página. Entre como gestor de rede para proceder.');
+        Swal.fire({
+            icon: 'error',
+            title: 'Você não tem permissão para ver esta página',
+            text: 'Entre como gestor de rede para proceder',
+        })
         window.location = "../index.html";
     }
     let primaryKey = localStorage.getItem("primaryKey");
@@ -35,7 +41,7 @@ function getSessionData() {
             })
         }
     })
-
+//atualizar infos no banco de dados
     $("#update_data").click(function () {
         let url = "http://127.0.0.1:3001/networkupdate";
         {
@@ -54,6 +60,7 @@ function getSessionData() {
     })
 };
 
+//sair da conta logada
 function logout() {
     localStorage.setItem("loggedIn", "false");
     localStorage.setItem("primaryKey", null);
@@ -61,6 +68,7 @@ function logout() {
     window.location.href = "../login/login.html";
 }
 
+//aparecer informações sobre sua escola no front
 function showUpdateBox() {
     $('#school-name-update').val(network['name']);
     $("#networkUpdate").val(network['network_id'])

@@ -3,7 +3,7 @@ function onload() {
     readQuestionsFromDatabase();
 }
 // Constante id do diagnosses
- const diagnosisid = 4;
+const diagnosisid = 4;
 
 // Reinicia modal de adicionar questões
 function addModal() {
@@ -53,17 +53,29 @@ function updateAddModalDropdowns() {
 // Salva nova questão no modal de adicionar questões
 function saveQuestion() {
     if ($('#axis-dropdown').val() === null || $('#critical-factors').val() === null) {
-        alert("Escolha um eixo e fator crítico para adicionar a questão.");
+        Swal.fire({
+            icon: 'error',
+            title: 'Escolha um eixo e fator crítico para adicionar a questão',
+        })
     } else if ($('#question').val() === '') {
-        alert("Preencha o enunciado da questão para continuar.");
+        Swal.fire({
+            icon: 'error',
+            title: 'Preencha o enunciado da questão para continuar.',
+        })
     } else if ($('#weight').val() === '') {
-        alert("Preencha o peso da questão para continuar.");
+        Swal.fire({
+            icon: 'error',
+            title: 'Preencha o peso da questão para continuar',
+        })
     } else if (($('#alternative1').val() != '' && $('#alternativeweight1').val() === '') ||
         ($('#alternative2').val() != '' && $('#alternativeweight2').val() === '') ||
         ($('#alternative3').val() != '' && $('#alternativeweight3').val() === '') ||
         ($('#alternative4').val() != '' && $('#alternativeweight4').val() === '') ||
         ($('#alternative5').val() != '' && $('#alternativeweight5').val() === '')) {
-        alert("Preencha os pesos das alternativas para adicionar a questão.");
+        Swal.fire({
+            icon: 'error',
+            title: 'Preencha os pesos das alternativas para adicionar a questão',
+        })
     } else {
         $.ajax({
             url: "http://127.0.0.1:3001/questioninsert",
@@ -88,17 +100,29 @@ function saveQuestion() {
 // Informa o último id automático da última questão
 function saveQuestionChanges(question_id) {
     if ($('#edit-axis-dropdown').val() === null || $('#edit-critical-factors').val() === null) {
-        alert("Escolha um eixo e fator crítico para salvar a questão.");
+        Swal.fire({
+            icon: 'error',
+            title: 'Escolha um eixo e fator crítico para salvar a questão',
+        })
     } else if ($('#edit-question').val() === '') {
-        alert("Preencha o enunciado da questão para continuar.");
+        Swal.fire({
+            icon: 'error',
+            title: 'Preencha o enunciado da questão para continuar',
+        })
     } else if ($('#edit-weight').val() === '') {
-        alert("Preencha o peso da questão para continuar.");
+        Swal.fire({
+            icon: 'error',
+            title: 'Preencha o peso da questão para continuar',
+        })
     } else if (($('#edit-alternative1').val() != '' && $('#edit-alternativeweight1').val() === '') ||
         ($('#edit-alternative2').val() != '' && $('#edit-alternativeweight2').val() === '') ||
         ($('#edit-alternative3').val() != '' && $('#edit-alternativeweight3').val() === '') ||
         ($('#edit-alternative4').val() != '' && $('#edit-alternativeweight4').val() === '') ||
         ($('#edit-alternative5').val() != '' && $('#edit-alternativeweight5').val() === '')) {
-        alert("Preencha os pesos das alternativas para salvar a questão.");
+        Swal.fire({
+            icon: 'error',
+            title: 'Preencha os pesos das alternativas para salvar a questão',
+        })
     } else {
         $.ajax({
             url: "http://127.0.0.1:3001/questionupdate",
@@ -253,7 +277,7 @@ function saveAlternatives(question_id) {
     }
 }
 
-// Salve mudanças das alternativas que forem feitas 
+// Salva mudanças das alternativas que forem feitas 
 function saveAlternativeChanges(question_id) {
     original_alternatives = getAlternatives(question_id);
     for (let i = 0; i < original_alternatives.length; i++) {
@@ -267,7 +291,7 @@ function saveAlternativeChanges(question_id) {
         });
     }
 
-// Função que insere até cinco alternativas se preenchidas 
+    // Função que insere até cinco alternativas se preenchidas 
     let currentPosition = 1;
     for (let i = 1; i <= 5; i++) {
         if ($("#edit-alternative" + i).val() != "") {
@@ -371,7 +395,10 @@ $('#delete-axis').on('click', function (event) {
         document.getElementById('critical-factors').innerHTML = "<option value='' disabled selected>Escolher...</option>";
         $('#delete-axis').hide();
     } else if ($("#axis-dropdown").val() === '' || $("#axis-dropdown").val() === null) {
-        alert("Selecione um fator crítico no dropdown para deletá-lo.")
+        Swal.fire({
+            icon: 'error',
+            title: 'Selecione um fator crítico no dropdown para deletá-lo',
+        })
     }
 });
 
@@ -393,7 +420,10 @@ $('#delete-subaxis').on('click', function (event) {
 
         document.getElementById('critical-factors').innerHTML = "<option value='' disabled selected>Escolher...</option>";
     } else if ($("#critical-factors").val() === '' || $("#critical-factors").val() === null) {
-        alert("Selecione um fator crítico no dropdown para deletá-lo.")
+        Swal.fire({
+            icon: 'error',
+            title: 'Selecione um fator crítico no dropdown para deletá-lo',
+        })
     }
 });
 
@@ -424,7 +454,10 @@ $('#edit-delete-subaxis').on('click', function (event) {
         $('#editModal').modal('toggle');
 
     } else if ($("#edit-critical-factors").val() === '' || $("#edit-critical-factors").val() === null) {
-        alert("Selecione um eixo no dropdown para deletá-lo.")
+        Swal.fire({
+            icon: 'error',
+            title: 'Selecione um eixo no dropdown para deletá-lo',
+        })
     }
 });
 
@@ -437,7 +470,10 @@ $('#edit-delete-axis').on('click', function (event) {
         updateAddModalDropdowns();
         $('#editModal').modal('toggle');
     } else if ($("#edit-axis-dropdown").val() === '' || $("#edit-axis-dropdown").val() === null) {
-        alert("Selecione um eixo no dropdown para deletá-lo.")
+        Swal.fire({
+            icon: 'error',
+            title: 'Selecione um eixo no dropdown para deletá-lo',
+        })
     }
 });
 
@@ -528,7 +564,12 @@ function getSubaxisIdFromName(name) {
 $('#save-subaxis').on('click', function (event) {
     let axis = $("#axis-dropdown").val();
     if ($("#axis-dropdown").val() === '' || $("#axis-dropdown").val() === null) {
-        return alert("Selecione um eixo para adicionar um fator crítico");
+        return Swal.fire({
+            icon: 'error',
+            title: 'Selecione um eixo para adicionar um fator crítico',
+        })
+
+        alert("Selecione um eixo para adicionar um fator crítico");
     }
     let subaxis_name = $('#add-subaxis-input').val();
     $.ajax({
@@ -542,7 +583,7 @@ $('#save-subaxis').on('click', function (event) {
         }
     });
 
-// Dropdown dos subeixos depois que forem criados 
+    // Dropdown dos subeixos depois que forem criados 
     $('#add-subaxis-input').val("");
     $('#add-subaxis-span').hide();
     let subdivisions = getSubdivisionsFromAxisId(getAxisIdFromName(axis));
@@ -670,22 +711,22 @@ function deleteQuestion(question_id) {
 function getQuestionsFromSubaxis(subaxis_id) {
     let questions = [];
     $.ajax({
-//Url do endpoint
+        //Url do endpoint
         url: "http://127.0.0.1:3001/questions",
-//Tipo da requisição
+        //Tipo da requisição
         type: 'GET',
         async: false,
-//Se obtiver sucesso, executar a arrow function abaixo
+        //Se obtiver sucesso, executar a arrow function abaixo
         success: data => {
-//Se não tiver questão no banco de dados, retorna um div do html com esse texto
+            //Se não tiver questão no banco de dados, retorna um div do html com esse texto
             data.forEach(question => {
                 if (question['axis_subdivision_id'] === subaxis_id) {
 
                     questions.push(question);
                 }
             })
-        }     
-//ForEach faz loop que vai passar por cada elemento dentro do data
+        }
+        //ForEach faz loop que vai passar por cada elemento dentro do data
     });
     return questions;
 }
@@ -698,24 +739,24 @@ function getQuestionsByAxis() {
     });
 
     $.ajax({
-//url do endpoint
+        //url do endpoint
         url: "http://127.0.0.1:3001/questions",
-//tipo da requisição
+        //tipo da requisição
         type: 'GET',
-//se obtiver sucesso, executar a arrow function abaixo
+        //se obtiver sucesso, executar a arrow function abaixo
         success: data => {
- //se não tiver questão no banco de dados, retorna um div do html com esse texto
+            //se não tiver questão no banco de dados, retorna um div do html com esse texto
             if (data.length == 0) {
             }
- //se tiver questão, limpa o questionsContainer
+            //se tiver questão, limpa o questionsContainer
             else {
                 data.forEach(question => {
                     if (question['axis_id'] in questions) {
                         questions[question['axis_id']].push(question);
                     }
                 })
-            }     
-//forEach faz loop que vai passar por cada elemento dentro do data
+            }
+            //forEach faz loop que vai passar por cada elemento dentro do data
         }
     });
     return questions;
@@ -724,21 +765,21 @@ function getQuestionsByAxis() {
 function getAllQuestionsFromAxis(axis_id) {
     questions = [];
     $.ajax({
-//url do endpoint
+        //url do endpoint
         url: "http://127.0.0.1:3001/questions",
-//tipo da requisição
+        //tipo da requisição
         type: 'GET',
         async: false,
-//se obtiver sucesso, executar a arrow function abaixo
+        //se obtiver sucesso, executar a arrow function abaixo
         success: data => {
-//se não tiver questão no banco de dados, retorna um div do html com esse texto
-//se tiver questão, limpa o questionsContainer
+            //se não tiver questão no banco de dados, retorna um div do html com esse texto
+            //se tiver questão, limpa o questionsContainer
             data.forEach(question => {
                 if (question['axis_id'] === axis_id) {
                     questions.push(question);
                 }
-            })    
-//forEach faz loop que vai passar por cada elemento dentro do data
+            })
+            //forEach faz loop que vai passar por cada elemento dentro do data
         }
     });
     return questions;

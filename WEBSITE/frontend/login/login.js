@@ -14,7 +14,7 @@ function login() {
             // alert("Este CPF não está cadastrado como gestor escolar.")
             Swal.fire({
                 icon: 'error',
-                title: 'Este CPF não está cadastrado como gestor escolar.',
+                title: 'Este CPF não está cadastrado como gestor escolar',
             })
 
         }
@@ -29,7 +29,7 @@ function login() {
             // alert("Este CPF não está cadastrado como gestor de rede.")
             Swal.fire({
                 icon: 'error',
-                title: 'Este CPF não está cadastrado como gestor de rede.',
+                title: 'Este CPF não está cadastrado como gestor de rede',
             })
 
         }
@@ -44,7 +44,7 @@ function login() {
             // alert("Este CPF não está cadastrado como funcionário Falconi.")
             Swal.fire({
                 icon: 'error',
-                title: 'Este CPF não está cadastrado como funcionário Falconi.',
+                title: 'Este CPF não está cadastrado como administrador Falconi',
             })
 
         }
