@@ -1,9 +1,23 @@
 // Carregar questões ao carregar a página
 function onload() {
     readQuestionsFromDatabase();
+    checkLogin();
 }
 // Constante id do diagnosses
 const diagnosisid = 4;
+
+//funçao para ver se esta logado
+function checkLogin(){
+    if (localStorage.getItem("loggedIn") === "false" || localStorage.getItem("table") != "employee") {
+        // alert('Você não tem permissão para ver esta página. Entre como gestor escolar para proceder.');
+        Swal.fire({
+            icon: 'error',
+            title: 'Você não tem permissão para ver esta página',
+            text: ' Entre como administrador para proceder'
+        })
+        window.location = "../index.html";
+    }
+}
 
 // Reinicia modal de adicionar questões
 function addModal() {
