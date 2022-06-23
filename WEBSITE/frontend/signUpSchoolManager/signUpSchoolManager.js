@@ -91,6 +91,12 @@ $(document).ready(function () {
                 showConfirmButton: false,
                 timer: 6000
             })
+            localStorage.setItem("loggedIn", "true");
+            localStorage.setItem("table", "school_manager");
+            localStorage.setItem("primaryKey", localStorage.getItem("cpf"))
+            localStorage.setItem("cpf", null);
+            localStorage.setItem("name", null);
+            localStorage.setItem("email", null);
             window.location = '../schoolManagerDashboard/schoolManagerDashboard.html';
         }
         else {

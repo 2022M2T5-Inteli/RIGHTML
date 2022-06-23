@@ -97,6 +97,7 @@ function getNetworkNameFromId(network_id) {
 //atualiza os dados da escola
 function updateSchoolInfo() {
     getSessionData();
+    console.log(getNetworkNameFromId(school['network_id']))
     $("#institutionName").text(school['name'])
     $("#network").text(getNetworkNameFromId(school['network_id']))
     if (school['type_of_institution'] === "public") {
@@ -112,9 +113,12 @@ function updateSchoolInfo() {
 }
 //escolhe se a escola é publica ou privada
 function updateNetworkDropdown() {
+    document.getElementById("networkUpdate").innerHTML = "";
     let networks = getNetworks();
+    console.log("networks: " + networks)
     networks.forEach(network => {
-        $("#networkUpdate").html(`<option value="${network['id']}">${network['name']}</option>`)
+        console.log(network)
+        document.getElementById("networkUpdate").innerHTML += `<option value="${network['id']}">${network['name']}</option>`;
     })
 }
 //esolhe qual a rede da escola

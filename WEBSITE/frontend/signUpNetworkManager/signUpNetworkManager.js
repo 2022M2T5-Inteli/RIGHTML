@@ -37,6 +37,7 @@ $(document).ready(function () {
                     type: document.querySelector('input[name="opcao"]:checked').value
                 },
             })
+            console.log(getLastNetworkId())
             $.ajax({
                 url: "http://127.0.0.1:3001/networkmanagerinsert",
                 type: 'POST',
@@ -53,6 +54,13 @@ $(document).ready(function () {
                 showConfirmButton: false,
                 timer: 6000
             })
+            localStorage.setItem("loggedIn", "true");
+            localStorage.setItem("table", "network_manager");
+            localStorage.setItem("primaryKey", localStorage.getItem("cpf"))
+            localStorage.setItem("cpf", null);
+            localStorage.setItem("name", null);
+            localStorage.setItem("email", null);
+
             window.location = '../networkManagerDashboard/networkManagerDashboard.html';
         }
     });

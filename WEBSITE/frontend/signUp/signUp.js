@@ -3,7 +3,6 @@
 function next() {
     let options = document.querySelector('input[name="option"]:checked').value;
     let cpf = parseInt($("#cpf").val());
-    console.log("cpf " + cpf)
     if(cpf === "" || $("#name").val() === "" || $("#email").val() === "") {
         Swal.fire({
             icon: 'error',
@@ -24,6 +23,7 @@ function next() {
         }
     }
     else if (options == "networkManager") {
+        console.log("cpf testado: " + cpf)
         if(NetworkManagerCPFIsUnique(cpf)) {
             localStorage.setItem("cpf", cpf);
             localStorage.setItem("name", $("#name").val())
@@ -63,7 +63,9 @@ function NetworkManagerCPFIsUnique(cpf) {
         type: 'GET',
         async: false,
         success: data => {
+            console.log("data: " + data)
             data.forEach(element => {
+                console.log(element['cpf'])
                 if (cpf === element['cpf']) {
                     isUnique = false;
                 }
