@@ -12,9 +12,10 @@ function getSessionData() {
             icon: 'error',
             title: 'Você não tem permissão para ver esta página',
             text: 'Entre como gestor de rede para proceder',
+        }).then(function() {
+            window.location.href = "../index.html";
         })
 
-        window.location = "../index.html";
     }
     let primaryKey = localStorage.getItem("primaryKey");
     $.ajax({
