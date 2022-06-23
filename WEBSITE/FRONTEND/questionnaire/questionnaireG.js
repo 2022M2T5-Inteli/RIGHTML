@@ -246,7 +246,7 @@ function saveAnswers() {
                 axis_id: answeredQuestion['axis_id'],
                 diagnosis_id: 5,
                 school_cnpj: login[1]['cnpj'],
-                network_id: data[1]['network_id']
+                network_id: login[1]['network_id']
             }
         });
     })
