@@ -30,7 +30,8 @@
             <input type="number" class="textInput" id="cpf" />
         </div>
         <!--selecionar o que você é para login-->
-        <div>
+        <div class="options" style="font-size: 15px">
+
             <input class="option" type="radio" value="schoolManager" name="userType"> Sou gestor de escola</input><br>
             <input class="option" type="radio" value="networkManager" name="userType"> Sou gestor de rede</input><br>
             <input class="option" type="radio" value="falconi" name="userType"> Sou funcionário Falconi</input>
@@ -40,8 +41,9 @@
             <input type="button" value="Entrar" class="buttonEntrar" onclick="login()">
         </div>
         <div>
+            <p class="content-text">Ainda não tem conta?</p>
             <a href="../signUp/signUP.html">
-                <p class="content" style="text-align: center;"> Ainda não tem conta? </p>
+                <!--<p class="content" style="text-align: center;"> Ainda não tem conta? </p>-->
                 <input type="button" value="Criar conta" class="buttonCriarConta">
             </a>
         </div>

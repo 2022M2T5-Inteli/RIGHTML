@@ -52,7 +52,7 @@ body {
 
 .navbar{
     background: #FFE600;
-    font-family: "Lucida Console", monospace;   
+    font-family: 'Manrope', sans-serif;
 }
 .nav-item{
     padding: 1% 7%;
@@ -68,6 +68,6 @@ body {
     margin-top: 3vh;
     text-align: center;
     font-size: 5vh;
-    font-family: "Space Mono", monospace;
+    font-family: 'Manrope', sans-serif;
 }
 

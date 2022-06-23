@@ -1,5 +1,6 @@
 /* Generic styling */
 
+
 body {
     font-family: 'Manrope', sans-serif;
 }
@@ -52,7 +53,7 @@ a:active {
 /* Navbar styling */
 
 .navbar {
-    font-family: "Space Mono", monospace;
+    font-family: 'Manrope', sans-serif;
     color: white;
 }
 
@@ -63,7 +64,7 @@ a:active {
     margin-top: 3vh;
     text-align: center;
     font-size: 5vh;
-    font-family: "Space Mono", monospace;
+    font-family: 'Manrope', sans-serif;
 }
 
 
@@ -77,7 +78,7 @@ a:active {
 footer {
     background-color: #232228;
     color: white;
-    font-family: 'Space Mono', monospace;
+    font-family: 'Manrope', sans-serif;
     position: absolute;
     bottom: 0;
     width: 100%;
@@ -148,7 +149,7 @@ footer {
 .title2home {
     font-size: 45px;
     font-weight: bold;
-    font-family: monospace;
+    font-family: 'Manrope', sans-serif;
     text-align: center;
     color: #232228;
     margin: 130px;
