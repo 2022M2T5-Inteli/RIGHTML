@@ -23,20 +23,22 @@
         <h1 class="title">
             Entrar
         </h1>
+        <!--informações para login-->
         <h2 class="content-text">Cadastre-se aqui para ter acesso ao<br>questionário e ao diagnóstico!</h2>
         <div class="inputGroup">
             <label class="label">CPF</label>
             <input type="number" class="textInput" id="cpf" />
         </div>
+        <!--selecionar o que você é para login-->
         <div>
             <input class="option" type="radio" value="schoolManager" name="userType"> Sou gestor de escola</input><br>
             <input class="option" type="radio" value="networkManager" name="userType"> Sou gestor de rede</input><br>
             <input class="option" type="radio" value="falconi" name="userType"> Sou funcionário Falconi</input>
         </div>
+               <!--botão de entrar ou criar conta-->
         <div>
             <input type="button" value="Entrar" class="buttonEntrar" onclick="login()">
         </div>
-
         <div>
             <a href="../signUp/signUP.html">
                 <p class="content" style="text-align: center;"> Ainda não tem conta? </p>

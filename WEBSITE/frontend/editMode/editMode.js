@@ -277,7 +277,7 @@ function saveAlternatives(question_id) {
     }
 }
 
-// Salve mudanças das alternativas que forem feitas 
+// Salva mudanças das alternativas que forem feitas 
 function saveAlternativeChanges(question_id) {
     original_alternatives = getAlternatives(question_id);
     for (let i = 0; i < original_alternatives.length; i++) {

@@ -1,6 +1,5 @@
 
-
-// Essa função serve para atualizar os dados da escola no banco de dados
+//verifica quem está logado
 var user = null;
 var school = null;
 
@@ -41,6 +40,7 @@ function getSessionData() {
     })
 }
 
+//atualiza os dados da escola
 $("#update_data").click(function () {
     let url = "http://127.0.0.1:3001/schoolupdate";
     {
@@ -60,14 +60,14 @@ $("#update_data").click(function () {
         updateSchoolInfo();
     }
 });
-
+//sai da conta logada
 function logout() {
     localStorage.setItem("loggedIn", "false");
     localStorage.setItem("primaryKey", null);
     localStorage.setItem("table", null);
     window.location.href = "../login/login.html";
 }
-
+//mostra os dados da escola
 function showUpdateBox() {
     updateNetworkDropdown();
     $('#update_employees_number').val(school['number_of_employees']);
@@ -77,6 +77,7 @@ function showUpdateBox() {
     $("#networkUpdate").val(school['network_id'])
     $("#institutionTypeUpdate").val(school['type_of_institution'])
 }
+//pega as redes de escola existentes
 function getNetworkNameFromId(network_id) {
     let networkName = null;
     $.ajax({
@@ -93,7 +94,7 @@ function getNetworkNameFromId(network_id) {
     })
     return networkName;
 }
-
+//atualiza os dados da escola
 function updateSchoolInfo() {
     getSessionData();
     $("#institutionName").text(school['name'])
@@ -109,14 +110,14 @@ function updateSchoolInfo() {
     $("#staff-number").text(school['number_of_employees'])
 
 }
-
+//escolhe se a escola é publica ou privada
 function updateNetworkDropdown() {
     let networks = getNetworks();
     networks.forEach(network => {
         $("#networkUpdate").html(`<option value="${network['id']}">${network['name']}</option>`)
     })
 }
-
+//esolhe qual a rede da escola
 function getNetworks() {
     let networks = [];
     $.ajax({

@@ -1,5 +1,5 @@
 
-
+//te encaminha para a proxima pagina de cadastro
 function next() {
     let options = document.querySelector('input[name="option"]:checked').value
     if (options == "schoolManager") {
@@ -17,8 +17,7 @@ function next() {
     }
 }
 
-let cpfs = [];
-
+//posta as infos colocadas no login
 $(document).ready(function () {
     $("#continue").click(function () {
         let url = "http://127.0.0.1:3001/schoolmanagerinsert";
@@ -41,6 +40,8 @@ $(document).ready(function () {
     });
 });
 
+//pega os cpfs do banco de dados
+let cpfs = [];
 function get_cpfs() {
     $.ajax({
         url: "http://127.0.0.1:3001/schoolmanagers",
