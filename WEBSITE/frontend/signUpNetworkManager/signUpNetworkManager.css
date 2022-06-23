@@ -1,11 +1,4 @@
 /*estilo do corpo da página*/
-.title {
-    font-size: 4rem;
-    font-weight: bold;
-    font-family: "Manrope", sans-serif;
-    text-align: center;
-    margin-bottom: 2rem;
-}
 
 .content {
     font-size: 1.5rem;
@@ -25,25 +18,13 @@ html {
 }
 
 body {
-    background-color: black;
     min-height: 100vh;
     position: relative;
     font-family: "Manrope", sans-serif;
 
 }
 
-.container {
-    position: absolute;
-    top: 50%;
-    left: 70%;
-    transform: translate(-50%, -50%);
-    background-color: white;
-    border-radius: 6px;
-    padding: 5rem 5rem;
-    width: 50rem;
-    height: 45rem;
-    overflow-y: scroll;
-}
+
 
 .inputGroup {
     margin-bottom: 1.5rem;
@@ -106,4 +87,49 @@ body {
 #networkType {
     margin: 1.5rem auto;
 
+}
+
+.container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border-radius: 12px;
+    padding: 4rem 2rem;
+    width: 40rem;
+}
+
+.background-image {
+
+    background-image: url("../login/img/imgbkglog.png");
+    background-size: cover; 
+    height: 100vh;
+    background-repeat: no-repeat;
+ 
+ }
+
+ .logo {
+    width: 200px;
+    margin-top: -2rem;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}   
+
+.content-text {
+    font-size: 1.5rem;
+    font-family: "Manrope", sans-serif;
+    text-align: center  ;
+    margin-bottom: 2rem;
+}
+
+.title {
+    font-size: 4rem;
+    font-weight: bold;
+    font-family: "Manrope", sans-serif;
+    text-align: center;
+    margin-bottom: 1rem;
+    margin-top: -1rem;
+    color: #232228;
 }

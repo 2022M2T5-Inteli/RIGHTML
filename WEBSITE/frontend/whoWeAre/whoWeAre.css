@@ -34,3 +34,30 @@
     padding-left: 200px;
 }
 
+.quemsomos {
+   
+    margin-left: 100px;
+    margin-right: 100px;
+    text-align: center;
+}
+
+
+#centerCarousel{
+    position: relative;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 2%;
+    height: 50%;
+    width: 50%;
+    margin-left: 25%;
+}
+
+/**#carouselExampleControls{
+     height: 50%;
+    width: 50%;
+    
+    
+}**/
