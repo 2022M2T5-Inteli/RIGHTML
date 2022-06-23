@@ -1,57 +1,77 @@
 
 //te encaminha para a proxima pagina de cadastro
 function next() {
-    let options = document.querySelector('input[name="option"]:checked').value
-    if (options == "schoolManager") {
-        window.location = "../signUpSchoolManager/signUpSchoolManager.html"
-    }
-    else if (options == "networkManager") {
-        window.location = "../signUpNetworkManager/signUpNetworkManager.html"
-    }
-    else {
-        // window.alert("Selecione uma das opções")
+    let options = document.querySelector('input[name="option"]:checked').value;
+    let cpf = parseInt($("#cpf").val());
+
+    if (cpf === "" || $("#name").val() === "" || $("#email").val() === "") {
         Swal.fire({
             icon: 'error',
             title: 'Selecione uma das opções',
         })
     }
+    else if (options == "schoolManager") {
+        if (SchoolManagerCPFIsUnique(cpf)) {
+            localStorage.setItem("cpf", cpf);
+            localStorage.setItem("name", $("#name").val())
+            localStorage.setItem("email", $("#email").val())
+            window.location = "../signUpSchoolManager/signUpSchoolManager.html"
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'CPF já cadastrado',
+            })
+        }
+    }
+    else if (options == "networkManager") {
+
+        if (NetworkManagerCPFIsUnique(cpf)) {
+            localStorage.setItem("cpf", cpf);
+            localStorage.setItem("name", $("#name").val())
+            localStorage.setItem("email", $("#email").val())
+            window.location = "../signUpNetworkManager/signUpNetworkManager.html"
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'CPF já cadastrado',
+            })
+        }
+    }
 }
 
-//posta as infos colocadas no login
-$(document).ready(function () {
-    $("#continue").click(function () {
-        let url = "http://127.0.0.1:3001/schoolmanagerinsert";
-        get_cpfs()
-        console.log("LISTA: " + cpfs)
-        console.log("CPF1:" + $('#cpf').val())
-        console.log("CPF2:" + cpfs.includes(parseInt(document.getElementById("cpf").value)))
-        //if (!cpfs.includes(parseInt($('#cpf').val()))) {
-
-        $.ajax({
-            url: url,
-            type: 'POST',
-            data: {
-                email: "sjkhkjlsdn",
-                name: $('#first-name').val(),
-                school_cnpj: "212321",//$('#school_cnpj').val(),
-                cpf: $('#cpf').val(),
-            },
-        });
-    });
-});
-
-//pega os cpfs do banco de dados
-let cpfs = [];
-function get_cpfs() {
+function SchoolManagerCPFIsUnique(cpf) {
+    let isUnique = true;
     $.ajax({
         url: "http://127.0.0.1:3001/schoolmanagers",
         type: 'GET',
+        async: false,
         success: data => {
             data.forEach(element => {
-
-                cpfs.push(element['cpf'])
+                console.log("current cpf " + element['cpf'])
+                if (cpf === element['cpf']) {
+                    isUnique = false;
+                }
             });
         }
-
     });
+    return isUnique;
+}
+
+function NetworkManagerCPFIsUnique(cpf) {
+    let isUnique = true;
+    $.ajax({
+        url: "http://127.0.0.1:3001/networkmanagers",
+        type: 'GET',
+        async: false,
+        success: data => {
+            console.log("data: " + data)
+            data.forEach(element => {
+                console.log(element['cpf'])
+                if (cpf === element['cpf']) {
+                    isUnique = false;
+                }
+            });
+        }
+    });
+    return isUnique;
 }

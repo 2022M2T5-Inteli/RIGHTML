@@ -1,79 +1,67 @@
-// function criarConta() {
-//     window.location = "../homePage/home.html"
-// }
-
-//Pega o CPF do gestor de rede 
-$(document).ready(function () {
-    let CPFS = [];
-    function get_cpf() {
-        $.ajax({
-            url: "http://127.0.0.1:3001/networkmanagers",
-            type: 'GET',
-            async: false,
-            success: data => {
-                data.forEach(element => {
-
-                    CPFS.push(element['cpf'])
-                });
-            }
-
-        });
-    }
-
-    // Botão criar a conta 
-    $("#buttonCreateAccount").click(function () {
-        let urlNetworkManager = "http://127.0.0.1:3001/networkmanagerinsert"
-        let urlNetwork = "http://127.0.0.1:3001/networkinsert"
-        console.log(CPFS)
-
-        if ($('#networkManagerName').val() === "" || $('#networkManagerEmail').val() === "" || $('#networkName').val() === "" || $('#networkId').val() === "" || $('#networkManagerCPF').val() === "") {
-            // alert("Preencha seus dados")
-            Swal.fire({
-                icon: 'error',
-                title: 'Preencha todos os campos!',
-            })
+let school_id = [];
+//Essa função vê o ID da rede
+function getLastNetworkId() {
+    let lastID = -1;
+    $.ajax({
+        url: "http://127.0.0.1:3001/networks",
+        type: 'GET',
+        async: false,
+        success: data => {
+            data.forEach(element => {
+                if (element['id'] > lastID) {
+                    lastID = element['id'];
+                }
+            });
         }
-        else if ((CPFS.includes(parseInt($('#networkManagerCPF').val())))) {
-            // alert("O CPF informado já existe!")
+    });
+    return lastID;
+}
+
+// Função que checa se todos os campos da escola estão preenchidos
+$(document).ready(function () {
+    $("#create-account").click(function () {
+        if ($('#name').val() === "") {
             Swal.fire({
                 icon: 'error',
-                title: 'O usuário com o CPF informado já existe!',
+                title: 'Preencha todos os dados!',
             })
         }
         else {
-            console.log("funcionou")
-            get_cpf()
-            //Insere  os dados no banco de dados
+            //Insere os dados da escola no banco de dados
             $.ajax({
-                url: urlNetworkManager,
-                type: 'POST',
-                data: {
-                    name: $('#networkManagerName').val(),
-                    email: $('#networkManagerEmail').val(),
-                    cpf: $('#networkManagerCPF').val(),
-                },
-            })
-            $.ajax({
-                url: urlNetwork,
+                url: "http://127.0.0.1:3001/networkinsert",
                 type: 'POST',
                 data: {
                     name: $('#networkName').val(),
-                    network_id: $('#networkId').val(),
-                    type: $('input[name=opcao]:checked').val(),
+                    type: document.querySelector('input[name="opcao"]:checked').value
+                },
+            })
+            console.log(getLastNetworkId())
+            $.ajax({
+                url: "http://127.0.0.1:3001/networkmanagerinsert",
+                type: 'POST',
+                data: {
+                    name: localStorage.getItem("name"),
+                    cpf: localStorage.getItem("cpf"),
+                    email: localStorage.getItem("email"),
+                    network_id: getLastNetworkId()
                 },
             })
             Swal.fire({
                 icon: 'success',
                 title: 'Conta criada com sucesso',
-                showConfirmButton: false,
-                timer: 3000
+
             })
-            window.location.replace("../homePage/home.html")
+            localStorage.setItem("loggedIn", "true");
+            localStorage.setItem("table", "network_manager");
+            localStorage.setItem("primaryKey", localStorage.getItem("cpf"))
+            localStorage.setItem("cpf", null);
+            localStorage.setItem("name", null);
+            localStorage.setItem("email", null);
+
+            window.location = '../networkManagerDashboard/networkManagerDashboard.html';
         }
     });
 });
-
-
-
 
 

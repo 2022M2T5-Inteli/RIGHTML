@@ -13,6 +13,7 @@ function getSessionData() {
             title: 'Você não tem permissão para ver esta página',
             text: 'Entre como gestor de rede para proceder',
         })
+
         window.location = "../index.html";
     }
     let primaryKey = localStorage.getItem("primaryKey");
