@@ -15,8 +15,9 @@ function checkLogin(){
             icon: 'error',
             title: 'Você não tem permissão para ver esta página',
             text: ' Entre como administrador para proceder'
+        }).then(function() {
+            window.location = "../index.html";
         })
-        window.location = "../index.html";
     }
 }
 
@@ -95,7 +96,7 @@ function saveQuestion() {
         })
     } else {
         $.ajax({
-            url: "http://127.0.0.1:3001/questioninsert",
+            url: "http://127.0.0.1:1234/questioninsert",
             type: 'POST',
             async: false,
             data: {
@@ -143,7 +144,7 @@ function saveQuestionChanges(question_id) {
         })
     } else {
         $.ajax({
-            url: "http://127.0.0.1:3001/questionupdate",
+            url: "http://127.0.0.1:1234/questionupdate",
             type: 'POST',
             async: false,
             data: {
@@ -164,7 +165,7 @@ function saveQuestionChanges(question_id) {
 function getLastQuestionId() {
     var highestId = 0;
     $.ajax({
-        url: "http://127.0.0.1:3001/questions",
+        url: "http://127.0.0.1:1234/questions",
         type: 'GET',
         async: false,
         success: data => {
@@ -182,7 +183,7 @@ function getLastQuestionId() {
 function getAxisIdFromName(name) {
     let id = null;
     $.ajax({
-        url: "http://127.0.0.1:3001/axes",
+        url: "http://127.0.0.1:1234/axes",
         type: 'GET',
         async: false,
         success: data => {
@@ -202,7 +203,7 @@ let domain = [];
 function getSubdivisionsFromAxisId(axis_id) {
     subdivisions = [];
     $.ajax({
-        url: "http://127.0.0.1:3001/axissubdivisions",
+        url: "http://127.0.0.1:1234/axissubdivisions",
         type: 'GET',
         async: false,
         success: data => {
@@ -256,7 +257,7 @@ $("#edit-axis-dropdown").change(function () {
 function findSubdivisionIDFromName(name) {
     let id = ''
     $.ajax({
-        url: "http://127.0.0.1:3001/axissubdivisions",
+        url: "http://127.0.0.1:1234/axissubdivisions",
         type: 'GET',
         async: false,
         success: data => {
@@ -279,7 +280,7 @@ function saveAlternatives(question_id) {
     for (let i = 1; i <= 5; i++) {
         if ($("#alternative" + i).val() != "") {
             $.ajax({
-                url: "http://127.0.0.1:3001/optioninsert",
+                url: "http://127.0.0.1:1234/optioninsert",
                 type: 'POST',
                 async: false,
                 data: {
@@ -301,7 +302,7 @@ function saveAlternativeChanges(question_id) {
     original_alternatives = getAlternatives(question_id);
     for (let i = 0; i < original_alternatives.length; i++) {
         $.ajax({
-            url: "http://127.0.0.1:3001/optiondelete",
+            url: "http://127.0.0.1:1234/optiondelete",
             type: 'POST',
             async: false,
             data: {
@@ -315,7 +316,7 @@ function saveAlternativeChanges(question_id) {
     for (let i = 1; i <= 5; i++) {
         if ($("#edit-alternative" + i).val() != "") {
             $.ajax({
-                url: "http://127.0.0.1:3001/optioninsert",
+                url: "http://127.0.0.1:1234/optioninsert",
                 type: 'POST',
                 async: false,
                 data: {
@@ -337,7 +338,7 @@ function saveAlternativeChanges(question_id) {
 function getAxes() {
     var axes = [];
     $.ajax({
-        url: "http://127.0.0.1:3001/axes",
+        url: "http://127.0.0.1:1234/axes",
         type: 'GET',
         async: false,
         success: data => {
@@ -355,7 +356,7 @@ function getAxes() {
 function getAxisIdFromName(name) {
     let id = null;
     $.ajax({
-        url: "http://127.0.0.1:3001/axes",
+        url: "http://127.0.0.1:1234/axes",
         type: 'GET',
         async: false,
         success: data => {
@@ -390,7 +391,7 @@ function deleteAxis(axis_id) {
             deleteSubaxis(subaxis['id'])
         })
         $.ajax({
-            url: "http://127.0.0.1:3001/axisdelete",
+            url: "http://127.0.0.1:1234/axisdelete",
             type: 'POST',
             async: false,
             data: {
@@ -449,7 +450,7 @@ $('#delete-subaxis').on('click', function (event) {
 // Deleta a subdivisão 
 function deleteSubaxis(subaxis_id) {
     $.ajax({
-        url: "http://127.0.0.1:3001/axissubdivisiondelete",
+        url: "http://127.0.0.1:1234/axissubdivisiondelete",
         type: 'POST',
         async: false,
         data: {
@@ -509,7 +510,7 @@ $('#edit-add-axis').on('click', function (event) {
 $('#save-axis').on('click', function (event) {
     let axis_name = $('#add-axis-input').val();
     $.ajax({
-        url: "http://127.0.0.1:3001/axisinsert",
+        url: "http://127.0.0.1:1234/axisinsert",
         type: 'POST',
         async: false,
         data: {
@@ -528,7 +529,7 @@ $('#save-axis').on('click', function (event) {
 $('#edit-save-axis').on('click', function (event) {
     let axis_name = $('#edit-add-axis-input').val();
     $.ajax({
-        url: "http://127.0.0.1:3001/axisinsert",
+        url: "http://127.0.0.1:1234/axisinsert",
         type: 'POST',
         async: false,
         data: {
@@ -564,7 +565,7 @@ function getSubaxisIdFromName(name) {
     console.log("subaxis name: " + name)
     let id = -1;
     $.ajax({
-        url: "http://127.0.0.1:3001/axissubdivisions",
+        url: "http://127.0.0.1:1234/axissubdivisions",
         type: 'GET',
         async: false,
         success: data => {
@@ -594,7 +595,7 @@ $('#save-subaxis').on('click', function (event) {
     }
     let subaxis_name = $('#add-subaxis-input').val();
     $.ajax({
-        url: "http://127.0.0.1:3001/axissubdivisioninsert",
+        url: "http://127.0.0.1:1234/axissubdivisioninsert",
         type: 'POST',
         async: false,
         data: {
@@ -621,7 +622,7 @@ $('#save-subaxis').on('click', function (event) {
 $('#edit-save-subaxis').on('click', function (event) {
     let subaxis_name = $('#edit-add-subaxis-input').val();
     $.ajax({
-        url: "http://127.0.0.1:3001/axissubdivisioninsert",
+        url: "http://127.0.0.1:1234/axissubdivisioninsert",
         type: 'POST',
         async: false,
         data: {
@@ -639,7 +640,7 @@ $('#edit-save-subaxis').on('click', function (event) {
 function getAxisFromId(id) {
     var name = null;
     $.ajax({
-        url: "http://127.0.0.1:3001/axes",
+        url: "http://127.0.0.1:1234/axes",
         type: 'GET',
         async: false,
         success: data => {
@@ -659,7 +660,7 @@ let alternatives = [];
 function getAlternatives(question_id) {
     alternatives = [];
     $.ajax({
-        url: "http://127.0.0.1:3001/options",
+        url: "http://127.0.0.1:1234/options",
         type: 'GET',
         async: false,
         success: data => {
@@ -677,7 +678,7 @@ function getAlternatives(question_id) {
 function getAnswers(question_id) {
     let answers = [];
     $.ajax({
-        url: "http://127.0.0.1:3001/answerS",
+        url: "http://127.0.0.1:1234/answerS",
         type: 'GET',
         async: false,
         success: data => {
@@ -698,7 +699,7 @@ function deleteQuestion(question_id) {
     console.log(answers)
     answers.forEach(answer => {
         $.ajax({
-            url: "http://127.0.0.1:3001/answerdelete",
+            url: "http://127.0.0.1:1234/answerdelete",
             type: 'POST',
             async: false,
             data: {
@@ -709,7 +710,7 @@ function deleteQuestion(question_id) {
     let alternatives = getAlternatives(question_id);
     alternatives.forEach(alternative => {
         $.ajax({
-            url: "http://127.0.0.1:3001/optiondelete",
+            url: "http://127.0.0.1:1234/optiondelete",
             type: 'POST',
             async: false,
             data: {
@@ -718,7 +719,7 @@ function deleteQuestion(question_id) {
         });
     });
     $.ajax({
-        url: "http://127.0.0.1:3001/questiondelete",
+        url: "http://127.0.0.1:1234/questiondelete",
         type: 'POST',
         async: false,
         data: {
@@ -733,7 +734,7 @@ function getQuestionsFromSubaxis(subaxis_id) {
     let questions = [];
     $.ajax({
         //url do endpoint
-        url: "http://127.0.0.1:3001/questions",
+        url: "http://127.0.0.1:1234/questions",
         //tipo da requisição
         type: 'GET',
         async: false,
@@ -760,7 +761,7 @@ function getQuestionsByAxis() {
 
     $.ajax({
         //url do endpoint
-        url: "http://127.0.0.1:3001/questions",
+        url: "http://127.0.0.1:1234/questions",
         //tipo da requisição
         type: 'GET',
         //se obtiver sucesso, executar a arrow function abaixo
@@ -785,7 +786,7 @@ function getAllQuestionsFromAxis(axis_id) {
     questions = [];
     $.ajax({
         //url do endpoint
-        url: "http://127.0.0.1:3001/questions",
+        url: "http://127.0.0.1:1234/questions",
         //tipo da requisição
         type: 'GET',
         async: false,
@@ -807,10 +808,24 @@ function getAllQuestionsFromAxis(axis_id) {
 function createAxisAccordions(container) {
     let axes = getAxes()
     axes.forEach(axis => {
+        let axisName = axis['name'];
+        console.log(axisName)
         document.getElementById(`${container}`).innerHTML += `<div class="accordion" id="${axis['name']}Accordion">
         <div class="accordion-item">
+    <h2 class="accordion-header" id="headingTwo">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#${axisName}" aria-expanded="false" aria-controls="${axisName}">
+        Accordion Item #2
+      </button>
+    </h2>
+    <div id="${axisName}" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+      </div>
+    </div>
+  </div>
+        <div class="accordion-item">
           <h2 class="accordion-header" id="headingOne">
-            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target='#my${axis['name']}' aria-expanded="true" aria-controls="my${axis['name']}">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target='#my${axis['name']}' aria-expanded="true" aria-controls="my${axis}">
                 ${axis['name']}
             </button>
           </h2>
@@ -878,7 +893,7 @@ function showQuestionsByAxis() {
 function questionsExist() {
     let questionsExist = false;
     $.ajax({
-        url: "http://127.0.0.1:3001/questions",
+        url: "http://127.0.0.1:1234/questions",
         type: 'GET',
         async: false,
         success: data => {
@@ -913,7 +928,7 @@ function updateEditModal(question_id) {
     $("#delete-subaxis").show();
     var question = null;
     $.ajax({
-        url: "http://127.0.0.1:3001/questions",
+        url: "http://127.0.0.1:1234/questions",
         type: 'GET',
         async: false,
         success: data => {
@@ -957,7 +972,7 @@ function updateEditModal(question_id) {
 function getSubaxisFromId(id) {
     let subaxisName = '';
     $.ajax({
-        url: "http://127.0.0.1:3001/axissubdivisions",
+        url: "http://127.0.0.1:1234/axissubdivisions",
         type: 'GET',
         async: false,
         success: data => {

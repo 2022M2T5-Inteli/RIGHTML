@@ -3,7 +3,7 @@ function onload() {
     readQuestionsFromDatabase();
     checkLogin();
 }
-// Constante id do diagnosses
+// Constante id do diagnoses
 const diagnosisid = 4;
 
 //funçao para ver se esta logado
@@ -92,7 +92,7 @@ function saveQuestion() {
         })
     } else {
         $.ajax({
-            url: "http://127.0.0.1:3001/questioninsert",
+            url: "http://127.0.0.1:1234/questioninsert",
             type: 'POST',
             async: false,
             data: {
@@ -139,7 +139,7 @@ function saveQuestionChanges(question_id) {
         })
     } else {
         $.ajax({
-            url: "http://127.0.0.1:3001/questionupdate",
+            url: "http://127.0.0.1:1234/questionupdate",
             type: 'POST',
             async: false,
             data: {
@@ -160,7 +160,7 @@ function saveQuestionChanges(question_id) {
 function getLastQuestionId() {
     var highestId = 0;
     $.ajax({
-        url: "http://127.0.0.1:3001/questions",
+        url: "http://127.0.0.1:1234/questions",
         type: 'GET',
         async: false,
         success: data => {
@@ -177,7 +177,7 @@ function getLastQuestionId() {
 function getAxisIdFromName(name) {
     let id = null;
     $.ajax({
-        url: "http://127.0.0.1:3001/axes",
+        url: "http://127.0.0.1:1234/axes",
         type: 'GET',
         async: false,
         success: data => {
@@ -197,7 +197,7 @@ let critical_factors = [];
 function getSubdivisionsFromAxisId(axis_id) {
     subdivisions = [];
     $.ajax({
-        url: "http://127.0.0.1:3001/axissubdivisions",
+        url: "http://127.0.0.1:1234/axissubdivisions",
         type: 'GET',
         async: false,
         success: data => {
@@ -251,7 +251,7 @@ $("#edit-axis-dropdown").change(function () {
 function findSubdivisionIDFromName(name) {
     let id = ''
     $.ajax({
-        url: "http://127.0.0.1:3001/axissubdivisions",
+        url: "http://127.0.0.1:1234/axissubdivisions",
         type: 'GET',
         async: false,
         success: data => {
@@ -274,7 +274,7 @@ function saveAlternatives(question_id) {
     for (let i = 1; i <= 5; i++) {
         if ($("#alternative" + i).val() != "") {
             $.ajax({
-                url: "http://127.0.0.1:3001/optioninsert",
+                url: "http://127.0.0.1:1234/optioninsert",
                 type: 'POST',
                 async: false,
                 data: {
@@ -296,7 +296,7 @@ function saveAlternativeChanges(question_id) {
     original_alternatives = getAlternatives(question_id);
     for (let i = 0; i < original_alternatives.length; i++) {
         $.ajax({
-            url: "http://127.0.0.1:3001/optiondelete",
+            url: "http://127.0.0.1:1234/optiondelete",
             type: 'POST',
             async: false,
             data: {
@@ -310,7 +310,7 @@ function saveAlternativeChanges(question_id) {
     for (let i = 1; i <= 5; i++) {
         if ($("#edit-alternative" + i).val() != "") {
             $.ajax({
-                url: "http://127.0.0.1:3001/optioninsert",
+                url: "http://127.0.0.1:1234/optioninsert",
                 type: 'POST',
                 async: false,
                 data: {
@@ -332,7 +332,7 @@ function saveAlternativeChanges(question_id) {
 function getAxes() {
     var axes = [];
     $.ajax({
-        url: "http://127.0.0.1:3001/axes",
+        url: "http://127.0.0.1:1234/axes",
         type: 'GET',
         async: false,
         success: data => {
@@ -350,7 +350,7 @@ function getAxes() {
 function getAxisIdFromName(name) {
     let id = null;
     $.ajax({
-        url: "http://127.0.0.1:3001/axes",
+        url: "http://127.0.0.1:1234/axes",
         type: 'GET',
         async: false,
         success: data => {
@@ -385,7 +385,7 @@ function deleteAxis(axis_id) {
             deleteSubaxis(subaxis['id'])
         })
         $.ajax({
-            url: "http://127.0.0.1:3001/axisdelete",
+            url: "http://127.0.0.1:1234/axisdelete",
             type: 'POST',
             async: false,
             data: {
@@ -444,7 +444,7 @@ $('#delete-subaxis').on('click', function (event) {
 // Deleta a subdivisão 
 function deleteSubaxis(subaxis_id) {
     $.ajax({
-        url: "http://127.0.0.1:3001/axissubdivisiondelete",
+        url: "http://127.0.0.1:1234/axissubdivisiondelete",
         type: 'POST',
         async: false,
         data: {
@@ -504,7 +504,7 @@ $('#edit-add-axis').on('click', function (event) {
 $('#save-axis').on('click', function (event) {
     let axis_name = $('#add-axis-input').val();
     $.ajax({
-        url: "http://127.0.0.1:3001/axisinsert",
+        url: "http://127.0.0.1:1234/axisinsert",
         type: 'POST',
         async: false,
         data: {
@@ -522,7 +522,7 @@ $('#save-axis').on('click', function (event) {
 $('#edit-save-axis').on('click', function (event) {
     let axis_name = $('#edit-add-axis-input').val();
     $.ajax({
-        url: "http://127.0.0.1:3001/axisinsert",
+        url: "http://127.0.0.1:1234/axisinsert",
         type: 'POST',
         async: false,
         data: {
@@ -558,7 +558,7 @@ function getSubaxisIdFromName(name) {
     console.log("subaxis name: " + name)
     let id = -1;
     $.ajax({
-        url: "http://127.0.0.1:3001/axissubdivisions",
+        url: "http://127.0.0.1:1234/axissubdivisions",
         type: 'GET',
         async: false,
         success: data => {
@@ -587,7 +587,7 @@ $('#save-subaxis').on('click', function (event) {
     }
     let subaxis_name = $('#add-subaxis-input').val();
     $.ajax({
-        url: "http://127.0.0.1:3001/axissubdivisioninsert",
+        url: "http://127.0.0.1:1234/axissubdivisioninsert",
         type: 'POST',
         async: false,
         data: {
@@ -614,7 +614,7 @@ $('#save-subaxis').on('click', function (event) {
 $('#edit-save-subaxis').on('click', function (event) {
     let subaxis_name = $('#edit-add-subaxis-input').val();
     $.ajax({
-        url: "http://127.0.0.1:3001/axissubdivisioninsert",
+        url: "http://127.0.0.1:1234/axissubdivisioninsert",
         type: 'POST',
         async: false,
         data: {
@@ -632,7 +632,7 @@ $('#edit-save-subaxis').on('click', function (event) {
 function getAxisFromId(id) {
     var name = null;
     $.ajax({
-        url: "http://127.0.0.1:3001/axes",
+        url: "http://127.0.0.1:1234/axes",
         type: 'GET',
         async: false,
         success: data => {
@@ -652,7 +652,7 @@ let alternatives = [];
 function getAlternatives(question_id) {
     alternatives = [];
     $.ajax({
-        url: "http://127.0.0.1:3001/options",
+        url: "http://127.0.0.1:1234/options",
         type: 'GET',
         async: false,
         success: data => {
@@ -670,7 +670,7 @@ function getAlternatives(question_id) {
 function getAnswers(question_id) {
     let answers = [];
     $.ajax({
-        url: "http://127.0.0.1:3001/answerS",
+        url: "http://127.0.0.1:1234/answerS",
         type: 'GET',
         async: false,
         success: data => {
@@ -691,7 +691,7 @@ function deleteQuestion(question_id) {
     console.log(answers)
     answers.forEach(answer => {
         $.ajax({
-            url: "http://127.0.0.1:3001/answerdelete",
+            url: "http://127.0.0.1:1234/answerdelete",
             type: 'POST',
             async: false,
             data: {
@@ -702,7 +702,7 @@ function deleteQuestion(question_id) {
     let alternatives = getAlternatives(question_id);
     alternatives.forEach(alternative => {
         $.ajax({
-            url: "http://127.0.0.1:3001/optiondelete",
+            url: "http://127.0.0.1:1234/optiondelete",
             type: 'POST',
             async: false,
             data: {
@@ -711,7 +711,7 @@ function deleteQuestion(question_id) {
         });
     });
     $.ajax({
-        url: "http://127.0.0.1:3001/questiondelete",
+        url: "http://127.0.0.1:1234/questiondelete",
         type: 'POST',
         async: false,
         data: {
@@ -726,7 +726,7 @@ function getQuestionsFromSubaxis(subaxis_id) {
     let questions = [];
     $.ajax({
         //Url do endpoint
-        url: "http://127.0.0.1:3001/questions",
+        url: "http://127.0.0.1:1234/questions",
         //Tipo da requisição
         type: 'GET',
         async: false,
@@ -754,7 +754,7 @@ function getQuestionsByAxis() {
 
     $.ajax({
         //url do endpoint
-        url: "http://127.0.0.1:3001/questions",
+        url: "http://127.0.0.1:1234/questions",
         //tipo da requisição
         type: 'GET',
         //se obtiver sucesso, executar a arrow function abaixo
@@ -780,7 +780,7 @@ function getAllQuestionsFromAxis(axis_id) {
     questions = [];
     $.ajax({
         //url do endpoint
-        url: "http://127.0.0.1:3001/questions",
+        url: "http://127.0.0.1:1234/questions",
         //tipo da requisição
         type: 'GET',
         async: false,
@@ -874,7 +874,7 @@ function showQuestionsByAxis() {
 function questionsExist() {
     let questionsExist = false;
     $.ajax({
-        url: "http://127.0.0.1:3001/questions",
+        url: "http://127.0.0.1:1234/questions",
         type: 'GET',
         async: false,
         success: data => {
@@ -909,7 +909,7 @@ function updateEditModal(question_id) {
     $("#delete-subaxis").show();
     var question = null;
     $.ajax({
-        url: "http://127.0.0.1:3001/questions",
+        url: "http://127.0.0.1:1234/questions",
         type: 'GET',
         async: false,
         success: data => {
@@ -953,7 +953,7 @@ function updateEditModal(question_id) {
 function getSubaxisFromId(id) {
     let subaxisName = '';
     $.ajax({
-        url: "http://127.0.0.1:3001/axissubdivisions",
+        url: "http://127.0.0.1:1234/axissubdivisions",
         type: 'GET',
         async: false,
         success: data => {
