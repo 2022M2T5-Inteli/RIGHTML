@@ -1,4 +1,4 @@
-const diagnosisId = 5;
+const diagnosisId = 4;
 
 let axes = [];
 //pega os eixos existentes no banco de dados
