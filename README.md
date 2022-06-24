@@ -9,9 +9,9 @@
 ## RIGHTML
 
 ## Integrantes: 
-- <a href="https://www.google.com/">Antonio Angelo Teixeira</a> 
+- <a href="https://github.com/Antoniointeli">Antonio Angelo Teixeira</a> 
 - <a href="https://www.linkedin.com/in/eduardo-franca-porto/">Eduardo França Porto</a>
-- <a href="https://www.google.com/">Elisa de Oliveira Flemer</a>
+- <a href="https://github.com/elisaflemer-inteli">Elisa de Oliveira Flemer</a>
 - <a href="https://www.linkedin.com/in/matheus-macedo-santos-2a8106194/">Matheus Macedo Santos</a>
 - <a href="https://www.linkedin.com/in/pedro-gattai-096678227/">Pedro Gattai</a>
 - <a href="https://www.linkedin.com/in/tainara-rodrigues-763a42233/">Tainara Rodrigues Teixeira</a>
