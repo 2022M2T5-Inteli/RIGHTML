@@ -803,18 +803,20 @@ function getAllQuestionsFromAxis(axis_id) {
 function createAxisAccordions(container) {
     let axes = getAxes()
     axes.forEach(axis => {
-        document.getElementById(`${container}`).innerHTML += `<div class="accordion" id="${axis['name']}Accordion">
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingOne">
-            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target='#my${axis['name']}' aria-expanded="true" aria-controls="my${axis}">
-                ${axis['name']}
-            </button>
-          </h2>
-          <div id='my${axis['name']}' class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-            <div class="accordion-body" id="${axis['name']}-body">
-            </div>
-          </div>
-          </div>`
+        console.log(axis)
+        let axisName = axis['name'].replaceAll(' ', '-');
+        document.getElementById(`${container}`).innerHTML += `<div class="accordion" id="${axisName}Accordion">
+          <div class="accordion-item">
+    <h2 class="accordion-header" id="headingTwo">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#${axisName}" aria-expanded="false" aria-controls="${axisName}">
+        ${axis['name']}
+      </button>
+    </h2>
+    <div id="${axisName}" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+      <div class="accordion-body" id="${axisName}-body">
+      </div>
+    </div>
+  </div>`
     })
 }
 
@@ -823,13 +825,14 @@ function showQuestionsByAxis() {
     var questionNumber = 0;
     let axes = getAxes()
     axes.forEach(axis => {
+        let axisName = axis['name'].replaceAll(" ", "-");
         let subdivisions = getSubdivisionsFromAxisId(axis['id']);
         subdivisions.forEach(subdivision => {
             let questions = getQuestionsFromSubaxis(subdivision['id']);
             if (questions.length > 0) {
-                document.getElementById(`${axis['name']}-body`).innerHTML += `<h4 class="yellow">${subdivision['name']}</h4>`;
+                document.getElementById(`${axisName}-body`).innerHTML += `<h4 class="yellow">${subdivision['name']}</h4>`;
                 questions.forEach(question => {
-                    document.getElementById(`${axis['name']}-body`).innerHTML += `
+                    document.getElementById(`${axisName}-body`).innerHTML += `
                 <div id = "question${questionNumber}" >
                     <div class='row'>
                         <div class="col-sm-9">

@@ -808,33 +808,21 @@ function getAllQuestionsFromAxis(axis_id) {
 function createAxisAccordions(container) {
     let axes = getAxes()
     axes.forEach(axis => {
-        let axisName = axis['name'];
-        console.log(axisName)
-        document.getElementById(`${container}`).innerHTML += `<div class="accordion" id="${axis['name']}Accordion">
-        <div class="accordion-item">
+        console.log(axis)
+        let axisName = axis['name'].replaceAll(' ', '-');
+            document.getElementById(`${container}`).innerHTML += `<div class="accordion" id="${axisName}Accordion">
+          <div class="accordion-item">
     <h2 class="accordion-header" id="headingTwo">
       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#${axisName}" aria-expanded="false" aria-controls="${axisName}">
-        Accordion Item #2
+        ${axis['name']}
       </button>
     </h2>
     <div id="${axisName}" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-      <div class="accordion-body">
-        <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+      <div class="accordion-body" id="${axisName}-body">
       </div>
     </div>
-  </div>
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingOne">
-            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target='#my${axis['name']}' aria-expanded="true" aria-controls="my${axis}">
-                ${axis['name']}
-            </button>
-          </h2>
-          <div id='my${axis['name']}' class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-            <div class="accordion-body" id="${axis['name']}-body">
-            </div>
-          </div>
-          </div>`
-    })
+  </div>`
+})
 }
 
 // Função que faz aparecer as questões cadastradas divididas por eixos e subeixos em cada questionário 
@@ -842,13 +830,14 @@ function showQuestionsByAxis() {
     var questionNumber = 0;
     let axes = getAxes()
     axes.forEach(axis => {
+        let axisName = axis['name'].replaceAll(' ', '-');
         let subdivisions = getSubdivisionsFromAxisId(axis['id']);
         subdivisions.forEach(subdivision => {
             let questions = getQuestionsFromSubaxis(subdivision['id']);
             if (questions.length > 0) {
-                document.getElementById(`${axis['name']}-body`).innerHTML += `<h4 class="yellow">${subdivision['name']}</h4>`;
+                document.getElementById(`${axisName}-body`).innerHTML += `<h4 class="yellow">${subdivision['name']}</h4>`;
                 questions.forEach(question => {
-                    document.getElementById(`${axis['name']}-body`).innerHTML += `
+                    document.getElementById(`${axisName}-body`).innerHTML += `
                 <div id = "question${questionNumber}" >
                     <div class='row'>
                         <div class="col-sm-9">
@@ -873,18 +862,18 @@ function showQuestionsByAxis() {
             `
                     let alternatives = getAlternatives(question['id']);
                     alternatives.forEach(alternative => {
-                        document.getElementById(`${axis['name']}-body`).innerHTML +=
+                        document.getElementById(`${axisName}-body`).innerHTML +=
                             `<div class="form-check">
                 <input class="form-check-input" type="radio" name="question${question['id']}" id="flexRadioDefault1">
                     <label class="form-check-label" for="flexRadioDefault1">${alternative['text']}</label>
                 </div>`
                     })
-                    document.getElementById(`${axis['name']}-body`).innerHTML += "</div><hr>";
+                    document.getElementById(`${axisName}-body`).innerHTML += "</div><hr>";
                 });
                 questionNumber++;
             }
             ;
-            document.getElementById(`${axis['name']}-body`).innerHTML += "<br>";
+            document.getElementById(`${axisName}-body`).innerHTML += "<br>";
         });
     })
 };
