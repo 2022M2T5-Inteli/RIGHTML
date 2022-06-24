@@ -3,7 +3,7 @@ let school_id = [];
 function getLastNetworkId() {
     let lastID = -1;
     $.ajax({
-        url: "http://127.0.0.1:3001/networks",
+        url: "http://127.0.0.1:1234/networks",
         type: 'GET',
         async: false,
         success: data => {
@@ -29,7 +29,7 @@ $(document).ready(function () {
         else {
             //Insere os dados da escola no banco de dados
             $.ajax({
-                url: "http://127.0.0.1:3001/networkinsert",
+                url: "http://127.0.0.1:1234/networkinsert",
                 type: 'POST',
                 data: {
                     name: $('#networkName').val(),
@@ -38,7 +38,7 @@ $(document).ready(function () {
             })
             console.log(getLastNetworkId())
             $.ajax({
-                url: "http://127.0.0.1:3001/networkmanagerinsert",
+                url: "http://127.0.0.1:1234/networkmanagerinsert",
                 type: 'POST',
                 data: {
                     name: localStorage.getItem("name"),

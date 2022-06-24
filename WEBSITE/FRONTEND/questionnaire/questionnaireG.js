@@ -22,7 +22,7 @@ function readQuestionsFromDatabase() {
 function questionsExist() {
     let questionsExist = false;
     $.ajax({
-        url: "http://127.0.0.1:3001/questions",
+        url: "http://127.0.0.1:1234/questions",
         type: 'GET',
         async: false,
         success: data => {
@@ -38,32 +38,36 @@ function questionsExist() {
 function createAxisAccordions(container) {
     let axes = getAxes()
     axes.forEach(axis => {
-        document.getElementById(`${container}`).innerHTML += `
-<div class="accordion" id="${axis['name']}Accordion">
- <div class="accordion-item">
-    <h2 class="accordion-header" id="${axis['name']}heading">
-      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#${axis['name']}" aria-expanded="true" aria-controls="${axis['name']}">
-        ${axis['name']}
-      </button>
-    </h2>
-    <div id="${axis['name']}" class="accordion-collapse collapse show" aria-labelledby="${axis['name']}heading" data-bs-parent="#${axis['name']}Accordion">
-        <div class="accordion-body" id="${axis['name']}-body">
-        </div>      
-    </div>
-  </div>
+        document.getElementById(`${container}`).innerHTML += `<div class="accordion" id="${axis['name']}Accordion">
         <div class="accordion-item">
           <h2 class="accordion-header" id="headingOne">
-            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target='#my${axis['name']}' aria-expanded="true" aria-controls="my${axis['name']}">
+            <button class="accordion-button" type="button"  role="button"  data-target="my${axis['name']}" aria-expanded="false" aria-controls="my${axis['name']}">
                 ${axis['name']}
             </button>
           </h2>
-          <div id='my${axis['name']}' class="accordion" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+          <div id="my${axis['name']}"   >
             <div class="accordion-body" id="${axis['name']}-body">
             </div>
           </div>
           </div>`
     })
 }
+
+// <p>
+//   <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+//     Link with href
+//   </a>
+//   <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+//     Button with data-target
+//   </button>
+// </p>
+// <div class="collapse" id="collapseExample">
+//   <div class="card card-body">
+//     Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+//   </div>
+// </div>
+
+
 
 let loadedQuestions = [];
 
@@ -109,7 +113,7 @@ function showQuestionsByAxis() {
 function getAxes() {
     var axes = [];
     $.ajax({
-        url: "http://127.0.0.1:3001/axes",
+        url: "http://127.0.0.1:1234/axes",
         type: 'GET',
         async: false,
         success: data => {
@@ -127,7 +131,7 @@ function getAxes() {
 function getSubdivisionsFromAxisId(axis_id) {
     subdivisions = [];
     $.ajax({
-        url: "http://127.0.0.1:3001/axissubdivisions",
+        url: "http://127.0.0.1:1234/axissubdivisions",
         type: 'GET',
         async: false,
         success: data => {
@@ -146,7 +150,7 @@ function getQuestionsFromSubaxis(subaxis_id) {
     let questions = [];
     $.ajax({
         //url do endpoint
-        url: "http://127.0.0.1:3001/questions",
+        url: "http://127.0.0.1:1234/questions",
         //tipo da requisição
         type: 'GET',
         async: false,
@@ -168,7 +172,7 @@ function getQuestionsFromSubaxis(subaxis_id) {
 function getAlternatives(question_id) {
     alternatives = [];
     $.ajax({
-        url: "http://127.0.0.1:3001/options",
+        url: "http://127.0.0.1:1234/options",
         type: 'GET',
         async: false,
         success: data => {
@@ -194,7 +198,7 @@ function getSessionData() {
 
     if (table === "school_manager") {
         $.ajax({
-            url: "http://127.0.0.1:3001/schoolmanagers",
+            url: "http://127.0.0.1:1234/schoolmanagers",
             type: 'GET',
             async: false,
             success: data => {
@@ -206,7 +210,7 @@ function getSessionData() {
             }
         })
         $.ajax({
-            url: "http://127.0.0.1:3001/schools",
+            url: "http://127.0.0.1:1234/schools",
             type: 'GET',
             async: false,
             success: data => {
@@ -234,7 +238,7 @@ function saveAnswers() {
         console.log(answeredQuestion)
         let chosen_alternative_id = document.querySelector(`input[name=question${answeredQuestion['id']}]:checked`).value
         $.ajax({
-            url: "http://127.0.0.1:3001/answerinsert",
+            url: "http://127.0.0.1:1234/answerinsert",
             type: 'POST',
             async: false,
             data: {
@@ -243,7 +247,7 @@ function saveAnswers() {
                 question_id: answeredQuestion['id'],
                 axis_subdivision_id: answeredQuestion['axis_subdivision_id'],
                 axis_id: answeredQuestion['axis_id'],
-                diagnosis_id: 5,
+                diagnosis_id: 4,
                 school_cnpj: school['cnpj'],
                 network_id: school['network_id']
             }

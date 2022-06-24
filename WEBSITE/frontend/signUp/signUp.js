@@ -42,7 +42,7 @@ function next() {
 function SchoolManagerCPFIsUnique(cpf) {
     let isUnique = true;
     $.ajax({
-        url: "http://127.0.0.1:3001/schoolmanagers",
+        url: "http://127.0.0.1:1234/schoolmanagers",
         type: 'GET',
         async: false,
         success: data => {
@@ -60,7 +60,7 @@ function SchoolManagerCPFIsUnique(cpf) {
 function NetworkManagerCPFIsUnique(cpf) {
     let isUnique = true;
     $.ajax({
-        url: "http://127.0.0.1:3001/networkmanagers",
+        url: "http://127.0.0.1:1234/networkmanagers",
         type: 'GET',
         async: false,
         success: data => {

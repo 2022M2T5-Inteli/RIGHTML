@@ -61,7 +61,7 @@ function getWeightAlternative(answer) {
   let chosenOption = null;
   let alternativeId = answer["option_id"]
   $.ajax({
-    url: "http://127.0.0.1:3001/options",
+    url: "http://127.0.0.1:1234/options",
     type: 'GET',
     async: false,
     success: data => {
@@ -79,7 +79,7 @@ function getWeightQuestion(answer) {
   let questionWeight = null;
   let questionId = answer["question_id"]
   $.ajax({
-    url: "http://127.0.0.1:3001/questions",
+    url: "http://127.0.0.1:1234/questions",
     type: 'GET',
     async: false,
     success: data => {
@@ -96,7 +96,7 @@ function getWeightQuestion(answer) {
 function getAnswersByAxis(axis_id) {
   let answers = [];
   $.ajax({
-    url: "http://127.0.0.1:3001/answers",
+    url: "http://127.0.0.1:1234/answers",
     type: 'GET',
     async: false,
     success: data => {
@@ -113,7 +113,7 @@ function getAnswersByAxis(axis_id) {
 function getAxes() {
   let axes = [];
   $.ajax({
-    url: "http://127.0.0.1:3001/axes",
+    url: "http://127.0.0.1:1234/axes",
     type: 'GET',
     async: false,
     success: data => {
@@ -131,7 +131,7 @@ function getUser() {
   let cpf = localStorage.getItem("primaryKey");
   let user = null;
   $.ajax({
-    url: "http://127.0.0.1:3001/schoolmanagers",
+    url: "http://127.0.0.1:1234/schoolmanagers",
     type: 'GET',
     async: false,
     success: data => {
@@ -167,7 +167,7 @@ function getSchoolName() {
   let user = getUser()
   let schoolName = null
   $.ajax({
-    url: "http://127.0.0.1:3001/schools",
+    url: "http://127.0.0.1:1234/schools",
     type: 'GET',
     async: false,
     success: data => {

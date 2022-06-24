@@ -5,7 +5,7 @@ let school_id = [];
 function get_cnpjs() {
     let CNPJS = [];
     $.ajax({
-        url: "http://127.0.0.1:3001/schools",
+        url: "http://127.0.0.1:1234/schools",
         type: 'GET',
         async: false,
         success: data => {
@@ -20,7 +20,7 @@ function get_cnpjs() {
 //Essa função vê o ID da rede 
 function get_network_id() {
     $.ajax({
-        url: "http://127.0.0.1:3001/networks",
+        url: "http://127.0.0.1:1234/networks",
         type: 'GET',
         async: false,
         success: data => {
@@ -62,7 +62,7 @@ $(document).ready(function () {
         else if (cnpjIsUnique()) {
             //Insere os dados da escola no banco de dados
             $.ajax({
-                url: "http://127.0.0.1:3001/schoolinsert",
+                url: "http://127.0.0.1:1234/schoolinsert",
                 type: 'POST',
                 data: {
                     type_of_institution: document.querySelector('input[name="opcao"]:checked').value,
@@ -75,7 +75,7 @@ $(document).ready(function () {
                 },
             })
             $.ajax({
-                url: "http://127.0.0.1:3001/schoolmanagerinsert",
+                url: "http://127.0.0.1:1234/schoolmanagerinsert",
                 type: 'POST',
                 data: {
                     name: localStorage.getItem("name"),
@@ -118,7 +118,7 @@ function updateNetworkDropdown() {
 function getNetworks() {
     let networks = [];
     $.ajax({
-        url: "http://127.0.0.1:3001/networks",
+        url: "http://127.0.0.1:1234/networks",
         type: 'GET',
         async: false,
         success: data => {

@@ -22,7 +22,7 @@ function readQuestionsFromDatabase() {
 function questionsExist() {
     let questionsExist = false;
     $.ajax({
-        url: "http://127.0.0.1:3001/questions",
+        url: "http://127.0.0.1:1234/questions",
         type: 'GET',
         async: false,
         success: data => {
@@ -97,7 +97,7 @@ function showQuestionsByAxis() {
 function getAxes() {
     var axes = [];
     $.ajax({
-        url: "http://127.0.0.1:3001/axes",
+        url: "http://127.0.0.1:1234/axes",
         type: 'GET',
         async: false,
         success: data => {
@@ -115,7 +115,7 @@ function getAxes() {
 function getSubdivisionsFromAxisId(axis_id) {
     subdivisions = [];
     $.ajax({
-        url: "http://127.0.0.1:3001/axissubdivisions",
+        url: "http://127.0.0.1:1234/axissubdivisions",
         type: 'GET',
         async: false,
         success: data => {
@@ -134,7 +134,7 @@ function getQuestionsFromSubaxis(subaxis_id) {
     let questions = [];
     $.ajax({
         //url do endpoint
-        url: "http://127.0.0.1:3001/questions",
+        url: "http://127.0.0.1:1234/questions",
         //tipo da requisição
         type: 'GET',
         async: false,
@@ -156,7 +156,7 @@ function getQuestionsFromSubaxis(subaxis_id) {
 function getAlternatives(question_id) {
     alternatives = [];
     $.ajax({
-        url: "http://127.0.0.1:3001/options",
+        url: "http://127.0.0.1:1234/options",
         type: 'GET',
         async: false,
         success: data => {
@@ -182,7 +182,7 @@ function getSessionData() {
 
     if (table === "school_manager") {
         $.ajax({
-            url: "http://127.0.0.1:3001/schoolmanagers",
+            url: "http://127.0.0.1:1234/schoolmanagers",
             type: 'GET',
             async: false,
             success: data => {
@@ -194,7 +194,7 @@ function getSessionData() {
             }
         })
         $.ajax({
-            url: "http://127.0.0.1:3001/schools",
+            url: "http://127.0.0.1:1234/schools",
             type: 'GET',
             async: false,
             success: data => {
@@ -222,7 +222,7 @@ function saveAnswers() {
         console.log(answeredQuestion)
         let chosen_alternative_id = document.querySelector(`input[name=question${answeredQuestion['id']}]:checked`).value
         $.ajax({
-            url: "http://127.0.0.1:3001/answerinsert",
+            url: "http://127.0.0.1:1234/answerinsert",
             type: 'POST',
             async: false,
             data: {
