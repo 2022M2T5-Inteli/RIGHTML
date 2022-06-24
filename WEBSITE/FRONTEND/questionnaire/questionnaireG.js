@@ -38,10 +38,22 @@ function questionsExist() {
 function createAxisAccordions(container) {
     let axes = getAxes()
     axes.forEach(axis => {
-        document.getElementById(`${container}`).innerHTML += `<div class="accordion" id="${axis['name']}Accordion">
+        document.getElementById(`${container}`).innerHTML += `
+<div class="accordion" id="${axis['name']}Accordion">
+ <div class="accordion-item">
+    <h2 class="accordion-header" id="${axis['name']}heading">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#${axis['name']}" aria-expanded="true" aria-controls="${axis['name']}">
+        ${axis['name']}
+      </button>
+    </h2>
+    <div id="${axis['name']}" class="accordion-collapse collapse show" aria-labelledby="${axis['name']}heading" data-bs-parent="#${axis['name']}Accordion">
+        <div class="accordion-body" id="${axis['name']}-body">
+        </div>      
+    </div>
+  </div>
         <div class="accordion-item">
           <h2 class="accordion-header" id="headingOne">
-            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target='#my${axis['name']}' aria-expanded="true" aria-controls="my${axis}">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target='#my${axis['name']}' aria-expanded="true" aria-controls="my${axis['name']}">
                 ${axis['name']}
             </button>
           </h2>

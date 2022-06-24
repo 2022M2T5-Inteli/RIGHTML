@@ -35,6 +35,7 @@ function login() {
         }
         //Compara o input da tela de login caso escolha o botão funcionário Falconi
     } else if (userType === "falconi") {
+        console.log("inside")
         if (checkFalconiEmployee(loginInput)) {
             localStorage.setItem("loggedIn", "true");
             localStorage.setItem("primaryKey", loginInput);
@@ -56,7 +57,7 @@ function login() {
 function checkSchoolManager(loginInput) {
     let user = null;
     $.ajax({
-        url: "http://127.0.0.1:3001/schoolmanagers",
+        url: "http://127.0.0.1:1234/schoolmanagers",
         type: 'GET',
         async: false,
         success: data => {
@@ -74,7 +75,7 @@ function checkSchoolManager(loginInput) {
 function checkNetworkManager(loginInput) {
     let user = null;
     $.ajax({
-        url: "http://127.0.0.1:3001/networkmanagers",
+        url: "http://127.0.0.1:1234/networkmanagers",
         type: 'GET',
         async: false,
         success: data => {
@@ -90,9 +91,10 @@ function checkNetworkManager(loginInput) {
 
 //Checa no banco de dados se o cpf existe ou não
 function checkFalconiEmployee(loginInput) {
+    console.log("login input: " + loginInput)
     let user = null;
     $.ajax({
-        url: "http://127.0.0.1:3001/employees",
+        url: "http://127.0.0.1:1234/employees",
         type: 'GET',
         async: false,
         success: data => {
