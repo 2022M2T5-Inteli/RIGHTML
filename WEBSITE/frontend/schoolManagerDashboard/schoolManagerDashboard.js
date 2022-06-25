@@ -15,7 +15,7 @@ function getSessionData() {
     }
     let primaryKey = localStorage.getItem("primaryKey");
     $.ajax({
-        url: "http://127.0.0.1:3001/schoolmanagers",
+        url: "http://127.0.0.1:1234/schoolmanagers",
         type: 'GET',
         async: false,
         success: data => {
@@ -27,7 +27,7 @@ function getSessionData() {
         }
     })
     $.ajax({
-        url: "http://127.0.0.1:3001/schools",
+        url: "http://127.0.0.1:1234/schools",
         type: 'GET',
         async: false,
         success: data => {
@@ -42,7 +42,7 @@ function getSessionData() {
 
 //atualiza os dados da escola
 $("#update_data").click(function () {
-    let url = "http://127.0.0.1:3001/schoolupdate";
+    let url = "http://127.0.0.1:1234/schoolupdate";
     {
         $.ajax({
             url: url,
@@ -81,7 +81,7 @@ function showUpdateBox() {
 function getNetworkNameFromId(network_id) {
     let networkName = null;
     $.ajax({
-        url: "http://127.0.0.1:3001/networks",
+        url: "http://127.0.0.1:1234/networks",
         type: 'GET',
         async: false,
         success: data => {
@@ -125,7 +125,7 @@ function updateNetworkDropdown() {
 function getNetworks() {
     let networks = [];
     $.ajax({
-        url: "http://127.0.0.1:3001/networks",
+        url: "http://127.0.0.1:1234/networks",
         type: 'GET',
         async: false,
         success: data => {

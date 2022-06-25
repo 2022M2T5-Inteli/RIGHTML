@@ -22,7 +22,7 @@ function readQuestionsFromDatabase() {
 function questionsExist() {
     let questionsExist = false;
     $.ajax({
-        url: "http://127.0.0.1:3001/questions",
+        url: "http://127.0.0.1:1234/questions",
         type: 'GET',
         async: false,
         success: data => {
@@ -38,30 +38,20 @@ function questionsExist() {
 function createAxisAccordions(container) {
     let axes = getAxes()
     axes.forEach(axis => {
-        document.getElementById(`${container}`).innerHTML += `
-<div class="accordion" id="${axis['name']}Accordion">
- <div class="accordion-item">
-    <h2 class="accordion-header" id="${axis['name']}heading">
-      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#${axis['name']}" aria-expanded="true" aria-controls="${axis['name']}">
+        console.log(axis)
+        let axisName = axis['name'].replaceAll(' ', '-');
+        document.getElementById(`${container}`).innerHTML += `<div class="accordion" id="${axisName}Accordion">
+          <div class="accordion-item">
+    <h2 class="accordion-header" id="headingTwo">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#${axisName}" aria-expanded="false" aria-controls="${axisName}">
         ${axis['name']}
       </button>
     </h2>
-    <div id="${axis['name']}" class="accordion-collapse collapse show" aria-labelledby="${axis['name']}heading" data-bs-parent="#${axis['name']}Accordion">
-        <div class="accordion-body" id="${axis['name']}-body">
-        </div>      
+    <div id="${axisName}" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+      <div class="accordion-body" id="${axisName}-body">
+      </div>
     </div>
-  </div>
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingOne">
-            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target='#my${axis['name']}' aria-expanded="true" aria-controls="my${axis['name']}">
-                ${axis['name']}
-            </button>
-          </h2>
-          <div id='my${axis['name']}' class="accordion" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-            <div class="accordion-body" id="${axis['name']}-body">
-            </div>
-          </div>
-          </div>`
+  </div>`
     })
 }
 
@@ -70,37 +60,38 @@ let loadedQuestions = [];
 //Mostra as questões por eixo na página e adiciona cada elemento num ID específico do HTML
 function showQuestionsByAxis() {
     loadedQuestions = [];
-    let axes = getAxes()
+    let axes = getAxes();
     axes.forEach(axis => {
+        let axisName = axis['name'].replaceAll(" ", "-");
         let subdivisions = getSubdivisionsFromAxisId(axis['id']);
         subdivisions.forEach(subdivision => {
             let questions = getQuestionsFromSubaxis(subdivision['id']);
             if (questions.length > 0) {
-                document.getElementById(`${axis['name']}-body`).innerHTML += `<div class="axis-title-outer-styling">
+                document.getElementById(`${axisName}-body`).innerHTML += `<div class="axis-title-outer-styling">
       <div class="axis-title-inner-styling">
         <h4>${subdivision['name']}</h4>
       </div>
     </div>`;
                 //Adiciona o texto das questões no HTML 
                 questions.forEach(question => {
-                    document.getElementById(`${axis['name']}-body`).innerHTML += `
+                    document.getElementById(`${axisName}-body`).innerHTML += `
                             <div id = "question${question['id']}">
                             <p style="font-size:16px;">${question['text']}</p>`
                     loadedQuestions.push(question)
                     let alternatives = getAlternatives(question['id']);
                     alternatives.forEach(alternative => {
-                        document.getElementById(`${axis['name']}-body`).innerHTML +=
+                        document.getElementById(`${axisName}-body`).innerHTML +=
                             `<div class="form-check">
                              <input class="form-check-input" type="radio" name="question${question['id']}" id="${alternative['id']}" value="${alternative['id']}">
                              <label class="form-check-label" for="flexRadioDefault1">${alternative['text']}</label>
                              </div>`
                     })
-                    document.getElementById(`${axis['name']}-body`).innerHTML += `<input id="extra-info-${question['id']}" style="width:100%;margin: 10px 0;;" placeholder="Mais informações"></input>`
-                    document.getElementById(`${axis['name']}-body`).innerHTML += "</div><hr>";
+                    document.getElementById(`${axisName}-body`).innerHTML += `<input id="extra-info-${question['id']}" style="width:100%;margin: 10px 0;;" placeholder="Mais informações"></input>`
+                    document.getElementById(`${axisName}-body`).innerHTML += "</div><hr>";
                 });
             }
             ;
-            document.getElementById(`${axis['name']}-body`).innerHTML += "<br>";
+            document.getElementById(`${axisName}-body`).innerHTML += "<br>";
         });
     })
 };
@@ -109,7 +100,7 @@ function showQuestionsByAxis() {
 function getAxes() {
     var axes = [];
     $.ajax({
-        url: "http://127.0.0.1:3001/axes",
+        url: "http://127.0.0.1:1234/axes",
         type: 'GET',
         async: false,
         success: data => {
@@ -127,7 +118,7 @@ function getAxes() {
 function getSubdivisionsFromAxisId(axis_id) {
     subdivisions = [];
     $.ajax({
-        url: "http://127.0.0.1:3001/axissubdivisions",
+        url: "http://127.0.0.1:1234/axissubdivisions",
         type: 'GET',
         async: false,
         success: data => {
@@ -146,7 +137,7 @@ function getQuestionsFromSubaxis(subaxis_id) {
     let questions = [];
     $.ajax({
         //url do endpoint
-        url: "http://127.0.0.1:3001/questions",
+        url: "http://127.0.0.1:1234/questions",
         //tipo da requisição
         type: 'GET',
         async: false,
@@ -168,7 +159,7 @@ function getQuestionsFromSubaxis(subaxis_id) {
 function getAlternatives(question_id) {
     alternatives = [];
     $.ajax({
-        url: "http://127.0.0.1:3001/options",
+        url: "http://127.0.0.1:1234/options",
         type: 'GET',
         async: false,
         success: data => {
@@ -194,7 +185,7 @@ function getSessionData() {
 
     if (table === "school_manager") {
         $.ajax({
-            url: "http://127.0.0.1:3001/schoolmanagers",
+            url: "http://127.0.0.1:1234/schoolmanagers",
             type: 'GET',
             async: false,
             success: data => {
@@ -206,7 +197,7 @@ function getSessionData() {
             }
         })
         $.ajax({
-            url: "http://127.0.0.1:3001/schools",
+            url: "http://127.0.0.1:1234/schools",
             type: 'GET',
             async: false,
             success: data => {
@@ -234,7 +225,7 @@ function saveAnswers() {
         console.log(answeredQuestion)
         let chosen_alternative_id = document.querySelector(`input[name=question${answeredQuestion['id']}]:checked`).value
         $.ajax({
-            url: "http://127.0.0.1:3001/answerinsert",
+            url: "http://127.0.0.1:1234/answerinsert",
             type: 'POST',
             async: false,
             data: {

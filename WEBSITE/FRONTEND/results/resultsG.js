@@ -8,6 +8,7 @@ function getAxisLabels() {
   axes.forEach(axis => {
     axesNames.push(axis['name'])
   })
+  console.log(axesNames)
   return axesNames
 }
 //te envia para pagina da falconi
@@ -15,32 +16,7 @@ function contactUs() {
   window.location.href = "https://conteudo.falconi.com/formulario-home";
 }
 //estilo do grafico
-const ctx = document.getElementById('myChart');
 
-const myChart = new Chart(ctx, {
-  type: 'radar',
-  data: {
-    labels: getAxisLabels(),
-    datasets: [{
-      label: getSchoolName(),
-      data: getAxesScores(),
-      fill: true,
-      backgroundColor: 'rgba(129, 13, 253, 0.2)',
-      borderColor: 'rgb(129, 13, 253)',
-      pointBackgroundColor: 'rgb(129, 13, 253)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgb(129, 13, 253)'
-    }]
-  },
-  options: {
-    elements: {
-      line: {
-        borderWidth: 2
-      }
-    }
-  },
-});
 //calcula sua nota na questao
 function getAxesScores() {
   let axesScores = [];
@@ -61,7 +37,7 @@ function getWeightAlternative(answer) {
   let chosenOption = null;
   let alternativeId = answer["option_id"]
   $.ajax({
-    url: "http://127.0.0.1:3001/options",
+    url: "http://127.0.0.1:1234/options",
     type: 'GET',
     async: false,
     success: data => {
@@ -79,7 +55,7 @@ function getWeightQuestion(answer) {
   let questionWeight = null;
   let questionId = answer["question_id"]
   $.ajax({
-    url: "http://127.0.0.1:3001/questions",
+    url: "http://127.0.0.1:1234/questions",
     type: 'GET',
     async: false,
     success: data => {
@@ -96,7 +72,7 @@ function getWeightQuestion(answer) {
 function getAnswersByAxis(axis_id) {
   let answers = [];
   $.ajax({
-    url: "http://127.0.0.1:3001/answers",
+    url: "http://127.0.0.1:1234/answers",
     type: 'GET',
     async: false,
     success: data => {
@@ -113,7 +89,7 @@ function getAnswersByAxis(axis_id) {
 function getAxes() {
   let axes = [];
   $.ajax({
-    url: "http://127.0.0.1:3001/axes",
+    url: "http://127.0.0.1:1234/axes",
     type: 'GET',
     async: false,
     success: data => {
@@ -131,7 +107,7 @@ function getUser() {
   let cpf = localStorage.getItem("primaryKey");
   let user = null;
   $.ajax({
-    url: "http://127.0.0.1:3001/schoolmanagers",
+    url: "http://127.0.0.1:1234/schoolmanagers",
     type: 'GET',
     async: false,
     success: data => {
@@ -167,7 +143,7 @@ function getSchoolName() {
   let user = getUser()
   let schoolName = null
   $.ajax({
-    url: "http://127.0.0.1:3001/schools",
+    url: "http://127.0.0.1:1234/schools",
     type: 'GET',
     async: false,
     success: data => {
@@ -183,6 +159,11 @@ function getSchoolName() {
 function onLoad() {
   getSessionData();
   loggedChecked();
+  let results = getAxesScores();
+  getAxisLabels();
+  $("#gestaoPessoasNota").html(results[0])
+  $("#sistemaGestaoNota").html(results[1])
+
 
 }
 //olha quem está logado na pagina

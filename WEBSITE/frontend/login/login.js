@@ -99,7 +99,8 @@ function checkFalconiEmployee(loginInput) {
         async: false,
         success: data => {
             data.forEach(falconiEmployee => {
-                if (falconiEmployee['cpf'] === loginInput) {
+                console.log(falconiEmployee)
+                if (parseInt(falconiEmployee['cpf']) === parseInt(loginInput)) {
                     user = falconiEmployee;
                 }
             })
