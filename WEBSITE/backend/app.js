@@ -682,23 +682,23 @@ app.get('/answers', (req, res) => {
 
                   
                   
-// function getAlternatives(question_id) {
-//     alternatives = [];
-//     $.ajax({
-//         url: "http://127.0.0.1:3001/options",
-//         type: 'GET',
-//         async: false,
-//         success: data => { 
-//             data.forEach(element => {
-//                 if (parseInt(question_id) === parseInt(element['question_id'])) {
-//                     alternatives.push(element['text']);
-//                 }
-//             })
-//         }
+function getAlternatives(question_id) {
+    alternatives = [];
+    $.ajax({
+        url: "http://127.0.0.1:3001/options",
+        type: 'GET',
+        async: false,
+        success: data => { 
+            data.forEach(element => {
+                if (parseInt(question_id) === parseInt(element['question_id'])) {
+                    alternatives.push(element['text']);
+                }
+            })
+        }
 
-//     })
-//     return alternatives;
-// }
+    })
+    return alternatives;
+}
 
 app.post('/answerinsert', urlencodedParser, (req, res) => {
 	res.statusCode = 200;
