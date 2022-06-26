@@ -55,6 +55,22 @@ function createAxisAccordions(container) {
     })
 }
 
+// <p>
+//   <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+//     Link with href
+//   </a>
+//   <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+//     Button with data-target
+//   </button>
+// </p>
+// <div class="collapse" id="collapseExample">
+//   <div class="card card-body">
+//     Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+//   </div>
+// </div>
+
+
+
 let loadedQuestions = [];
 
 //Mostra as questões por eixo na página e adiciona cada elemento num ID específico do HTML
@@ -234,7 +250,7 @@ function saveAnswers() {
                 question_id: answeredQuestion['id'],
                 axis_subdivision_id: answeredQuestion['axis_subdivision_id'],
                 axis_id: answeredQuestion['axis_id'],
-                diagnosis_id: 5,
+                diagnosis_id: 4,
                 school_cnpj: school['cnpj'],
                 network_id: school['network_id']
             }

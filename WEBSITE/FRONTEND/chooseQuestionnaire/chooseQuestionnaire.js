@@ -13,7 +13,7 @@ function onload() {
 function getNumberOfQuestions(diagnosis_id) {
     let number = 0;
     $.ajax({
-        url: "http://127.0.0.1:3001/questions",
+        url: "http://127.0.0.1:1234/questions",
         type: 'GET',
         async: false,
         success: data => {
@@ -31,7 +31,7 @@ function getNumberOfQuestions(diagnosis_id) {
 function getDiagnosisData(diagnosis_id) {
     let desiredDiagnosis = null;
     $.ajax({
-        url: "http://127.0.0.1:3001/diagnoses",
+        url: "http://127.0.0.1:1234/diagnoses",
         type: 'GET',
         async: false,
         success: data => {
