@@ -1,4 +1,0 @@
-A pasta "underdeveloped" contém os arquivos atuais para páginas que ainda
-não estão prontas e padronizadas. Nossa meta esta semana foi entregar, 
-principalmente, a edição e preenchimento das respostas, presentes nas
-pastas "editMode" e "questionnaires".
