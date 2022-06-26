@@ -1,0 +1,185 @@
+/* Generic styling */
+
+
+body {
+    font-family: 'Manrope', sans-serif;
+}
+
+main {
+    margin: 0 2vw;
+}
+
+.centered {
+    display: flex;
+    align-items: center;
+}
+
+p {
+    font-size: small;
+    font-family: 'Manrope', sans-serif;
+}
+
+a {
+    color: #FFFFFF8C;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #C7C8C9;
+    text-decoration: none;
+}
+
+a:active {
+    color: white;
+    text-decoration: none;
+}
+
+.btn-primary {
+    background: #810DFD;
+    border-color: #810DFD;
+}
+
+.btn-primary:hover {
+    background-color: #810DFD;
+}
+
+.btn-primary:visited,
+.btn-primary:active,
+.btn-primary:focus {
+    background: #810DFD;
+    outline-color: transparent;
+}
+
+/* Navbar styling */
+
+.navbar {
+    font-family: 'Manrope', sans-serif;
+    color: white;
+}
+
+
+/* Top of the page styling */
+
+#page-title {
+    margin-top: 3vh;
+    text-align: center;
+    font-size: 5vh;
+    font-family: 'Manrope', sans-serif;
+}
+
+
+#homepageImage {
+    width: 100%;
+    height: 100%;
+}
+
+/* Footer styling */
+
+footer {
+    background-color: #232228;
+    color: white;
+    font-family: 'Manrope', sans-serif;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Footer height */
+
+}
+
+.social-media-icons {
+    color: #FFFFFF8C;
+    padding: 0 2%;
+}
+
+#footer-logo {
+    width: 6%;
+    height: 6%;
+    padding-right: 1%;
+}
+
+.footer-content {
+    padding: 1vh 0;
+}
+
+.main-title {
+    padding: 0;
+    margin: 0;
+    font-size: medium;
+}
+
+.yellow {
+    background-color: #f8c000;
+}
+
+.purple {
+    background-color: #810DFD;
+}
+
+.black {
+    background-color: #232228;
+}
+
+.white {
+
+    background-color: #fff;
+}
+
+.titlehome {
+    font-size: 56px;
+    font-weight: bold;
+    font-family: 'Manrope', sans-serif;
+    text-align: center;
+    color: #232228;
+}
+
+.button {
+    border-radius: 15px;
+    background-color: #810DFD;
+    color: white;
+    border-color: #810DFD;
+    font-family: manrope;
+    font-size: 23px;
+}
+
+.link {
+    font-family: manrope;
+    color: #1F033D;
+}
+
+.title2home {
+    font-size: 45px;
+    font-weight: bold;
+    font-family: 'Manrope', sans-serif;
+    text-align: center;
+    color: #232228;
+    margin: 130px;
+    ;
+}
+
+#page-container {
+    position: relative;
+    min-height: 100vh;
+}
+
+#content-wrap {
+    padding-bottom: 2.5rem;    /* Footer height */
+}
+
+#footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 2.5rem;            /* Footer height */
+}
+
+#header {
+    position: fixed;
+    width: 100%;
+}
+
+#content-text {
+    font-size: 1.5rem;
+    font-family: "Manrope", sans-serif;
+    text-align: center  ;
+    margin-bottom: 2rem;
+}
