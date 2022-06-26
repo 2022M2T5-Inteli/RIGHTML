@@ -1,0 +1,134 @@
+/*estilo do body da pagina*/
+.title {
+    font-size: 4rem;
+    font-weight: bold;
+    font-family: "Manrope", sans-serif;
+    text-align: center;
+    margin-bottom: 1rem;
+    margin-top: -1rem;
+    color: #232228;
+}
+
+.content-text {
+    font-size: 1.5rem;
+    font-family: "Manrope", sans-serif;
+    text-align: center  ;
+    margin-bottom: 2rem;
+}
+
+.content {
+    font-size: 1.5rem;
+    font-family: "Manrope", sans-serif;
+    text-align: center  ;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+
+}
+
+html {
+    box-sizing: border-box;
+    font-size: 62.5%;
+}
+
+body {
+    
+    min-height: 100vh;
+    position: relative;
+    font-family: "Manrope", sans-serif;
+
+}
+
+.container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border-radius: 6px;
+    padding: 5rem 5rem;
+    width: 50rem;
+    height: 68rem;
+}
+
+.inputGroup {
+    margin-bottom: 1rem;
+    border-color: rgb(180, 180, 180)
+}
+
+.inputName {
+    margin-bottom: 1rem;
+    width: 15rem;
+}
+
+.label {
+    font-size: 1.6rem;
+    display: block;
+    margin-bottom: 0.8rem;
+}
+
+.textInput {
+    padding: 1rem 1.2rem;
+    font-size: 1.6rem;
+    outline: none;
+    background: none;
+    border: 1px solid #333;
+    border-radius: 6px;
+    width: 400px;
+}
+
+.buttonContinuar {
+    text-align: center;
+    border-radius: 5px;
+    font: "Inter";
+    background-color: #810dfd;
+    color: white;
+    border-color: #810dfd;
+    margin: auto;
+    padding: 1rem;
+    display: block;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.buttonContinuar:hover {
+    transform: scale(1.05)
+}
+
+.signUpText {
+    position: absolute;
+    top: 50%;
+    left: 30%;
+    transform: translate(-50%, -50%);
+
+}
+
+#signUpTitle {
+    color: #f8c000;;
+    padding: 2rem;
+}
+
+#signUpContent {
+    color: white;
+    width: 50rem;
+    padding: 2rem;
+}
+
+.background-image {
+
+    background-image: url("./img/imgbkglog.png");
+    background-size: cover; 
+    height: 100vh;
+    background-repeat: no-repeat;
+ }
+
+.logo {
+    width: 200px;
+    margin-top: -2rem;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}   

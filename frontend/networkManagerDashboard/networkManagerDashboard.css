@@ -1,0 +1,86 @@
+/* Top of the page styling */
+
+#overview-div {
+    border: 1px solid grey;
+    border-radius: 2px;
+    width: 100%;
+    margin: 2% 0;
+}
+
+#overview-data {
+    margin: auto;
+    padding: 1vh 0;
+}
+
+/* Toolbar */
+
+#toolbar {
+    text-align: center;
+}
+
+#basic-addon1 { /* Search icon on the left */
+    height: 100%;
+    background-color: white;
+}
+
+#searchbox {
+    margin-top: 1vh;
+    width: 100%;
+    text-align: center;
+    font-family: 'Manrope', sans-serif;
+}
+
+#add-toolbar-button {
+    background-color: white;
+    padding: 1% 1% 1% 4%;
+}
+
+#trash-toolbar-button {
+    background-color: white;
+    padding: 1% 4% 1% 4%;
+    text-align: center;
+    border-style: none solid none none;
+}
+
+/* Buttons of admin panel */
+#edit-question {
+    margin: 5%;
+    bottom: 20%;
+}
+
+#qs1{
+    margin-top: 5%;
+    text-align: center;
+    height: 50px;
+}
+
+#qs2{
+    font-size: 35px;
+    font-family: 'Manrope', sans-serif;
+}
+
+#qs3{
+    margin-top: 20px;
+    font-family: manrope;
+    font-size: 20px;
+}
+
+#botao{
+    text-align: center;
+    background-color: #810DFD;
+    height: 40px;
+    width: 240px;
+    border: solid 2px black;
+    border-radius: 5px;
+    padding: 0px;
+    margin-top: 20px;
+    font-size: 20px;
+    font-family: 'Manrope', sans-serif;
+    border-color: #808080;
+}
+
+#imagem{
+    padding-left: 200px;
+}
+
+
