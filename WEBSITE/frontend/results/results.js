@@ -1,7 +1,14 @@
+// id do diagnóstico analisado
 const diagnosisId = 4;
 
+// variáveis para dados do usuário logado
+var school = null;
+var user = null;
+
+// variável para guardar eixos
 let axes = [];
-//pega os eixos existentes no banco de dados
+
+//pega os nomes dos eixos existentes no banco de dados
 function getAxisLabels() {
   let axes = getAxes()
   let axesNames = [];
@@ -10,12 +17,12 @@ function getAxisLabels() {
   })
   return axesNames
 }
-//te envia para pagina da falconi
+// redireciona para a página da falconi
 function contactUs() {
   window.location.href = "https://conteudo.falconi.com/formulario-home";
 }
 
-//estilo do grafico
+// configura gráfico
 const ctx = document.getElementById('myChart');
 
 const myChart = new Chart(ctx, {
@@ -42,11 +49,11 @@ const myChart = new Chart(ctx, {
     }
   },
 });
-//calcula sua nota na questao
+
+//calcula nota em cada eixo
 function getAxesScores() {
   let axesScores = [];
   let axes = getAxes()
-  console.log(axes)
   axes.forEach(axis => {
     let soma = 0;
     let answers = getAnswersByAxis(axis['id']);
@@ -55,7 +62,6 @@ function getAxesScores() {
     })
     axesScores.push(soma);
   });
-  console.log(axesScores)
   return axesScores;
 }
 
@@ -95,8 +101,9 @@ function getWeightQuestion(answer) {
   });
   return questionWeight;
 }
-//mostra a alternativa marcada
+// retorna as alternativas marcadas para certo eixo e escola
 function getAnswersByAxis(axis_id) {
+  getSessionData();
   let answers = [];
   $.ajax({
     url: "http://127.0.0.1:1234/answers",
@@ -104,7 +111,7 @@ function getAnswersByAxis(axis_id) {
     async: false,
     success: data => {
       data.forEach(answer => {
-        if (answer["axis_id"] === axis_id) {
+        if (answer["axis_id"] === axis_id && answer['school_cnpj'] === school['cnpj']) {
           answers.push(answer)
         }
       });
@@ -112,7 +119,7 @@ function getAnswersByAxis(axis_id) {
   });
   return answers;
 }
-//pega o eixos do questionario escolhido
+//pega o eixos do questionário escolhido
 function getAxes() {
   let axes = [];
   $.ajax({
@@ -130,7 +137,7 @@ function getAxes() {
   return axes;
 }
 
-//pega o usuario que está sendop avaliado
+//pega o usuário que está sendop avaliado
 function getUser() {
   let cpf = localStorage.getItem("primaryKey");
   let user = null;
@@ -148,13 +155,37 @@ function getUser() {
   });
   return user;
 }
-//verifica se você tem permissão para estar na página
+//verifica se você tem permissão para estar na página. Se sim, salva dados do usuário logado.
 function getSessionData() {
   let loggedIn = localStorage.getItem("loggedIn")
   let userType = localStorage.getItem("table")
   let primaryKey = localStorage.getItem("primaryKey");
 
   if (loggedIn === 'true' && userType === "school_manager") {
+    $.ajax({
+      url: "http://127.0.0.1:1234/schoolmanagers",
+      type: 'GET',
+      async: false,
+      success: data => {
+        data.forEach(school_manager => {
+          if (parseInt(primaryKey) === parseInt(school_manager['cpf'])) {
+            user = school_manager;
+          }
+        })
+      }
+    })
+    $.ajax({
+      url: "http://127.0.0.1:1234/schools",
+      type: 'GET',
+      async: false,
+      success: data => {
+        data.forEach(currentSchool => {
+          if (parseInt(user['school_cnpj']) === parseInt(currentSchool['cnpj'])) {
+            school = currentSchool;
+          }
+        })
+      }
+    })
   }
   else {
     // alert("Você precisa se logar para ter acesso aos resultados")
@@ -165,7 +196,7 @@ function getSessionData() {
     window.location.href = "../login/login.html"
   }
 }
-//pega o nome da escola do usuario 
+//pega o nome da escola do usuário
 function getSchoolName() {
   let user = getUser()
   let schoolName = null
@@ -183,42 +214,5 @@ function getSchoolName() {
   });
   return schoolName;
 }
-//olha quem está logado na pagina
-function onLoad() {
-  getSessionData();
-  loggedChecked();
 
-}
-
-let logged = localStorage.getItem("loggedIn");
-let headerLogged = document.getElementById("changeLink");
-let userType = localStorage.getItem("table");
-console.log(userType)
-
-
-//Verifica se o usuria já havia logado antes 
-function loggedChecked() {
-  if (logged === "true") {
-    console.log('logadoooo')
-    // headerLogged.innerHTML = `<a href="./login/login.html" class="nav-item nav-link" id="changeLink">Logadao</a>`
-    if (userType === "school_manager") {
-      console.log('gestor escola user')
-      headerLogged.innerHTML = `<a href="../schoolManagerDashboard/schoolManagerDashboard.html" class="nav-item nav-link" >Área do Gestor</a>`
-    }
-
-    else if (userType === "network_manager") {
-      console.log('gestor rede user')
-      headerLogged.innerHTML = `<a href="../networkManagerDashboard/networkManagerDashboard.html" class="nav-item nav-link" >Área do Gestor</a>`
-    }
-
-    else if (userType === "employee") {
-      console.log('funcionario')
-      headerLogged.innerHTML = `<a href="../adminDashboard.html" class="nav-item nav-link" >Área do Administrador </a>`
-    }
-  }
-  else {
-
-    headerLogged.innerHTML = `<a href="../login/login.html" class="nav-item nav-link" id="changeLink">Entrar</a>`
-  }
-}
 

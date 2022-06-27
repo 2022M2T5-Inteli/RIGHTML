@@ -1,5 +1,8 @@
 const diagnosisId = 5;
 
+var school = null;
+var user = null;
+
 let axes = [];
 //pega os eixos existentes no banco de dados
 function getAxisLabels() {
@@ -15,7 +18,6 @@ function getAxisLabels() {
 function contactUs() {
   window.location.href = "https://conteudo.falconi.com/formulario-home";
 }
-//estilo do grafico
 
 //calcula sua nota na questao
 function getAxesScores() {
@@ -70,6 +72,7 @@ function getWeightQuestion(answer) {
 }
 //mostra a alternativa marcada
 function getAnswersByAxis(axis_id) {
+  getSessionData();
   let answers = [];
   $.ajax({
     url: "http://127.0.0.1:1234/answers",
@@ -77,7 +80,7 @@ function getAnswersByAxis(axis_id) {
     async: false,
     success: data => {
       data.forEach(answer => {
-        if (answer["axis_id"] === axis_id) {
+        if (answer["axis_id"] === axis_id && answer['school_cnpj'] === school['cnpj']) {
           answers.push(answer)
         }
       });
@@ -128,6 +131,30 @@ function getSessionData() {
   let primaryKey = localStorage.getItem("primaryKey");
 
   if (loggedIn === 'true' && userType === "school_manager") {
+    $.ajax({
+      url: "http://127.0.0.1:1234/schoolmanagers",
+      type: 'GET',
+      async: false,
+      success: data => {
+        data.forEach(school_manager => {
+          if (parseInt(primaryKey) === parseInt(school_manager['cpf'])) {
+            user = school_manager;
+          }
+        })
+      }
+    })
+    $.ajax({
+      url: "http://127.0.0.1:1234/schools",
+      type: 'GET',
+      async: false,
+      success: data => {
+        data.forEach(currentSchool => {
+          if (parseInt(user['school_cnpj']) === parseInt(currentSchool['cnpj'])) {
+            school = currentSchool;
+          }
+        })
+      }
+    })
   }
   else {
     // alert("Você precisa se logar para ter acesso aos resultados")

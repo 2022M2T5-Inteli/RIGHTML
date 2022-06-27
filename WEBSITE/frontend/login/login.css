@@ -8,6 +8,7 @@
     margin-top: -2rem;
     color: #232228;
 }
+
 .content {
     font-size: 1.5rem;
     font-family: "Manrope", sans-serif;
@@ -17,19 +18,15 @@
     size: 100px;
 }
 
-
-
 html {
     box-sizing: border-box;
     font-size: 62.5%;
 }
 
 body {
-
     min-height: 100vh;
     position: relative;
     font-family: "Manrope", sans-serif;
-
 }
 
 .container {
@@ -88,7 +85,6 @@ body {
     color: white;
     border-color: #810dfd;
     cursor: pointer;
-
     transition: all 0.2s;
 }
 

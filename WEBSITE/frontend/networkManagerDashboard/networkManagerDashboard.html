@@ -20,16 +20,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Manrope&family=Space+Mono&display=swap" rel="stylesheet">
 
     <link href="../general.css" rel="stylesheet">
-    <link href="schoolManagerDashboard.css" rel="stylesheet">
+    <link href="networkManagerDashboard.css" rel="stylesheet">
 
     <title>Área do gestor</title>
 </head>
 
+<!-- Função getSessionData() verifica qual usuário está logado -->
 <body onload="getSessionData()">
     <div id="page-container">
         <div id="content-wrap">
-
-
             <header>
                 <!-- Navegação segundo classes do Bootstrap-->
                 <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top" id="header">
@@ -55,9 +54,8 @@
             </header>
 
             <!-- Conteúdo da página em si -->
-
             <main class="container" style="margin-top: 100px">
-                <h2 id="page-title" style="margin-bottom: 10vh">Área do gestor de rede</h2>
+                <h2 id="page-title" style="margin-top: 10vh; font-family: monospace">Área do gestor de rede</h2>
                 <!-- Box de informações gerais sobre o sistema e funcionalidades -->
                 <div class="row">
                     <div class="col-sm" style="text-align: center">
@@ -106,29 +104,25 @@
                         </div>
                     </div>
 
-                    <!-- Box para alterar dados dos usuarios  -->
+                    <!-- Box para alterar dados dos usuários  -->
                     <div class="collapse col-sm" id="collapseExample2">
-                        <h5>Atualizar informações do usuário</h5>
+                        <h5>Atualizar informações</h5>
                         <div class="input-group mb-3">
-                            <span class="input-group-text" id="basic-addon3">Nome</span>
+                            <span class="input-group-text">Nome da rede</span>
                             <input type="text" class="form-control" id="network-name-update"
                                 aria-describedby="basic-addon3">
                         </div>
 
                         <div class="input-group mb-3">
-                            <span class="input-group-text" id="basic-addon3">Email</span>
-                            <input type="text" class="form-control" id="network-name-update"
-                                aria-describedby="basic-addon3">
+                            <span class="input-group-text" id="basic-addon3">Tipo</span>
+                            <select id="network-type-update">
+                                <option value="public">Pública</option>
+                                <option value="private">Particular</option>
+                            </select>
                         </div>
 
-                        <div class="input-group mb-3">
-                            <span class="input-group-text" id="basic-addon3">CPF</span>
-                            <input type="text" class="form-control" id="network-name-update"
-                                aria-describedby="basic-addon3">
-                        </div>
-                        <!--Box de teste apenas para testar função de atualizar dados em uma planilha-->
-
-                        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" id="network_data"
+                        <!-- botão de salvar dados -->
+                        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" id="update-data"
                             data-bs-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2">
                             Salvar
                         </button>

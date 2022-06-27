@@ -8,6 +8,15 @@
     margin: auto;
 }
 
+.call-to-action {
+    background-color: #810DFD;
+    border-radius: 7px;
+    color: white;
+    border-color: #810DFD;
+    font-family: 'Manrope';
+    font-size: 20px;
+}
+
 /*body*/
 .button-src{
     background-color: #810dfd;
@@ -60,3 +69,4 @@ footer {
     color: white;
     margin-top: auto;
     font-family: 'Manrope', sans-serif;
+}

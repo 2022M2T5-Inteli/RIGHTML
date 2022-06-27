@@ -1,15 +1,11 @@
-
-
-// Essa função serve para atualizar os dados da escola no banco de dados
 var user = null;
 var network = null;
 
-
 function getSessionData() {
-    //verifica se voê tem permissão para estar na pagina
-    console.log("loggedIn  = " + localStorage.getItem("loggedIn"))
-    console.log("primary  = " + localStorage.getItem("primaryKey"))
-    if (localStorage.getItem("loggedIn") === "false" || localStorage.getItem("table") != "network_manager") {
+    //verifica se voê tem permissão para estar na página
+    // se não estiver logado, mostra pop-up de erro
+    if (localStorage.getItem("loggedIn") === "false" ||
+        localStorage.getItem("table") != "network_manager") {
         Swal.fire({
             icon: 'error',
             title: 'Você não tem permissão para ver esta página',
@@ -17,17 +13,18 @@ function getSessionData() {
         }).then(function() {
             window.location.href = "../index.html";
         })
-
     }
+
+    // se estiver logado corretamente, pega informações do login do browser para descobrir
+    // em qual conta está logado
     let primaryKey = localStorage.getItem("primaryKey");
-    console.log("IM HERE")
+    // encontra o registro de network manager associado ao cpf logado
     $.ajax({
         url: "http://127.0.0.1:1234/networkmanagers",
         type: 'GET',
         async: false,
         success: data => {
             data.forEach(network_manager => {
-                console.log(localStorage.getItem("primaryKey"))
                 if (parseInt(primaryKey) === parseInt(network_manager['cpf'])) {
                     user = network_manager;
                 }
@@ -35,30 +32,31 @@ function getSessionData() {
         }
     })
 
+    // encontra a rede de ensino associada ao network manager logado
     $.ajax({
         url: "http://127.0.0.1:1234/networks",
         type: 'GET',
         async: false,
         success: data => {
             data.forEach(currentNetwork => {
-                if (parseInt(user['network_id']) === parseInt(['id'])) {
-                    console.log("i am smth")
+                if (parseInt(user['network_id']) === parseInt(currentNetwork['id'])) {
                     network = currentNetwork;
                 }
             })
         }
     })
-//atualizar infos no banco de dados
-    $("#update_data").click(function () {
+
+//atualizar infos no banco de dados de acordo com o inputado no box de atualizar informações
+    $("#update-data").click(function () {
         let url = "http://127.0.0.1:1234/networkupdate";
         {
             $.ajax({
                 url: url,
                 type: 'POST',
                 data: {
-                    type_of_institution: $('#institutionTypeUpdate').val(),
+                    type: $('#network-type-update').val(),
                     name: $('#network-name-update').val(),
-                    network_id: $("#networkUpdate").val()
+                    id: network['id']
                 },
             })
             updateNetworkInfo();
@@ -75,13 +73,13 @@ function logout() {
     window.location.href = "../login/login.html";
 }
 
-//aparecer informações sobre sua escola no front
+// mostra dados atuais nos inputs de atualização
 function showUpdateBox() {
-    $('#school-name-update').val(network['name']);
-    $("#networkUpdate").val(network['network_id'])
-    $("#institutionTypeUpdate").val(network['type_of_institution'])
+    $('#network-name-update').val(network['name']);
+    $("#network-type-update").val(network['type'])
 }
 
+// retorna o nome de uma rede com base no id
 function getNetworkNameFromId(network_id) {
     let networkName = null;
     $.ajax({
@@ -99,14 +97,14 @@ function getNetworkNameFromId(network_id) {
     return networkName;
 }
 
+// atualiza os dados da rede no box de informações
 function updateNetworkInfo() {
     getSessionData();
-    console.log("network:" + network)
     $("#networkName").text(network['name'])
     $("#network").text(getNetworkNameFromId(network['network_id']))
-    if (network['type_of_institution'] === "public") {
-        $("#institutionType").text("Pública")
-    } else if (network['type_of_institution'] === "private") {
-        $("#institutionType").text("Particular")
+    if (network['type'] === "public") {
+        $("#networkType").text("Pública")
+    } else if (network['type'] === "private") {
+        $("#networkType").text("Particular")
     }
 }

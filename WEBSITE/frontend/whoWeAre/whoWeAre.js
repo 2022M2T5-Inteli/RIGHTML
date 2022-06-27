@@ -3,7 +3,7 @@ let logged = localStorage.getItem("loggedIn");
 let headerLogged = document.getElementById("changeLink");
 let userType = localStorage.getItem("table");
 
-//Verifica se o usuário está logado e, se sim, 
+//Verifica se o usuário está logado e troca link da navegação de acordo.
 function loggedChecked() {
     if (logged === "true") {
         if (userType === "school_manager") {
@@ -16,11 +16,10 @@ function loggedChecked() {
 
         else if (userType === "employee") {
             console.log('funcionario')
-            headerLogged.innerHTML = `<a href="./adminDashboard.html" class="nav-item nav-link">Área do Administrador </a>`
+            headerLogged.innerHTML = `<a href="../adminDashboard/adminDashboard.html" class="nav-item nav-link">Área do Administrador </a>`
         }
     }
     else {
-
-        headerLogged.innerHTML = `<a href="./login/login.html" class="nav-item nav-link" id="changeLink">Entrar</a>`
+        headerLogged.innerHTML = `<a href="../login/login.html" class="nav-item nav-link" id="changeLink">Entrar</a>`
     }
 }

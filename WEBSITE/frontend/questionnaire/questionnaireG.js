@@ -5,6 +5,10 @@ function onload() {
     loggedChecked();
 }
 
+function deleteLastQuestionnaire() {
+    
+}
+
 //Ler as questões do banco de dados e criar o acordeon 
 function readQuestionsFromDatabase() {
     if (questionsExist()) {
