@@ -39,7 +39,7 @@ function cnpjIsUnique() {
     cnpjs.forEach(cnpj => {
         if (cnpj === parseInt($("#CNPJ").val())) {
             isUnique = false;
-            return
+
         }
     })
     return isUnique;

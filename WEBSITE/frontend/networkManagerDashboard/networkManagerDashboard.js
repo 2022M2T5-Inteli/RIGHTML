@@ -65,7 +65,7 @@ function getSessionData() {
         }
 
     })
-};
+}
 
 //sair da conta logada
 function logout() {

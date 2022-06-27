@@ -867,11 +867,11 @@ function showQuestionsByAxis() {
                 });
                 questionNumber++;
             }
-            ;
+
             document.getElementById(`${axis['name']}-body`).innerHTML += "<br>";
         });
     })
-};
+}
 
 // Função que verifica se existe eixo no banco de dados 
 function questionsExist() {

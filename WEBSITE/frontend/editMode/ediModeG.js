@@ -872,11 +872,11 @@ function showQuestionsByAxis() {
                 });
                 questionNumber++;
             }
-            ;
+
             document.getElementById(`${axisName}-body`).innerHTML += "<br>";
         });
     })
-};
+}
 
 // Função que verifica se existe eixo no banco de dados 
 function questionsExist() {

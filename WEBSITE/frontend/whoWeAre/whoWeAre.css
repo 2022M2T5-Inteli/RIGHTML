@@ -30,21 +30,21 @@
     border-color: #808080;
 }
 
+.call-to-action {
+    background-color: #810DFD;
+    border-radius: 7px;
+    color: white;
+    border-color: #810DFD;
+    font-family: 'Manrope';
+    font-size: 20px;
+}
+
 #imagem{
     padding-left: 200px;
 }
 
-.quemsomos {
-   
-    margin-left: 100px;
-    margin-right: 100px;
-    text-align: center;
-}
-
-
 #centerCarousel{
     position: relative;
-
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -54,10 +54,3 @@
     width: 50%;
     margin-left: 25%;
 }
-
-/**#carouselExampleControls{
-     height: 50%;
-    width: 50%;
-    
-    
-}**/

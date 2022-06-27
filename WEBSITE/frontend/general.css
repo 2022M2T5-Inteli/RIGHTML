@@ -1,39 +1,42 @@
-/* Generic styling */
+/* Estilização geral do site */
 
-
+/* Deixa Manrope como fonte padrão do site */
 body {
     font-family: 'Manrope', sans-serif;
 }
 
+/* Padroniza margem lateral */
 main {
     margin: 0 2vw;
 }
 
+/* Centraliza elementos */
 .centered {
     display: flex;
     align-items: center;
 }
 
+/* Padroniza parágrafos */
 p {
     font-size: small;
     font-family: 'Manrope', sans-serif;
 }
 
+/* Padroniza links */
 a {
     color: #FFFFFF8C;
     text-decoration: none;
 }
-
 a:hover {
     color: #C7C8C9;
     text-decoration: none;
 }
-
 a:active {
     color: white;
     text-decoration: none;
 }
 
+/* Padroniza botões */
 .btn-primary {
     background: #810DFD;
     border-color: #810DFD;
@@ -50,16 +53,13 @@ a:active {
     outline-color: transparent;
 }
 
-/* Navbar styling */
-
+/* Padroniza barra de navegação */
 .navbar {
-    font-family: 'Manrope', sans-serif;
+    font-family: monospace, sans-serif;
     color: white;
 }
 
-
-/* Top of the page styling */
-
+/* Padroniza título da página */
 #page-title {
     margin-top: 3vh;
     text-align: center;
@@ -68,22 +68,12 @@ a:active {
 }
 
 
-#homepageImage {
-    width: 100%;
-    height: 100%;
-}
-
-/* Footer styling */
-
+/* Padroniza footer */
 footer {
     background-color: #232228;
     color: white;
-    font-family: 'Manrope', sans-serif;
+    font-family: monospace, sans-serif;
     position: absolute;
-    bottom: 0;
-    width: 100%;
-    /* Footer height */
-
 }
 
 .social-media-icons {
@@ -101,12 +91,15 @@ footer {
     padding: 1vh 0;
 }
 
+/* Padroniza título do site no footer */
 .main-title {
     padding: 0;
     margin: 0;
     font-size: medium;
 }
 
+
+/* Padroniza cores do site */
 .yellow {
     background-color: #f8c000;
 }
@@ -120,63 +113,33 @@ footer {
 }
 
 .white {
-
     background-color: #fff;
 }
 
-.titlehome {
-    font-size: 56px;
-    font-weight: bold;
-    font-family: 'Manrope', sans-serif;
-    text-align: center;
-    color: #232228;
-}
 
-.button {
-    border-radius: 15px;
-    background-color: #810DFD;
-    color: white;
-    border-color: #810DFD;
-    font-family: manrope;
-    font-size: 23px;
-}
-
+/* Padroniza alguns links */
 .link {
-    font-family: manrope;
+    font-family: 'Manrope';
     color: #1F033D;
 }
 
-.title2home {
-    font-size: 45px;
-    font-weight: bold;
-    font-family: 'Manrope', sans-serif;
-    text-align: center;
-    color: #232228;
-    margin: 130px;
-    ;
-}
-
+/* Mantém footer na base da página */
 #page-container {
     position: relative;
     min-height: 100vh;
 }
 
 #content-wrap {
-    padding-bottom: 2.5rem;    /* Footer height */
+    padding-bottom: 2.5rem;
 }
 
-#footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 2.5rem;            /* Footer height */
-}
-
+/* Padroniza header */
 #header {
     position: fixed;
     width: 100%;
 }
 
+/* Padroniza conteúdo de texto */
 #content-text {
     font-size: 1.5rem;
     font-family: "Manrope", sans-serif;

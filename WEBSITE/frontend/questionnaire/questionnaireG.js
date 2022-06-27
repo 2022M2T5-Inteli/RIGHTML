@@ -90,11 +90,11 @@ function showQuestionsByAxis() {
                     document.getElementById(`${axisName}-body`).innerHTML += "</div><hr>";
                 });
             }
-            ;
+
             document.getElementById(`${axisName}-body`).innerHTML += "<br>";
         });
     })
-};
+}
 
 //Compara se os eixos são de educação e guarda na array
 function getAxes() {
