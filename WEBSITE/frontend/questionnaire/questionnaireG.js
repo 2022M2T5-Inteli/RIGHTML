@@ -5,6 +5,7 @@ function onload() {
     loggedChecked();
 }
 
+// deleta as respostas anteriores
 function deleteLastQuestionnaire() {
     let axes = getAxes();
     axes.forEach(axis => {
@@ -22,6 +23,7 @@ function deleteLastQuestionnaire() {
     })
 }
 
+// retorna as respostas para certo eixo
 function getAnswersByAxis(axis_id) {
     getSessionData();
     let answers = [];

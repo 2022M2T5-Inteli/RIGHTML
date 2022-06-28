@@ -70,7 +70,7 @@ function getWeightQuestion(answer) {
   });
   return questionWeight;
 }
-//mostra a alternativa marcada
+// retornas as respostas para certo eixo
 function getAnswersByAxis(axis_id) {
   getSessionData();
   let answers = [];
