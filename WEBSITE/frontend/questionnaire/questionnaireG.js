@@ -6,7 +6,38 @@ function onload() {
 }
 
 function deleteLastQuestionnaire() {
-    
+    let axes = getAxes();
+    axes.forEach(axis => {
+        let answers = getAnswersByAxis(axis['id']);
+        answers.forEach(answer => {
+            $.ajax({
+                url: "http://127.0.0.1:1234/answerdelete",
+                type: 'POST',
+                async: false,
+                data: {
+                    id: answer['id']
+                }
+            });
+        })
+    })
+}
+
+function getAnswersByAxis(axis_id) {
+    getSessionData();
+    let answers = [];
+    $.ajax({
+        url: "http://127.0.0.1:1234/answers",
+        type: 'GET',
+        async: false,
+        success: data => {
+            data.forEach(answer => {
+                if (answer["axis_id"] === axis_id && answer['school_cnpj'] === school['cnpj']) {
+                    answers.push(answer)
+                }
+            });
+        }
+    });
+    return answers;
 }
 
 //Ler as questões do banco de dados e criar o acordeon 
@@ -224,6 +255,7 @@ function getSessionData() {
 
 //Salva as respostas para o usúario específico 
 function saveAnswers() {
+    deleteLastQuestionnaire()
     getSessionData()
     loadedQuestions.forEach(answeredQuestion => {
         console.log(answeredQuestion)
@@ -270,7 +302,7 @@ function loggedChecked() {
 
         else if (userType === "employee") {
             console.log('funcionario')
-            headerLogged.innerHTML = `<a href="../adminDashboard.html" class="nav-item nav-link" >Área do Administrador </a>`
+            headerLogged.innerHTML = `<a href="../adminDashboard/adminDashboard.html" class="nav-item nav-link" >Área do Administrador </a>`
         }
     }
     else {

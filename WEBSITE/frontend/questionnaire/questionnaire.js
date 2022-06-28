@@ -4,6 +4,41 @@ function onload() {
     readQuestionsFromDatabase()
     loggedChecked();
 }
+function getAnswersByAxis(axis_id) {
+    getSessionData();
+    let answers = [];
+    $.ajax({
+        url: "http://127.0.0.1:1234/answers",
+        type: 'GET',
+        async: false,
+        success: data => {
+            data.forEach(answer => {
+                if (answer["axis_id"] === axis_id && answer['school_cnpj'] === school['cnpj']) {
+                    answers.push(answer)
+                }
+            });
+        }
+    });
+    return answers;
+}
+
+function deleteLastQuestionnaire() {
+    let axes = getAxes();
+    axes.forEach(axis => {
+        let answers = getAnswersByAxis(axis['id']);
+        answers.forEach(answer => {
+            $.ajax({
+                url: "http://127.0.0.1:1234/answerdelete",
+                type: 'POST',
+                async: false,
+                data: {
+                    id: answer['id']
+                }
+            });
+        })
+    })
+}
+
 
 //Ler as questões do banco de dados e criar o acordeon 
 function readQuestionsFromDatabase() {
@@ -220,6 +255,7 @@ function getSessionData() {
 //Salva as respostas para o usúario específico 
 function saveAnswers() {
     getSessionData()
+    deleteLastQuestionnaire()
     loadedQuestions.forEach(answeredQuestion => {
         console.log(answeredQuestion)
         let chosen_alternative_id = document.querySelector(`input[name=question${answeredQuestion['id']}]:checked`).value
