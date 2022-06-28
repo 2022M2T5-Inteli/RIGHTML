@@ -158,7 +158,7 @@ app.get('/schools', (req, res) => {
 	res.setHeader('Access-Control-Allow-Origin', '*'); // Isso é importante para evitar o erro de CORS
 
 	var db = new sqlite3.Database(DBPATH); // Abre o banco
-  var sql = 'SELECT * FROM school ORDER BY name COLLATE NOCASE';
+  	var sql = 'SELECT * FROM school ORDER BY name COLLATE NOCASE';
 	db.all(sql, [],  (err, rows ) => {
 		if (err) {
 		    throw err;
@@ -357,7 +357,7 @@ app.get('/diagnoses', (req, res) => {
 	res.setHeader('Access-Control-Allow-Origin', '*');
 
 	var db = new sqlite3.Database(DBPATH); 
-  var sql = 'SELECT * FROM diagnosis ORDER BY name COLLATE NOCASE';
+  	var sql = 'SELECT * FROM diagnosis ORDER BY name COLLATE NOCASE';
 	db.all(sql, [],  (err, rows ) => {
 		if (err) {
 		    throw err;
@@ -370,7 +370,6 @@ app.get('/diagnoses', (req, res) => {
  app.post('/diagnosisinsert', urlencodedParser, (req, res) => {
 	res.statusCode = 200;
 	res.setHeader('Access-Control-Allow-Origin', '*');
-
 	sql = "INSERT INTO diagnosis (name, description, answer_time) VALUES ('" + req.body.name + "', '" + req.body.description + "', '" + req.body.answer_time + "')";
 	var db = new sqlite3.Database(DBPATH); 
 	db.run(sql, [],  err => {
@@ -477,7 +476,7 @@ app.get('/axissubdivisions', (req, res) => {
 	res.setHeader('Access-Control-Allow-Origin', '*'); // Isso é importante para evitar o erro de CORS
 
 	var db = new sqlite3.Database(DBPATH); // Abre o banco
-  var sql = 'SELECT * FROM axis_subdivision ORDER BY name COLLATE NOCASE';
+  	var sql = 'SELECT * FROM axis_subdivision ORDER BY name COLLATE NOCASE';
 	db.all(sql, [],  (err, rows ) => {
 		if (err) {
 		    throw err;
@@ -539,7 +538,7 @@ app.get('/questions', (req, res) => {
 	res.setHeader('Access-Control-Allow-Origin', '*'); // Isso é importante para evitar o erro de CORS
 
 	var db = new sqlite3.Database(DBPATH); // Abre o banco
-  var sql = 'SELECT * FROM question ORDER BY id COLLATE NOCASE';
+  	var sql = 'SELECT * FROM question ORDER BY id COLLATE NOCASE';
 	db.all(sql, [],  (err, rows ) => {
 		if (err) {
 		    throw err;
@@ -602,7 +601,7 @@ app.get('/options', (req, res) => {
 	res.setHeader('Access-Control-Allow-Origin', '*'); // Isso é importante para evitar o erro de CORS
 
 	var db = new sqlite3.Database(DBPATH); // Abre o banco
-  var sql = 'SELECT * FROM option ORDER BY id COLLATE NOCASE';
+  	var sql = 'SELECT * FROM option ORDER BY id COLLATE NOCASE';
 	db.all(sql, [],  (err, rows ) => {
 		if (err) {
 		    throw err;
@@ -676,29 +675,6 @@ app.get('/answers', (req, res) => {
 	});
 	db.close(); // Fecha o banco
 });
-
-
-
-
-                  
-                  
-function getAlternatives(question_id) {
-    alternatives = [];
-    $.ajax({
-        url: "http://127.0.0.1:3001/options",
-        type: 'GET',
-        async: false,
-        success: data => { 
-            data.forEach(element => {
-                if (parseInt(question_id) === parseInt(element['question_id'])) {
-                    alternatives.push(element['text']);
-                }
-            })
-        }
-
-    })
-    return alternatives;
-}
 
 app.post('/answerinsert', urlencodedParser, (req, res) => {
 	res.statusCode = 200;
@@ -825,7 +801,7 @@ app.get('/employeeschool', (req, res) => {
 	res.setHeader('Access-Control-Allow-Origin', '*'); // Isso é importante para evitar o erro de CORS
 
 	var db = new sqlite3.Database(DBPATH); // Abre o banco
-  var sql = 'SELECT * FROM employee_school ORDER BY email_employee COLLATE NOCASE';
+  	var sql = 'SELECT * FROM employee_school ORDER BY email_employee COLLATE NOCASE';
 	db.all(sql, [],  (err, rows ) => {
 		if (err) {
 		    throw err;
